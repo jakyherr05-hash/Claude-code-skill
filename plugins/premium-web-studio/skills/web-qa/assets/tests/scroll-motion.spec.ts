@@ -30,16 +30,20 @@ test.describe('Lenis + GSAP integration', () => {
     expect(lenisCount).toBe(1);
     // Method pin trigger progress must update WHILE Lenis animates, not only at the end
     const methodTop = await page.locator('#method').evaluate((el) => el.getBoundingClientRect().top + scrollY);
-    await page.evaluate((y) => (window as any).__lenis.scrollTo(y + 900, { duration: 1.6 }), methodTop);
-    const progress: number[] = [];
-    for (let i = 0; i < 8; i++) {
-      await page.waitForTimeout(150);
-      progress.push(await page.evaluate(() => {
-        const st = (window as any).__ScrollTrigger.getAll().find((t: any) => t.pin);
-        return st ? Math.round(st.progress * 1000) / 1000 : -1;
-      }));
-    }
-    test.info().annotations.push({ type: 'pin-progress', description: JSON.stringify(progress) });
+    // sample the pinned trigger's progress on EVERY frame, in-page (Playwright-side polling misses frames under load)
+    const progress: number[] = await page.evaluate(async (y) => {
+      const st = (window as any).__ScrollTrigger.getAll().find((t: any) => t.pin);
+      if (!st) return [-1];
+      const out: number[] = [];
+      (window as any).__lenis.scrollTo(y + 900, { duration: 1.6 });
+      const t0 = performance.now();
+      await new Promise<void>((done) => {
+        const loop = () => { out.push(Math.round(st.progress * 1000) / 1000); performance.now() - t0 < 2000 ? requestAnimationFrame(loop) : done(); };
+        requestAnimationFrame(loop);
+      });
+      return out;
+    }, methodTop);
+    test.info().annotations.push({ type: 'pin-progress', description: JSON.stringify({ frames: progress.length, distinct: new Set(progress).size, sample: progress.filter((_, k) => k % 6 === 0) }) });
     expect(progress[0]).toBeGreaterThanOrEqual(0);
     expect(new Set(progress).size).toBeGreaterThan(3); // many intermediate values = synced per frame
   });

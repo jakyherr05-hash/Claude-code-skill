@@ -42,10 +42,15 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   const locks = useRef(0);
 
   useEffect(() => {
+    // Reduced motion: Lenis' respectReducedMotion makes PROGRAMMATIC scrolls instant, but user wheel input
+    // still runs a short damp (lerp forced to 1 → damp λ=60, ≈70 ms; lenis.mjs L753-757 + L86). For a truly
+    // native, un-eased wheel we turn smoothWheel off (line 621 then leaves the event to the browser) and
+    // keep it in sync with the OS setting live.
+    const reducedMq = matchMedia('(prefers-reduced-motion: reduce)');
     const instance = new Lenis({
       autoRaf: false,
       lerp: 0.1,
-      smoothWheel: true,
+      smoothWheel: !reducedMq.matches,
       syncTouch: false, // native touch momentum on phones; most robust on iOS/Android
       anchors: false,   // handled below so we can apply header offset AND move focus
       stopInertiaOnNavigate: true,
@@ -55,11 +60,14 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     const tick = (time: number) => instance.raf(time * 1000);
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
+    const onReducedChange = () => { instance.options.smoothWheel = !reducedMq.matches; };
+    reducedMq.addEventListener('change', onReducedChange);
     setLenis(instance);
     if (import.meta.env.DEV || new URLSearchParams(location.search).has('debug')) {
       (window as unknown as { __lenis?: Lenis }).__lenis = instance;
     }
     return () => {
+      reducedMq.removeEventListener('change', onReducedChange);
       gsap.ticker.remove(tick);
       gsap.ticker.lagSmoothing(500, 33); // GSAP default
       instance.destroy();

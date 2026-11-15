@@ -13,7 +13,7 @@ description: Single, accessible smooth-scroll architecture with Lenis 1.3 + GSAP
   gsap.ticker.add((time) => { lenis.raf(time * 1000) })
   gsap.ticker.lagSmoothing(0)
   ```
-- `respectReducedMotion` defaults to `true`: smoothing is disabled and programmatic scrolls are instant, but scroll still runs on the main thread. The `prefersReducedMotion` getter exposes this. The demo's tests confirm it in a browser (see QA report).
+- `respectReducedMotion` defaults to `true`, but read the source, not just the README: it makes **programmatic** scrolls instant, while **user wheel input still eases** (lerp forced to 1 → `damp` with λ=60, about 70 ms; `lenis.mjs` L753–757 and L86). For truly native, un-eased wheel scrolling under reduced motion, set `smoothWheel: false` when `(prefers-reduced-motion: reduce)` matches, and update `lenis.options.smoothWheel` on the media query's `change` event. The template does this. Verified in a browser by the demo's reduced-motion test, which samples every frame and allows at most one intermediate value.
 - Lenis wraps **native** scroll, so `position: sticky`, find-in-page, keyboard scrolling and screen readers keep working. Include `lenis.css`: it sets `height: auto` and `overflow: clip` while stopped.
 
 ## Install
@@ -34,7 +34,7 @@ Then set a `--header-h` CSS variable if you have a fixed header; anchor offsets 
 | Scroll lock | `useScrollLock(open)` is ref-counted; `lenis.stop()` + `html.is-scroll-locked`. Blocks wheel, touch and keyboard |
 | Route changes | Router calls `lenis.scrollTo(0 or savedY, { immediate: true, force: true })`, then `ScrollTrigger.refresh()` next frame. `history.scrollRestoration = 'manual'`, with positions saved in `history.state` |
 | Touch | `syncTouch: false` keeps native momentum on iOS/Android (most robust). Only enable `syncTouch` when a scene truly needs synchronous touch, and test on real devices |
-| Reduced motion | Lenis' built-in `respectReducedMotion` |
+| Reduced motion | `respectReducedMotion` (instant programmatic scrolls) **plus** `smoothWheel` off while `prefers-reduced-motion: reduce` matches (instant wheel), tracked live |
 | Cleanup | On unmount: ticker callback removed, `lagSmoothing` restored, `lenis.destroy()` (removes `lenis` classes) |
 | Debug | `window.__lenis` in dev or `?debug` |
 

@@ -12,7 +12,8 @@ const OUT = process.env.PW_OUT || 'dist';
 export default defineConfig({
   testDir: './tests',
   timeout: 60_000,
-  expect: { timeout: 10_000, toHaveScreenshot: { maxDiffPixelRatio: 0.01, animations: 'disabled', caret: 'hide' } },
+  // Visual tolerance: 0.1% of pixels. The earlier 1% let a moved 11px label pass unnoticed (QA D-5).
+  expect: { timeout: 10_000, toHaveScreenshot: { maxDiffPixelRatio: 0.001, threshold: 0.2, animations: 'disabled', caret: 'hide' } },
   fullyParallel: true,
   // 1 worker by default: without a GPU, Chromium rasterises WebGL on the CPU (SwiftShader, ~120-220 ms per
   // full frame). With 3 parallel workers on a 4-core box, route-transition tests intermittently exceeded

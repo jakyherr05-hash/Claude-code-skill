@@ -8,13 +8,14 @@ type Props = { step: 1 | 2 | 3; idPrefix: string; animated?: boolean };
 const BEAMS = [
   { id: 'altar', from: [655, 92], to: [[600, 318], [712, 318]], label: '12° · 40 lux', lx: 662, ly: 300 },
   { id: 'threshold', from: [170, 120], to: [[108, 318], [190, 318]], label: '24° · 8 lux', lx: 112, ly: 300 },
-  { id: 'niche', from: [470, 70], to: [[512, 200], [548, 200]], label: '8° · 25 lux', lx: 522, ly: 188 },
-] as const;
+  // label sits LEFT of its beam (right-anchored) so it never collides with the AMBULATORY label on small screens
+  { id: 'niche', from: [470, 70], to: [[512, 200], [548, 200]], label: '8° · 25 lux', lx: 500, ly: 214, anchor: 'end' },
+] as { id: string; from: readonly [number, number]; to: readonly (readonly [number, number])[]; label: string; lx: number; ly: number; anchor?: 'start' | 'end' }[];
 
 const HATCH = [
   { x: 230, y: 150, w: 300, h: 168, label: 'NAVE · ≤ 2 lux' },
   { x: 60, y: 60, w: 110, h: 90, label: 'VAULT · DARK' },
-  { x: 730, y: 150, w: 70, h: 168, label: 'AMBULATORY · 0' },
+  { x: 730, y: 150, w: 70, h: 168, label: 'AMBULATORY · 0 lux' },
 ];
 
 export function MethodDrawing({ step, idPrefix, animated }: Props) {
@@ -86,7 +87,7 @@ export function MethodDrawing({ step, idPrefix, animated }: Props) {
             points={`${b.from[0]},${b.from[1]} ${b.to[0][0]},${b.to[0][1]} ${b.to[1][0]},${b.to[1][1]}`}
             fill={`url(#${p(`g-${b.id}`)})`}
           />
-          <text data-label className="mono" x={b.lx} y={b.ly - 8} fill="var(--accent-warm)" fontSize="11">{b.label}</text>
+          <text data-label className="mono" x={b.lx} y={b.ly - 8} textAnchor={b.anchor ?? 'start'} fill="var(--accent-warm)" fontSize="11">{b.label}</text>
         </g>
       ))}
 
