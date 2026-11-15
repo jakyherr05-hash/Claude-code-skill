@@ -6,7 +6,9 @@ import { defineConfig, devices } from '@playwright/test';
  * Only Chromium is installed in the studio's verification environment; add firefox/webkit projects
  * where those browsers are available.
  */
-const PORT = 4173;
+// PW_PORT / PW_OUT let several reviewers run the suite concurrently without sharing a server or dist/.
+const PORT = Number(process.env.PW_PORT || 4173);
+const OUT = process.env.PW_OUT || 'dist';
 export default defineConfig({
   testDir: './tests',
   timeout: 60_000,
@@ -28,7 +30,7 @@ export default defineConfig({
     { name: 'chromium-desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
   ],
   webServer: {
-    command: 'npm run build && npm run preview',
+    command: `npx tsc --noEmit && npx vite build --outDir ${OUT} --emptyOutDir && npx vite preview --outDir ${OUT} --port ${PORT} --strictPort`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

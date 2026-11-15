@@ -22,7 +22,10 @@ ffmpeg -y -hide_banner -loglevel error -i "$IN" -an -vf "$SCALE" \
 ffmpeg -y -hide_banner -loglevel error -i "$IN" -an -vf "$SCALE" \
   -c:v libvpx-vp9 -b:v 0 -crf $((CRF + 10)) -row-mt 1 -deadline good -cpu-used 2 "$OUT/$NAME.webm"
 
-if ffmpeg -hide_banner -encoders 2>/dev/null | grep -q libsvtav1; then
+# Capture first: with `set -o pipefail`, `ffmpeg -encoders | grep -q` makes grep exit early, ffmpeg dies of
+# SIGPIPE and the whole pipeline reads as "not found" even when the encoder exists.
+ENCODERS="$(ffmpeg -hide_banner -encoders 2>/dev/null || true)"
+if grep -q libsvtav1 <<<"$ENCODERS"; then
   ffmpeg -y -hide_banner -loglevel error -i "$IN" -an -vf "$SCALE" \
     -c:v libsvtav1 -crf $((CRF + 12)) -preset 6 -pix_fmt yuv420p -movflags +faststart "$OUT/$NAME.av1.mp4"
 fi
@@ -32,12 +35,10 @@ ffmpeg -y -hide_banner -loglevel error -i "$OUT/$NAME-poster.jpg" -c:v libwebp -
 
 echo "encoded → $OUT"
 for f in "$OUT/$NAME".*  "$OUT/$NAME"-poster.*; do printf '  %-40s %6s KB\n' "$(basename "$f")" "$(( $(stat -c%s "$f" 2>/dev/null || stat -f%z "$f") / 1024 ))"; done
-cat <<EOF
-
-<video autoplay muted loop playsinline preload="metadata" poster="$NAME-poster.webp">
-  <source src="$NAME.av1.mp4" type='video/mp4; codecs="av01.0.08M.08"'>
-  <source src="$NAME.webm" type="video/webm">
-  <source src="$NAME.mp4" type="video/mp4">
-</video>
-(Remove the av1 <source> if that file wasn't produced. Pause off-screen and under prefers-reduced-motion.)
-EOF
+echo
+echo "<video autoplay muted loop playsinline preload=\"metadata\" poster=\"$NAME-poster.webp\">"
+[[ -f "$OUT/$NAME.av1.mp4" ]] && echo "  <source src=\"$NAME.av1.mp4\" type='video/mp4; codecs=\"av01.0.08M.08\"'>"
+echo "  <source src=\"$NAME.webm\" type=\"video/webm\">"
+echo "  <source src=\"$NAME.mp4\" type=\"video/mp4\">"
+echo "</video>"
+echo "(Pause off-screen and under prefers-reduced-motion.)"

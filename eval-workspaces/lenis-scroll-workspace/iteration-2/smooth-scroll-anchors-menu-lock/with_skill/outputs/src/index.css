@@ -1,0 +1,11 @@
+:root { --header-h: 72px; }
+
+/* No `scroll-behavior: smooth` here: Lenis owns smooth scrolling and the two would fight. */
+
+body { margin: 0; font-family: system-ui, sans-serif; }
+header { position: fixed; inset: 0 0 auto; height: var(--header-h); display: flex; align-items: center; gap: 1rem; padding: 0 1.5rem; background: #fff; z-index: 10; }
+section { min-height: 100vh; padding: 96px 1.5rem; }
+/* ONE header-offset mechanism: Lenis reads scroll-margin-top, and native / no-JS / initial #hash loads honour it too.
+   Do not also pass a JS offset (it would double-count). */
+section[id] { scroll-margin-top: var(--header-h); }
+.menu { position: fixed; inset: var(--header-h) 0 0; background: #fff; padding: 2rem; z-index: 9; overflow-y: auto; overscroll-behavior: contain; }

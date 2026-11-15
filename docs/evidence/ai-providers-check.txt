@@ -1,0 +1,4 @@
+hf-space      AVAILABLE?  space stage=RUNNING; gradio_client NOT installed (pip install gradio_client); no HF_TOKEN (anonymous quota is shared per IP and often 0 on cloud hosts). Quota is only known when a job runs.
+hf-inference  BLOCKED     needs HF_TOKEN (free account token works only with purchased credits or PRO monthly credits)
+comfyui       BLOCKED     no ComfyUI at http://127.0.0.1:8188 (needs a local install + GPU; see references/providers.md)
+pollinations  BLOCKED     needs POLLINATIONS_KEY (sk_...). Keyless legacy endpoint watermarks output — not for deliverables.
