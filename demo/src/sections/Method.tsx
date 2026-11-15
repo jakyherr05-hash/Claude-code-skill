@@ -66,7 +66,8 @@ function MethodPinned() {
       gsap.set(q('[data-layer="cct"]'), { opacity: 0 });
       gsap.set(q('[data-closing]'), { autoAlpha: 0 });
 
-      const setActive = (i: number) => steps.forEach((s, j) => s.setAttribute('aria-hidden', String(j !== i)));
+      let active = -1; // write aria-hidden only when the active step changes, not on every scroll frame
+      const setActive = (i: number) => { if (i === active) return; active = i; steps.forEach((s, j) => s.setAttribute('aria-hidden', String(j !== i))); };
       setActive(0);
       const tint = { k: 0 };
       const tintAt = gsap.utils.interpolate(['#d9a05b', '#9db4c6', '#d9a05b']);

@@ -6,16 +6,16 @@
 type Props = { step: 1 | 2 | 3; idPrefix: string; animated?: boolean };
 
 const BEAMS = [
-  { id: 'altar', from: [655, 92], to: [[600, 318], [712, 318]], label: '12° · 40 lux', lx: 662, ly: 300 },
-  { id: 'threshold', from: [170, 120], to: [[108, 318], [190, 318]], label: '24° · 8 lux', lx: 112, ly: 300 },
+  { id: 'altar', from: [655, 92], to: [[600, 318], [712, 318]], label: '12° · 40 lux', lx: 594, ly: 300, anchor: 'end' },
+  { id: 'threshold', from: [170, 120], to: [[108, 318], [190, 318]], label: '24° · 8 lux', lx: 112, ly: 300 },
   // label sits LEFT of its beam (right-anchored) so it never collides with the AMBULATORY label on small screens
-  { id: 'niche', from: [470, 70], to: [[512, 200], [548, 200]], label: '8° · 25 lux', lx: 500, ly: 214, anchor: 'end' },
+  { id: 'niche', from: [470, 70], to: [[512, 200], [548, 200]], label: '8° · 25 lux', lx: 500, ly: 214, anchor: 'end' },
 ] as { id: string; from: readonly [number, number]; to: readonly (readonly [number, number])[]; label: string; lx: number; ly: number; anchor?: 'start' | 'end' }[];
 
 const HATCH = [
-  { x: 230, y: 150, w: 300, h: 168, label: 'NAVE · ≤ 2 lux' },
+  { x: 230, y: 150, w: 300, h: 168, label: 'NAVE · ≤ 2 lux' },
   { x: 60, y: 60, w: 110, h: 90, label: 'VAULT · DARK' },
-  { x: 730, y: 150, w: 70, h: 168, label: 'AMBULATORY · 0 lux' },
+  { x: 730, y: 150, w: 70, h: 168, label: 'AMBULATORY · 0 lux' },
 ];
 
 export function MethodDrawing({ step, idPrefix, animated }: Props) {
@@ -30,9 +30,9 @@ export function MethodDrawing({ step, idPrefix, animated }: Props) {
       role="img"
       aria-label={[
         'Section drawing of a small chapel.',
-        showHatch && 'Hatched zones mark where darkness is protected: nave at or below 2 lux, vault dark, ambulatory 0 lux.',
-        showBeams && 'Three narrow beams: altar 12 degrees 40 lux, threshold 24 degrees 8 lux, niche 8 degrees 25 lux.',
-        showCct && 'A colour-temperature band shows the day running from 2200 K to 5600 K and back.',
+        showHatch && 'Hatched zones mark where darkness is protected: nave at or below 2 lux, vault dark, ambulatory 0 lux.',
+        showBeams && 'Three narrow beams: altar 12 degrees 40 lux, threshold 24 degrees 8 lux, niche 8 degrees 25 lux.',
+        showCct && 'A colour-temperature band shows the day running from 2200 K to 5600 K and back.',
       ].filter(Boolean).join(' ')}
       style={{ ['--beam-tint' as string]: '#d9a05b' }}
     >
@@ -73,8 +73,11 @@ export function MethodDrawing({ step, idPrefix, animated }: Props) {
             {HATCH.map((h) => (
               <g key={h.label} data-zone>
                 <rect x={h.x} y={h.y} width={h.w} height={h.h} fill={`url(#${p('hatch')})`} />
-                {/* zones near the right edge anchor their label to the right so it never runs out of the drawing */}
-                <text data-label className="mono" x={h.x + h.w > 700 ? h.x + h.w - 6 : h.x + 6} textAnchor={h.x + h.w > 700 ? 'end' : 'start'} y={h.y + 16} fill="var(--ink)" fontSize="11" letterSpacing="0.08em">{h.label}</text>
+                {/* narrow zones (the ambulatory) carry a vertical label along the zone, as architectural drawings do:
+                    it can't collide with neighbouring labels at any width (CD Gate B fix 6) */}
+                {h.w < 100
+                  ? <text data-label className="mono" x={h.x + h.w / 2 + 4} y={h.y + h.h - 8} transform={`rotate(-90 ${h.x + h.w / 2 + 4} ${h.y + h.h - 8})`} fill="var(--ink)" fontSize="11" letterSpacing="0.08em">{h.label}</text>
+                  : <text data-label className="mono" x={h.x + 6} y={h.y + 16} fill="var(--ink)" fontSize="11" letterSpacing="0.08em">{h.label}</text>}
               </g>
             ))}
           </g>
@@ -96,7 +99,7 @@ export function MethodDrawing({ step, idPrefix, animated }: Props) {
           <rect x="60" y="358" width="740" height="8" fill={`url(#${p('cct')})`} opacity="0.85" />
           <line data-cct-marker x1="60" y1="350" x2="60" y2="374" stroke="var(--ink)" strokeWidth="1.5" />
           <g className="mono" fill="var(--ink-muted)" fontSize="11">
-            <text x="60" y="392">00:00 · 2200 K</text><text x="430" y="392" textAnchor="middle">13:30 · 5600 K</text><text x="800" y="392" textAnchor="end">24:00 · 2200 K</text>
+            <text x="60" y="392">00:00 · 2200 K</text><text x="430" y="392" textAnchor="middle">13:30 · 5600 K</text><text x="800" y="392" textAnchor="end">24:00 · 2200 K</text>
           </g>
         </g>
       )}

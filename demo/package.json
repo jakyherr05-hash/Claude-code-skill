@@ -6,9 +6,9 @@
   "description": "Validation demo for the premium-web-studio plugin: a fictional architectural-lighting atelier.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && node scripts/build.mjs dist",
     "preview": "vite preview --port 4173 --strictPort",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json",
     "test": "playwright test",
     "test:update-snapshots": "playwright test --update-snapshots",
     "assets": "node scripts/render-assets.mjs"
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.63.0",
+    "@types/node": "22.19.1",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@types/three": "0.187.0",
@@ -33,5 +34,8 @@
     "three": "0.187.0",
     "typescript": "7.0.2",
     "vite": "8.3.8"
+  },
+  "overrides": {
+    "playwright-core": "1.63.0"
   }
 }

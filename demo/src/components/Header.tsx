@@ -49,7 +49,7 @@ export function Header() {
   );
 
   return (
-    <header className="site-header">
+    <header className="site-header" data-menu-open={open}>
       <a className="skip-link" href="#main">Skip to content</a>
       <Link to="/" className="wordmark" aria-label="Penumbra — home">PENUMBRA</Link>
       <nav className="nav-desktop" aria-label="Primary">

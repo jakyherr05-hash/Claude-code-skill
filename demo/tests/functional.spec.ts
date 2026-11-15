@@ -87,7 +87,7 @@ test.describe('rendering & navigation', () => {
     await expect(hour.locator('[aria-live]')).toContainText('Noon flattens everything');
     await expect(hour.getByRole('button', { name: '13:30' })).toHaveAttribute('aria-pressed', 'true');
     const day = await hour.locator('.hour__readout dd').first().textContent();
-    expect(day).toMatch(/5\s?\d{3} K/);
+    expect(day).toMatch(/5\d{3}\sK/); // number and unit joined by a no-break space
     // midnight: no daylight, door only
     await hour.getByRole('button', { name: '00:00' }).click();
     await expect(hour.locator('.hour__time')).toHaveText('00:00', { timeout: 4000 });

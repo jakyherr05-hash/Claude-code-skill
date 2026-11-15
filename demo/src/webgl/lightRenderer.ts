@@ -59,11 +59,20 @@ export type HourPreset = {
 export type LightRenderer = {
   /** Merge a partial state; marks dirty only if a value changed. Renders on next `render()`. */
   set(state: Partial<LightState>): void;
-  /** Draw now if dirty (call from gsap.ticker). */
-  render(): void;
+  /**
+   * Draw now if dirty (call from gsap.ticker). At most one frame is in flight on
+   * the GPU: if the previous frame has not finished, this call is skipped and the
+   * frame stays dirty for the next tick. `force` ignores that (stills / capture).
+   */
+  render(force?: boolean): void;
   /** Re-read the canvas CSS size and DPR; always marks dirty. */
   resize(): void;
-  /** Delete program/VAO, lose the context, remove listeners. Idempotent. */
+  /**
+   * Stop drawing, delete program/VAO/fence, shrink the canvas to 1×1 and remove
+   * listeners — all synchronously and cheaply. The context itself is released in
+   * an idle callback (WEBGL_lose_context), so unmount never waits on the GPU.
+   * Idempotent; `lost` is true afterwards.
+   */
   destroy(): void;
   readonly lost: boolean;
 };
@@ -217,18 +226,13 @@ export function readoutAtMinutes(min: number): HourReadout {
   return r;
 }
 
-let webgl2Support: boolean | undefined;
+/**
+ * Cheap capability check: is the WebGL2 API exposed at all? Creates no context
+ * (a throwaway probe context cost 0.5–0.8 s of main thread to create + lose).
+ * The authoritative fallback signal is `createLightRenderer()` returning null.
+ */
 export function supportsWebGL2(): boolean {
-  if (webgl2Support !== undefined) return webgl2Support;
-  try {
-    const c = document.createElement('canvas');
-    const gl = c.getContext('webgl2');
-    webgl2Support = !!gl;
-    gl?.getExtension('WEBGL_lose_context')?.loseContext();
-  } catch {
-    webgl2Support = false;
-  }
-  return webgl2Support;
+  return typeof window !== 'undefined' && typeof window.WebGL2RenderingContext === 'function';
 }
 
 /* ------------------------------------------------------------------------ */
@@ -517,6 +521,43 @@ const restorable = new WeakSet<HTMLCanvasElement>();
  *  event has been handled is refused, so a re-mount waits for it. */
 const lossPending = new WeakSet<HTMLCanvasElement>();
 const waitingRestore = new WeakMap<HTMLCanvasElement, () => void>();
+/** Context losses scheduled by destroy() but not yet run, keyed by canvas → cancel. */
+const scheduledLoss = new WeakMap<HTMLCanvasElement, () => void>();
+
+/**
+ * loseContext() blocks the main thread until the GPU has drained everything
+ * queued for that context (measured 0.6–13 s on a software GPU when called inside
+ * a route swap). Run it when the browser is idle instead; a renderer re-created
+ * on the same canvas before then cancels it and simply reuses the live context.
+ */
+function scheduleLoss(canvas: HTMLCanvasElement, ctx: WebGL2RenderingContext, ext: WEBGL_lose_context): void {
+  if ((window as unknown as { __TMP_NOLOSS?: boolean }).__TMP_NOLOSS) return; // TMP-EXPERIMENT
+  let done = false;
+  const run = () => {
+    if (done) return;
+    done = true;
+    scheduledLoss.delete(canvas);
+    if (!ctx.isContextLost()) {
+      lossPending.add(canvas);
+      ext.loseContext();
+    }
+  };
+  let cancel: () => void;
+  if (typeof window.requestIdleCallback === 'function') {
+    const id = window.requestIdleCallback(run, { timeout: 2000 });
+    cancel = () => {
+      done = true;
+      window.cancelIdleCallback(id);
+    };
+  } else {
+    const id = window.setTimeout(run, 250);
+    cancel = () => {
+      done = true;
+      window.clearTimeout(id);
+    };
+  }
+  scheduledLoss.set(canvas, cancel);
+}
 const allowRestore = (e: Event) => {
   e.preventDefault();
   const canvas = e.target as HTMLCanvasElement;
@@ -594,6 +635,12 @@ export function createLightRenderer(
   opts: { maxDpr?: number } = {},
 ): LightRenderer | null {
   const maxDpr = opts.maxDpr ?? 1.5;
+  // Re-created before a previous destroy()'s deferred loss ran: keep the live context.
+  const cancelLoss = scheduledLoss.get(canvas);
+  if (cancelLoss) {
+    cancelLoss();
+    scheduledLoss.delete(canvas);
+  }
   let gl: WebGL2RenderingContext | null = null;
   try {
     gl = canvas.getContext('webgl2', {
@@ -624,6 +671,8 @@ export function createLightRenderer(
   // Optional geometry keys default to built (1) so callers that never mention them get the full room.
   const state: LightState = { ...HERO_STATE, doorway: 1, altarBlock: 1 };
   let res: GLRes | null = null;
+  /** Fence after the last draw: GPU backpressure, at most one frame in flight. */
+  let fence: WebGLSync | null = null;
   let dirty = true;
   let lost = ctx.isContextLost();
   let destroyed = false;
@@ -637,10 +686,12 @@ export function createLightRenderer(
     e.preventDefault(); // allow restoration
     lost = true;
     res = null; // GPU objects are gone with the context
+    fence = null;
   };
   const onRestored = () => {
     if (destroyed) return;
     res = compile(ctx);
+    fence = null;
     lost = !res;
     dirty = true;
   };
@@ -678,8 +729,15 @@ export function createLightRenderer(
     }
   }
 
-  function render(): void {
+  function render(force = false): void {
     if (!dirty || lost || destroyed || !res) return;
+    if (fence) {
+      // Non-blocking: WebGL only updates sync status between tasks. If the GPU is
+      // still on the previous frame, skip this tick instead of queueing another.
+      if (!force && ctx.getSyncParameter(fence, ctx.SYNC_STATUS) !== ctx.SIGNALED) return;
+      ctx.deleteSync(fence);
+      fence = null;
+    }
     dirty = false;
     const w = canvas.width, h = canvas.height;
     const aspect = w / h;
@@ -708,6 +766,8 @@ export function createLightRenderer(
     ctx.uniform1f(res.uZoom, zoom);
     ctx.uniform2f(res.uShow, clamp01(state.doorway ?? 1), clamp01(state.altarBlock ?? 1));
     ctx.drawArrays(ctx.TRIANGLES, 0, 3);
+    fence = ctx.fenceSync(ctx.SYNC_GPU_COMMANDS_COMPLETE, 0);
+    ctx.flush();
   }
 
   function destroy(): void {
@@ -715,18 +775,22 @@ export function createLightRenderer(
     destroyed = true;
     canvas.removeEventListener('webglcontextlost', onLost, false);
     canvas.removeEventListener('webglcontextrestored', onRestored, false);
-    if (res && !ctx.isContextLost()) {
+    waitingRestore.delete(canvas);
+    if (!ctx.isContextLost()) {
+      if (fence) ctx.deleteSync(fence);
       ctx.bindVertexArray(null);
       ctx.useProgram(null);
-      ctx.deleteProgram(res.program);
-      ctx.deleteVertexArray(res.vao);
+      if (res) {
+        ctx.deleteProgram(res.program);
+        ctx.deleteVertexArray(res.vao);
+      }
+      // Drop the full-size drawing buffer now; the context goes at idle time.
+      canvas.width = 1;
+      canvas.height = 1;
+      if (ext) scheduleLoss(canvas, ctx, ext);
     }
     res = null;
-    waitingRestore.delete(canvas);
-    if (ext && !ctx.isContextLost()) {
-      lossPending.add(canvas);
-      ext.loseContext();
-    }
+    fence = null;
     lost = true;
   }
 

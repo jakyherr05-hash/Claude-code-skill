@@ -11,6 +11,7 @@ export function ScheduleIndex() {
   const root = useRef<HTMLElement>(null);
   const [filter, setFilter] = useState<(typeof TYPES)[number]>('All');
   const flipState = useRef<Flip.FlipState | null>(null);
+  const mounted = useRef(false);
   const { contextSafe } = useGSAP({ scope: root });
   const visible = projects.filter((p) => filter === 'All' || p.type === filter);
 
@@ -26,7 +27,9 @@ export function ScheduleIndex() {
   useLayoutEffect(() => {
     const state = flipState.current;
     flipState.current = null;
-    if (!state) { ScrollTrigger.refresh(); return; }
+    // first run is mount: the router already refreshes after layout, so only refresh on real filter changes
+    if (!state) { if (mounted.current) ScrollTrigger.refresh(); mounted.current = true; return; }
+    mounted.current = true;
     const ctx = gsap.context(() => {
       Flip.from(state, {
         targets: root.current!.querySelectorAll('.sched__row'),
@@ -68,7 +71,7 @@ export function ScheduleIndex() {
                 <td>{p.typeLabel}</td>
                 <td className="mono sched__cct">
                   <span className="sched__swatch" aria-hidden="true" style={{ background: `linear-gradient(90deg, ${kelvinToHex(p.cct[0])}, ${kelvinToHex(p.cct[1])})` }} />
-                  {p.cct[0] === p.cct[1] ? `${p.cct[0]} K` : `${p.cct[0]}–${p.cct[1]} K`}
+                  {p.cct[0] === p.cct[1] ? `${p.cct[0]}\u00a0K` : `${p.cct[0]}–${p.cct[1]}\u00a0K`}
                 </td>
               </tr>
             ))}

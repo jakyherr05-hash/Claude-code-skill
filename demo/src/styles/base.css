@@ -29,7 +29,9 @@ button { font: inherit; color: inherit; }
 ::selection { background: var(--accent-warm); color: var(--accent-ink); }
 
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; box-shadow: 0 0 0 4px var(--ground); }
-main:focus, h1:focus, [tabindex='-1']:focus { outline: none; }
+/* programmatic focus targets (route h1, main, anchored sections): no ring/frame — focus-visible's box-shadow
+   would otherwise draw a 4px frame across the hero after keyboard navigation (tech-lead B5) */
+main:focus, h1:focus, [tabindex='-1']:focus { outline: none; box-shadow: none; }
 
 .visually-hidden {
   position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -62,7 +64,7 @@ main:focus, h1:focus, [tabindex='-1']:focus { outline: none; }
 
 /* ---- CTA & links ---- */
 .cta {
-  display: inline-flex; align-items: center; gap: 0.3em; min-height: 44px;
+  display: inline-flex; align-items: center; gap: 0.4em; min-height: 44px;
   font-family: var(--font-mono); font-size: var(--step--1); text-transform: uppercase; letter-spacing: var(--tr-label);
   color: var(--ink); text-decoration: none; position: relative; padding-block: var(--space-2xs);
 }
@@ -73,7 +75,7 @@ main:focus, h1:focus, [tabindex='-1']:focus { outline: none; }
 .cta:hover::after, .cta:focus-visible::after { transform: scaleX(1); }
 .link-arrow {
   font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.04em; color: var(--accent-warm);
-  text-decoration: none; display: inline-flex; min-height: 44px; align-items: center;
+  text-decoration: none; display: inline-flex; min-height: 44px; align-items: center; gap: 0.4em; /* flex strips the space before the arrow (CD fix 9) */
 }
 .link-arrow:hover { text-decoration: underline; }
 

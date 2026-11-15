@@ -5,6 +5,7 @@ import { motionTokens } from '../motion/tokens';
 import { featured, kelvinToHex, type Project } from '../data/content';
 import { Picture } from '../components/Picture';
 import { Link } from '../router/Router';
+import { MethodDrawing } from '../sections/MethodDrawing';
 
 /** Detail route /work/:slug — "Rise" entrance; exists to exercise route lifecycle cleanup. */
 export function ProjectPage({ project }: { project: Project }) {
@@ -48,7 +49,7 @@ export function ProjectPage({ project }: { project: Project }) {
             <li key={h.time} className="detail__hour">
               <span className="detail__chip" aria-hidden="true" style={{ background: h.k ? kelvinToHex(h.k) : 'var(--ground)' }} />
               <span className="mono">{h.time}</span>
-              <span className="mono">{h.k ? `${h.k} K` : 'off'}</span>
+              <span className="mono">{h.k ? `${h.k}\u00a0K` : 'off'}</span>
               <span>{h.note}</span>
             </li>
           ))}
@@ -57,12 +58,16 @@ export function ProjectPage({ project }: { project: Project }) {
       <section className="detail__paper" aria-labelledby="drawings-title">
         <div className="grid">
           <h2 id="drawings-title" className="kicker mono">Drawings · lighting schedule excerpt</h2>
+          <figure className="paper__drawing">
+            <MethodDrawing step={3} idPrefix="paper" />
+            <figcaption className="mono">Section A–A · lighting layout and protected dark zones</figcaption>
+          </figure>
           <table className="paper__table">
             <thead><tr className="mono"><th scope="col">Ref.</th><th scope="col">Location</th><th scope="col">Source</th><th scope="col">CCT</th><th scope="col">Level</th></tr></thead>
             <tbody>
-              <tr><td className="mono">L-01</td><td>Altar</td><td>Concealed spot, 12°</td><td className="mono">2700 K</td><td className="mono">40 lux</td></tr>
-              <tr><td className="mono">L-02</td><td>Threshold</td><td>Recessed step light</td><td className="mono">2200 K</td><td className="mono">8 lux</td></tr>
-              <tr><td className="mono">L-03</td><td>Niche</td><td>Linear grazer, 8°</td><td className="mono">2700 K</td><td className="mono">25 lux</td></tr>
+              <tr><td className="mono">L-01</td><td>Altar</td><td>Concealed spot, 12°</td><td className="mono">2700 K</td><td className="mono">40 lux</td></tr>
+              <tr><td className="mono">L-02</td><td>Threshold</td><td>Recessed step light</td><td className="mono">2200 K</td><td className="mono">8 lux</td></tr>
+              <tr><td className="mono">L-03</td><td>Niche</td><td>Linear grazer, 8°</td><td className="mono">2700 K</td><td className="mono">25 lux</td></tr>
             </tbody>
           </table>
         </div>

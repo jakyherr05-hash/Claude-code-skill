@@ -132,6 +132,33 @@ test.describe('lifecycle & cleanup across routes', () => {
     c.assertClean();
   });
 
+  test('strict leak check: Link round trips at the top keep EXACT trigger, renderer and DOM counts (×5)', async ({ page }) => {
+    // goBack() restores a scroll position where once-only triggers have already fired and been removed, so the
+    // test above can only bound growth. Navigating via Links at y=0 recreates the identical page each time.
+    const c = watchConsole(page);
+    await open(page);
+    await page.waitForTimeout(1200);
+    const counts = async () => ({ ...(await stats(page)), nodes: await page.evaluate(() => document.querySelectorAll('*').length) });
+    const first = await counts();
+    expect(first.lightRenderers).toBe(2);
+    const seen = [first];
+    for (let i = 0; i < 5; i++) {
+      await page.evaluate(() => (document.querySelector('.room__plate') as HTMLElement).click()); // no scroll-into-view
+      await expect(page.locator('main h1')).toHaveAccessibleName('Capela do Silêncio', { timeout: 15000 });
+      await page.locator('.wordmark').click();
+      await expect(page.locator('main h1#hero-title')).toBeFocused({ timeout: 15000 });
+      await page.waitForTimeout(1200);
+      seen.push(await counts());
+    }
+    test.info().annotations.push({ type: 'round-trips', description: JSON.stringify(seen) });
+    for (const s of seen) {
+      expect(s.scrollTriggers).toBe(first.scrollTriggers);
+      expect(s.lightRenderers).toBe(2);
+      expect(s.nodes).toBe(first.nodes);
+    }
+    c.assertClean();
+  });
+
   test('back/forward restores scroll position', async ({ page }) => {
     await open(page);
     await page.evaluate(() => (window as any).__lenis.scrollTo('#work', { immediate: true }));

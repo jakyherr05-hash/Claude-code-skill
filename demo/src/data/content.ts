@@ -46,12 +46,12 @@ export const projects: Project[] = [
   {
     slug: 'capela-do-silencio', no: '01', name: 'Capela do Silêncio', place: 'Évora, Portugal', year: 2025,
     type: 'Sacred', typeLabel: 'Sacred space', intent: 'One slit of dawn; the altar answers it at night.',
-    spec: '2400–2700 K · 40 lux · 3 sources', cct: [2200, 5800], featured: true, plate: 'capela-do-silencio',
+    spec: '2400–2700 K · 40 lux · 3 sources', cct: [2200, 5800], featured: true, plate: 'capela-do-silencio',
     alt: 'A dark barrel-vaulted nave; a single blade of dawn light from a high slit falls on the limewashed apse wall.',
     narrative: [
       'A sixteenth-century chapel had been lit like a supermarket: eleven floodlights, one level, all day.',
       'We removed every fitting, then waited a year of mornings. The east slit already did the most important work at dawn — so the scheme begins by staying out of its way.',
-      'At night three concealed sources take over: a 2700 K wash on the altar, a 2200 K mark at the door, and nothing at all over the nave.',
+      'At night three concealed sources take over: a 2700 K wash on the altar, a 2200 K mark at the door, and nothing at all over the nave.',
     ],
     hours: [
       { time: '06:10', k: 2400, note: 'Daylight only' }, { time: '10:00', k: 5000, note: 'Daylight only' },
@@ -62,7 +62,7 @@ export const projects: Project[] = [
   {
     slug: 'museu-das-mares', no: '02', name: 'Museu das Marés', place: 'Peniche, Portugal', year: 2024,
     type: 'Museum', typeLabel: 'Museum', intent: 'Vitrines glow like rock pools in a dark hall.',
-    spec: '4000 K · 50 lux on objects · 2 lux hall', cct: [3000, 4000], featured: true, plate: 'museu-das-mares',
+    spec: '4000 K · 50 lux on objects · 2 lux hall', cct: [3000, 4000], featured: true, plate: 'museu-das-mares',
     alt: 'A dark exhibition hall with three low vitrines glowing from within, their light pooling on a polished floor.',
     narrative: [
       'A maritime collection in a former cannery: salt-fragile objects, a hall the size of a hangar.',
@@ -76,11 +76,11 @@ export const projects: Project[] = [
   {
     slug: 'casa-sombra', no: '03', name: 'Casa Sombra', place: 'Comporta, Portugal', year: 2023,
     type: 'House', typeLabel: 'Private house', intent: 'Louvre shadows that tell the time across the floor.',
-    spec: '3000 K · 4 sources · daylight-led', cct: [2700, 5600], featured: true, plate: 'casa-sombra',
+    spec: '3000 K · 4 sources · daylight-led', cct: [2700, 5600], featured: true, plate: 'casa-sombra',
     alt: 'Soft-edged stripes of late-afternoon louvre shadow across a concrete floor and up a wall.',
     narrative: [
       'A single-storey house in pine and sand. The architect drew deep timber louvres; we drew their shadows.',
-      'Floor finishes were chosen for how they hold a soft edge. After dark, four sources at knee height continue the stripe rhythm at 3000 K.',
+      'Floor finishes were chosen for how they hold a soft edge. After dark, four sources at knee height continue the stripe rhythm at 3000 K.',
     ],
     hours: [
       { time: '07:00', k: 3200, note: 'East louvres' }, { time: '12:00', k: 5600, note: 'Overhead' }, { time: '17:00', k: 4200, note: 'Long stripes' },
@@ -90,7 +90,7 @@ export const projects: Project[] = [
   {
     slug: 'hotel-alva', no: '04', name: 'Hotel Alva', place: 'Porto, Portugal', year: 2026,
     type: 'Hospitality', typeLabel: 'Hospitality', intent: 'Corridors lit at ankle height; faces lit only at the bar.',
-    spec: '2200 K · grazing slots · 1.5 lux corridor', cct: [2200, 2700], featured: true, plate: 'hotel-alva',
+    spec: '2200 K · grazing slots · 1.5 lux corridor', cct: [2200, 2700], featured: true, plate: 'hotel-alva',
     alt: 'A long stone corridor in perspective, lit only by low grazing slots that leave regular warm pools on the floor.',
     narrative: [
       'Sixty rooms in a granite warehouse by the river. Guests arrive late; the building should feel like it is already asleep.',
@@ -101,18 +101,18 @@ export const projects: Project[] = [
       { time: '22:00', k: 2200, note: 'Corridors low' }, { time: '01:00', k: 2200, note: 'Night path' }, { time: '04:00', k: 2200, note: 'Minimum' },
     ],
   },
-  { slug: 'arquivo-municipal', no: '05', name: 'Arquivo Municipal', place: 'Tomar, Portugal', year: 2022, type: 'Museum', typeLabel: 'Museum', intent: 'Reading light without a single visible fitting.', spec: '3500 K · 300 lux desks', cct: [3500, 3500], featured: false },
-  { slug: 'igreja-de-sao-bras', no: '06', name: 'Igreja de São Brás (restoration)', place: 'Mértola, Portugal', year: 2021, type: 'Sacred', typeLabel: 'Sacred space', intent: 'Candle-level light for a mosque-church.', spec: '2200 K · 15 lux', cct: [2200, 2400], featured: false },
-  { slug: 'casa-do-patio', no: '07', name: 'Casa do Pátio', place: 'Lisbon, Portugal', year: 2022, type: 'House', typeLabel: 'Private house', intent: 'The courtyard is the only lamp.', spec: '2700 K · 2 sources', cct: [2700, 5000], featured: false },
-  { slug: 'pousada-da-serra', no: '08', name: 'Pousada da Serra', place: 'Manteigas, Portugal', year: 2024, type: 'Hospitality', typeLabel: 'Hospitality', intent: 'Fireside levels after snowfall.', spec: '2200 K · dim-to-warm', cct: [1900, 2700], featured: false },
-  { slug: 'galeria-do-rio', no: '09', name: 'Galeria do Rio', place: 'Coimbra, Portugal', year: 2025, type: 'Museum', typeLabel: 'Museum', intent: 'Daylight drawn down a light well onto paper.', spec: '4500 K · 50 lux', cct: [4000, 5600], featured: false },
-  { slug: 'ermida-do-cabo', no: '10', name: 'Ermida do Cabo', place: 'Sagres, Portugal', year: 2023, type: 'Sacred', typeLabel: 'Sacred space', intent: 'A lamp for sailors, a dark nave for prayer.', spec: '2400 K · 1 source', cct: [2400, 2400], featured: false },
+  { slug: 'arquivo-municipal', no: '05', name: 'Arquivo Municipal', place: 'Tomar, Portugal', year: 2022, type: 'Museum', typeLabel: 'Museum', intent: 'Reading light without a single visible fitting.', spec: '3500 K · 300 lux desks', cct: [3500, 3500], featured: false },
+  { slug: 'igreja-de-sao-bras', no: '06', name: 'Igreja de São Brás (restoration)', place: 'Mértola, Portugal', year: 2021, type: 'Sacred', typeLabel: 'Sacred space', intent: 'Candle-level light for a mosque-church.', spec: '2200 K · 15 lux', cct: [2200, 2400], featured: false },
+  { slug: 'casa-do-patio', no: '07', name: 'Casa do Pátio', place: 'Lisbon, Portugal', year: 2022, type: 'House', typeLabel: 'Private house', intent: 'The courtyard is the only lamp.', spec: '2700 K · 2 sources', cct: [2700, 5000], featured: false },
+  { slug: 'pousada-da-serra', no: '08', name: 'Pousada da Serra', place: 'Manteigas, Portugal', year: 2024, type: 'Hospitality', typeLabel: 'Hospitality', intent: 'Fireside levels after snowfall.', spec: '2200 K · dim-to-warm', cct: [1900, 2700], featured: false },
+  { slug: 'galeria-do-rio', no: '09', name: 'Galeria do Rio', place: 'Coimbra, Portugal', year: 2025, type: 'Museum', typeLabel: 'Museum', intent: 'Daylight drawn down a light well onto paper.', spec: '4500 K · 50 lux', cct: [4000, 5600], featured: false },
+  { slug: 'ermida-do-cabo', no: '10', name: 'Ermida do Cabo', place: 'Sagres, Portugal', year: 2023, type: 'Sacred', typeLabel: 'Sacred space', intent: 'A lamp for sailors, a dark nave for prayer.', spec: '2400 K · 1 source', cct: [2400, 2400], featured: false },
 ];
 
 export const featured = projects.filter((p) => p.featured);
 export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug && p.featured);
 
-/** Kelvin → sRGB hex (Tanner Helland approximation, clamped 1000–40000 K). Used for CCT swatches. */
+/** Kelvin → sRGB hex (Tanner Helland approximation, clamped 1000–40000 K). Used for CCT swatches. */
 export function kelvinToHex(k: number): string {
   const t = Math.min(40000, Math.max(1000, k)) / 100;
   const r = t <= 66 ? 255 : 329.698727446 * Math.pow(t - 60, -0.1332047592);

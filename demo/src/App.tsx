@@ -7,10 +7,11 @@ import { ProjectPage, NotFound } from './pages/ProjectPage';
 import { projectBySlug } from './data/content';
 import { DebugStats } from './components/DebugStats';
 
-export function App() {
+/** `initialPath` is only passed by the build-time prerenderer (src/entry-server.tsx). */
+export function App({ initialPath }: { initialPath?: string } = {}) {
   return (
     <SmoothScroll>
-      <Router>
+      <Router initialPath={initialPath}>
         {(route) => {
           const project = route.name === 'project' ? projectBySlug(route.slug) : undefined;
           const page = route.name === 'home' ? <Home /> : project ? <ProjectPage key={project.slug} project={project} /> : <NotFound />;

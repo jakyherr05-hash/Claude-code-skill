@@ -55,7 +55,7 @@ function apply(state: LightState): void {
   if (!renderer) return;
   renderer.set(state);
   renderer.resize(); // forces a redraw even if the state is unchanged
-  renderer.render(); // synchronous, so stats() can read the frame in the same task
+  renderer.render(true); // forced + synchronous, so stats() can read the frame in the same task
 }
 
 function setPreset(i: number): void {
@@ -117,14 +117,25 @@ function stats(): Stats {
 }
 
 /** Destroy + recreate. `fresh` swaps in a new canvas element (React remount);
- *  otherwise the same element is reused (StrictMode double effect). */
-async function cycle(times: number, fresh: boolean): Promise<{ ok: boolean; lostAfterDestroy: boolean[]; stats: Stats[] }> {
+ *  otherwise the same element is reused (StrictMode double effect). `waitMs` > 0
+ *  lets destroy()'s idle-deferred loseContext run first (exercises restore). */
+async function cycle(
+  times: number,
+  fresh: boolean,
+  waitMs = 0,
+): Promise<{ ok: boolean; lostAfterDestroy: boolean[]; destroyMs: number[]; contextLostBeforeMount: boolean[]; stats: Stats[] }> {
+  const destroyMs: number[] = [];
+  const contextLostBeforeMount: boolean[] = [];
   const lostAfterDestroy: boolean[] = [];
   const out: Stats[] = [];
   for (let i = 0; i < times; i++) {
     const r = renderer;
+    const t0 = performance.now();
     r?.destroy();
+    destroyMs.push(Math.round((performance.now() - t0) * 10) / 10);
     lostAfterDestroy.push(r?.lost ?? false);
+    if (waitMs > 0) await new Promise((res) => setTimeout(res, waitMs));
+    contextLostBeforeMount.push(!fresh && !!canvas.getContext('webgl2')?.isContextLost());
     if (fresh) {
       const next = document.createElement('canvas');
       next.id = 'c';
@@ -138,7 +149,7 @@ async function cycle(times: number, fresh: boolean): Promise<{ ok: boolean; lost
     setPreset(i % HOUR_PRESETS.length);
     out.push(stats());
   }
-  return { ok: out.every((s) => s.maxLuma > 40), lostAfterDestroy, stats: out };
+  return { ok: out.every((s) => s.maxLuma > 40), lostAfterDestroy, destroyMs, contextLostBeforeMount, stats: out };
 }
 
 document.getElementById('ui')!.addEventListener('click', (e) => {

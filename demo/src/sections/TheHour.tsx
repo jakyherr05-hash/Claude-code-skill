@@ -28,6 +28,8 @@ export function TheHour() {
   const target = useRef(START);
   const shown = useRef({ minutes: -1 });
   const quick = useRef<((v: number) => void) | null>(null);
+  // a running/finished preset tween uses overwrite:true, which kills the quickTo tween → recreate only then
+  const presetTween = useRef<gsap.core.Tween | null>(null);
   const out = useRef<Record<string, HTMLElement | null>>({});
   const [intent, setIntent] = useState(nearestPreset(START).intent);
   const [active, setActive] = useState(nearestPreset(START).time);
@@ -45,8 +47,8 @@ export function TheHour() {
       const o = out.current;
       if (o.time) o.time.textContent = fmt(m);
       slider.current?.setAttribute('aria-valuetext', fmt(Number(slider.current.value)));
-      if (o.day) o.day.textContent = r.daylightK ? `${r.daylightK} K` : '—';
-      if (o.art) o.art.textContent = r.artificialK ? `${r.artificialK} K` : 'off';
+      if (o.day) o.day.textContent = r.daylightK ? `${r.daylightK}\u00a0K` : '—';
+      if (o.art) o.art.textContent = r.artificialK ? `${r.artificialK}\u00a0K` : 'off';
       if (o.altar) o.altar.textContent = `${r.altarLux}`;
       if (o.nave) o.nave.textContent = `${r.naveLux}`;
       if (fallback.current) {
@@ -73,13 +75,16 @@ export function TheHour() {
   const onInput = contextSafe((e: React.FormEvent<HTMLInputElement>) => {
     const v = Number(e.currentTarget.value);
     target.current = v;
-    gsap.killTweensOf(state.current);
-    if (prefersReducedMotion()) { state.current.minutes = v; crossfade(); return; }
+    if (presetTween.current) {
+      presetTween.current.kill();
+      presetTween.current = null;
+      quick.current = gsap.quickTo(state.current, 'minutes', { duration: motionTokens.hour.quick, ease: 'power3.out' });
+    }
+    if (prefersReducedMotion()) { gsap.killTweensOf(state.current); state.current.minutes = v; crossfade(); return; }
     // keep quickTo on the shortest path when crossing midnight
     const cur = wrap24(state.current.minutes);
     if (Math.abs(v - cur) > 720) state.current.minutes = cur + (v > cur ? 1440 : -1440);
-    quick.current = gsap.quickTo(state.current, 'minutes', { duration: motionTokens.hour.quick, ease: 'power3.out' });
-    quick.current(v);
+    quick.current!(v);
   });
 
   const crossfade = contextSafe(() => {
@@ -95,7 +100,7 @@ export function TheHour() {
     if (prefersReducedMotion()) {
       state.current.minutes = to; slider.current!.value = String(to); crossfade(); announce(to); return;
     }
-    gsap.to(state.current, {
+    presetTween.current = gsap.to(state.current, {
       minutes: cur + d, duration: motionTokens.hour.preset, ease: 'power3.inOut', overwrite: true,
       onUpdate: () => { slider.current!.value = String(wrap24(Math.round(wrap24(state.current.minutes) / 5) * 5)); },
       onComplete: () => { state.current.minutes = wrap24(to); slider.current!.value = String(wrap24(to)); announce(to); },
@@ -112,6 +117,7 @@ export function TheHour() {
           <p className="hour__intro">{site.hourIntro}</p>
         </header>
 
+        <figure className="hour__figure">
         <div className="hour__stage">
           {!glFailed && (
             <LightCanvas
@@ -124,6 +130,8 @@ export function TheHour() {
           )}
           <div ref={fallback} className="hour__fallback" data-active={glFailed} aria-hidden="true" />
         </div>
+          <figcaption className="hour__intent" aria-live="polite">{intent}</figcaption>
+        </figure>
 
         <div className="hour__controls">
           <label htmlFor="hour-range" className="hour__label mono">
@@ -147,7 +155,7 @@ export function TheHour() {
               const delta = deltas[e.key];
               if (delta !== undefined) {
                 e.preventDefault();
-                // step from what the user SEES (the readout), not a slider value a running preset tween may lag
+                // step from the TARGET (where the light is going), never from the animated value a running tween lags behind
                 const v = wrap24(target.current + delta);
                 e.currentTarget.value = String(v);
                 e.currentTarget.dispatchEvent(new Event('input', { bubbles: true }));
@@ -170,7 +178,7 @@ export function TheHour() {
           <div><dt>Altar lux</dt><dd ref={reg('altar')}>—</dd></div>
           <div><dt>Nave lux</dt><dd ref={reg('nave')}>—</dd></div>
         </dl>
-        <p className="hour__intent" aria-live="polite">{intent}</p>
+
       </div>
     </section>
   );

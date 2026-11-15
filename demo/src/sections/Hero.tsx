@@ -18,14 +18,22 @@ export function Hero() {
     mm.add({ motion: '(prefers-reduced-motion: no-preference)', reduce: '(prefers-reduced-motion: reduce)' }, (ctx) => {
       if (ctx.conditions!.reduce) { light.current?.set({ reveal: 1 }); return; }
       const u = uniforms.current;
-      u.reveal = 0;
-      light.current?.set({ reveal: 0 });
-      gsap.to(u, { reveal: 1, duration: motionTokens.dur.xl, ease: motionTokens.ease.enter, onUpdate: () => light.current?.set({ reveal: u.reveal }) });
+      // Continue the poster's CSS warm-on (started at first paint) instead of restarting from dark:
+      // read its current opacity and run the shader's reveal from there over the remaining time.
+      const posterImg = root.current!.querySelector<HTMLImageElement>('.hero__poster img');
+      const start = posterImg ? Math.min(1, parseFloat(getComputedStyle(posterImg).opacity) || 0) : 0;
+      u.reveal = start;
+      light.current?.set({ reveal: start });
+      gsap.to(u, { reveal: 1, duration: Math.max(0.3, motionTokens.dur.xl * (1 - start)), ease: motionTokens.ease.enter, onUpdate: () => light.current?.set({ reveal: u.reveal }) });
+      // JS takes over the text from the CSS fallback in the same frame the words are split (no flash).
+      const h1 = root.current!.querySelector<HTMLElement>('h1')!;
+      gsap.set(h1, { opacity: 1, animation: 'none' });
       litWords(root.current!.querySelector('h1')!, { delay: 0.35, y: 4 });
       const sub = root.current!.querySelectorAll('[data-hero-sub]');
       const tl = gsap.timeline({ delay: 1.1 });
       // "Lit, not shown": start dim (0.08) like the headline instead of invisible. Elements at opacity 0
       // are excluded from LCP, so a 0→1 fade here pushed mobile LCP to ~5.3 s (PERFORMANCE_REPORT).
+      gsap.set(sub, { animation: 'none' });
       tl.fromTo(sub, { opacity: 0.08 }, { opacity: 1, duration: motionTokens.dur.m, ease: motionTokens.ease.reveal, stagger: 0.25 });
     });
   }, { scope: root });

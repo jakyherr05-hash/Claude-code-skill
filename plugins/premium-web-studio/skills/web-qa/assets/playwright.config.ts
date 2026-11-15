@@ -15,9 +15,9 @@ export default defineConfig({
   // Visual tolerance: 0.1% of pixels. The earlier 1% let a moved 11px label pass unnoticed (QA D-5).
   expect: { timeout: 10_000, toHaveScreenshot: { maxDiffPixelRatio: 0.001, threshold: 0.2, animations: 'disabled', caret: 'hide' } },
   fullyParallel: true,
-  // 1 worker by default: without a GPU, Chromium rasterises WebGL on the CPU (SwiftShader, ~120-220 ms per
-  // full frame). With 3 parallel workers on a 4-core box, route-transition tests intermittently exceeded
-  // their timeouts (verified: the same suite is 39/39 green at 1 worker). Raise via PW_WORKERS on GPU machines.
+  // 1 worker by default. Route-transition tests were flaky at 3 workers; the tech-lead traced the root cause
+  // to the app (WebGL destroy() calling loseContext() synchronously, blocking the main thread 0.8-10 s), not
+  // to the runner — fixed by deferring loseContext to idle. Raise via PW_WORKERS once re-verified on your host.
   workers: Number(process.env.PW_WORKERS || 1),
   retries: 0,
   reporter: [['list'], ['html', { open: 'never', outputFolder: 'playwright-report' }], ['json', { outputFile: 'reports/results.json' }]],
@@ -31,7 +31,7 @@ export default defineConfig({
     { name: 'chromium-desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 900 } } },
   ],
   webServer: {
-    command: `npx tsc --noEmit && npx vite build --outDir ${OUT} --emptyOutDir && npx vite preview --outDir ${OUT} --port ${PORT} --strictPort`,
+    command: `npx tsc --noEmit && node scripts/build.mjs ${OUT} && npx vite preview --outDir ${OUT} --port ${PORT} --strictPort`,
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

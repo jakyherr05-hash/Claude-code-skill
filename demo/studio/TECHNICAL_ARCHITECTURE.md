@@ -35,7 +35,10 @@ Registered GSAP plugins: ScrollTrigger, SplitText, Flip, CustomEase. Draggable a
 | `src/webgl/**`, `lab/**` | webgl-specialist |
 | `public/media/**`, `assets-src/**`, `scripts/render-assets.mjs` | ai-visual-producer |
 | `src/components/**`, `src/sections/**`, `src/pages/**`, `src/router/**`, `src/styles/base.css`, `src/styles/sections.css`, `src/data/**`, `index.html`, build config | frontend-engineer |
-| `tests/**`, `playwright.config.ts` | qa-engineer |
+| `tests/**`, `playwright.config.ts`, `tsconfig.node.json` | qa-engineer |
+| `src/entry-server.tsx`, `scripts/build.mjs` (prerender), `public/robots.txt`, `package.json`, `package-lock.json` | frontend-engineer (dependency changes need tech-lead approval) |
+| `plugins/**`, `docs/**`, `tests/validate.py`, `scripts/sync-templates.sh` (repo root) | orchestrator |
+| `plugins/premium-web-studio/skills/*/assets/**` | **generated, never hand-edited**: byte-identical copies of 23 demo files. Whoever edits a mapped demo file runs `bash scripts/sync-templates.sh` in the same change; `tests/validate.py` fails on drift |
 
 ## Scroll & motion architecture
 ```
@@ -51,15 +54,25 @@ gsap.ticker ──► lenis.raf(t*1000) ──► lenis 'scroll' ──► Scrol
 ## Asset pipeline
 `scripts/render-assets.mjs` (Playwright) → `assets-src/*.png` masters (gitignored, regenerable) → `optimize-images.mjs` (sharp) → `public/media/<id>-<w>.{avif,webp}` → `<Picture>` with explicit width/height (no CLS), lazy below the fold, `fetchpriority=high` + `<link rel=preload>` for the hero poster.
 
-## Performance budget
+## Performance budget (ratified by tech-lead, Gate B, 2026-11-15)
 | Metric | Budget | Measured (→ PERFORMANCE_REPORT) |
 |---|---|---|
-| LCP (mobile, lab) | ≤ 2.5 s | see report |
+| LCP, mobile lab (Lighthouse 13 default, median of 3, quiet host) | ≤ 2.5 s | see report |
 | CLS | ≤ 0.05 | see report |
-| TBT (INP lab proxy) | ≤ 200 ms | see report |
-| JS initial (gz) | ≤ 170 KB | see report |
-| Hero media | ≤ 60 KB | 8.3 KB AVIF @1920 (ASSET_MANIFEST) |
-| Total media, full scroll at 390 | ≤ 600 KB | see report |
+| TBT, mobile lab, **WebGL disabled** (gating) | ≤ 200 ms | see report |
+| TBT, mobile lab, WebGL on SwiftShader | informational; but **no GPU-independent synchronous WebGL call > 50 ms** | see report |
+| Route transition | Dim + Rise ≤ 1.2 s; no main-thread task > 200 ms | see report |
+| Initial JS (gz) | ≤ 170 KB | see report |
+| CSS (gz) | ≤ 15 KB | see report |
+| First-load fonts | ≤ 220 KB | see report |
+| Hero media incl. grain | ≤ 60 KB | see report |
+| Media, full scroll at 390 | ≤ 600 KB | see report |
+| Scroll probe | p95 frame ≤ 20 ms, 0 long tasks | see report |
+| Leak check | equal trigger/renderer/DOM counts over ≥ 5 Link round trips; heap ≤ 1 MB over 20 cycles | triggers/DOM: test; heap NOT TESTED |
+| Field data after launch | INP p75 ≤ 200 ms, LCP p75 ≤ 2.5 s | NOT TESTED (no deployment) |
+
+## Rendering
+Static prerendering at build time (`scripts/build.mjs`): client bundle → SSR bundle of `src/entry-server.tsx` → each route rendered with `react-dom/server` into `dist/index.html`, `dist/work/<slug>/index.html` (+ `<slug>.html` twin), with preloads for the two above-the-fold font files. `src/main.tsx` hydrates only when `#root[data-prerendered]` matches the URL (a host's SPA fallback may serve another route's HTML), otherwise renders fresh. Added after Gate B (B4): the LCP element was waiting on ~150 KB of client JS.
 
 ## Test plan
 `tests/functional.spec.ts`, `tests/scroll-motion.spec.ts`, `tests/responsive-a11y.spec.ts` and `tests/visual.spec.ts`, run against the production build. Covered: the 6-width matrix, reduced motion, axe WCAG 2.2 AA, keyboard order, resilience with no WebGL2 and with fonts/images blocked, a ×3 route leak test, and Lenis/ScrollTrigger sync. Only Chromium is available in this environment.

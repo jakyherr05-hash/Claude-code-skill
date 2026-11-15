@@ -32,7 +32,14 @@ export const LightCanvas = forwardRef<LightHandle, Props>(function LightCanvas({
     let onScreen = false;
     let io: IntersectionObserver | undefined;
     let ro: ResizeObserver | undefined;
-    const tick = () => { if (visible && onScreen) renderer.current?.render(); };
+    let wasLost = false;
+    const tick = () => {
+      const r = renderer.current;
+      if (!r) return;
+      // unrestored context loss → show the poster again (canvas fades out via data-ready)
+      if (r.lost !== wasLost) { wasLost = r.lost; setReady(!r.lost); }
+      if (visible && onScreen && !r.lost) r.render();
+    };
     const onVis = () => { visible = document.visibilityState === 'visible'; };
 
     // Defer GL setup until after first paint so the poster/H1 (LCP) is never blocked by shader compile.

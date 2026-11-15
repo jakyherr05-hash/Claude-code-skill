@@ -7,6 +7,9 @@
     <meta name="description" content="Penumbra is a fictional architectural-lighting atelier in Lisbon — a demonstration site built by the premium-web-studio plugin." />
     <meta name="theme-color" content="#0d0c0b" />
     <meta name="color-scheme" content="dark" />
+    <!-- Before first paint: allow the "unlit" opening only when motion is welcome. Reduced-motion and no-JS
+         visitors get the fully lit page straight away (see .motion-ok rules in sections.css). -->
+    <script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion-ok');</script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d0c0b'/%3E%3Cpath d='M8 4 L20 28 H26 L14 4Z' fill='%23d9a05b' opacity='.9'/%3E%3C/svg%3E" />
     <link rel="preload" as="image" type="image/avif" imagesrcset="/media/hero-poster-960.avif 960w, /media/hero-poster-1920.avif 1920w" imagesizes="100vw" fetchpriority="high" />
   </head>

@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { gsap, useGSAP } from '../motion/registry';
 import { litWords } from '../motion/lit';
-import { motionTokens } from '../motion/tokens';
 import { site } from '../data/content';
 
 /** S2 · Manifesto — a breathing section; lines are lit once, then the warm underline is drawn. */
@@ -13,17 +12,16 @@ export function Manifesto() {
     const mm = gsap.matchMedia();
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       const p = root.current!.querySelector('p')!;
-      const uline = p.querySelector('.uline');
-      gsap.set(uline, { backgroundSize: '0% 1px' });
+      // The underline is driven by CLASSES on the paragraph, not by a tween on the .uline node:
+      // SplitText (autoSplit) clones nested spans when it splits/re-splits lines, so a node reference or an
+      // inline style would target stale elements (CD Gate B fix 3). CSS draws it via a transition.
+      p.classList.add('uline-armed');
       litWords(p, {
         type: 'lines',
         scrollTrigger: { trigger: p, start: 'top 75%', once: true },
-        then: (tween) => {
-          tween.eventCallback('onComplete', () => {
-            gsap.to(uline, { backgroundSize: '100% 1px', duration: motionTokens.dur.l, ease: motionTokens.ease.enter });
-          });
-        },
+        then: (tween) => { tween.eventCallback('onComplete', () => p.classList.add('uline-drawn')); },
       });
+      return () => p.classList.remove('uline-armed', 'uline-drawn');
     });
   }, { scope: root });
 

@@ -5,7 +5,7 @@
 .hero__media { position: absolute; inset: 0; }
 .hero__poster, .hero__poster img, .hero__canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .hero__poster img { object-fit: cover; object-position: 60% 40%; }
-.hero__canvas { opacity: 0; transition: opacity var(--dur-l) var(--ease-dimmer); }
+.hero__canvas { opacity: 0; transition: opacity var(--dur-s) linear; } /* short handoff: shader continues the poster's rise */
 .hero__canvas[data-ready='true'] { opacity: 1; }
 .hero__scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, color-mix(in srgb, var(--ground) 72%, transparent) 100%); }
 .hero__content { position: relative; padding-block: calc(var(--header-h) + var(--space-2xl)) var(--space-2xl); row-gap: var(--space-m); }
@@ -31,6 +31,8 @@
   background: linear-gradient(var(--accent-warm), var(--accent-warm)) 0 100% / 100% 1px no-repeat;
   -webkit-box-decoration-break: clone; box-decoration-break: clone; padding-bottom: 0.06em;
 }
+.uline-armed .uline { background-size: 0% 1px; }
+.uline-armed.uline-drawn .uline { background-size: 100% 1px; transition: background-size var(--dur-l) var(--ease-dimmer); }
 @media (min-width: 64rem) { .manifesto__text { grid-column: 2 / 10; } }
 
 /* ---- S3 Method ---- */
@@ -52,9 +54,15 @@
 .method__figure { width: 100%; }
 .method-drawing { width: 100%; height: auto; overflow: visible; }
 .method-drawing text { font-family: var(--font-mono); }
-@media (max-width: 47.999rem) { .method-drawing text { font-size: 24px !important; letter-spacing: 0 !important; } .method-drawing__labels { display: none; } }
+@media (max-width: 47.999rem) {
+  .method-drawing text { font-size: 24px !important; letter-spacing: 0 !important; }
+  .method-drawing__labels { display: none; }
+  /* bleed the drawing to the viewport edges on phones (CD fix 6) */
+  .method__figure, .method__static-step .method-drawing { width: auto; margin-inline: calc(-1 * var(--margin)); }
+}
 @media (min-width: 64rem) {
-  .method__pin { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-2xl); align-items: center; }
+  .method-drawing text { font-size: 12px; }
+  .method__pin { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-2xl); align-items: center; }
 }
 @media (max-width: 63.999rem) {
   .method__figure { order: -1; }
@@ -92,10 +100,8 @@
 .hour__intent { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: var(--step-2); line-height: var(--lh-3, 1.2); max-width: 30ch; }
 @media (min-width: 64rem) {
   .hour__head { grid-column: 1 / 5; }
-  .hour__stage { grid-column: 5 / -1; grid-row: 1 / span 3; }
   .hour__controls { grid-column: 1 / 5; }
   .hour__readout { grid-column: 1 / 5; }
-  .hour__intent { grid-column: 5 / -1; }
 }
 
 /* ---- S5 Rooms ---- */
@@ -165,9 +171,9 @@
 @media (min-width: 64rem) { .contact__title { grid-column: 2 / 11; } .contact__pool, .contact__address { grid-column: 2 / 8; } }
 
 /* ---- Detail route ---- */
-.detail__hero { height: min(88svh, 60rem); overflow: hidden; background: var(--ground-raised); }
+.detail__hero { height: min(62svh, 46rem); overflow: hidden; background: var(--ground-raised); }
 .detail__hero picture, .detail__hero img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; }
-.detail__head { padding-block: var(--space-2xl) var(--space-l); row-gap: var(--space-s); }
+.detail__head { padding-block: var(--space-xl) var(--space-l); row-gap: var(--space-s); }
 .detail__head h1 { font-family: var(--font-display); font-weight: 300; font-size: var(--step-6); line-height: var(--lh-6); letter-spacing: var(--tr-6); text-wrap: balance; }
 .detail__head h1 .w { display: inline-block; }
 .detail__head .kicker a { color: inherit; }
@@ -191,3 +197,34 @@
 
 .notfound { min-height: 80svh; align-content: center; row-gap: var(--space-m); }
 .notfound h1 { font-family: var(--font-display); font-weight: 300; font-size: var(--step-6); }
+
+/* ---- Gate B creative fixes ---- */
+/* fix 10: grid children of display:grid sections stretch (margin-inline:auto would shrink-wrap + centre them) */
+.manifesto > .grid, .contact > .grid { width: 100%; }
+/* fix 12: the intent line is the stage's caption */
+.hour__figure { margin: 0; display: grid; gap: var(--space-s); }
+.hour__figure .hour__intent { margin: 0; }
+@media (min-width: 64rem) { .hour__figure { grid-column: 5 / -1; grid-row: 1 / span 3; align-self: start; } }
+/* fix 7: the Method drawing re-inked for the paper band */
+.paper__drawing { margin: 0 0 var(--space-l); }
+.paper__drawing figcaption { color: var(--paper-muted); font-size: var(--step--2); margin-top: var(--space-xs); letter-spacing: 0.06em; }
+.detail__paper .method-drawing { --ink: var(--paper-ink); --ink-muted: var(--paper-muted); --ground: var(--paper); --accent-warm: var(--paper-accent); --beam-tint: var(--paper-accent) !important; }
+@media (min-width: 64rem) { .paper__drawing { grid-column: 1 / 10; } }
+/* fix 8: stack the paper table on phones */
+@media (max-width: 47.999rem) {
+  .paper__table thead { display: none; }
+  .paper__table, .paper__table tbody, .paper__table tr { display: block; }
+  .paper__table tr { display: flex; flex-wrap: wrap; column-gap: 0.6em; padding-block: var(--space-xs); border-bottom: 1px solid color-mix(in srgb, var(--paper-ink) 20%, transparent); }
+  .paper__table td { border: 0; padding: 0; }
+  .paper__table td:nth-child(3) { flex-basis: 100%; order: 5; color: var(--paper-muted); }
+}
+/* fix 13: solid header while the menu is open (no hero texture through the gradient) */
+.site-header[data-menu-open='true'] { background: var(--ground); }
+
+/* fix 2: the site opens unlit — one continuous warm-on from first paint (CSS), continued by the shader (JS).
+   .motion-ok is set by an inline <head> script only when reduced motion is off. If JS never runs, the
+   fallback animations still light everything ~3 s in. Opacity 0.08 (not 0) keeps the text an LCP candidate. */
+@keyframes hero-warm { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hero-lit-fallback { to { opacity: 1; } }
+.motion-ok .hero__poster img { animation: hero-warm var(--dur-xl) var(--ease-dimmer) both; }
+.motion-ok .hero__title, .motion-ok .hero [data-hero-sub] { opacity: 0.08; animation: hero-lit-fallback var(--dur-m) var(--ease-dimmer) 3s forwards; }

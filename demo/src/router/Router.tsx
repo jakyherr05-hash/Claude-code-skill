@@ -34,12 +34,14 @@ function nextFrame(cb: () => void) {
   setTimeout(run, 100);
 }
 
-type Nav = { route: Route; navigate: (path: string) => void; transitioning: boolean };
+type Nav = { route: Route; navigate: (path: string) => void };
 const RouterContext = createContext<Nav | null>(null);
 
-export function Router({ children }: { children: (route: Route) => ReactNode }) {
-  const [route, setRoute] = useState<Route>(() => parse(location.pathname));
-  const [transitioning, setTransitioning] = useState(false);
+/** `initialPath` is required for server prerendering (no `location` there); the client reads location. */
+export function Router({ children, initialPath }: { children: (route: Route) => ReactNode; initialPath?: string }) {
+  const [route, setRoute] = useState<Route>(() => parse(initialPath ?? location.pathname));
+  // scroll lock is held from Dim until Rise completes (released in done())
+  const releaseLock = useRef<(() => void) | null>(null);
   const veil = useRef<HTMLDivElement>(null);
   const pendingScroll = useRef<number | null>(null);
   const pendingHash = useRef<string | null>(null);
@@ -49,8 +51,8 @@ export function Router({ children }: { children: (route: Route) => ReactNode }) 
 
   const swap = useCallback(async (path: string, restoreY: number | null) => {
     const reduced = prefersReducedMotion();
-    setTransitioning(true);
-    const release = lock();
+    releaseLock.current?.();
+    releaseLock.current = lock();
     if (veil.current) {
       // "Dim": the page sinks into the ground colour
       const dur = reduced ? motionTokens.page.reduced : motionTokens.page.dim;
@@ -65,7 +67,6 @@ export function Router({ children }: { children: (route: Route) => ReactNode }) 
     const hashAt = path.indexOf('#');
     pendingHash.current = hashAt >= 0 ? path.slice(hashAt + 1) : null;
     setRoute(parse(hashAt >= 0 ? path.slice(0, hashAt) : path));
-    release();
   }, [lock]);
 
   // after the new route has rendered: position scroll, refresh triggers, reveal, focus
@@ -90,7 +91,8 @@ export function Router({ children }: { children: (route: Route) => ReactNode }) 
         hashEl.setAttribute('tabindex', '-1');
       }
       const done = () => {
-        setTransitioning(false);
+        releaseLock.current?.();
+        releaseLock.current = null;
         if (hashEl) hashEl.focus({ preventScroll: true });
         else if (y === 0) document.querySelector<HTMLElement>('main h1')?.focus({ preventScroll: true });
       };
@@ -99,8 +101,9 @@ export function Router({ children }: { children: (route: Route) => ReactNode }) 
         const reduced = prefersReducedMotion();
         const dur = reduced ? motionTokens.page.reduced : motionTokens.page.rise;
         let finished = false;
-        const finish = () => { if (finished) return; finished = true; rise.progress(1); gsap.set(veil.current, { visibility: 'hidden' }); done(); };
-        const rise = gsap.to(veil.current, { opacity: 0, duration: dur, ease: reduced ? 'none' : motionTokens.ease.enter, onComplete: finish });
+        let rise: gsap.core.Tween | null = null;
+        const finish = () => { if (finished) return; finished = true; rise?.progress(1); gsap.set(veil.current, { visibility: 'hidden' }); done(); };
+        rise = gsap.to(veil.current, { opacity: 0, duration: dur, ease: reduced ? 'none' : motionTokens.ease.enter, onComplete: finish });
         setTimeout(finish, dur * 1000 + 250); // same rAF-independence guarantee as the Dim step
       } else done();
     });
@@ -120,7 +123,7 @@ export function Router({ children }: { children: (route: Route) => ReactNode }) 
   }, [swap]);
 
   return (
-    <RouterContext.Provider value={{ route, navigate, transitioning }}>
+    <RouterContext.Provider value={{ route, navigate }}>
       {children(route)}
       <div ref={veil} className="route-veil" aria-hidden="true" />
     </RouterContext.Provider>
