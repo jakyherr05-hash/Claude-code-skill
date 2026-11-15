@@ -1,0 +1,55 @@
+{
+  "expectations": [
+    {
+      "text": "Exactly one Lenis instance is created in the app (no second smooth-scroll library, no autoRaf alongside a manual raf loop)",
+      "passed": true,
+      "evidence": "one `new Lenis` (scroll/SmoothScroll.tsx from template), autoRaf:false"
+    },
+    {
+      "text": "Lenis is driven by gsap.ticker (gsap.ticker.add calling lenis.raf with time*1000) and gsap.ticker.lagSmoothing(0) is set",
+      "passed": true,
+      "evidence": "gsap.ticker.add(tick) where tick = time => lenis.raf(time*1000); lagSmoothing(0)"
+    },
+    {
+      "text": "ScrollTrigger is updated from Lenis scroll events (lenis.on('scroll', ScrollTrigger.update) or equivalent)",
+      "passed": true,
+      "evidence": "instance.on('scroll', ScrollTrigger.update)"
+    },
+    {
+      "text": "The CSS rule html { scroll-behavior: smooth } is removed or neutralised because it conflicts with Lenis programmatic scrolling",
+      "passed": true,
+      "evidence": "index.css: rule removed; only a comment remains explaining why"
+    },
+    {
+      "text": "In-page anchor navigation scrolls with a 72px (or header-height) offset so sections are not hidden under the fixed header",
+      "passed": true,
+      "evidence": "RUNTIME (vite build + Playwright): header nav \u2192 #pricing top = 72px; menu link \u2192 #faq top = 72px. index.css uses section[id]{scroll-margin-top: var(--header-h)} and the template skips its own offset when CSS margin is present \u2014 the iteration-1 double-count is gone"
+    },
+    {
+      "text": "Anchor navigation moves keyboard focus to the target section (e.g. tabindex=-1 + focus) or otherwise preserves accessible focus",
+      "passed": true,
+      "evidence": "RUNTIME: activeElement = pricing / faq after clicks"
+    },
+    {
+      "text": "Opening the mobile menu stops scrolling (lenis.stop() or equivalent) and closing it restores scrolling (lenis.start())",
+      "passed": true,
+      "evidence": "useScrollLock(open) \u2192 lenis.stop/start; RUNTIME wheel blocked while open, scroll works after close"
+    },
+    {
+      "text": "The Lenis instance and the ticker callback are cleaned up on unmount (lenis.destroy() and gsap.ticker.remove)",
+      "passed": true,
+      "evidence": "template cleanup: ticker.remove, lagSmoothing restored, destroy()"
+    },
+    {
+      "text": "The Lenis stylesheet (lenis/dist/lenis.css) or equivalent recommended CSS is included",
+      "passed": true,
+      "evidence": "imports lenis/dist/lenis.css; RUNTIME html.lenis present"
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "pass_rate": 1.0
+  }
+}
