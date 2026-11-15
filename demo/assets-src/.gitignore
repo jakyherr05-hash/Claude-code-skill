@@ -1,0 +1,2 @@
+# PNG masters are ~10 MB each and fully reproducible: `npm run assets` (scripts/render-assets.mjs).
+*.png

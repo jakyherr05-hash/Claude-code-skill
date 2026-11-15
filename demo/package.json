@@ -1,0 +1,37 @@
+{
+  "name": "penumbra-demo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Validation demo for the premium-web-studio plugin: a fictional architectural-lighting atelier.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4173 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "test:update-snapshots": "playwright test --update-snapshots",
+    "assets": "node scripts/render-assets.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/hanken-grotesk": "5.3.0",
+    "@fontsource-variable/jetbrains-mono": "5.3.0",
+    "@fontsource-variable/newsreader": "5.3.0",
+    "@gsap/react": "2.1.2",
+    "gsap": "3.15.1",
+    "lenis": "1.3.27",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.63.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.187.0",
+    "@vitejs/plugin-react": "6.3.0",
+    "three": "0.187.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.8"
+  }
+}

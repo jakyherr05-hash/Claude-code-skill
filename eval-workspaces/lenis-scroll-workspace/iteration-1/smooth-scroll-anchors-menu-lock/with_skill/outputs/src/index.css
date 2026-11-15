@@ -1,0 +1,9 @@
+:root { --header-h: 72px; }
+/* No `scroll-behavior: smooth`: it fights Lenis' programmatic scrolls. Lenis owns smoothing. */
+body { margin: 0; font-family: system-ui, sans-serif; }
+header { position: fixed; inset: 0 0 auto; height: var(--header-h); display: flex; align-items: center; gap: 1rem; padding: 0 1.5rem; background: #fff; z-index: 10; }
+section { min-height: 100vh; padding: 96px 1.5rem; }
+/* Fallback for no-JS / pre-hydration hash navigation; Lenis applies the same offset itself. */
+section[id] { scroll-margin-top: var(--header-h); }
+.menu { position: fixed; inset: var(--header-h) 0 0; background: #fff; padding: 2rem; overflow-y: auto; overscroll-behavior: contain; }
+html.is-scroll-locked { overscroll-behavior: none; }

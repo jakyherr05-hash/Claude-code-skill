@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "A creative direction file exists in studio/ containing a one-sentence concept specific to Aster (engineered, quiet / precision instrument), not a generic tagline",
+      "passed": true,
+      "evidence": "creative-direction.md \u00a71 'A quiet instrument' \u2014 tied to the brief's precision-instrument framing"
+    },
+    {
+      "text": "The palette lists hex values with roles AND contrast ratios that were actually computed (a script or calculation is shown or run), with body text pairs at least 4.5:1",
+      "passed": false,
+      "evidence": "No computation in the run (2 tool calls, both file writes). Stated ratios are inaccurate when measured with contrast.mjs: Graphite/Paper claimed 15.6:1 \u2192 actual 14.97:1; Signal/Paper claimed 4.3:1 \u2192 actual 3.89:1"
+    },
+    {
+      "text": "Every chosen font has its licence stated AND checked against a source during the run (npm/Fontsource licence field, Google Fonts/OFL, Fontshare API or licence page), and all are free for commercial use",
+      "passed": false,
+      "evidence": "type-system.md states 'all SIL Open Font License 1.1' (Newsreader, Hanken Grotesk, IBM Plex Mono) \u2014 correct in fact, but asserted from memory: no npm/API/licence-page check in the transcript (2 tool calls, both writes)"
+    },
+    {
+      "text": "The typography system defines a fluid type scale using clamp() values with explicit min/max viewport assumptions, plus line-height and letter-spacing per step",
+      "passed": true,
+      "evidence": "type-system.md table: min/max px per step, Newsreader weights, line-height and tracking per step; tokens.css clamp() with '375px \u2026 1440px' assumption"
+    },
+    {
+      "text": "A spacing/grid system defines a base unit or scale, grid columns per breakpoint, container width(s) and section spacing",
+      "passed": true,
+      "evidence": "type-system.md \u00a73/\u00a74: 8px scale (space-1..8), section-y, 12/8/4 columns with breakpoints, gutters, 1280px max width"
+    },
+    {
+      "text": "Motion guidance includes durations/easing and an explicit prefers-reduced-motion behaviour",
+      "passed": false,
+      "evidence": "creative-direction.md principle 4: '400-600 ms ease \u2026 Respect prefers-reduced-motion' \u2014 durations present but no reduced-motion BEHAVIOUR specified"
+    },
+    {
+      "text": "The direction includes an explicit list of things deliberately not done (e.g. avoiding sporty/extreme-sports clich\u00e9s)",
+      "passed": true,
+      "evidence": "creative-direction.md \u00a76 Do/Don't: 'Don't: gradients, glows \u2026 stock cyclists, countdown timers'"
+    },
+    {
+      "text": "No website implementation code (components, pages, CSS for sections) was created \u2014 only direction/system documents (and optionally a token CSS file)",
+      "passed": true,
+      "evidence": "Only creative-direction.md, type-system.md, tokens.css (reference tokens) \u2014 no components/pages"
+    }
+  ],
+  "summary": {
+    "passed": 5,
+    "failed": 3,
+    "total": 8,
+    "pass_rate": 0.625
+  }
+}

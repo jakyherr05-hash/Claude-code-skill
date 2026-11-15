@@ -1,0 +1,197 @@
+{
+  "metadata": {
+    "skill_name": "lenis-scroll",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-11-15T12:50:58Z",
+    "evals_run": [
+      "smooth-scroll-anchors-menu-lock"
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": "smooth-scroll-anchors-menu-lock",
+      "eval_name": "smooth-scroll-anchors-menu-lock",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.889,
+        "passed": 8,
+        "failed": 1,
+        "total": 9,
+        "time_seconds": 25.0,
+        "tokens": 66931,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Exactly one Lenis instance is created in the app (no second smooth-scroll library, no autoRaf alongside a manual raf loop)",
+          "passed": true,
+          "evidence": "main.tsx wraps App in the single <SmoothScroll> (src/scroll/SmoothScroll.tsx, identical to the tested template); no other Lenis/smooth library; autoRaf:false"
+        },
+        {
+          "text": "Lenis is driven by gsap.ticker (gsap.ticker.add calling lenis.raf with time*1000) and gsap.ticker.lagSmoothing(0) is set",
+          "passed": true,
+          "evidence": "SmoothScroll.tsx: gsap.ticker.add(time => lenis.raf(time*1000)); gsap.ticker.lagSmoothing(0)"
+        },
+        {
+          "text": "ScrollTrigger is updated from Lenis scroll events (lenis.on('scroll', ScrollTrigger.update) or equivalent)",
+          "passed": true,
+          "evidence": "SmoothScroll.tsx: instance.on('scroll', () => ScrollTrigger.update())"
+        },
+        {
+          "text": "The CSS rule html { scroll-behavior: smooth } is removed or neutralised because it conflicts with Lenis programmatic scrolling",
+          "passed": true,
+          "evidence": "index.css: 'html { scroll-behavior: smooth }' removed, with comment explaining the conflict"
+        },
+        {
+          "text": "In-page anchor navigation scrolls with a 72px (or header-height) offset so sections are not hidden under the fixed header",
+          "passed": false,
+          "evidence": "RUNTIME (Playwright, built with vite): clicking 'Pricing' lands #pricing at top=144px, not 72px. Cause: the run added 'section[id]{scroll-margin-top: var(--header-h)}' while the template also passes offset:-72 \u2014 Lenis 1.3.27 scrollTo(element) already subtracts scroll-margin-top (lenis.mjs L787-790), so the offset is applied twice."
+        },
+        {
+          "text": "Anchor navigation moves keyboard focus to the target section (e.g. tabindex=-1 + focus) or otherwise preserves accessible focus",
+          "passed": true,
+          "evidence": "RUNTIME: document.activeElement.id === 'pricing' after both nav and menu clicks"
+        },
+        {
+          "text": "Opening the mobile menu stops scrolling (lenis.stop() or equivalent) and closing it restores scrolling (lenis.start())",
+          "passed": true,
+          "evidence": "App.tsx: useScrollLock(open) \u2192 lenis.stop()/start(); RUNTIME: wheel while menu open left scrollY unchanged; scrolling works after close"
+        },
+        {
+          "text": "The Lenis instance and the ticker callback are cleaned up on unmount (lenis.destroy() and gsap.ticker.remove)",
+          "passed": true,
+          "evidence": "SmoothScroll.tsx cleanup: gsap.ticker.remove(tick); lagSmoothing restored; instance.destroy()"
+        },
+        {
+          "text": "The Lenis stylesheet (lenis/dist/lenis.css) or equivalent recommended CSS is included",
+          "passed": true,
+          "evidence": "SmoothScroll.tsx imports 'lenis/dist/lenis.css'; RUNTIME html has class 'lenis'"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": "smooth-scroll-anchors-menu-lock",
+      "eval_name": "smooth-scroll-anchors-menu-lock",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.889,
+        "passed": 8,
+        "failed": 1,
+        "total": 9,
+        "time_seconds": 24.0,
+        "tokens": 61374,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Exactly one Lenis instance is created in the app (no second smooth-scroll library, no autoRaf alongside a manual raf loop)",
+          "passed": true,
+          "evidence": "src/useLenis.ts creates one Lenis (autoRaf:false); none elsewhere"
+        },
+        {
+          "text": "Lenis is driven by gsap.ticker (gsap.ticker.add calling lenis.raf with time*1000) and gsap.ticker.lagSmoothing(0) is set",
+          "passed": true,
+          "evidence": "useLenis.ts: gsap.ticker.add(time => instance.raf(time*1000)); gsap.ticker.lagSmoothing(0)"
+        },
+        {
+          "text": "ScrollTrigger is updated from Lenis scroll events (lenis.on('scroll', ScrollTrigger.update) or equivalent)",
+          "passed": true,
+          "evidence": "useLenis.ts: instance.on('scroll', () => ScrollTrigger.update())"
+        },
+        {
+          "text": "The CSS rule html { scroll-behavior: smooth } is removed or neutralised because it conflicts with Lenis programmatic scrolling",
+          "passed": true,
+          "evidence": "index.css: scroll-behavior: smooth removed (comment explains conflict)"
+        },
+        {
+          "text": "In-page anchor navigation scrolls with a 72px (or header-height) offset so sections are not hidden under the fixed header",
+          "passed": false,
+          "evidence": "RUNTIME: clicking 'Pricing' lands #pricing at top=216px (3\u00d772). Cause: offset:-72 in lenis.scrollTo PLUS 'scroll-margin-top:72px' on sections PLUS 'scroll-padding-top:72px' on html \u2014 Lenis subtracts both CSS values itself (lenis.mjs L787-790)."
+        },
+        {
+          "text": "Anchor navigation moves keyboard focus to the target section (e.g. tabindex=-1 + focus) or otherwise preserves accessible focus",
+          "passed": true,
+          "evidence": "RUNTIME: activeElement.id === 'pricing' after nav and menu clicks (target.focus({preventScroll:true}))"
+        },
+        {
+          "text": "Opening the mobile menu stops scrolling (lenis.stop() or equivalent) and closing it restores scrolling (lenis.start())",
+          "passed": true,
+          "evidence": "App.tsx effect: lenis.stop() + html overflow hidden while open, restored on close; RUNTIME: wheel blocked while open, scrolling works after close"
+        },
+        {
+          "text": "The Lenis instance and the ticker callback are cleaned up on unmount (lenis.destroy() and gsap.ticker.remove)",
+          "passed": true,
+          "evidence": "useLenis.ts cleanup: ticker removed, lagSmoothing restored, off('scroll'), destroy()"
+        },
+        {
+          "text": "The Lenis stylesheet (lenis/dist/lenis.css) or equivalent recommended CSS is included",
+          "passed": true,
+          "evidence": "index.css contains the recommended Lenis base CSS inline (html.lenis height:auto, .lenis-stopped overflow:clip, data-lenis-prevent, iframe pointer-events) \u2014 equivalent"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.889,
+        "stddev": 0.0,
+        "min": 0.889,
+        "max": 0.889
+      },
+      "time_seconds": {
+        "mean": 25.0,
+        "stddev": 0.0,
+        "min": 25.0,
+        "max": 25.0
+      },
+      "tokens": {
+        "mean": 66931.0,
+        "stddev": 0.0,
+        "min": 66931,
+        "max": 66931
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.889,
+        "stddev": 0.0,
+        "min": 0.889,
+        "max": 0.889
+      },
+      "time_seconds": {
+        "mean": 24.0,
+        "stddev": 0.0,
+        "min": 24.0,
+        "max": 24.0
+      },
+      "tokens": {
+        "mean": 61374.0,
+        "stddev": 0.0,
+        "min": 61374,
+        "max": 61374
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00",
+      "time_seconds": "+1.0",
+      "tokens": "+5557"
+    }
+  },
+  "notes": [
+    "Non-discriminating case: the base model already knows the Lenis+GSAP integration well; both configurations scored 8/9.",
+    "Both runs FAILED the anchor-offset assertion at RUNTIME (Playwright on a vite build), not by code reading: with_skill landed at 144px, baseline at 216px for a 72px header. Root cause, confirmed in lenis 1.3.27 source (lenis.mjs L787-790): scrollTo(element) already subtracts CSS scroll-margin-top and scroll-padding-top, so adding offset:-72 double-counts.",
+    "Action taken after iteration 1: lenis-scroll SKILL.md gained an explicit rule, and the SmoothScroll.tsx template now skips its own offset when CSS margin/padding is present. Re-measured on the with_skill output: 72px exactly (nav and menu links).",
+    "with_skill reused the tested template verbatim (diff-identical) and added aria-controls + Escape-to-close + data-lenis-prevent on the overlay; baseline hand-rolled an equivalent hook. Similar tokens/time (\u224867k vs 61k, both \u224825s).",
+    "Single run per configuration \u2014 no variance estimate."
+  ]
+}

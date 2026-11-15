@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lab · light study (raw WebGL2)</title>
+    <style>
+      html, body { margin: 0; background: #0d0c0b; color: #a39c90; font: 12px/1.4 ui-monospace, monospace; }
+      #stage { position: relative; width: 100vw; height: 100vh; }
+      canvas { display: block; width: 100%; height: 100%; }
+      #ui { position: fixed; left: 12px; bottom: 12px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+      #ui button { background: #171513; color: #ece6da; border: 1px solid #6f685d; padding: 4px 8px; font: inherit; cursor: pointer; }
+      #readout { position: fixed; right: 12px; bottom: 12px; text-align: right; max-width: 40ch; }
+      body.clean #ui, body.clean #readout { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="stage"><canvas id="c" aria-hidden="true"></canvas></div>
+    <div id="ui">
+      <button data-p="-1">hero</button>
+      <button data-p="0">06:10</button><button data-p="1">10:00</button><button data-p="2">13:30</button>
+      <button data-p="3">18:20</button><button data-p="4">21:00</button><button data-p="5">00:00</button>
+      <input id="min" type="range" min="0" max="1439" step="15" value="370" aria-label="Time of day" />
+    </div>
+    <div id="readout" aria-live="polite"></div>
+    <script type="module" src="./light-lab.ts"></script>
+  </body>
+</html>

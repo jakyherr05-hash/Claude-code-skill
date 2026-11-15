@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: sprint-direction-and-type-system
+expected_outcome: |
+  A studio/ folder with a creative direction and a typography + spacing system tailored to Aster: an original
+  one-line concept, palette with measured contrast, fonts whose free commercial licence is verified (not assumed),
+  a fluid type scale, spacing/grid tokens, motion guidance with reduced-motion behaviour, and no code built.

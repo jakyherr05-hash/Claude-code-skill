@@ -1,0 +1,8 @@
+{
+  "chromium": "153.0.8010.12",
+  "playwright": "1.63.0",
+  "scenes": [
+    "hero-poster",
+    "grain"
+  ]
+}

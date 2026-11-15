@@ -1,0 +1,310 @@
+{
+  "id": "lenis",
+  "url": "https://lenis.darkroom.engineering/",
+  "researchedAt": "2026-11-15T03:56:15.543Z",
+  "status": "inspected",
+  "errors": [
+    "networkidle timeout (page kept loading; continued)"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://lenis.dev/",
+  "title": "Lenis – Smooth Scroll",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 37462,
+    "htmlClasses": "anton_a8b17dcd-module__Xi7J6a__variable roboto_2384e6da-module__e7HsQW__variable lenis has-custom-cursor",
+    "bodyBackground": "rgb(0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(239, 239, 239)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "{\"@context\":\"https://schema.org\",\"@type\":\"SoftwareApplication\",\"name\":\"Lenis\",\"d",
+      "fontFamily": "Anton, sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(239, 239, 239)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 37462
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "The smooth scroll libraryby darkroom.engineering",
+      "fontFamily": "Roboto, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "900",
+      "lineHeight": "15.96px",
+      "letterSpacing": "normal",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(239, 239, 239)",
+      "box": {
+        "x": 271,
+        "y": 830,
+        "w": 322,
+        "h": 50
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Smooth Scroll",
+      "fontFamily": "Panchang, sans-serif",
+      "fontSize": "52px",
+      "fontWeight": "700",
+      "lineHeight": "46.8px",
+      "letterSpacing": "normal",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(239, 239, 239)",
+      "box": {
+        "x": 617,
+        "y": 451,
+        "w": 783,
+        "h": 47
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "scroll",
+      "fontFamily": "Anton, sans-serif",
+      "fontSize": "24px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(239, 239, 239)",
+      "box": {
+        "x": 56,
+        "y": 830,
+        "w": 191,
+        "h": 24
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Showcase",
+      "fontFamily": "Roboto, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "900",
+      "lineHeight": "15.82px",
+      "letterSpacing": "normal",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(239, 239, 239)",
+      "box": {
+        "x": 40,
+        "y": 20,
+        "w": 76,
+        "h": 16
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "52px",
+      "fontFamily": "Panchang, sans-serif",
+      "fontWeight": "700",
+      "letterSpacing": "normal",
+      "lineHeight": "46.8px",
+      "text": "Smooth Scroll"
+    },
+    "loadedFonts": [
+      "Anton 400 normal",
+      "Roboto 400 normal",
+      "Roboto 900 normal",
+      "Panchang 700 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "fixed",
+      "height": 56,
+      "linkCount": 6
+    },
+    "counts": {
+      "sections": 5,
+      "images": 18,
+      "videos": 16,
+      "canvases": 1,
+      "svgs": 29,
+      "links": 88
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      }
+    ],
+    "videos": [
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "src": "rm.workers.dev/media/pbc_1930884531/cypda2odb92k89b/netflix_webm_zzv7giof3n.webm"
+      },
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "src": "orkers.dev/media/pbc_1930884531/cyiqgwj8iuhk8ju/landonorris_webm_gmtmuacq0l.webm"
+      },
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "src": ""
+      },
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "src": ""
+      },
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "src": ""
+      }
+    ],
+    "imageFormats": {
+      "other": 18
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": true,
+      "lenisGlobal": true,
+      "locomotiveScroll": false,
+      "threeRevision": "182",
+      "barba": false,
+      "swup": false,
+      "nextjs": true,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 188
+      },
+      {
+        "ms": 100,
+        "y": 405
+      },
+      {
+        "ms": 250,
+        "y": 551
+      },
+      {
+        "ms": 500,
+        "y": 592
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 68,
+    "likelySmoothed": true,
+    "movedPx": 600
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 696,
+    "loadMs": 1849,
+    "lcpMs": 820,
+    "cls": 0,
+    "requests": 65,
+    "byInitiator": {
+      "link": {
+        "count": 13,
+        "transferKB": 241
+      },
+      "script": {
+        "count": 35,
+        "transferKB": 706
+      },
+      "video": {
+        "count": 4,
+        "transferKB": 0
+      },
+      "css": {
+        "count": 1,
+        "transferKB": 20
+      },
+      "fetch": {
+        "count": 12,
+        "transferKB": 209
+      }
+    }
+  },
+  "scripts": {
+    "total": 36,
+    "libraryHints": [
+      "https://lenis.dev/_next/static/immutable/chunks/2-5t9ui6athrq.js",
+      "https://lenis.dev/_next/static/immutable/chunks/2qccn6b15ilk7.js",
+      "https://lenis.dev/_next/static/immutable/chunks/22shkyxziluiu.js",
+      "https://lenis.dev/_next/static/immutable/chunks/0c3bjcctkybmj.js",
+      "https://lenis.dev/_next/static/immutable/chunks/turbopack-07u0ptxueyye9.js",
+      "https://lenis.dev/_next/static/immutable/chunks/1m2pxfoto0lwp.js",
+      "https://lenis.dev/_next/static/immutable/chunks/310nnc3-gv-1m.js",
+      "https://lenis.dev/_next/static/immutable/chunks/1f5ns-rr75iz2.js",
+      "https://lenis.dev/_next/static/immutable/chunks/2_lgl9wqfzibv.js",
+      "https://lenis.dev/_next/static/immutable/chunks/02pv29xqr80z2.js",
+      "https://lenis.dev/_next/static/immutable/chunks/2hp47i-psehpr.js",
+      "https://lenis.dev/_next/static/immutable/chunks/3gd2iotmwgq38.js",
+      "https://lenis.dev/_next/static/immutable/chunks/1sahx-34wc-in.js",
+      "https://lenis.dev/_next/static/immutable/chunks/2he1vjs7qp5cw.js",
+      "https://lenis.dev/_next/static/immutable/chunks/1mqjgr7a5dyf8.js",
+      "https://lenis.dev/_next/static/immutable/chunks/00bsa4fpq00cc.js",
+      "https://lenis.dev/_next/static/immutable/chunks/3_f6aeff9d2w0.js",
+      "https://lenis.dev/_vercel/insights/script.js",
+      "https://lenis.dev/_next/static/immutable/chunks/0lbqdcz6wxp51.js",
+      "https://lenis.dev/_next/static/immutable/chunks/38wq7_tiho8a6.js",
+      "https://lenis.dev/_next/static/immutable/chunks/1ioxambvl7y-8.js",
+      "https://lenis.dev/_next/static/immutable/chunks/0xx33vx3z-mm9.js",
+      "https://lenis.dev/_next/static/immutable/chunks/0efyhwnxrzfbt.js",
+      "https://lenis.dev/_next/static/immutable/chunks/1_r7d2jpk8nda.js",
+      "https://lenis.dev/_next/static/immutable/chunks/15fpu1hgdocl9.js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "14.56px",
+    "largestFontSize": 58.24,
+    "menuButton": true
+  }
+}

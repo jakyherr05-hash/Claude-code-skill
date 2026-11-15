@@ -1,0 +1,12 @@
+{
+  "name": "premium-web-studio-marketplace",
+  "description": "A multi-agent premium website studio for Claude Code: creative direction, typography, GSAP + Lenis motion, WebGL, AI visuals, engineering, performance and QA.",
+  "owner": { "name": "premium-web-studio maintainers" },
+  "plugins": [
+    {
+      "name": "premium-web-studio",
+      "source": "./plugins/premium-web-studio",
+      "description": "Orchestrator skill, 12 specialist agents, 9 supporting skills, a researched reference library and tested GSAP/Lenis/Three templates for building award-calibre websites."
+    }
+  ]
+}

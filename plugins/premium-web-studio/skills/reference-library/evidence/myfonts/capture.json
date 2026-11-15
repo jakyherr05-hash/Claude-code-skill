@@ -1,0 +1,287 @@
+{
+  "id": "myfonts",
+  "url": "https://www.myfonts.com/",
+  "researchedAt": "2026-11-15T03:53:33.243Z",
+  "status": "inspected",
+  "errors": [
+    "networkidle timeout (page kept loading; continued)"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://www.myfonts.com/",
+  "title": "MyFonts | Buy and Download Fonts",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 1622,
+    "htmlClasses": "js",
+    "bodyBackground": "rgb(255, 255, 255)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(49, 57, 69)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "#gs__aa_form:not(:focus-within) { border-bottom: none; } #m-gh-header_search_chi",
+      "fontFamily": "HelveticaNowMTText, \"HelveticaNowMTText Fallback\", \"Lucida Sans\", \"Lucida Grande\", \"Lucida Sans Unicode\", \"Trebuchet MS\", sans-serif",
+      "fontSize": "22.4px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(49, 57, 69)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 1622
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "MyFonts is one of the largest font marketplaces in the world, offering professio",
+      "fontFamily": "HelveticaNowMTDisplayMedium, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "33px",
+      "fontWeight": "500",
+      "lineHeight": "40px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(49, 57, 69)",
+      "box": {
+        "x": 281,
+        "y": 291,
+        "w": 878,
+        "h": 80
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Over 400,000 available fonts, and counting.",
+      "fontFamily": "HelveticaNowMTTextMedium, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "23px",
+      "fontWeight": "400",
+      "lineHeight": "32px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(87, 101, 121)",
+      "box": {
+        "x": 46,
+        "y": 381,
+        "w": 1348,
+        "h": 32
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "",
+      "fontFamily": "HelveticaNowMTText, \"HelveticaNowMTText Fallback\", \"Lucida Sans\", \"Lucida Grande\", \"Lucida Sans Unicode\", \"Trebuchet MS\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "-0.32px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(49, 57, 69)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Tags",
+      "fontFamily": "HelveticaNowMTTextRegular, Helvetica, Arial, sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "500",
+      "lineHeight": "24px",
+      "letterSpacing": "-0.32px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(87, 101, 121)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "33px",
+      "fontFamily": "HelveticaNowMTDisplayMedium, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontWeight": "500",
+      "letterSpacing": "normal",
+      "lineHeight": "40px",
+      "text": "MyFonts is one of the largest font marketplaces in the world, offering professio"
+    },
+    "loadedFonts": [
+      "HelveticaNowMTText 400 normal",
+      "HelveticaNowMTTextMedium 400 normal",
+      "HelveticaNowMTTextBold 700 normal",
+      "HelveticaNowMTMicro 400 normal",
+      "HelveticaNowMTDisplayMedium normal normal",
+      "HelveticaNowMTMicroMedium normal normal",
+      "HelveticaNowMTTextRegular normal normal",
+      "HelveticaNowMTText normal normal",
+      "HelveticaNowMTTextMedium normal normal",
+      "HelveticaNowMTMicro normal normal",
+      "Open Sans 400 normal",
+      "Lato 400 normal"
+    ],
+    "nav": {
+      "tag": "nav",
+      "position": "static",
+      "height": 49,
+      "linkCount": 20
+    },
+    "counts": {
+      "sections": 39,
+      "images": 47,
+      "videos": 0,
+      "canvases": 1,
+      "svgs": 44,
+      "links": 170
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "fixed"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "webp": 7,
+      "jpg": 4,
+      "png": 27,
+      "svg": 7,
+      "gif": 1,
+      "other": 1
+    },
+    "landmarks": {
+      "header": false,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": true
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 600
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1553,
+    "loadMs": 2724,
+    "lcpMs": 13968,
+    "cls": 0.236,
+    "requests": 425,
+    "byInitiator": {
+      "link": {
+        "count": 163,
+        "transferKB": 912
+      },
+      "script": {
+        "count": 102,
+        "transferKB": 729
+      },
+      "img": {
+        "count": 48,
+        "transferKB": 65
+      },
+      "xmlhttprequest": {
+        "count": 24,
+        "transferKB": 15
+      },
+      "beacon": {
+        "count": 3,
+        "transferKB": 1
+      },
+      "fetch": {
+        "count": 66,
+        "transferKB": 181
+      },
+      "css": {
+        "count": 8,
+        "transferKB": 4
+      },
+      "iframe": {
+        "count": 7,
+        "transferKB": 140
+      },
+      "other": {
+        "count": 4,
+        "transferKB": 117
+      }
+    }
+  },
+  "scripts": {
+    "total": 113,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js",
+      "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/1072550348/"
+    ]
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "19px",
+    "largestFontSize": 145,
+    "menuButton": true
+  }
+}

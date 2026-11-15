@@ -1,0 +1,50 @@
+{
+  "expectations": [
+    {
+      "text": "A creative direction file exists in studio/ containing a one-sentence concept specific to Aster (engineered, quiet / precision instrument), not a generic tagline",
+      "passed": true,
+      "evidence": "CREATIVE_DIRECTION.md concept 'Measured, not shouted' \u2014 the C1 as a precision instrument speaking in measurements and materials"
+    },
+    {
+      "text": "The palette lists hex values with roles AND contrast ratios that were actually computed (a script or calculation is shown or run), with body text pairs at least 4.5:1",
+      "passed": true,
+      "evidence": "Palette measured with design-intelligence/scripts/contrast.mjs during the run; stated 15.1:1 ink/paper and 6.0:1 accent/paper; re-measured by grader: 15.09:1 and 6.01:1 (accurate)"
+    },
+    {
+      "text": "Every chosen font has its licence stated AND checked against a source during the run (npm/Fontsource licence field, Google Fonts/OFL, Fontshare API or licence page), and all are free for commercial use",
+      "passed": true,
+      "evidence": "TYPOGRAPHY_SYSTEM.md: Newsreader + Geist, 'OFL-1.1 [M: npm view returned OFL-1.1; LICENSE file in the tarball]'; Fontshare faces explicitly held back because licence page couldn't be re-read"
+    },
+    {
+      "text": "The typography system defines a fluid type scale using clamp() values with explicit min/max viewport assumptions, plus line-height and letter-spacing per step",
+      "passed": true,
+      "evidence": "TYPOGRAPHY_SYSTEM.md: 11 clamp() values generated with type-scale.mjs (min 360 / max 1440 viewport), role, line-height and tracking per step"
+    },
+    {
+      "text": "A spacing/grid system defines a base unit or scale, grid columns per breakpoint, container width(s) and section spacing",
+      "passed": true,
+      "evidence": "SPACING_SYSTEM.md: 8px base, 11-step fluid scale, 4/8/12 columns at 48/64rem, containers wide 1440px / text 60ch / narrow 38rem, section padding, 3 protected rests"
+    },
+    {
+      "text": "Motion guidance includes durations/easing and an explicit prefers-reduced-motion behaviour",
+      "passed": true,
+      "evidence": "CREATIVE_DIRECTION.md: motion durations/eases + 'Reduced motion: every reveal becomes an instant final state; the weight rule renders at 10.9 immediately'"
+    },
+    {
+      "text": "The direction includes an explicit list of things deliberately not done (e.g. avoiding sporty/extreme-sports clich\u00e9s)",
+      "passed": true,
+      "evidence": "CREATIVE_DIRECTION.md \u00a7'Deliberately not doing': speed lines, performance language, wattage hero claims, 3D/WebGL, parallax, countdowns"
+    },
+    {
+      "text": "No website implementation code (components, pages, CSS for sections) was created \u2014 only direction/system documents (and optionally a token CSS file)",
+      "passed": true,
+      "evidence": "Only studio/*.md docs + tokens.draft.css; no components/pages (find *.tsx/*.html \u2192 none)"
+    }
+  ],
+  "summary": {
+    "passed": 8,
+    "failed": 0,
+    "total": 8,
+    "pass_rate": 1.0
+  }
+}

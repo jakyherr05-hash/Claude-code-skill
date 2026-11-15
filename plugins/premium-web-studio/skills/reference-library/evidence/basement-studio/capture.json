@@ -1,0 +1,260 @@
+{
+  "id": "basement-studio",
+  "url": "https://basement.studio/",
+  "researchedAt": "2026-11-15T03:50:18.052Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://basement.studio/",
+  "title": "basement.studio | We make cool shit that performs.",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 6714,
+    "htmlClasses": "",
+    "bodyBackground": "rgb(0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "Close [ESC]HomeServicesShowcase(26)PeopleBlog(29)LabOnline ()Press [/] to chatCo",
+      "fontFamily": "Geist, \"Geist Fallback\"",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 0,
+        "y": 900,
+        "w": 1440,
+        "h": 5814
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "A digital studio & branding powerhouse making cool shit that performs",
+      "fontFamily": "Geist, \"Geist Fallback\"",
+      "fontSize": "87px",
+      "fontWeight": "600",
+      "lineHeight": "78px",
+      "letterSpacing": "-3.48px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(230, 230, 230)",
+      "box": {
+        "x": 16,
+        "y": 916,
+        "w": 1290,
+        "h": 234
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Trusted by Visionaries",
+      "fontFamily": "Geist, \"Geist Fallback\"",
+      "fontSize": "24px",
+      "fontWeight": "600",
+      "lineHeight": "24px",
+      "letterSpacing": "-0.72px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(117, 117, 117)",
+      "box": {
+        "x": 134,
+        "y": 1354,
+        "w": 1290,
+        "h": 24
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Menu",
+      "fontFamily": "Geist, \"Geist Fallback\"",
+      "fontSize": "12px",
+      "fontWeight": "600",
+      "lineHeight": "16px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(230, 230, 230)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Home",
+      "fontFamily": "Geist, \"Geist Fallback\"",
+      "fontSize": "12px",
+      "fontWeight": "600",
+      "lineHeight": "16px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(230, 230, 230)",
+      "box": {
+        "x": 534,
+        "y": 10,
+        "w": 33,
+        "h": 16
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "16px",
+      "fontFamily": "Geist, \"Geist Fallback\"",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "24px",
+      "text": "Close [ESC]"
+    },
+    "loadedFonts": [
+      "Geist 100 900 normal",
+      "Geist Mono 100 900 normal",
+      "flauta normal normal"
+    ],
+    "nav": {
+      "tag": "nav",
+      "position": "fixed",
+      "height": 36,
+      "linkCount": 6
+    },
+    "counts": {
+      "sections": 2,
+      "images": 40,
+      "videos": 0,
+      "canvases": 2,
+      "svgs": 11,
+      "links": 79
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      },
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "relative"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "svg": 36,
+      "other": 4
+    },
+    "landmarks": {
+      "header": false,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": "180",
+      "barba": false,
+      "swup": false,
+      "nextjs": true,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 703,
+    "loadMs": 1551,
+    "lcpMs": 852,
+    "cls": 0.001,
+    "requests": 210,
+    "byInitiator": {
+      "link": {
+        "count": 42,
+        "transferKB": 2208
+      },
+      "script": {
+        "count": 49,
+        "transferKB": 2367
+      },
+      "img": {
+        "count": 71,
+        "transferKB": 1017
+      },
+      "fetch": {
+        "count": 39,
+        "transferKB": 8974
+      },
+      "other": {
+        "count": 2,
+        "transferKB": 1
+      },
+      "video": {
+        "count": 7,
+        "transferKB": 620
+      }
+    }
+  },
+  "scripts": {
+    "total": 57,
+    "libraryHints": []
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "46px",
+    "largestFontSize": 46,
+    "menuButton": false
+  }
+}

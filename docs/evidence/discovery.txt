@@ -1,0 +1,26 @@
+Warning: no stdin data received in 3s, proceeding without it. If piping from a slow command, redirect stdin explicitly: < /dev/null to skip, or wait longer.
+AGENTS:
+- premium-web-studio:ai-visual-producer
+- premium-web-studio:creative-director
+- premium-web-studio:frontend-engineer
+- premium-web-studio:gsap-animator
+- premium-web-studio:lenis-scroll
+- premium-web-studio:performance-engineer
+- premium-web-studio:qa-engineer
+- premium-web-studio:reference-researcher
+- premium-web-studio:tech-lead
+- premium-web-studio:typography-spacing
+- premium-web-studio:ui-ux-designer
+- premium-web-studio:webgl-specialist
+
+SKILLS:
+- premium-web-studio:ai-visual-pipeline
+- premium-web-studio:design-intelligence
+- premium-web-studio:gsap-motion
+- premium-web-studio:lenis-scroll
+- premium-web-studio:reference-library
+- premium-web-studio:reference-study
+- premium-web-studio:typography-system
+- premium-web-studio:web-qa
+- premium-web-studio:web-studio
+- premium-web-studio:webgl-three

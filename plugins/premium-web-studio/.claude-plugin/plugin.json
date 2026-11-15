@@ -1,0 +1,8 @@
+{
+  "name": "premium-web-studio",
+  "version": "1.0.0",
+  "description": "Run Claude like a high-end digital agency: an orchestrator skill plus 12 specialist agents (creative direction, research, UI/UX, typography, GSAP, Lenis, WebGL, AI visuals, frontend, performance, QA, technical lead) with verified GSAP 3.15 / Lenis 1.3 / Three r187 architecture templates.",
+  "author": { "name": "premium-web-studio maintainers" },
+  "license": "MIT",
+  "keywords": ["website", "gsap", "lenis", "threejs", "design", "animation", "multi-agent", "qa", "playwright"]
+}

@@ -1,0 +1,94 @@
+/* Penumbra design tokens. Owner: typography-spacing agent. Spec: studio/TYPOGRAPHY_SYSTEM.md, SPACING_SYSTEM.md.
+   Fluid range: viewport 360px -> 1440px (clamp + rem intercept, so browser zoom / text-size still work).
+   Palette values come verbatim from studio/CREATIVE_DIRECTION.md. */
+:root {
+  color-scheme: dark;
+
+  /* ---- Fonts (fallback faces declared in fonts.css) ---- */
+  --font-display: 'Newsreader Variable', 'Newsreader Fallback', Georgia, 'Times New Roman', serif;
+  --font-text: 'Hanken Grotesk Variable', 'Hanken Fallback', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono Fallback', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --fw-display: 300;  /* display light; opsz is automatic (font-optical-sizing: auto) */
+  --fw-text: 400;     /* never below 400 on dark */
+  --fw-strong: 560;
+  --fw-mono: 420;
+
+  /* ---- Type scale: fluid 360 -> 1440 ---- */
+  --step--2: clamp(0.75rem, 0.7222rem + 0.0741vw, 0.8125rem);    /* 12 -> 13px, uppercase kickers/labels only */
+  --step--1: clamp(0.875rem, 0.8472rem + 0.0741vw, 0.9375rem);   /* 14 -> 15px, captions, meta, mono readouts */
+  --step-0: clamp(1.0625rem, 1.0208rem + 0.1852vw, 1.1875rem);   /* 17 -> 19px, body */
+  --step-1: clamp(1.275rem, 1.1724rem + 0.4562vw, 1.5829rem);    /* 20.4 -> 25.3px, lead */
+  --step-2: clamp(1.53rem, 1.3366rem + 0.8593vw, 2.1101rem);     /* 24.5 -> 33.8px, h3 / pull-quote */
+  --step-3: clamp(1.6875rem, 1.3125rem + 1.6667vw, 2.8125rem);   /* 27 -> 45px */
+  --step-4: clamp(2.0625rem, 1.5rem + 2.5vw, 3.75rem);           /* 33 -> 60px */
+  --step-5: clamp(2.375rem, 1.5rem + 3.8889vw, 5rem);            /* 38 -> 80px */
+  --step-6: clamp(2.75rem, 1.4456rem + 5.7963vw, 6.6625rem);     /* 44 -> 106.6px */
+  --step-7: clamp(3.5rem, 1.6667rem + 8.1481vw, 9rem);          /* 56 -> 144px, hero H1 */
+
+  /* line-height + tracking per step (tighter as size grows) */
+  --lh-3: 1.12;  --tr-3: -0.015em;
+  --lh-4: 1.06;  --tr-4: -0.02em;
+  --lh-5: 1.02;  --tr-5: -0.025em;
+  --lh-6: 0.98;  --tr-6: -0.03em;
+  --lh-7: 0.95;  --tr-7: -0.035em;
+  --lh-body: 1.6;
+  --lh-ui: 1.4;       /* captions, labels, mono */
+  --tr-body: 0.005em; /* slightly open for light-on-dark */
+  --tr-label: 0.12em; /* uppercase kicker */
+  --measure: 64ch;
+
+  /* ---- Spacing: fluid 360 -> 1440, 8px base ---- */
+  --space-3xs: clamp(0.2rem, 0.1833rem + 0.0741vw, 0.25rem);     /* 3.2 -> 4 */
+  --space-2xs: clamp(0.4rem, 0.3667rem + 0.1481vw, 0.5rem);      /* 6.4 -> 8 */
+  --space-xs: clamp(0.6rem, 0.55rem + 0.2222vw, 0.75rem);        /* 9.6 -> 12 */
+  --space-s: clamp(0.8rem, 0.7333rem + 0.2963vw, 1rem);          /* 12.8 -> 16 */
+  --space-m: clamp(1.2rem, 1.1rem + 0.4444vw, 1.5rem);           /* 19.2 -> 24 */
+  --space-l: clamp(1.6rem, 1.4667rem + 0.5926vw, 2rem);          /* 25.6 -> 32 */
+  --space-xl: clamp(2.4rem, 2.2rem + 0.8889vw, 3rem);            /* 38.4 -> 48 */
+  --space-2xl: clamp(3.2rem, 2.9333rem + 1.1852vw, 4rem);        /* 51 -> 64 */
+  --space-3xl: clamp(4.8rem, 4.4rem + 1.7778vw, 6rem);           /* 77 -> 96 */
+  --space-4xl: clamp(6.4rem, 5.8667rem + 2.3704vw, 8rem);        /* 102 -> 128 */
+  --space-5xl: clamp(9.6rem, 8.8rem + 3.5556vw, 12rem);          /* 154 -> 192 */
+
+  --section-pad: clamp(6rem, 4rem + 8vw, 14rem);                 /* 110 -> 179px at 1440, caps at 224px */
+  --margin: clamp(1.25rem, 0.8rem + 2vw, 3rem);                  /* 20 -> ~42px page edge, caps 48px */
+  --gutter: var(--space-s);
+  --header-h: 4rem;                                              /* fixed header; scroll system offsets anchors by this */
+
+  /* ---- Grid ---- */
+  --cols: 4;
+  --container-max: 105rem;                                       /* 1680px */
+  --container-text: var(--measure);
+
+  /* ---- Colour (dark ground default) ---- */
+  --ground: #0d0c0b;
+  --ground-raised: #171513;
+  --ink: #ece6da;
+  --ink-muted: #a39c90;
+  --line: #2b2825;
+  --line-strong: #6f685d;
+  --accent-warm: #d9a05b;
+  --accent-cool: #9db4c6;
+  --accent-ink: #0d0c0b;
+  --focus: #d9a05b;
+  --paper: #e9e3d6;
+  --paper-ink: #1b1917;
+  --paper-muted: #6b5f50;
+  --paper-accent: #8a5420;
+
+  /* ---- Motion mirrors (JS source of truth: src/motion) ---- */
+  --dur-xs: 0.18s;
+  --dur-s: 0.4s;
+  --dur-m: 0.8s;
+  --dur-l: 1.3s;
+  --dur-xl: 2s;
+  --ease-dimmer: cubic-bezier(0.32, 0, 0.12, 1);
+}
+
+@media (min-width: 48rem) {
+  :root { --cols: 8; --gutter: var(--space-m); }
+}
+@media (min-width: 64rem) {
+  :root { --cols: 12; --gutter: var(--space-m); }
+}

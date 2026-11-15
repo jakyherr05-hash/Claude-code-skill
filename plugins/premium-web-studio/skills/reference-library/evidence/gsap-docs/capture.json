@@ -1,0 +1,270 @@
+{
+  "id": "gsap-docs",
+  "url": "https://gsap.com/docs/v3/",
+  "researchedAt": "2026-11-15T03:55:52.172Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://gsap.com/docs/v3/",
+  "title": "docsHome | GSAP | Docs & Learning",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 3532,
+    "htmlClasses": "docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-docsHome",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgb(14, 16, 15)",
+    "bodyColor": "rgb(187, 186, 166)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "<iframe src=\"https://www.googletagmanager.com/ns.html?id=G-XWSY51WBF0\" height=\"0",
+      "fontFamily": "Mori, Arial, Helvetica, \"Segoe UI\", Roboto, \"Open Sans\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "29.6px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(187, 186, 166)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Animate Anything",
+      "fontFamily": "Mori, Arial, Helvetica, \"Segoe UI\", Roboto, \"Open Sans\", sans-serif",
+      "fontSize": "101.282px",
+      "fontWeight": "600",
+      "lineHeight": "101.282px",
+      "letterSpacing": "-1.01282px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 252, 225)",
+      "box": {
+        "x": 455,
+        "y": 299,
+        "w": 848,
+        "h": 125
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "GSAP Overview",
+      "fontFamily": "Mori, Arial, Helvetica, \"Segoe UI\", Roboto, \"Open Sans\", sans-serif",
+      "fontSize": "39.9224px",
+      "fontWeight": "600",
+      "lineHeight": "39.9224px",
+      "letterSpacing": "-0.399224px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 252, 225)",
+      "box": {
+        "x": 446,
+        "y": 580,
+        "w": 867,
+        "h": 40
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Professional-grade JavaScript animation for the modern web",
+      "fontFamily": "Mori, Arial, Helvetica, \"Segoe UI\", Roboto, \"Open Sans\", sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "600",
+      "lineHeight": "21.6px",
+      "letterSpacing": "-0.18px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(124, 124, 111)",
+      "box": {
+        "x": 379,
+        "y": 299,
+        "w": 252,
+        "h": 65
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "GSAPGSAP",
+      "fontFamily": "Mori, Arial, Helvetica, \"Segoe UI\", Roboto, \"Open Sans\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "29.6px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(187, 186, 166)",
+      "box": {
+        "x": 41,
+        "y": 24,
+        "w": 82,
+        "h": 30
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "101.282px",
+      "fontFamily": "Mori, Arial, Helvetica, \"Segoe UI\", Roboto, \"Open Sans\", sans-serif",
+      "fontWeight": "600",
+      "letterSpacing": "-1.01282px",
+      "lineHeight": "101.282px",
+      "text": "Animate Anything"
+    },
+    "loadedFonts": [
+      "Mori 400 normal",
+      "Mori 600 normal",
+      "Fraktion Mono 400 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "relative",
+      "height": 77,
+      "linkCount": 45
+    },
+    "counts": {
+      "sections": 2,
+      "images": 2,
+      "videos": 0,
+      "canvases": 0,
+      "svgs": 33,
+      "links": 194
+    },
+    "canvases": [],
+    "videos": [],
+    "imageFormats": {
+      "png": 2
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": true
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": "Docusaurus v3.9.2"
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 600
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 804,
+    "loadMs": 1521,
+    "lcpMs": 760,
+    "cls": 0.002,
+    "requests": 25,
+    "byInitiator": {
+      "link": {
+        "count": 1,
+        "transferKB": 65
+      },
+      "script": {
+        "count": 17,
+        "transferKB": 454
+      },
+      "image": {
+        "count": 1,
+        "transferKB": 54
+      },
+      "css": {
+        "count": 3,
+        "transferKB": 118
+      },
+      "img": {
+        "count": 2,
+        "transferKB": 122
+      },
+      "xmlhttprequest": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 17,
+    "libraryHints": [
+      "https://gsap.com/assets/js/runtime~main.feaa64d1.js",
+      "https://gsap.com/assets/js/main.18cbe30d.js",
+      "https://www.googletagmanager.com/gtm.js",
+      "https://gsap.com/assets/js/5e95c892.ed49b629.js",
+      "https://gsap.com/assets/js/aba21aa0.335e026d.js",
+      "https://gsap.com/assets/js/a7bd4aaa.d4bd605e.js",
+      "https://gsap.com/assets/js/8a56686d.b8a06017.js",
+      "https://gsap.com/assets/js/a94703ab.bd4ad554.js",
+      "https://gsap.com/assets/js/16450.62b6c20e.js",
+      "https://gsap.com/assets/js/10929.52f8f5a7.js",
+      "https://gsap.com/assets/js/98344.518df7c4.js",
+      "https://gsap.com/assets/js/50306.526d3664.js",
+      "https://gsap.com/assets/js/27634.c6094823.js",
+      "https://gsap.com/assets/js/55954.919f2129.js",
+      "https://gsap.com/assets/js/17896441.46764e37.js",
+      "https://gsap.com/assets/js/a6809ab5.953bef93.js"
+    ]
+  },
+  "consoleErrors": [
+    "Refused to execute script from 'https://gsap.com/assets/js/a7bd4aaa.d4bd605e.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'https://gsap.com/assets/js/50306.526d3664.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'https://gsap.com/assets/js/a6809ab5.953bef93.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.",
+    "Refused to execute script from 'https://gsap.com/assets/js/17896441.46764e37.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled."
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": 48,
+    "menuButton": false
+  }
+}

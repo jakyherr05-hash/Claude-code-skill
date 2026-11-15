@@ -1,0 +1,294 @@
+{
+  "id": "motion",
+  "url": "https://motion.dev/",
+  "researchedAt": "2026-11-15T03:57:29.323Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://motion.dev/",
+  "title": "Motion (prev Framer Motion): JavaScript & React animation library",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 13635,
+    "htmlClasses": "",
+    "bodyBackground": "rgb(14, 19, 18)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(237, 237, 236)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "{\"@context\":\"https://schema.org\",\"@graph\":[{\"@type\":\"Organization\",\"@id\":\"https:",
+      "fontFamily": "\"TASA Orbiter\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "\"opsz\" 14, \"wght\" 400",
+      "color": "rgb(237, 237, 236)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 13635
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "The animation library loved by humans and agents alike.",
+      "fontFamily": "\"TASA Orbiter\", sans-serif",
+      "fontSize": "34.56px",
+      "fontWeight": "700",
+      "lineHeight": "37.3248px",
+      "letterSpacing": "-1.2096px",
+      "textTransform": "none",
+      "fontVariationSettings": "\"opsz\" 48, \"wght\" 720",
+      "color": "oklch(0.94 0.008 96)",
+      "box": {
+        "x": 120,
+        "y": 584,
+        "w": 540,
+        "h": 75
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Small APIs.Expressive interfaces.",
+      "fontFamily": "\"TASA Orbiter\", sans-serif",
+      "fontSize": "40px",
+      "fontWeight": "700",
+      "lineHeight": "44px",
+      "letterSpacing": "-1.4px",
+      "textTransform": "none",
+      "fontVariationSettings": "\"opsz\" 48, \"wght\" 720",
+      "color": "oklch(0.94 0.008 96)",
+      "box": {
+        "x": 120,
+        "y": 1210,
+        "w": 1200,
+        "h": 88
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Motion is deployed and sponsoredby the best teams in the industry",
+      "fontFamily": "\"TASA Orbiter\", sans-serif",
+      "fontSize": "12px",
+      "fontWeight": "400",
+      "lineHeight": "19.2px",
+      "letterSpacing": "-0.12px",
+      "textTransform": "none",
+      "fontVariationSettings": "\"opsz\" 14, \"wght\" 400",
+      "color": "oklch(0.69 0.012 148)",
+      "box": {
+        "x": 627,
+        "y": 972,
+        "w": 187,
+        "h": 38
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Motion",
+      "fontFamily": "\"TASA Orbiter\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "\"opsz\" 14, \"wght\" 400",
+      "color": "oklch(0.94 0.008 96)",
+      "box": {
+        "x": 120,
+        "y": 42,
+        "w": 88,
+        "h": 13
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "34.56px",
+      "fontFamily": "\"TASA Orbiter\", sans-serif",
+      "fontWeight": "700",
+      "letterSpacing": "-1.2096px",
+      "lineHeight": "37.3248px",
+      "text": "The animation library loved by humans and agents alike."
+    },
+    "loadedFonts": [
+      "Geist Mono 100 900 normal",
+      "TASA Orbiter 400 800 normal"
+    ],
+    "nav": {
+      "tag": "nav",
+      "position": "fixed",
+      "height": 72,
+      "linkCount": 5
+    },
+    "counts": {
+      "sections": 18,
+      "images": 58,
+      "videos": 5,
+      "canvases": 1,
+      "svgs": 121,
+      "links": 114
+    },
+    "canvases": [
+      {
+        "w": 1200,
+        "h": 900,
+        "position": "static"
+      }
+    ],
+    "videos": [
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "ttps://images.motion.dev/examples/stage/js/pinch-rotate/v-62462c6cbe17/thumb.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "https://images.motion.dev/examples/stage/js/pinch-zoom/v-0d01c737e042/thumb.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "https://images.motion.dev/examples/stage/js/tap-double/v-3312feaa2e80/thumb.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "https://images.motion.dev/examples/stage/js/press-hold/v-5e7cfd79fb5a/thumb.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "images.motion.dev/examples/stage/react/animate-suspense/v-dc17e61d1b13/thumb.mp4"
+      }
+    ],
+    "imageFormats": {
+      "webp": 58
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": true
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1089,
+    "loadMs": 3038,
+    "lcpMs": 1104,
+    "cls": 0,
+    "requests": 142,
+    "byInitiator": {
+      "link": {
+        "count": 25,
+        "transferKB": 152
+      },
+      "other": {
+        "count": 95,
+        "transferKB": 426
+      },
+      "script": {
+        "count": 4,
+        "transferKB": 0
+      },
+      "css": {
+        "count": 1,
+        "transferKB": 1
+      },
+      "img": {
+        "count": 14,
+        "transferKB": 0
+      },
+      "beacon": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "xmlhttprequest": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 99,
+    "libraryHints": []
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "30.03px",
+    "largestFontSize": 30.03,
+    "menuButton": false
+  }
+}

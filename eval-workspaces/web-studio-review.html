@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eval Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --bg: #faf9f5;
+      --surface: #ffffff;
+      --border: #e8e6dc;
+      --text: #141413;
+      --text-muted: #b0aea5;
+      --accent: #d97757;
+      --accent-hover: #c4613f;
+      --green: #788c5d;
+      --green-bg: #eef2e8;
+      --red: #c44;
+      --red-bg: #fceaea;
+      --header-bg: #141413;
+      --header-text: #faf9f5;
+      --radius: 6px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ---- Header ---- */
+    .header {
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .header .instructions {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+    .header .progress {
+      font-size: 0.875rem;
+      opacity: 0.8;
+      text-align: right;
+    }
+
+    /* ---- Main content ---- */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* ---- Sections ---- */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+    .section-header {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.75rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .section-body {
+      padding: 1rem;
+    }
+
+    /* ---- Config badge ---- */
+    .config-badge {
+      display: inline-block;
+      padding: 0.2rem 0.625rem;
+      border-radius: 9999px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-left: 0.75rem;
+      vertical-align: middle;
+    }
+    .config-badge.config-primary {
+      background: rgba(33, 150, 243, 0.12);
+      color: #1976d2;
+    }
+    .config-badge.config-baseline {
+      background: rgba(255, 193, 7, 0.15);
+      color: #f57f17;
+    }
+
+    /* ---- Prompt ---- */
+    .prompt-text {
+      white-space: pre-wrap;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+    }
+
+    /* ---- Outputs ---- */
+    .output-file {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .output-file + .output-file {
+      margin-top: 1rem;
+    }
+    .output-file-header {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .output-file-header .dl-btn {
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+    .output-file-header .dl-btn:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .output-file-content {
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .output-file-content pre {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+    }
+    .output-file-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+    .output-file-content iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .output-file-content table {
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      width: 100%;
+    }
+    .output-file-content table td,
+    .output-file-content table th {
+      border: 1px solid var(--border);
+      padding: 0.375rem 0.5rem;
+      text-align: left;
+    }
+    .output-file-content table th {
+      background: var(--bg);
+      font-weight: 600;
+    }
+    .output-file-content .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+    .output-file-content .download-link:hover {
+      background: var(--border);
+    }
+    .empty-state {
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* ---- Feedback ---- */
+    .prev-feedback {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.625rem 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .prev-feedback-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+      color: var(--text-muted);
+    }
+    .feedback-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      resize: vertical;
+      color: var(--text);
+    }
+    .feedback-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+    .feedback-status {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      min-height: 1.1em;
+    }
+
+    /* ---- Grades (collapsible) ---- */
+    .grades-toggle {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .grades-toggle:hover {
+      color: var(--accent);
+    }
+    .grades-toggle .arrow {
+      margin-right: 0.5rem;
+      transition: transform 0.15s;
+      font-size: 0.75rem;
+    }
+    .grades-toggle .arrow.open {
+      transform: rotate(90deg);
+    }
+    .grades-content {
+      display: none;
+      margin-top: 0.75rem;
+    }
+    .grades-content.open {
+      display: block;
+    }
+    .grades-summary {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .grade-badge {
+      display: inline-block;
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .grade-pass { background: var(--green-bg); color: var(--green); }
+    .grade-fail { background: var(--red-bg); color: var(--red); }
+    .assertion-list {
+      list-style: none;
+    }
+    .assertion-item {
+      padding: 0.625rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8125rem;
+    }
+    .assertion-item:last-child { border-bottom: none; }
+    .assertion-status {
+      font-weight: 600;
+      margin-right: 0.5rem;
+    }
+    .assertion-status.pass { color: var(--green); }
+    .assertion-status.fail { color: var(--red); }
+    .assertion-evidence {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      padding-left: 1.5rem;
+    }
+
+    /* ---- View tabs ---- */
+    .view-tabs {
+      display: flex;
+      gap: 0;
+      padding: 0 2rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .view-tab {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.625rem 1.25rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+    }
+    .view-tab:hover { color: var(--text); }
+    .view-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .view-panel { display: none; }
+    .view-panel.active { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+
+    /* ---- Benchmark view ---- */
+    .benchmark-view {
+      padding: 1.5rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .benchmark-table {
+      border-collapse: collapse;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.8125rem;
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+    .benchmark-table th, .benchmark-table td {
+      padding: 0.625rem 0.75rem;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .benchmark-table th {
+      font-family: 'Poppins', sans-serif;
+      background: var(--header-bg);
+      color: var(--header-text);
+      font-weight: 500;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .benchmark-table tr:hover { background: var(--bg); }
+    .benchmark-table tr.benchmark-row-with { background: rgba(33, 150, 243, 0.06); }
+    .benchmark-table tr.benchmark-row-without { background: rgba(255, 193, 7, 0.06); }
+    .benchmark-table tr.benchmark-row-with:hover { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-without:hover { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-table tr.benchmark-row-avg { font-weight: 600; border-top: 2px solid var(--border); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-with { background: rgba(33, 150, 243, 0.12); }
+    .benchmark-table tr.benchmark-row-avg.benchmark-row-without { background: rgba(255, 193, 7, 0.12); }
+    .benchmark-delta-positive { color: var(--green); font-weight: 600; }
+    .benchmark-delta-negative { color: var(--red); font-weight: 600; }
+    .benchmark-notes {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+    .benchmark-notes h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+    }
+    .benchmark-notes ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+    }
+    .benchmark-notes li {
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      margin-bottom: 0.375rem;
+    }
+    .benchmark-empty {
+      color: var(--text-muted);
+      font-style: italic;
+      text-align: center;
+      padding: 3rem;
+    }
+
+    /* ---- Navigation ---- */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .nav-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      transition: all 0.15s;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .done-btn {
+      font-family: 'Poppins', sans-serif;
+      padding: 0.5rem 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.15s;
+    }
+    .done-btn:hover {
+      background: var(--bg);
+      border-color: var(--text-muted);
+    }
+    .done-btn.ready {
+      border: none;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+    .done-btn.ready:hover {
+      background: var(--accent-hover);
+    }
+    /* ---- Done overlay ---- */
+    .done-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    .done-overlay.visible {
+      display: flex;
+    }
+    .done-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 500px;
+    }
+    .done-card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .done-card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .done-card .btn-row {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    .done-card button {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .done-card button:hover {
+      background: var(--bg);
+    }
+    /* ---- Toast ---- */
+    .toast {
+      position: fixed;
+      bottom: 5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--header-bg);
+      color: var(--header-text);
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 200;
+    }
+    .toast.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" style="height:100vh; display:flex; flex-direction:column;">
+    <div class="header">
+      <div>
+        <h1>Eval Review: <span id="skill-name"></span></h1>
+        <div class="instructions">Review each output and leave feedback below. Navigate with arrow keys or buttons. When done, copy feedback and paste into Claude Code.</div>
+      </div>
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- View tabs (only shown when benchmark data exists) -->
+    <div class="view-tabs" id="view-tabs" style="display:none;">
+      <button class="view-tab active" onclick="switchView('outputs')">Outputs</button>
+      <button class="view-tab" onclick="switchView('benchmark')">Benchmark</button>
+    </div>
+
+    <!-- Outputs panel (qualitative review) -->
+    <div class="view-panel active" id="panel-outputs">
+    <div class="main">
+      <!-- Prompt -->
+      <div class="section">
+        <div class="section-header">Prompt <span class="config-badge" id="config-badge" style="display:none;"></span></div>
+        <div class="section-body">
+          <div class="prompt-text" id="prompt-text"></div>
+        </div>
+      </div>
+
+      <!-- Outputs -->
+      <div class="section">
+        <div class="section-header">Output</div>
+        <div class="section-body" id="outputs-body">
+          <div class="empty-state">No output files found</div>
+        </div>
+      </div>
+
+      <!-- Previous Output (collapsible) -->
+      <div class="section" id="prev-outputs-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="togglePrevOutputs()">
+            <span class="arrow" id="prev-outputs-arrow">&#9654;</span>
+            Previous Output
+          </div>
+        </div>
+        <div class="grades-content" id="prev-outputs-content"></div>
+      </div>
+
+      <!-- Grades (collapsible) -->
+      <div class="section" id="grades-section" style="display:none;">
+        <div class="section-header">
+          <div class="grades-toggle" onclick="toggleGrades()">
+            <span class="arrow" id="grades-arrow">&#9654;</span>
+            Formal Grades
+          </div>
+        </div>
+        <div class="grades-content" id="grades-content"></div>
+      </div>
+
+      <!-- Feedback -->
+      <div class="section">
+        <div class="section-header">Your Feedback</div>
+        <div class="section-body">
+          <textarea
+            class="feedback-textarea"
+            id="feedback"
+            placeholder="What do you think of this output? Any issues, suggestions, or things that look great?"
+          ></textarea>
+          <div class="feedback-status" id="feedback-status"></div>
+          <div class="prev-feedback" id="prev-feedback" style="display:none;">
+            <div class="prev-feedback-label">Previous feedback</div>
+            <div id="prev-feedback-text"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav" id="outputs-nav">
+      <button class="nav-btn" id="prev-btn" onclick="navigate(-1)">&#8592; Previous</button>
+      <button class="done-btn" id="done-btn" onclick="showDoneDialog()">Submit All Reviews</button>
+      <button class="nav-btn" id="next-btn" onclick="navigate(1)">Next &#8594;</button>
+    </div>
+    </div><!-- end panel-outputs -->
+
+    <!-- Benchmark panel (quantitative stats) -->
+    <div class="view-panel" id="panel-benchmark">
+      <div class="benchmark-view" id="benchmark-content">
+        <div class="benchmark-empty">No benchmark data available. Run a benchmark to see quantitative results here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Done overlay -->
+  <div class="done-overlay" id="done-overlay">
+    <div class="done-card">
+      <h2>Review Complete</h2>
+      <p>Your feedback has been saved. Go back to your Claude Code session and tell Claude you're done reviewing.</p>
+      <div class="btn-row">
+        <button onclick="closeDoneDialog()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ---- Embedded data (injected by generate_review.py) ----
+    const EMBEDDED_DATA = {"skill_name": "web-studio", "runs": [{"id": "sprint-direction-and-type-system-with_skill", "prompt": "We're Aster Cycles, a 14-person e-bike maker in Rotterdam. In March we launch the Aster C1, a \u20ac6,200 carbon commuter e-bike (10.9 kg, belt drive, integrated lights). Audience: design-minded city commuters 30-50 who'd never buy \"sporty\" gear \u2014 they read Monocle, they care about craft and calm. I want the launch page to feel engineered and quiet, like a precision instrument, not an extreme-sports ad. We have no fonts budget, so everything has to be free for commercial use. Before anyone codes anything, give me the creative direction and the typography + spacing system for a single launch page, as files in a studio/ folder. Don't build the site yet.", "eval_id": null, "outputs": [{"name": "studio/ANIMATION_SPECIFICATION.md", "type": "text", "content": "# Animation Specification \u2014 Aster C1 Launch\n_Owner: gsap-animator \u00b7 Date: 2026-11-15_\n\n## Motion tokens\n| Token | Value | Use |\n|---|---|---|\n| --dur-xs \u2026 --dur-xl | | |\n| ease-signature | | |\n\n## Global systems\n- Scroll: Lenis (lenis-scroll) \u2192 GSAP ticker \u2192 ScrollTrigger\n- Page transitions:\n- Reduced motion policy:\n\n## Per-section choreography\n### S1 \u00b7 \u003cname>\n- Purpose of motion:\n- Trigger: load | enter | scrub | pin | hover | drag\n- Timeline (time/position \u2192 target \u2192 props \u2192 ease):\n- Mobile variant:\n- Reduced-motion variant:\n- Perf notes (properties animated, will-change, layer count):\n\n## Plugins used (all in the public `gsap` package, Standard no-charge licence)\n"}, {"name": "studio/ASSET_MANIFEST.md", "type": "text", "content": "# Asset Manifest \u2014 Aster C1 Launch\n_Owner: ai-visual-producer \u00b7 Date: 2026-11-15_\n\n| ID | File(s) | Type | Source (generated / stock / client / procedural) | Model / tool + version | Prompt / seed | Licence & commercial use | Formats & sizes | Weight | Alt text |\n|---|---|---|---|---|---|---|---|---|---|\n\n## Visual consistency rules (from CREATIVE_DIRECTION)\n\n## Rejected generations (and why)\n"}, {"name": "studio/CREATIVE_DIRECTION.md", "type": "text", "content": "# Creative Direction \u2014 Aster C1 Launch\n_Owner: creative-director (performed by the orchestrator in this run) \u00b7 Status: draft, awaiting client approval \u00b7 Date: 2026-11-15_\n_Track: Sprint, light pass. Reference research was skipped on purpose: the brief gives a clear audience and tone, and no live sites were inspected. Nothing below is copied from a reference._\n\n## Brand tension (three pairs to hold in balance)\n- exact \u003c-> calm\n- engineered \u003c-> humane (a daily companion, not a gadget)\n- rare (EUR 6,200, 14 people) \u003c-> unshowy (no status theatre)\n\n## Concept (one sentence)\n**\"Measured, not shouted\":** the Aster C1 is presented like a precision instrument, so the page speaks in measurements, materials and silence, and never in adjectives like \"powerful\" or \"extreme\".\n\nWorking line for the hero (placeholder copy, for the client to rewrite): *\"Ten point nine kilograms. Nothing you hear.\"*\n\n## Design language & rationale\nPrimary: **Minimalist** (design-languages.md). Accent: **Editorial** (the Monocle reading habit).\n- Minimalist because the object is the claim: light, belt-driven, unadorned. Hierarchy comes from size and space, not decoration.\n- Editorial because the audience reads long, well-set text and trusts a publication voice: a literate serif for headlines, captions and kickers as design elements, text measured at 60ch.\n- Rejected on purpose: Automotive (dark studio, speed, pinned image sequences = \"sporty\"), Futuristic (gadget energy), Luxury (gold/didone = status, wrong calm), Cinematic (scroll-jacking, heavy media).\n- Edge language: **hairline** (1px at ~16% ink), radius **0** everywhere including the CTA button (square-cornered). No shadows. No gradients.\n\n## Narrative arc\n| Beat | Section | What the visitor feels | What they learn |\n|---|---|---|---|\n| 1 Arrival | Hero: wordmark, one headline, one image of the bike alone in calm light, \"Reserve\" + \"March\" | Quiet, curiosity | A new bike exists; it is not what they expected from \"e-bike\" |\n| 2 The Weight (signature) | One near-empty viewport: **10.9 kg** | Surprise, then trust | It is exceptionally light. Stated as a measurement, with a plain comparison line (client supplies) |\n| 3 Material | Carbon frame: macro detail + 2 lines of copy | Respect for craft | Why carbon, how it is made in Rotterdam (client to confirm any claim) |\n| 4 Silence | Belt drive: no chain, no grease, no noise | Relief | Practical daily benefit; clean trousers, little maintenance (claims to be confirmed by Aster) |\n| 5 Dusk | Integrated lights (the single dark section) | Safety and ease | Lights are part of the frame, always there |\n| 6 Specification | Instrument-panel spec table, ruled lines, tabular figures | Confidence | Full facts; gaps labelled \"to be supplied\" until Aster provides them |\n| 7 Reserve | EUR 6,200, March, one CTA, delivery/returns/warranty line (client to supply) | Calm decision | What it costs, when, what to do next |\n\n## Palette\nBorn from materials: unbleached paper, graphite carbon, a single dyed-textile accent (aster violet). Contrast measured with design-intelligence/scripts/contrast.mjs on 2026-11-15 [M].\n| Token | Value | Role | Measured contrast |\n|---|---|---|---|\n| `--paper` | `#EEEBE5` | ground (default) | base |\n| `--paper-raised` | `#E4E0D8` | panels, spec table rows | ink 13.6:1 (via #15171A on E4E0D8), muted 5.18:1 |\n| `--ink` | `#15171A` | primary text | 15.09:1 on paper (AAA) |\n| `--ink-muted` | `#585B60` | secondary text, captions | 5.73:1 on paper, 5.18:1 on paper-raised (AA) |\n| `--line` | ink at 16% alpha | hairlines, decorative only | not text; do not use for input borders (use ink-muted, which is >= 3:1) |\n| `--aster` | `#4A4FA3` | accent: CTA fill, focus ring, the scale tick on the weight rule; \u003c5% of any viewport | 6.01:1 on paper; white on aster 7.15:1 (AAA) |\n| `--graphite` | `#121416` | the one dark section | paper text on graphite 15.52:1 |\n| `--graphite-muted` | `#9A9DA3` | secondary text on dark | 6.79:1 on graphite (AA) |\n| `--aster-on-dark` | `#8E92E0` | accent on dark (focus ring, light glyph) | 6.45:1 on graphite |\nRules: no pure #000/#fff grounds (white text on the aster button is the only #FFF). Accent never used for body text links larger than the CTA and focus ring; text links are ink with a hairline underline.\n\n## Type personality (final fonts in TYPOGRAPHY_SYSTEM.md)\nLiterate and exact. A light, optically-sized text serif for headlines (editorial voice, hairlines that look drawn rather than stamped), a neutral, technical sans for everything functional (specs, labels, body). No condensed, no wide, no italics for emphasis, no all-caps headlines. Uppercase appears only in small tracked labels.\n\n## Image & video direction\n- Subject: the bike alone, calm, true to scale. Rotterdam as quiet context: early morning, overcast, wet stone, brick, water. Riders (if any) are dressed for work, upright, unhurried, shot from a distance or cropped to hands and bag.\n- Light: soft overcast daylight, long exposures of dusk for the lights section; no flash, no lens flare.\n- Grade: neutral-cool, low contrast, slightly desaturated greys with warm paper highlights. One treatment family for every image.\n- Macro: carbon weave, belt teeth, frame joins, light housing. Real objects, honest detail.\n- Composition: one focal element per viewport; generous empty frame; images sit on the grid and keep hairline-aligned edges. No full-bleed text-over-image except the dusk section, where text sits in the calm lower-left zone.\n- Video: none required. If added later: muted, slow, under 10 s, paused under reduced motion.\n- Provenance: all photography must be Aster-owned or commissioned with written commercial rights. AI-generated imagery is not assumed and, if used, must be disclosed to Aster and logged in ASSET_MANIFEST.md.\n\n## Motion personality\n- Tempo: slow-and-exact. 400-700 ms for reveals, 150-250 ms for UI feedback.\n- Weight: light object, so little mass. Ease: decelerating, no overshoot, no bounce (`power2.out` / `cubic-bezier(0.2, 0, 0, 1)`).\n- What moves: opacity and 8-16 px translate on reveals; the weight rule (below). Nothing else.\n- What never moves: body text, nav, prices, spec values. No parallax, no scroll-jacking, no pinned image sequences, no cursor effects, no preloader.\n- Scroll: native scrolling is the baseline. Smooth scroll (Lenis) is optional and, if used, gentle; it must never delay anchor jumps. Decision deferred to build.\n- Reduced motion: every reveal becomes an instant final state; the weight rule renders at 10.9 immediately.\n\n## Signature moment\n**\"The Weight.\"** One viewport, mostly empty paper. A single figure, **10.9 kg**, set very large in the display serif. Beneath it a hairline ruler graduated like a scale; as the section enters, a single aster-violet tick travels from 0 to 10.9 over about 1.2 s and settles. No counting digits, no sound, no bounce. It is the only large motion on the page and costs two CSS-sized elements (no WebGL, no video). The reduced-motion version is the static final frame. The figure is real text (selectable, screen-reader readable: \"10.9 kilograms\").\n\nSupporting quiet moment: **\"Dusk\"**, the only dark section. The page goes from paper to graphite and back, a hush that matches the lights and the belt's silence.\n\n## Deliberately not doing\n- No speed, slope, mountain, jump, sweat, or \"beast / power / extreme / crush / conquer / performance\" vocabulary or imagery.\n- No diagonal cuts, speed lines, motion blur, neon, gradients, glows, grain, glassmorphism, drop shadows.\n- No condensed or ultra-wide display type, no all-caps headlines.\n- No wattage / torque / \"up to X km\" figures as hero claims.\n- No 3D configurator, no WebGL, no autoplay video, no countdown timer, no carousel, no pop-ups beyond what consent law requires.\n- No parallax or scroll-jacking.\n- No generic \"Inter on off-white, fade-up everything\" treatment: motion is rationed to one signature moment.\n\n## Alternates considered\n1. **Cinematic automotive** (dark studio, pinned scroll through the frame). Rejected: reads sporty, heavy media, scroll control loss, wrong for the audience.\n2. **Luxury / didone** (high-contrast serif, gold). Rejected: status signalling is the opposite of calm; EUR 6,200 buyers here read craft, not bling.\n3. **Full editorial magazine** (Monocle pastiche). Kept only as the accent language; a full imitation would bury the product and drift toward copying.\n\n## Open questions for the client (answered with assumptions for now)\nSee PROJECT_BRIEF.md assumptions. Highest impact: hero copy and tone-of-voice, available photography, and what \"Reserve\" actually does.\n"}, {"name": "studio/DECISIONS.md", "type": "text", "content": "# Decision Log \u2014 Aster C1 Launch\n\n| Date | Decision | Alternatives | Rationale | Decided by |\n|---|---|---|---|---|\n| 2026-11-15 | Track = Sprint, scoped to creative direction + type + spacing; no build | Full production; Spot | One page; user asked for direction and systems before code | orchestrator |\n| 2026-11-15 | Skip reference research phase | Run reference-researcher | Brief has a clear audience/tone; no live sites inspected (and none claimed). Add later if the client wants benchmarking | orchestrator |\n| 2026-11-15 | Concept \"Measured, not shouted\": instrument voice, one signature moment (The Weight) | Cinematic automotive; luxury didone; full editorial | Rejected sporty / status / pastiche (see CREATIVE_DIRECTION) | creative-director role (draft) |\n| 2026-11-15 | Language = Minimalist primary, Editorial accent | Luxury, Automotive, Product experience | Matches audience reading habits and calm | creative-director role (draft) |\n| 2026-11-15 | Fonts: Newsreader (display) + Geist (text/UI), both OFL-1.1, self-hosted | Fraunces, Inter, Fontshare faces, paid foundry fonts | Licence verified, zero cost, quiet literate/technical pairing; ~161 KB latin | typography-spacing role (draft) |\n| 2026-11-15 | Keep Newsreader opsz file (132 KB) over wght-only (58 KB) | wght-only | Optical sizing matters at 70-86 px; revisit at performance gate | typography-spacing role (draft) |\n| 2026-11-15 | Scale ratio 1.2 -> 1.25, base 16 -> 18 | Dramatic 1.333+ | Calm, product/editorial; drama comes from one 10.9 kg figure, not the ratio | typography-spacing role (draft) |\n| 2026-11-15 | No WebGL, video, 3D configurator | 3D bike | Not warranted by the concept; protects calm and performance | creative-director role (draft) |\n"}, {"name": "studio/DESIGN_SPECIFICATION.md", "type": "text", "content": "# Design Specification \u2014 Aster C1 Launch\n_Owner: ui-ux-designer \u00b7 Date: 2026-11-15_\n\n## Sitemap & navigation model\n\n## Global components\n- Header / nav (desktop, mobile, open state, focus trap):\n- Footer:\n- Cursor / pointer treatments (if any, with touch fallback):\n\n## Sections\n### S1 \u00b7 \u003cname>\n- Purpose:\n- Content:\n- Layout \u2014 \u22651440 / 1024 / 768 / \u2264390:\n- Interaction & states:\n- Motion hook (\u2192 ANIMATION_SPECIFICATION):\n- Accessibility notes:\n\n## Responsive rules\n\n## Accessibility\n- Landmarks, heading outline, focus order, contrast pairs, reduced motion, alt-text plan\n\n## Conversion / CTA strategy\n"}, {"name": "studio/PERFORMANCE_REPORT.md", "type": "text", "content": "# Performance Report \u2014 Aster C1 Launch\n_Owner: performance-engineer \u00b7 Date: 2026-11-15 \u00b7 Build: \u003ccommit>_\n\n## Method\n- Tool + version, device emulation, throttling, runs (median of N), server (preview build)\n\n## Results vs budget\n| Metric | Budget | Mobile | Desktop | Status |\n|---|---|---|---|---|\n\n## Bundle\n## Media\n## Runtime (scroll long tasks, FPS sampling, memory)\n## Actions taken / recommended\n"}, {"name": "studio/PROJECT_BRIEF.md", "type": "text", "content": "# Project Brief \u2014 Aster C1 Launch\n_Owner: orchestrator \u00b7 Last updated: 2026-11-15 \u00b7 Track: Sprint (single page), scoped to direction + type + spacing only_\n\n## Business\n- What it is: Aster Cycles, a 14-person e-bike maker in Rotterdam.\n- Offer / product: Aster C1, carbon commuter e-bike. EUR 6,200. 10.9 kg. Belt drive. Integrated lights. Launches March (year assumed: next March).\n- Differentiator: a light, quiet, finished object. Craft and restraint rather than performance claims.\n\n## Audience\n- Primary: design-minded city commuters, 30-50, who read Monocle-type publications, would never buy \"sporty\" gear, and care about craft and calm.\n- Secondary: design press, bike-shop partners (assumed).\n- What they must believe after visiting: \"This is a well-made object that makes my daily ride simpler, and the company behind it is serious.\"\n\n## The feeling\nEngineered and quiet, like a precision instrument. Not an extreme-sports ad.\n\n## Goals & success measures\n| Goal | Measure |\n|---|---|\n| Convert interest to a reservation or launch-list sign-up | Primary CTA click-through (target to be set by Aster; NOT yet defined) |\n| Make the price feel earned | Qualitative: price shown with the evidence above it, not hidden |\n\n## Content inventory\n| Item | Exists? | Source / owner |\n|---|---|---|\n| Copy | Unknown. Only the facts above were supplied. All copy in the studio docs is placeholder. | Aster |\n| Logo / brand marks | Unknown | Aster |\n| Photography | Unknown. Direction is written so it can be briefed or commissioned. | Aster |\n| Video | Unknown. Not required by the direction. | Aster |\n| Further specs (motor, battery, range, sizes, colours, weight limit) | Not supplied. Spec panel is designed around the supplied facts plus labelled gaps. | Aster |\n\n## Constraints\n- Stack / hosting: not decided (build phase; default Vite + React + TS or static HTML).\n- Deadline: March launch. Design must be signed off well before build.\n- Accessibility / legal: WCAG 2.2 AA target; EU audience, so cookie/consent handling and GDPR for the sign-up form are needed at build time.\n- Budget for paid fonts/assets/services: none. Free/open licences only, commercial use required.\n\n## Likes / dislikes (user-supplied references)\n- Likes: Monocle-style editorial calm, craft, precision instruments.\n- Dislikes: \"sporty\" gear aesthetics, extreme-sports advertising.\n\n## Assumptions (made by the studio, revisit if wrong)\n- Language: English first; Dutch version likely later, so layouts allow 30-40% text expansion and long compound words.\n- One page, one primary action: reserve / join the launch list. Exact commerce mechanism (deposit, pre-order, waitlist) is Aster's decision. The design labels it \"Reserve\" as a placeholder.\n- No logo supplied: the wordmark \"Aster\" is set in the display face as a stand-in.\n- Photography will be supplied or commissioned; no 3D, no video required.\n- Facts not supplied (range, motor, battery, sizes, colours) are NOT invented. They appear only as clearly flagged gaps.\n- The launch date is shown as \"March\" with no countdown timer (calm tone).\n- Dark mode: not offered; the page has one light palette plus one deliberate dark section.\n"}, {"name": "studio/PROJECT_STATUS.md", "type": "text", "content": "# Project Status \u2014 Aster C1 Launch\n_Single source of truth. Update at every phase boundary._\n\n- Track: sprint (scoped: direction + type + spacing only, no build)\n- Current phase: 3-4 complete (draft) -> awaiting client review before design specification and build\n- Last updated: 2026-11-15\n\n## Phase log\n| Phase | Owner(s) | Status | Exit evidence | Date |\n|---|---|---|---|---|\n| 1 Discovery | orchestrator | done (non-interactive: assumptions recorded, no questions asked) | studio/PROJECT_BRIEF.md | 2026-11-15 |\n| 2 Research | reference-researcher | skipped by decision | DECISIONS.md | 2026-11-15 |\n| 3 Creative direction | creative-director (role performed inline) | draft complete, awaiting client approval | studio/CREATIVE_DIRECTION.md | 2026-11-15 |\n| 4 Type + spacing | typography-spacing (role performed inline) | draft complete; NOT rendered in a browser | studio/TYPOGRAPHY_SYSTEM.md, SPACING_SYSTEM.md, tokens.draft.css | 2026-11-15 |\n| 4 UI/UX structure, animation spec | ui-ux-designer, gsap-animator | not started | n/a | |\n| 5+ Architecture, build, QA | various | not started (out of scope for this request) | n/a | |\n\n## Gates\n| Gate | Reviewer | Verdict | Evidence | Date |\n|---|---|---|---|---|\n| A \u00b7 Architecture | tech-lead | not started | | |\n| B \u00b7 Creative | creative-director | not started | | |\n| B \u00b7 Technical | tech-lead | not started | | |\n| B \u00b7 QA | qa-engineer | not started | | |\n\n## Verification summary (evidence vocabulary)\n| Check | Status |\n|---|---|\n| Font licences (OFL-1.1) via npm registry and bundled LICENSE | PASS |\n| Font axes via api.fontsource.org | PASS |\n| Palette contrast pairs via contrast.mjs | PASS (values in CREATIVE_DIRECTION.md) |\n| Specimen at 360/768/1440/1920, no overflow | NOT TESTED |\n| Geist tnum / Newsreader lnum / euro glyph | NOT TESTED |\n| Fallback font metrics | NOT TESTED |\n| Fontshare licence page (reserve option) | NOT TESTED, not used |\n\n## Open tasks\n| Task | Owner | Blocked by |\n|---|---|---|\n| Approve concept and signature moment | client | |\n| Supply copy, photography, logo, missing specs (range, motor, battery, sizes, colours) | client | |\n| Define what \"Reserve\" does (deposit / waitlist) | client | |\n| Render specimen page, confirm type decisions | typography-spacing | build phase |\n| Section-by-section design spec, then animation spec | ui-ux-designer, gsap-animator | client approval |\n\n## Handoffs received\n- Creative direction and type/spacing produced inline (specialist agents could not be spawned in this run). Not independently reviewed by a second agent.\n"}, {"name": "studio/QA_REPORT.md", "type": "text", "content": "# QA Report \u2014 Aster C1 Launch\n_Owner: qa-engineer \u00b7 Date: 2026-11-15 \u00b7 Build: \u003ccommit>_\n\nStatuses: PASS (evidence linked) \u00b7 FAIL \u00b7 NOT TESTED \u00b7 BLOCKED\n\n| # | Area | Check | Status | Evidence |\n|---|---|---|---|---|\n\n## Responsive matrix (360 / 390 / 768 / 1024 / 1440 / 1920)\n## Accessibility\n## Visual regression (baseline commit, diffs investigated)\n## Defects\n| ID | Severity | Description | Owner | Status |\n|---|---|---|---|---|\n"}, {"name": "studio/REFERENCE_RESEARCH.md", "type": "text", "content": "# Reference Research \u2014 Aster C1 Launch\n_Owner: reference-researcher \u00b7 Date: 2026-11-15_\n\nLabel every claim: **[M]** measured \u00b7 **[O]** observed \u00b7 **[I]** inferred \u00b7 **[?]** unknown.\n\n## Selected references\n### 1. \u003cSite name> \u2014 \u003curl>\n- Library entry: `reference-library/sites/\u003cslug>.md` (or \"new capture \u003cdate>\")\n- Lesson for this project:\n- Typography: \n- Layout & spacing:\n- Motion & scroll:\n- Technique notes:\n- Confidence: high | medium | low\n\n## Patterns to adopt\n\n## Patterns to avoid (and why)\n\n## Not inspected\n| URL | Reason |\n|---|---|\n"}, {"name": "studio/SPACING_SYSTEM.md", "type": "text", "content": "# Spacing & Grid System \u2014 Aster C1 Launch\n_Owner: typography-spacing (performed by the orchestrator in this run) \u00b7 Date: 2026-11-15 \u00b7 Status: proposed, not yet rendered_\n\nPrinciple: space is the quiet. One fluid scale, one grid, three containers, three deliberate rests. A one-off value is a design bug unless recorded here.\n\n## Base unit & scale\n8 px base (4 px half-step for UI details). Generated with `type-scale.mjs --space-base 8` [M]; fluid between 360 and 1440 viewport.\n\n| Token | clamp() [M] | px at 360 -> 1440 | Use |\n|---|---|---|---|\n| `--space-3xs` | `clamp(0.2rem, 0.1833rem + 0.0741vw, 0.25rem)` | 3.2 -> 4 | hairline offsets, icon nudges |\n| `--space-2xs` | `clamp(0.4rem, 0.3667rem + 0.1481vw, 0.5rem)` | 6.4 -> 8 | label to value gap |\n| `--space-xs` | `clamp(0.6rem, 0.55rem + 0.2222vw, 0.75rem)` | 9.6 -> 12 | kicker to heading |\n| `--space-s` | `clamp(0.8rem, 0.7333rem + 0.2963vw, 1rem)` | 12.8 -> 16 | paragraph to paragraph, button padding block |\n| `--space-m` | `clamp(1.2rem, 1.1rem + 0.4444vw, 1.5rem)` | 19.2 -> 24 | heading to body, grid gutter (desktop) |\n| `--space-l` | `clamp(1.6rem, 1.4667rem + 0.5926vw, 2rem)` | 25.6 -> 32 | between blocks inside a section |\n| `--space-xl` | `clamp(2.4rem, 2.2rem + 0.8889vw, 3rem)` | 38.4 -> 48 | spec table row group, page margin (desktop) |\n| `--space-2xl` | `clamp(3.2rem, 2.9333rem + 1.1852vw, 4rem)` | 51.2 -> 64 | image to caption block |\n| `--space-3xl` | `clamp(4.8rem, 4.4rem + 1.7778vw, 6rem)` | 76.8 -> 96 | between a section's sub-groups |\n| `--space-4xl` | `clamp(6.4rem, 5.8667rem + 2.3704vw, 8rem)` | 102.4 -> 128 | section padding (compact sections) |\n| `--space-5xl` | `clamp(9.6rem, 8.8rem + 3.5556vw, 12rem)` | 153.6 -> 192 | section padding (standard) and rests |\n\nTokens beyond the scale (documented exceptions): `--hit: 2.75rem` (44 px minimum touch target), `--hairline: 1px`.\n\n## Grid\n- Columns: 4 (\u003c 48rem), 8 (>= 48rem), 12 (>= 64rem). Breakpoints are content-driven defaults; the 12-column layout starts where the two-column text/image composition stops feeling cramped (to be confirmed visually at build).\n- Gutter: `--space-s` on 4/8-col, `--space-m` on 12-col.\n- Page margin: `--margin: clamp(1.25rem, 0.8rem + 2vw, 3rem)` (20 px at 360, 48 px at 1440+).\n- Max width: 1440 px (equal to the upper bound of the fluid scale). At 1920 the layout stays centred; the paper ground runs full-bleed; type does not grow past its 1440 size.\n```css\n:root { --cols: 4; --gutter: var(--space-s); --margin: clamp(1.25rem, 0.8rem + 2vw, 3rem); --container-wide: 1440px; --container-text: 60ch; --container-narrow: 38rem; }\n@media (min-width: 48rem) { :root { --cols: 8; } }\n@media (min-width: 64rem) { :root { --cols: 12; --gutter: var(--space-m); } }\n.grid { display: grid; grid-template-columns: repeat(var(--cols), minmax(0, 1fr)); column-gap: var(--gutter); padding-inline: var(--margin); max-width: var(--container-wide); margin-inline: auto; }\n```\n- Composition rule: **asymmetric, left-weighted**. On 12 columns, text sits in columns 1-5 (or 2-6) and imagery spans 6-12; the hero image may bleed to the right edge. The spec table spans columns 1-12 but its text-bearing cells align to columns 1-3 (label) and 4-8 (value). Anything that breaks the grid must do so on purpose and only once per section.\n- On 8 columns: text 1-6, image 1-8 stacked. On 4 columns: single column, image first or second per narrative beat, all full-width within margins.\n\n## Containers\n| Name | Width | Used by |\n|---|---|---|\n| Full-bleed | 100% | Hero image, Dusk section background |\n| Wide | 1440 px incl. margins | Grid, spec table, image pairs |\n| Text | 60ch (about 540 px at 18 px) | Body, lead; never exceeded, even inside full-bleed sections |\n| Narrow | 38rem | Reserve block, form (email field), legal lines |\n\n## Vertical rhythm\n- Body rhythm unit: 18 px x 1.6 = 28.8 px at 1440 (25.6 px at 360). Spacing between text elements uses the scale, not multiples of line-height.\n- Heading proximity: space above a heading > space below. Kicker -> heading `--space-xs`; heading -> body `--space-m`; body -> body `--space-s`; body -> CTA `--space-l`; block -> block `--space-3xl`.\n- Spec table: row padding-block `--space-s`, hairline between rows, label column `--step--1` uppercase, value column Geist 300 at `--step-3` for the headline specs (weight, price) and `--step-0` for the rest, all tabular.\n- Image captions: `--space-2xs` under the image, step -1, ink-muted.\n\n## Section rhythm\n- Standard section padding: `--section-pad: var(--space-5xl)` (154 -> 192 px).\n- Compact section (spec table, footer): `--space-4xl`.\n- Mobile compression: the clamp already compresses (about 20% from 1440 to 360). Never below `--space-4xl`; the page must stay calm on a phone.\n- Section edges: paper to graphite and back are hard edges (no gradient). A 1px `--line` hairline separates paper sections that share a ground.\n- Sticky header: 56 px tall (`--space-2xl` + hairline), transparent over the hero, paper once scrolled; reserve `scroll-padding-top: 4.5rem` for anchors.\n\n## Intentional negative space (protect from content creep)\n1. **The Weight** (beat 2): a full viewport (`min-height: 100svh`) holding only \"10.9 kg\", the ruler, and one line of copy. Nothing else may be added.\n2. **Dusk exit**: after the lights text, `--space-5xl` of graphite before the page returns to paper. No content.\n3. **Before Reserve**: a single sentence on its own, with `--space-5xl` above and below.\nThese three rests are the page's pacing; a stakeholder request to \"use the space\" for more content must be raised as a design decision.\n\n## Responsive behaviour\nMatrix to verify at build: 360, 390, 768, 1024, 1440, 1920.\n- 360/390: 4 columns, margin 20 px, single-column stack, ruler in the Weight section spans the full content width (about 320 px), the figure stays on one line (check).\n- 768: 8 columns, text 1-6; image pairs side by side only if each is >= 280 px wide.\n- 1024: 12 columns begin; text/image offset composition.\n- 1440: reference layout.\n- 1920: centred container, extra paper margin on both sides; no scaling of type or spacing.\n- Landscape phones: sections that use `100svh` set a `min-height`, never a fixed height, so content is never clipped.\n- Zoom: 200% text zoom must not hide content (use rem/em; no fixed heights on text blocks).\n\n## Interactive sizing\n- Buttons: height >= `--hit` (44 px), padding-inline `--space-l`, radius 0, label step -1 uppercase tracked, accent fill `--aster`, text white (7.15:1), focus ring 2px offset 3px in `--aster` (6.0:1 on paper) or `--aster-on-dark` on graphite.\n- Email field: 1px `--ink-muted` border (>= 3:1), height 48 px, visible label above (not placeholder-only).\n- Targets spaced at least `--space-xs` apart.\n\n## Verification status\n| Check | Status | Evidence |\n|---|---|---|\n| Scale values generated | PASS | type-scale.mjs output |\n| Grid/containers rendered at all six widths | NOT TESTED | no build in this run |\n| 100svh rests behave on mobile browser chrome | NOT TESTED | check at build |\n"}, {"name": "studio/TECHNICAL_ARCHITECTURE.md", "type": "text", "content": "# Technical Architecture \u2014 Aster C1 Launch\n_Owner: frontend-engineer \u00b7 Gate A: pending | approved by tech-lead on \u003cdate>_\n\n## Stack & rationale\n\n## Dependencies\n| Package | Version | Licence | Size (min+gz) | Why | Verified how |\n|---|---|---|---|---|---|\n\n## Directory layout & ownership\n| Path | Owner agent |\n|---|---|\n\n## Scroll & motion architecture\n\n## Asset pipeline\n\n## Performance budget\n| Metric | Budget | Measured (\u2192 PERFORMANCE_REPORT) |\n|---|---|---|\n| LCP (mobile, lab) | | |\n| CLS | | |\n| TBT / INP proxy | | |\n| JS initial (gz) | | |\n| Hero media | | |\n\n## Test plan\n"}, {"name": "studio/TYPOGRAPHY_SYSTEM.md", "type": "text", "content": "# Typography System \u2014 Aster C1 Launch\n_Owner: typography-spacing (performed by the orchestrator in this run) \u00b7 Date: 2026-11-15 \u00b7 Status: proposed, not yet rendered in a browser_\n\nEvidence labels: [M] measured/verified in this run, [I] inferred, [?] unknown, to verify at build.\n\n## Fonts\nTwo families, three font files in the latin subset. All free for commercial use (SIL OFL 1.1), self-hosted. No paid font is needed.\n\n| Role | Family | Source | Licence | Weights/axes used | Loading |\n|---|---|---|---|---|---|\n| Display + the signature number | Newsreader (variable) | npm `@fontsource-variable/newsreader@5.3.0` (design: Production Type, Google Fonts) | OFL-1.1 [M: `npm view` returned `OFL-1.1`; LICENSE file in the tarball is the SIL OFL 1.1] | wght 300-500 (used 300 and 400), opsz 6-72 auto [M: api.fontsource.org axes] | Self-host `newsreader-latin-opsz-normal.woff2` (132 KB [M]). Preload. |\n| Text, UI, labels, specs | Geist (variable) | npm `@fontsource-variable/geist@5.3.0` (Vercel) | OFL-1.1 [M] | wght 100-900 [M], used 300, 400, 500 | Self-host `geist-latin-wght-normal.woff2` (29 KB [M]). Preload. |\n| Accent / mono | none | | | | Deliberate omission: tabular Geist covers the specs; a third family would break the quiet. |\n\nTotal font payload: about 161 KB for the latin subset [M, from file sizes]. `latin-ext` files load only through `unicode-range` when needed (Dutch and English need only `latin`; the euro sign and e/e/i with diacritics are in the latin subset [I], verify the glyph coverage at build).\nCheaper option if the budget tightens: Newsreader `wght`-only file (58 KB [M]) loses optical sizing; at 70-85 px headlines hairlines become heavier. Decision: keep opsz, reconsider after the performance gate.\n\n## Pairing rationale\n- Contrast of one variable: serif (warm, literate, drawn) versus neutral technical sans. Everything else is harmonised: both are light-to-regular, low-contrast-extremes, similar colour on the page.\n- Newsreader was designed for reading news; its optical-size axis makes a light 70 px headline elegant and a 16 px caption sturdy. That matches a Monocle audience and a \"quiet\" tone without any ornament.\n- Geist is precise and unobtrusive: a \"measuring tool\" voice for specs and labels, with tabular figures [I: the feature `tnum` is expected in Geist; verify at build].\n- Pattern closest in pairings.md: \"Soft editorial\" without Fraunces' eccentric SOFT/WONK, and without the mono accent. Fraunces was rejected as too warm and quirky for \"engineered and quiet\".\n- Rejected: Inter (the default of the web), Instrument Serif (trend risk, condensed), Bodoni Moda / Playfair (luxury/status), Archivo / Mona Sans width axis (reads automotive/sport), Fontshare faces (ITF FFL says free commercial use but its licence page could not be re-read here, so they are held in reserve, not chosen).\n- Check: x-heights differ (Newsreader is smaller), so the two faces are never mixed within one line. The one exception is a label directly beside a heading, which sits on its own line.\n\n## Fluid scale (min viewport 360 -> max 1440)\nGenerated with `typography-system/scripts/type-scale.mjs --min-base 16 --max-base 18 --min-ratio 1.2 --max-ratio 1.25 --steps -2,7 --space-base 8` [M]. Calm ratio (1.2 to 1.25) because this is a product/editorial page, not a poster. Scale contrast display:body is up to about 1:5 at the top and the single 10.9 kg moment uses step 7 for drama.\n\n| Step | Token | clamp() [M] | px at 360 -> 1440 | Line-height | Tracking | Face / weight | Use |\n|---|---|---|---|---|---|---|---|\n| -2 | `--step--2` | `clamp(0.6944rem, 0.6859rem + 0.0379vw, 0.72rem)` | 11.1 -> 11.5 | 1.5 | +0.02em | Geist 400 | Legal footnote only. Not for anything the audience must read. |\n| -1 | `--step--1` | `clamp(0.8333rem, 0.8111rem + 0.0988vw, 0.9rem)` | 13.3 -> 14.4 | 1.5 | +0.01em; labels +0.10em uppercase | Geist 500 (labels), 400 (captions) | Kickers, captions, spec labels, nav, button text |\n| 0 | `--step-0` | `clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem)` | 16 -> 18 | 1.6 | 0 | Geist 400 | Body |\n| 1 | `--step-1` | `clamp(1.2rem, 1.1312rem + 0.3056vw, 1.4063rem)` | 19.2 -> 22.5 | 1.4 | 0 | Geist 400 | Lead paragraph under a heading |\n| 2 | `--step-2` | `clamp(1.44rem, 1.3341rem + 0.4708vw, 1.7578rem)` | 23 -> 28.1 | 1.2 | -0.01em | Newsreader 400 | Pull quote, sub-heading |\n| 3 | `--step-3` | `clamp(1.728rem, 1.5716rem + 0.6952vw, 2.1973rem)` | 27.6 -> 35.2 | 1.15 | -0.01em | Newsreader 400 | H3, feature title; spec figure (Geist 300 tabular) |\n| 4 | `--step-4` | `clamp(2.0736rem, 1.8493rem + 0.997vw, 2.7466rem)` | 33.2 -> 43.9 | 1.08 | -0.02em | Newsreader 400 | H2 on small sections, price line |\n| 5 | `--step-5` | `clamp(2.4883rem, 2.1734rem + 1.3999vw, 3.4332rem)` | 39.8 -> 54.9 | 1.06 | -0.02em | Newsreader 300 | H2 (section titles) |\n| 6 | `--step-6` | `clamp(2.986rem, 2.5508rem + 1.9341vw, 4.2915rem)` | 47.8 -> 68.7 | 1.0 | -0.03em | Newsreader 300 | H1 (hero headline) |\n| 7 | `--step-7` | `clamp(3.5832rem, 2.9894rem + 2.6389vw, 5.3644rem)` | 57.3 -> 85.8 | 0.98 | -0.03em | Newsreader 300 | \"10.9 kg\" only (the signature figure). Used once on the page. |\n\nOverrides to the script's suggestions (which gave lh 1.55/1.35/1.15/1.06 etc.): body 1.6 and lead 1.4 for calm; tracking at steps -2/-1 left at +0.01 to +0.02em.\nAt 85.8 px the \"10.9 kg\" figure is about 7 characters wide, around 350 px, comfortably inside a 1440 grid; at 57 px it is about 235 px at 360 viewport (width inside a 320 px content area is fine) [I: estimated from average glyph width, verify].\n\n## Rules\n- Measure: body and lead `max-width: 60ch` (inside the 45-75ch range). Pull quote 28ch. H1 at most 14ch wide (e.g. \"Ten point nine kilograms.\" breaks into 2-3 lines by design).\n- Optical sizing: `font-optical-sizing: auto` on Newsreader; no manual `font-variation-settings` needed. Weight 300 only at step 5 and above. Below step 5 use 400 (light weights at small sizes fail legibility).\n- Case: sentence case everywhere. Uppercase only in `.label` (step -1, Geist 500, tracking +0.10em, max about 24 characters).\n- Numerals: Geist `font-variant-numeric: tabular-nums lining-nums` in the spec table and prices. Newsreader's default numerals: force `lining-nums` on \"10.9\" and verify rendering [?] (oldstyle numerals would look wrong in a measurement).\n- Units: non-breaking space between a number and its unit (\"10.9&nbsp;kg\", \"EUR&nbsp;6,200\"). Use the euro symbol as in \"\u20ac6,200\" in copy; keep it in the same text run as the number.\n- Hanging punctuation: for the pull quote use `text-indent: -0.4em` (Safari-only `hanging-punctuation` is not relied on). Measure per font at build.\n- Optical alignment: pull the first letter of the H1 left by about `-0.04em` [I]; measure and record at build.\n- Emphasis: weight 500 in Geist, never italic for emphasis, never underline except links. Links: ink colour, 1px hairline underline offset 0.2em, thickness 1px; hover darkens the underline to `--aster`.\n- Language: set `lang` on the document. Use `hyphens: auto` on body text only (not headings) so Dutch compounds (\"fietsverlichting\") do not overflow at 360 px; headings may use `overflow-wrap: anywhere` as a last resort.\n- Minimum sizes: body never below 16 px; interactive text never below 13.3 px (step -1 at 360). Touch targets 44 x 44 px (see SPACING_SYSTEM).\n- Text on dark (Dusk section): use `--paper` (15.5:1) and `--graphite-muted` (6.8:1); increase body line-height by +0.05 and weight stays 400 (no thinning on dark).\n\n## Fallbacks & metrics overrides (CLS)\nStrategy: `font-display: swap` for Geist; for Newsreader (the hero) preload and use `font-display: swap` with a metric-matched fallback so the swap does not shift layout. The override values below are NOT measured; they must be tuned by overlaying fallback and real font in a browser at build.\n```css\n@font-face { font-family: \"Newsreader Fallback\"; src: local(\"Times New Roman\"); size-adjust: 100%; ascent-override: 90%; descent-override: 25%; line-gap-override: 0%; } /* [?] starting values, tune */\n@font-face { font-family: \"Geist Fallback\"; src: local(\"Arial\"); size-adjust: 100%; ascent-override: 92%; descent-override: 24%; line-gap-override: 0%; } /* [?] starting values, tune */\n--font-display: \"Newsreader Variable\", \"Newsreader Fallback\", Georgia, serif;\n--font-text: \"Geist Variable\", \"Geist Fallback\", system-ui, sans-serif;\n```\nPreload exactly two files: `newsreader-latin-opsz-normal.woff2` and `geist-latin-wght-normal.woff2`, `crossorigin`. No italic files are loaded (no italic in use).\n\n## Font loading (CSS to land at build)\n```css\n@font-face { font-family: \"Newsreader Variable\"; font-style: normal; font-display: swap; font-weight: 200 800;\n  src: url(\"/fonts/newsreader-latin-opsz-normal.woff2\") format(\"woff2-variations\");\n  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }\n@font-face { font-family: \"Geist Variable\"; font-style: normal; font-display: swap; font-weight: 100 900;\n  src: url(\"/fonts/geist-latin-wght-normal.woff2\") format(\"woff2-variations\"); /* same unicode-range */ }\n```\n(Use the `@font-face` blocks shipped in each package's `opsz.css` / `wght.css`; they hold the authoritative `unicode-range`.) Confirm that the opsz axis is exposed by the shipped `opsz.css` [M: file present in the package].\n\n## Verification status\n| Check | Status | Evidence |\n|---|---|---|\n| Licences (Newsreader, Geist = OFL-1.1) | PASS (registry metadata and bundled LICENSE) | `npm view @fontsource-variable/{newsreader,geist} license` returned OFL-1.1; Newsreader LICENSE read |\n| Axes available (opsz, wght) | PASS | api.fontsource.org/v1/variable/{newsreader,geist} |\n| Scale values | PASS (generated) | type-scale.mjs output, see table |\n| Specimen rendered at 360/768/1440/1920, no overflow of the largest line | NOT TESTED | No page built in this run; do this first when code starts |\n| Geist `tnum`, Newsreader `lnum`, euro glyph in subset | NOT TESTED | verify at build |\n| Fallback metrics | NOT TESTED | tune by overlay |\n"}, {"name": "studio/tokens.draft.css", "type": "text", "content": "/* Aster C1 launch: design tokens (DRAFT, not a built site).\n   Source of truth: studio/TYPOGRAPHY_SYSTEM.md, SPACING_SYSTEM.md, CREATIVE_DIRECTION.md.\n   Intended to become src/styles/tokens.css when the build phase starts. NOT TESTED in a browser. */\n:root {\n  /* colour */\n  --paper: #EEEBE5; --paper-raised: #E4E0D8; --ink: #15171A; --ink-muted: #585B60;\n  --line: rgb(21 23 26 / 0.16); --aster: #4A4FA3; --on-aster: #FFFFFF;\n  --graphite: #121416; --graphite-muted: #9A9DA3; --aster-on-dark: #8E92E0;\n\n  /* font stacks (fallback metrics to be tuned, see TYPOGRAPHY_SYSTEM.md) */\n  --font-display: \"Newsreader Variable\", \"Newsreader Fallback\", Georgia, serif;\n  --font-text: \"Geist Variable\", \"Geist Fallback\", system-ui, sans-serif;\n\n  /* type scale 360 -> 1440 (type-scale.mjs, ratio 1.2 -> 1.25, base 16 -> 18) */\n  --step--2: clamp(0.6944rem, 0.6859rem + 0.0379vw, 0.72rem);\n  --step--1: clamp(0.8333rem, 0.8111rem + 0.0988vw, 0.9rem);\n  --step-0: clamp(1rem, 0.9583rem + 0.1852vw, 1.125rem);\n  --step-1: clamp(1.2rem, 1.1312rem + 0.3056vw, 1.4063rem);\n  --step-2: clamp(1.44rem, 1.3341rem + 0.4708vw, 1.7578rem);\n  --step-3: clamp(1.728rem, 1.5716rem + 0.6952vw, 2.1973rem);\n  --step-4: clamp(2.0736rem, 1.8493rem + 0.997vw, 2.7466rem);\n  --step-5: clamp(2.4883rem, 2.1734rem + 1.3999vw, 3.4332rem);\n  --step-6: clamp(2.986rem, 2.5508rem + 1.9341vw, 4.2915rem);\n  --step-7: clamp(3.5832rem, 2.9894rem + 2.6389vw, 5.3644rem);\n\n  /* line-height and tracking per role */\n  --lh-body: 1.6; --lh-lead: 1.4; --lh-h3: 1.15; --lh-h2: 1.06; --lh-h1: 1; --lh-figure: 0.98;\n  --track-label: 0.1em; --track-h3: -0.01em; --track-h2: -0.02em; --track-h1: -0.03em;\n\n  /* spacing 360 -> 1440 */\n  --space-3xs: clamp(0.2rem, 0.1833rem + 0.0741vw, 0.25rem);\n  --space-2xs: clamp(0.4rem, 0.3667rem + 0.1481vw, 0.5rem);\n  --space-xs: clamp(0.6rem, 0.55rem + 0.2222vw, 0.75rem);\n  --space-s: clamp(0.8rem, 0.7333rem + 0.2963vw, 1rem);\n  --space-m: clamp(1.2rem, 1.1rem + 0.4444vw, 1.5rem);\n  --space-l: clamp(1.6rem, 1.4667rem + 0.5926vw, 2rem);\n  --space-xl: clamp(2.4rem, 2.2rem + 0.8889vw, 3rem);\n  --space-2xl: clamp(3.2rem, 2.9333rem + 1.1852vw, 4rem);\n  --space-3xl: clamp(4.8rem, 4.4rem + 1.7778vw, 6rem);\n  --space-4xl: clamp(6.4rem, 5.8667rem + 2.3704vw, 8rem);\n  --space-5xl: clamp(9.6rem, 8.8rem + 3.5556vw, 12rem);\n  --section-pad: var(--space-5xl); --section-pad-compact: var(--space-4xl);\n  --hit: 2.75rem; --hairline: 1px;\n\n  /* grid */\n  --cols: 4; --gutter: var(--space-s);\n  --margin: clamp(1.25rem, 0.8rem + 2vw, 3rem);\n  --container-wide: 1440px; --container-text: 60ch; --container-narrow: 38rem;\n\n  /* motion (values for the later animation spec) */\n  --ease-instrument: cubic-bezier(0.2, 0, 0, 1);\n  --dur-ui: 200ms; --dur-reveal: 600ms; --dur-weight-rule: 1200ms;\n}\n@media (min-width: 48rem) { :root { --cols: 8; } }\n@media (min-width: 64rem) { :root { --cols: 12; --gutter: var(--space-m); } }\n@media (prefers-reduced-motion: reduce) { :root { --dur-ui: 0ms; --dur-reveal: 0ms; --dur-weight-rule: 0ms; } }\n"}], "grading": {"expectations": [{"text": "A creative direction file exists in studio/ containing a one-sentence concept specific to Aster (engineered, quiet / precision instrument), not a generic tagline", "passed": true, "evidence": "CREATIVE_DIRECTION.md concept 'Measured, not shouted' \u2014 the C1 as a precision instrument speaking in measurements and materials"}, {"text": "The palette lists hex values with roles AND contrast ratios that were actually computed (a script or calculation is shown or run), with body text pairs at least 4.5:1", "passed": true, "evidence": "Palette measured with design-intelligence/scripts/contrast.mjs during the run; stated 15.1:1 ink/paper and 6.0:1 accent/paper; re-measured by grader: 15.09:1 and 6.01:1 (accurate)"}, {"text": "Every chosen font has its licence stated AND checked against a source during the run (npm/Fontsource licence field, Google Fonts/OFL, Fontshare API or licence page), and all are free for commercial use", "passed": true, "evidence": "TYPOGRAPHY_SYSTEM.md: Newsreader + Geist, 'OFL-1.1 [M: npm view returned OFL-1.1; LICENSE file in the tarball]'; Fontshare faces explicitly held back because licence page couldn't be re-read"}, {"text": "The typography system defines a fluid type scale using clamp() values with explicit min/max viewport assumptions, plus line-height and letter-spacing per step", "passed": true, "evidence": "TYPOGRAPHY_SYSTEM.md: 11 clamp() values generated with type-scale.mjs (min 360 / max 1440 viewport), role, line-height and tracking per step"}, {"text": "A spacing/grid system defines a base unit or scale, grid columns per breakpoint, container width(s) and section spacing", "passed": true, "evidence": "SPACING_SYSTEM.md: 8px base, 11-step fluid scale, 4/8/12 columns at 48/64rem, containers wide 1440px / text 60ch / narrow 38rem, section padding, 3 protected rests"}, {"text": "Motion guidance includes durations/easing and an explicit prefers-reduced-motion behaviour", "passed": true, "evidence": "CREATIVE_DIRECTION.md: motion durations/eases + 'Reduced motion: every reveal becomes an instant final state; the weight rule renders at 10.9 immediately'"}, {"text": "The direction includes an explicit list of things deliberately not done (e.g. avoiding sporty/extreme-sports clich\u00e9s)", "passed": true, "evidence": "CREATIVE_DIRECTION.md \u00a7'Deliberately not doing': speed lines, performance language, wattage hero claims, 3D/WebGL, parallax, countdowns"}, {"text": "No website implementation code (components, pages, CSS for sections) was created \u2014 only direction/system documents (and optionally a token CSS file)", "passed": true, "evidence": "Only studio/*.md docs + tokens.draft.css; no components/pages (find *.tsx/*.html \u2192 none)"}], "summary": {"passed": 8, "failed": 0, "total": 8, "pass_rate": 1.0}}}, {"id": "sprint-direction-and-type-system-without_skill", "prompt": "We're Aster Cycles, a 14-person e-bike maker in Rotterdam. In March we launch the Aster C1, a \u20ac6,200 carbon commuter e-bike (10.9 kg, belt drive, integrated lights). Audience: design-minded city commuters 30-50 who'd never buy \"sporty\" gear \u2014 they read Monocle, they care about craft and calm. I want the launch page to feel engineered and quiet, like a precision instrument, not an extreme-sports ad. We have no fonts budget, so everything has to be free for commercial use. Before anyone codes anything, give me the creative direction and the typography + spacing system for a single launch page, as files in a studio/ folder. Don't build the site yet.", "eval_id": null, "outputs": [{"name": "studio/creative-direction.md", "type": "text", "content": "# Aster C1 launch page: creative direction\n\nStatus: proposal for approval. No site code exists yet.\n\n## 1. The idea: \"A quiet instrument\"\nThe C1 is sold the way a good watch or a Leica is sold: by restraint and by evidence. The page should feel like a well-made technical object. It is calm and exact, and nothing on it is shouting.\n\nOne-line brief for everyone on the project: **say less, show the part, print the number.**\n\nWhy this works for the audience: design-minded 30-50 commuters (Monocle readers) distrust adrenaline. They respond to craft, material honesty, and confidence that doesn't need volume. At EUR 6,200 the page must justify the price through precision, not hype.\n\n## 2. Tone of voice\n- Declarative, short sentences, no exclamation marks, no \"unleash\", \"crush\", \"beast\", \"adventure\".\n- Specifics over adjectives: \"10.9 kg\" beats \"ultra-light\".\n- Dutch understatement. Dry is allowed, jokes are not.\n- Sample headline: \"Ten point nine kilograms. Nothing to maintain.\" Alt: \"The quiet way across the city.\"\n- Sample label: \"Belt drive. No oil, no noise, no stained trousers.\"\n\n## 3. Visual principles\n1. **Quiet.** One idea per screen. Lots of empty space. Maximum ~3 type sizes visible at once.\n2. **Engineered.** Visible grid, hairline rules, small tabular spec labels (like a drawing's title block). Numbers are set in monospace with tabular figures.\n3. **Material.** Carbon weave, belt, lights, shown in macro, evenly lit, neutral. Photography is documentary, not heroic: city mornings, overcast light, no motion blur, no jumps, no riders in lycra.\n4. **Slow.** Motion, if any, is a gentle fade or a 400-600 ms ease. No parallax spectacle, no autoplay sound. Respect prefers-reduced-motion.\n\n## 4. Colour (small palette, one accent)\n| Role | Name | Hex | Notes |\n|---|---|---|---|\n| Ground | Paper | #F2F0EB | warm off-white, default background |\n| Ground alt | Fog | #E4E2DC | section alternation, cards |\n| Text | Graphite | #1B1C1E | 15.6:1 on Paper |\n| Secondary text | Slate | #5A5D62 | 5.9:1 on Paper (AA) |\n| Rules | Hairline | #C9C6BE | 1px dividers |\n| Dark ground | Carbon | #121314 | one or two inverted sections (the frame, the lights) |\n| Accent | Signal | #D8431F | used sparingly: one CTA, one dot, the lights. Only on Paper/Carbon with large text or non-text use; use Graphite text on it never; check 4.5:1 before using as text (it is 4.3:1 on Paper, so text use is limited to 24px+ or bold 19px+) |\n\nRule: Signal appears at most twice per viewport.\n\n## 5. Page structure (single page, in order)\n1. Hero: product on Paper, one headline, price and \"Reserve\" link. Spec strip: 10.9 kg / Carbon / Belt / Integrated lights.\n2. The thesis: two sentences, large serif, lots of space.\n3. Weight: 10.9 kg, one big figure, comparison in a quiet table.\n4. Frame: carbon macro, dark section.\n5. Belt drive: why no chain, service interval, silence.\n6. Lights: integrated, shown at dusk, dark section.\n7. Specification: full table, mono labels.\n8. Made in Rotterdam: the 14 people, workshop, honesty about batch size.\n9. Reserve / order: price EUR 6,200, deposit and delivery March, test-ride booking, FAQ.\n10. Footer: contact, legal.\n\nClaims such as weight, range and motor specs must come from Aster engineering; placeholders are marked [TBC] in copy later.\n\n## 6. Do / Don't\nDo: generous margins, left-aligned text, real numbers, one CTA style.\nDon't: gradients, glows, italic-all-caps, diagonal cuts, stock cyclists, countdown timers, \"limited!\" pressure, emoji, more than two weights per family on screen.\n\n## 7. Assumptions (no questions asked this run)\n- Launch is March 2027, page is in English first; Dutch to follow (type system supports Dutch diacritics and long compound words, see type-system.md).\n- Single page, static or lightly dynamic; performance and accessibility matter more than effects.\n- Brand mark exists and is supplied; it is not redesigned here.\n- Photography will be commissioned or shot in-house; until then placeholders are neutral grey boxes with correct aspect ratios.\n- EU audience: fonts are self-hosted (no Google Fonts CDN calls) to avoid GDPR exposure and to speed loading.\n- Reservation/payment is handled by an existing provider; out of scope.\n"}, {"name": "studio/tokens.css", "type": "text", "content": "/* Aster C1 launch page: design tokens. Reference only; not wired to a site yet. */\n:root {\n  /* colour */\n  --paper: #F2F0EB; --fog: #E4E2DC; --graphite: #1B1C1E; --slate: #5A5D62;\n  --hairline: #C9C6BE; --carbon: #121314; --signal: #D8431F;\n\n  /* families */\n  --font-display: \"Newsreader\", \"Iowan Old Style\", Georgia, serif;\n  --font-body: \"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif;\n  --font-mono: \"IBM Plex Mono\", ui-monospace, \"SF Mono\", Menlo, monospace;\n\n  /* fluid type: clamp(min @375px, preferred, max @1440px) */\n  --step-display: clamp(2.75rem, 1.66rem + 4.58vw, 7rem);\n  --step-h1: clamp(2.25rem, 1.58rem + 2.82vw, 4rem);\n  --step-h2: clamp(1.75rem, 1.4rem + 1.13vw, 2.5rem);\n  --step-h3: clamp(1.3125rem, 1.14rem + 0.47vw, 1.625rem);\n  --step-lede: clamp(1.3125rem, 1.14rem + 0.47vw, 1.625rem);\n  --step-body: clamp(1.125rem, 1.1rem + 0.1vw, 1.1875rem);\n  --step-small: 0.9375rem;\n  --step-label: clamp(0.75rem, 0.73rem + 0.08vw, 0.8125rem);\n  --step-figure: clamp(1.125rem, 1rem + 0.37vw, 1.375rem);\n\n  /* spacing (8px base, rem) */\n  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 1rem; --space-4: 1.5rem;\n  --space-5: 2rem; --space-6: 3rem; --space-7: 4.5rem; --space-8: 7rem; --space-9: 10rem;\n  --section-y: clamp(4.5rem, 2.6rem + 8vw, 10rem);\n\n  /* layout */\n  --margin: clamp(20px, 5vw, 80px);\n  --gutter: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);\n  --max-width: 80rem;\n  --measure-body: 36rem; --measure-lede: 44rem;\n  --radius: 2px; --rule: 1px solid var(--hairline);\n}\n\nbody { background: var(--paper); color: var(--graphite); font: 400 var(--step-body)/1.6 var(--font-body); text-wrap: pretty; hyphens: auto; }\n.display { font: 300 var(--step-display)/1.02 var(--font-display); letter-spacing: -0.02em; text-wrap: balance; }\nh1 { font: 300 var(--step-h1)/1.08 var(--font-display); letter-spacing: -0.015em; text-wrap: balance; }\nh2 { font: 400 var(--step-h2)/1.15 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }\nh3 { font: 500 var(--step-h3)/1.3 var(--font-body); }\n.lede { font: 300 var(--step-lede)/1.4 var(--font-display); max-width: var(--measure-lede); }\n.small { font-size: var(--step-small); line-height: 1.5; color: var(--slate); }\n.label { font: 500 var(--step-label)/1.4 var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--slate); }\n.figure { font: 400 var(--step-figure)/1.3 var(--font-mono); font-variant-numeric: tabular-nums; }\np { max-width: var(--measure-body); }\n@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }\n"}, {"name": "studio/type-system.md", "type": "text", "content": "# Aster C1: typography and spacing system\n\n## 1. Fonts (all SIL Open Font License 1.1, free for commercial web use, embedding and self-hosting)\n| Role | Family | Why | Weights used |\n|---|---|---|---|\n| Display / headlines | **Newsreader** (Production Type) | Editorial serif with optical sizing; at large sizes and light weight it reads Monocle-calm, not fashion-loud | 300, 400 (opsz axis) |\n| Body / UI | **Hanken Grotesk** | Neutral, slightly warm grotesque, very legible at 17-19 px, no \"tech startup\" tics | 400, 500 |\n| Specs / numbers / labels | **IBM Plex Mono** | Precise, instrument-panel feel, tabular by nature, supports Dutch diacritics | 400, 500 |\n\nSources: Google Fonts repository (OFL files), or fontsource npm packages. Keep each family's OFL.txt in /fonts/licenses/. Do not substitute Adobe/Typekit or paid fonts.\n\nDelivery:\n- Self-host WOFF2, subset to Latin + Latin Extended-A (covers Dutch, plus French/German for later), `font-display: swap`.\n- Use variable files where available (Newsreader, Hanken Grotesk). Plex Mono as two static files (400, 500).\n- Preload only the hero headline face (Newsreader) and body regular. Total font budget target: under 150 KB.\n- Fallback stacks, with size-adjust metrics to limit layout shift:\n  - Display: `\"Newsreader\", \"Iowan Old Style\", Georgia, serif`\n  - Body: `\"Hanken Grotesk\", system-ui, -apple-system, \"Segoe UI\", sans-serif`\n  - Mono: `\"IBM Plex Mono\", ui-monospace, \"SF Mono\", Menlo, monospace`\n\nRejected: Inter (default-looking), Playfair (too fashion), Space Grotesk/JetBrains (too techy/sporty), paid options (Monotype etc.; no budget).\n\n## 2. Type scale\nBase 18 px (1.125rem) on mobile, 19 px on desktop. Ratio 1.250 (major third) on mobile widening to 1.333 (perfect fourth) on desktop via fluid clamp(). Steps are named; tokens in tokens.css.\n\n| Token | Role | Mobile (375) | Desktop (1440) | Family / weight | Line height | Tracking |\n|---|---|---|---|---|---|---|\n| display | hero headline, big figure | 44 px | 112 px | Newsreader 300 | 1.02 | -0.02em |\n| h1 | section thesis | 36 px | 64 px | Newsreader 300 | 1.08 | -0.015em |\n| h2 | section heading | 28 px | 40 px | Newsreader 400 | 1.15 | -0.01em |\n| h3 | sub-heading | 21 px | 26 px | Hanken 500 | 1.3 | 0 |\n| lede | intro paragraph | 21 px | 26 px | Newsreader 300 | 1.4 | 0 |\n| body | paragraphs | 18 px | 19 px | Hanken 400 | 1.6 | 0 |\n| small | captions, footnotes | 15 px | 15 px | Hanken 400 | 1.5 | 0.005em |\n| label | spec labels, nav | 12 px | 13 px | Plex Mono 500, uppercase | 1.4 | 0.08em |\n| figure | spec numbers | 18 px | 22 px | Plex Mono 400, tabular-nums | 1.3 | 0 |\n\nRules:\n- Measure: body 60-68 characters (`max-width: 36rem`); lede up to 44rem; headings up to 18-22 ch for display.\n- Never below 15 px for reading text; 12-13 px only for uppercase mono labels.\n- Left aligned, ragged right. No justified text. `text-wrap: balance` on headings, `pretty` on body.\n- Hyphenation on for body (`hyphens: auto`, `lang` attribute set), which matters for Dutch compounds.\n- Use `font-variant-numeric: tabular-nums` for all specs; `font-feature-settings: \"ss01\"` not needed.\n- Max two weights per family on screen. Serif headings are never bold.\n- Units in specs: thin space between number and unit (10.9 kg, EUR 6,200 written as \"\u20ac6,200\"; Dutch variant \"\u20ac 6.200\").\n- Contrast: all text pairings in creative-direction.md meet WCAG AA; Slate only for secondary text of 15 px+.\n\n## 3. Spacing system\nBase unit **8 px** with a 4 px half-step for tight UI. Space tokens are rem-based so they scale with user font settings.\n\n| Token | px | Use |\n|---|---|---|\n| space-1 | 4 | icon gaps, label-to-value |\n| space-2 | 8 | tight stacks |\n| space-3 | 16 | paragraph gap, related items |\n| space-4 | 24 | card padding, grid gutter (mobile) |\n| space-5 | 32 | grid gutter (desktop), heading-to-body |\n| space-6 | 48 | between groups |\n| space-7 | 72 | small section padding |\n| space-8 | 112 | section padding (mobile 72, desktop 160 via fluid `section-y`) |\n| space-9 | 160 | hero / thesis breathing room |\n\nVertical rhythm: body line-height 1.6 on 18-19 px is about 29-30 px; paragraph gap is 16 px and section spacing steps by 8 px multiples. Strict baseline-grid alignment is not enforced; consistency of tokens is.\n\nRules of proximity: heading-to-its-text is smaller than text-to-next-heading (space-3 vs space-6 minimum). Related items closer than unrelated items, always.\n\n## 4. Layout grid\n- 12 columns on desktop (>= 1024), 8 on tablet (>= 640), 4 on mobile.\n- Gutter: 24 px mobile, 32 px desktop. Outer margin: clamp(20px, 5vw, 80px).\n- Content max width 1280 px; text blocks occupy columns 1-6 or 4-9, never full width. Asymmetry (text offset, image bleeding) is the main compositional device; whitespace is intentional.\n- Hairline rules (1 px Hairline colour) separate spec rows and sections; no boxes with shadows. Radius 0 on images, 2 px on buttons/inputs.\n- Breakpoints: 640, 1024, 1440 (min-width, mobile-first).\n\n## 5. Components in brief (to be built later)\n- Button: Graphite fill, Paper text, label style, 48 px high (touch target), 24 px horizontal padding; hover inverts; focus ring 2 px Signal offset 2 px. One secondary: text link with underline offset 0.25em.\n- Spec row: label (mono, Slate) left, figure (mono, Graphite) right, 1 px rule beneath, row padding space-3.\n- Link: underline always visible in body copy.\n\n## 6. Accessibility / performance checks before launch\n- 200% zoom and 320 px width without horizontal scroll; rem-based sizes.\n- Visible focus states; reduced-motion respected.\n- LCP element is the hero image or headline; headline face preloaded.\n- Verify the fluid sizes at 375, 768, 1024, 1440 and 1920 px.\n\nImplementation tokens: see tokens.css.\n"}], "grading": {"expectations": [{"text": "A creative direction file exists in studio/ containing a one-sentence concept specific to Aster (engineered, quiet / precision instrument), not a generic tagline", "passed": true, "evidence": "creative-direction.md \u00a71 'A quiet instrument' \u2014 tied to the brief's precision-instrument framing"}, {"text": "The palette lists hex values with roles AND contrast ratios that were actually computed (a script or calculation is shown or run), with body text pairs at least 4.5:1", "passed": false, "evidence": "No computation in the run (2 tool calls, both file writes). Stated ratios are inaccurate when measured with contrast.mjs: Graphite/Paper claimed 15.6:1 \u2192 actual 14.97:1; Signal/Paper claimed 4.3:1 \u2192 actual 3.89:1"}, {"text": "Every chosen font has its licence stated AND checked against a source during the run (npm/Fontsource licence field, Google Fonts/OFL, Fontshare API or licence page), and all are free for commercial use", "passed": false, "evidence": "type-system.md states 'all SIL Open Font License 1.1' (Newsreader, Hanken Grotesk, IBM Plex Mono) \u2014 correct in fact, but asserted from memory: no npm/API/licence-page check in the transcript (2 tool calls, both writes)"}, {"text": "The typography system defines a fluid type scale using clamp() values with explicit min/max viewport assumptions, plus line-height and letter-spacing per step", "passed": true, "evidence": "type-system.md table: min/max px per step, Newsreader weights, line-height and tracking per step; tokens.css clamp() with '375px \u2026 1440px' assumption"}, {"text": "A spacing/grid system defines a base unit or scale, grid columns per breakpoint, container width(s) and section spacing", "passed": true, "evidence": "type-system.md \u00a73/\u00a74: 8px scale (space-1..8), section-y, 12/8/4 columns with breakpoints, gutters, 1280px max width"}, {"text": "Motion guidance includes durations/easing and an explicit prefers-reduced-motion behaviour", "passed": false, "evidence": "creative-direction.md principle 4: '400-600 ms ease \u2026 Respect prefers-reduced-motion' \u2014 durations present but no reduced-motion BEHAVIOUR specified"}, {"text": "The direction includes an explicit list of things deliberately not done (e.g. avoiding sporty/extreme-sports clich\u00e9s)", "passed": true, "evidence": "creative-direction.md \u00a76 Do/Don't: 'Don't: gradients, glows \u2026 stock cyclists, countdown timers'"}, {"text": "No website implementation code (components, pages, CSS for sections) was created \u2014 only direction/system documents (and optionally a token CSS file)", "passed": true, "evidence": "Only creative-direction.md, type-system.md, tokens.css (reference tokens) \u2014 no components/pages"}], "summary": {"passed": 5, "failed": 3, "total": 8, "pass_rate": 0.625}}}], "previous_feedback": {}, "previous_outputs": {}, "benchmark": {"metadata": {"skill_name": "web-studio", "skill_path": "\u003cpath/to/skill>", "executor_model": "\u003cmodel-name>", "analyzer_model": "\u003cmodel-name>", "timestamp": "2026-11-15T12:50:58Z", "evals_run": ["sprint-direction-and-type-system"], "runs_per_configuration": 1}, "runs": [{"eval_id": "sprint-direction-and-type-system", "eval_name": "sprint-direction-and-type-system", "configuration": "with_skill", "run_number": 1, "result": {"pass_rate": 1.0, "passed": 8, "failed": 0, "total": 8, "time_seconds": 204.1, "tokens": 120130, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "A creative direction file exists in studio/ containing a one-sentence concept specific to Aster (engineered, quiet / precision instrument), not a generic tagline", "passed": true, "evidence": "CREATIVE_DIRECTION.md concept 'Measured, not shouted' \u2014 the C1 as a precision instrument speaking in measurements and materials"}, {"text": "The palette lists hex values with roles AND contrast ratios that were actually computed (a script or calculation is shown or run), with body text pairs at least 4.5:1", "passed": true, "evidence": "Palette measured with design-intelligence/scripts/contrast.mjs during the run; stated 15.1:1 ink/paper and 6.0:1 accent/paper; re-measured by grader: 15.09:1 and 6.01:1 (accurate)"}, {"text": "Every chosen font has its licence stated AND checked against a source during the run (npm/Fontsource licence field, Google Fonts/OFL, Fontshare API or licence page), and all are free for commercial use", "passed": true, "evidence": "TYPOGRAPHY_SYSTEM.md: Newsreader + Geist, 'OFL-1.1 [M: npm view returned OFL-1.1; LICENSE file in the tarball]'; Fontshare faces explicitly held back because licence page couldn't be re-read"}, {"text": "The typography system defines a fluid type scale using clamp() values with explicit min/max viewport assumptions, plus line-height and letter-spacing per step", "passed": true, "evidence": "TYPOGRAPHY_SYSTEM.md: 11 clamp() values generated with type-scale.mjs (min 360 / max 1440 viewport), role, line-height and tracking per step"}, {"text": "A spacing/grid system defines a base unit or scale, grid columns per breakpoint, container width(s) and section spacing", "passed": true, "evidence": "SPACING_SYSTEM.md: 8px base, 11-step fluid scale, 4/8/12 columns at 48/64rem, containers wide 1440px / text 60ch / narrow 38rem, section padding, 3 protected rests"}, {"text": "Motion guidance includes durations/easing and an explicit prefers-reduced-motion behaviour", "passed": true, "evidence": "CREATIVE_DIRECTION.md: motion durations/eases + 'Reduced motion: every reveal becomes an instant final state; the weight rule renders at 10.9 immediately'"}, {"text": "The direction includes an explicit list of things deliberately not done (e.g. avoiding sporty/extreme-sports clich\u00e9s)", "passed": true, "evidence": "CREATIVE_DIRECTION.md \u00a7'Deliberately not doing': speed lines, performance language, wattage hero claims, 3D/WebGL, parallax, countdowns"}, {"text": "No website implementation code (components, pages, CSS for sections) was created \u2014 only direction/system documents (and optionally a token CSS file)", "passed": true, "evidence": "Only studio/*.md docs + tokens.draft.css; no components/pages (find *.tsx/*.html \u2192 none)"}], "notes": []}, {"eval_id": "sprint-direction-and-type-system", "eval_name": "sprint-direction-and-type-system", "configuration": "without_skill", "run_number": 1, "result": {"pass_rate": 0.625, "passed": 5, "failed": 3, "total": 8, "time_seconds": 55.4, "tokens": 63881, "tool_calls": 0, "errors": 0}, "expectations": [{"text": "A creative direction file exists in studio/ containing a one-sentence concept specific to Aster (engineered, quiet / precision instrument), not a generic tagline", "passed": true, "evidence": "creative-direction.md \u00a71 'A quiet instrument' \u2014 tied to the brief's precision-instrument framing"}, {"text": "The palette lists hex values with roles AND contrast ratios that were actually computed (a script or calculation is shown or run), with body text pairs at least 4.5:1", "passed": false, "evidence": "No computation in the run (2 tool calls, both file writes). Stated ratios are inaccurate when measured with contrast.mjs: Graphite/Paper claimed 15.6:1 \u2192 actual 14.97:1; Signal/Paper claimed 4.3:1 \u2192 actual 3.89:1"}, {"text": "Every chosen font has its licence stated AND checked against a source during the run (npm/Fontsource licence field, Google Fonts/OFL, Fontshare API or licence page), and all are free for commercial use", "passed": false, "evidence": "type-system.md states 'all SIL Open Font License 1.1' (Newsreader, Hanken Grotesk, IBM Plex Mono) \u2014 correct in fact, but asserted from memory: no npm/API/licence-page check in the transcript (2 tool calls, both writes)"}, {"text": "The typography system defines a fluid type scale using clamp() values with explicit min/max viewport assumptions, plus line-height and letter-spacing per step", "passed": true, "evidence": "type-system.md table: min/max px per step, Newsreader weights, line-height and tracking per step; tokens.css clamp() with '375px \u2026 1440px' assumption"}, {"text": "A spacing/grid system defines a base unit or scale, grid columns per breakpoint, container width(s) and section spacing", "passed": true, "evidence": "type-system.md \u00a73/\u00a74: 8px scale (space-1..8), section-y, 12/8/4 columns with breakpoints, gutters, 1280px max width"}, {"text": "Motion guidance includes durations/easing and an explicit prefers-reduced-motion behaviour", "passed": false, "evidence": "creative-direction.md principle 4: '400-600 ms ease \u2026 Respect prefers-reduced-motion' \u2014 durations present but no reduced-motion BEHAVIOUR specified"}, {"text": "The direction includes an explicit list of things deliberately not done (e.g. avoiding sporty/extreme-sports clich\u00e9s)", "passed": true, "evidence": "creative-direction.md \u00a76 Do/Don't: 'Don't: gradients, glows \u2026 stock cyclists, countdown timers'"}, {"text": "No website implementation code (components, pages, CSS for sections) was created \u2014 only direction/system documents (and optionally a token CSS file)", "passed": true, "evidence": "Only creative-direction.md, type-system.md, tokens.css (reference tokens) \u2014 no components/pages"}], "notes": []}], "run_summary": {"with_skill": {"pass_rate": {"mean": 1.0, "stddev": 0.0, "min": 1.0, "max": 1.0}, "time_seconds": {"mean": 204.1, "stddev": 0.0, "min": 204.1, "max": 204.1}, "tokens": {"mean": 120130.0, "stddev": 0.0, "min": 120130, "max": 120130}}, "without_skill": {"pass_rate": {"mean": 0.625, "stddev": 0.0, "min": 0.625, "max": 0.625}, "time_seconds": {"mean": 55.4, "stddev": 0.0, "min": 55.4, "max": 55.4}, "tokens": {"mean": 63881.0, "stddev": 0.0, "min": 63881, "max": 63881}}, "delta": {"pass_rate": "+0.38", "time_seconds": "+148.7", "tokens": "+56249"}}, "notes": ["Discriminating case: +37.5 points (8/8 vs 5/8).", "The three assertions only the skill passed are all verification behaviours: contrast computed with contrast.mjs (baseline's stated ratios were wrong when re-measured: 15.6 claimed vs 14.97 actual; accent 4.3 claimed vs 3.89 actual), font licences checked via npm during the run, and an explicit reduced-motion behaviour.", "Cost: with_skill used ~1.9x tokens (120k vs 64k) and ~3.7x wall time (204s vs 55s), and produced the full studio/ doc set (status, decisions, brief) \u2014 appropriate for a Sprint deliverable, heavier than strictly asked.", "Single run per configuration \u2014 no variance estimate."]}};
+
+    // ---- State ----
+    let feedbackMap = {};  // run_id -> feedback text
+    let currentIndex = 0;
+    let visitedRuns = new Set();
+
+    // ---- Init ----
+    async function init() {
+      // Load saved feedback from server — but only if this isn't a fresh
+      // iteration (indicated by previous_feedback being present). When
+      // previous feedback exists, the feedback.json on disk is stale from
+      // the prior iteration and should not pre-fill the textareas.
+      const hasPrevious = Object.keys(EMBEDDED_DATA.previous_feedback || {}).length > 0
+        || Object.keys(EMBEDDED_DATA.previous_outputs || {}).length > 0;
+      if (!hasPrevious) {
+        try {
+          const resp = await fetch("/api/feedback");
+          const data = await resp.json();
+          if (data.reviews) {
+            for (const r of data.reviews) feedbackMap[r.run_id] = r.feedback;
+          }
+        } catch { /* first run, no feedback yet */ }
+      }
+
+      document.getElementById("skill-name").textContent = EMBEDDED_DATA.skill_name;
+      showRun(0);
+
+      // Wire up feedback auto-save
+      const textarea = document.getElementById("feedback");
+      let saveTimeout = null;
+      textarea.addEventListener("input", () => {
+        clearTimeout(saveTimeout);
+        document.getElementById("feedback-status").textContent = "";
+        saveTimeout = setTimeout(() => saveCurrentFeedback(), 800);
+      });
+    }
+
+    // ---- Navigation ----
+    function navigate(delta) {
+      const newIndex = currentIndex + delta;
+      if (newIndex >= 0 && newIndex < EMBEDDED_DATA.runs.length) {
+        saveCurrentFeedback();
+        showRun(newIndex);
+      }
+    }
+
+    function updateNavButtons() {
+      document.getElementById("prev-btn").disabled = currentIndex === 0;
+      document.getElementById("next-btn").disabled =
+        currentIndex === EMBEDDED_DATA.runs.length - 1;
+    }
+
+    // ---- Show a run ----
+    function showRun(index) {
+      currentIndex = index;
+      const run = EMBEDDED_DATA.runs[index];
+
+      // Progress
+      document.getElementById("progress").textContent =
+        `${index + 1} of ${EMBEDDED_DATA.runs.length}`;
+
+      // Prompt
+      document.getElementById("prompt-text").textContent = run.prompt;
+
+      // Config badge
+      const badge = document.getElementById("config-badge");
+      const configMatch = run.id.match(/(with_skill|without_skill|new_skill|old_skill)/);
+      if (configMatch) {
+        const config = configMatch[1];
+        const isBaseline = config === "without_skill" || config === "old_skill";
+        badge.textContent = config.replace(/_/g, " ");
+        badge.className = "config-badge " + (isBaseline ? "config-baseline" : "config-primary");
+        badge.style.display = "inline-block";
+      } else {
+        badge.style.display = "none";
+      }
+
+      // Outputs
+      renderOutputs(run);
+
+      // Previous outputs
+      renderPrevOutputs(run);
+
+      // Grades
+      renderGrades(run);
+
+      // Previous feedback
+      const prevFb = (EMBEDDED_DATA.previous_feedback || {})[run.id];
+      const prevEl = document.getElementById("prev-feedback");
+      if (prevFb) {
+        document.getElementById("prev-feedback-text").textContent = prevFb;
+        prevEl.style.display = "block";
+      } else {
+        prevEl.style.display = "none";
+      }
+
+      // Feedback
+      document.getElementById("feedback").value = feedbackMap[run.id] || "";
+      document.getElementById("feedback-status").textContent = "";
+
+      updateNavButtons();
+
+      // Track visited runs and promote done button when all visited
+      visitedRuns.add(index);
+      const doneBtn = document.getElementById("done-btn");
+      if (visitedRuns.size >= EMBEDDED_DATA.runs.length) {
+        doneBtn.classList.add("ready");
+      }
+
+      // Scroll main content to top
+      document.querySelector(".main").scrollTop = 0;
+    }
+
+    // ---- Render outputs ----
+    function renderOutputs(run) {
+      const container = document.getElementById("outputs-body");
+      container.innerHTML = "";
+
+      const outputs = run.outputs || [];
+      if (outputs.length === 0) {
+        container.innerHTML = '<div class="empty-state">No output files</div>';
+        return;
+      }
+
+      for (const file of outputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        // Always show file header with download link
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const content = document.createElement("div");
+        content.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          content.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          content.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          content.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(content, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          content.appendChild(a);
+        } else if (file.type === "error") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          pre.style.color = "var(--red)";
+          content.appendChild(pre);
+        }
+
+        fileDiv.appendChild(content);
+        container.appendChild(fileDiv);
+      }
+    }
+
+    // ---- XLSX rendering via SheetJS ----
+    function renderXlsx(container, b64Data) {
+      try {
+        const raw = Uint8Array.from(atob(b64Data), c => c.charCodeAt(0));
+        const wb = XLSX.read(raw, { type: "array" });
+
+        for (let i = 0; i < wb.SheetNames.length; i++) {
+          const sheetName = wb.SheetNames[i];
+          const ws = wb.Sheets[sheetName];
+
+          if (wb.SheetNames.length > 1) {
+            const sheetLabel = document.createElement("div");
+            sheetLabel.style.cssText =
+              "font-weight:600; font-size:0.8rem; color:#b0aea5; margin-top:0.5rem; margin-bottom:0.25rem;";
+            sheetLabel.textContent = "Sheet: " + sheetName;
+            container.appendChild(sheetLabel);
+          }
+
+          const htmlStr = XLSX.utils.sheet_to_html(ws, { editable: false });
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = htmlStr;
+          container.appendChild(wrapper);
+        }
+      } catch (err) {
+        container.textContent = "Error rendering spreadsheet: " + err.message;
+      }
+    }
+
+    // ---- Grades ----
+    function renderGrades(run) {
+      const section = document.getElementById("grades-section");
+      const content = document.getElementById("grades-content");
+
+      if (!run.grading) {
+        section.style.display = "none";
+        return;
+      }
+
+      const grading = run.grading;
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("grades-arrow").classList.remove("open");
+
+      const summary = grading.summary || {};
+      const expectations = grading.expectations || [];
+
+      let html = '<div style="padding: 1rem;">';
+
+      // Summary line
+      const passRate = summary.pass_rate != null
+        ? Math.round(summary.pass_rate * 100) + "%"
+        : "?";
+      const badgeClass = summary.pass_rate >= 0.8 ? "grade-pass" : summary.pass_rate >= 0.5 ? "" : "grade-fail";
+      html += '<div class="grades-summary">';
+      html += '<span class="grade-badge ' + badgeClass + '">' + passRate + '</span>';
+      html += '<span>' + escapeHtml(summary.passed || 0) + ' passed, ' + escapeHtml(summary.failed || 0) + ' failed of ' + escapeHtml(summary.total || 0) + '</span>';
+      html += '</div>';
+
+      // Assertions list
+      html += '<ul class="assertion-list">';
+      for (const exp of expectations) {
+        const statusClass = exp.passed ? "pass" : "fail";
+        const statusIcon = exp.passed ? "\u2713" : "\u2717";
+        html += '<li class="assertion-item">';
+        html += '<span class="assertion-status ' + statusClass + '">' + statusIcon + '</span>';
+        html += '<span>' + escapeHtml(exp.text) + '</span>';
+        if (exp.evidence) {
+          html += '<div class="assertion-evidence">' + escapeHtml(exp.evidence) + '</div>';
+        }
+        html += '</li>';
+      }
+      html += '</ul>';
+
+      html += '</div>';
+      content.innerHTML = html;
+    }
+
+    function toggleGrades() {
+      const content = document.getElementById("grades-content");
+      const arrow = document.getElementById("grades-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Previous outputs (collapsible) ----
+    function renderPrevOutputs(run) {
+      const section = document.getElementById("prev-outputs-section");
+      const content = document.getElementById("prev-outputs-content");
+      const prevOutputs = (EMBEDDED_DATA.previous_outputs || {})[run.id];
+
+      if (!prevOutputs || prevOutputs.length === 0) {
+        section.style.display = "none";
+        return;
+      }
+
+      section.style.display = "block";
+      // Reset to collapsed
+      content.classList.remove("open");
+      document.getElementById("prev-outputs-arrow").classList.remove("open");
+
+      // Render the files into the content area
+      content.innerHTML = "";
+      const wrapper = document.createElement("div");
+      wrapper.style.padding = "1rem";
+
+      for (const file of prevOutputs) {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "output-file";
+
+        const header = document.createElement("div");
+        header.className = "output-file-header";
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = file.name;
+        header.appendChild(nameSpan);
+        const dlBtn = document.createElement("a");
+        dlBtn.className = "dl-btn";
+        dlBtn.textContent = "Download";
+        dlBtn.download = file.name;
+        dlBtn.href = getDownloadUri(file);
+        header.appendChild(dlBtn);
+        fileDiv.appendChild(header);
+
+        const fc = document.createElement("div");
+        fc.className = "output-file-content";
+
+        if (file.type === "text") {
+          const pre = document.createElement("pre");
+          pre.textContent = file.content;
+          fc.appendChild(pre);
+        } else if (file.type === "image") {
+          const img = document.createElement("img");
+          img.src = file.data_uri;
+          img.alt = file.name;
+          fc.appendChild(img);
+        } else if (file.type === "pdf") {
+          const iframe = document.createElement("iframe");
+          iframe.src = file.data_uri;
+          fc.appendChild(iframe);
+        } else if (file.type === "xlsx") {
+          renderXlsx(fc, file.data_b64);
+        } else if (file.type === "binary") {
+          const a = document.createElement("a");
+          a.className = "download-link";
+          a.href = file.data_uri;
+          a.download = file.name;
+          a.textContent = "Download " + file.name;
+          fc.appendChild(a);
+        }
+
+        fileDiv.appendChild(fc);
+        wrapper.appendChild(fileDiv);
+      }
+
+      content.appendChild(wrapper);
+    }
+
+    function togglePrevOutputs() {
+      const content = document.getElementById("prev-outputs-content");
+      const arrow = document.getElementById("prev-outputs-arrow");
+      content.classList.toggle("open");
+      arrow.classList.toggle("open");
+    }
+
+    // ---- Feedback (saved to server -> feedback.json) ----
+    function saveCurrentFeedback() {
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // Build reviews array from map
+      const reviews = [];
+      for (const [run_id, feedback] of Object.entries(feedbackMap)) {
+        if (feedback.trim()) {
+          reviews.push({ run_id, feedback, timestamp: new Date().toISOString() });
+        }
+      }
+
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reviews, status: "in_progress" }),
+      }).then(() => {
+        document.getElementById("feedback-status").textContent = "Saved";
+      }).catch(() => {
+        // Static mode or server unavailable — no-op on auto-save,
+        // feedback will be downloaded on final submit
+        document.getElementById("feedback-status").textContent = "Will download on submit";
+      });
+    }
+
+    // ---- Done ----
+    function showDoneDialog() {
+      // Save current textarea to feedbackMap (but don't POST yet)
+      const run = EMBEDDED_DATA.runs[currentIndex];
+      const text = document.getElementById("feedback").value;
+      if (text.trim() === "") {
+        delete feedbackMap[run.id];
+      } else {
+        feedbackMap[run.id] = text;
+      }
+
+      // POST once with status: complete — include ALL runs so the model
+      // can distinguish "no feedback" (looks good) from "not reviewed"
+      const reviews = [];
+      const ts = new Date().toISOString();
+      for (const r of EMBEDDED_DATA.runs) {
+        reviews.push({ run_id: r.id, feedback: feedbackMap[r.id] || "", timestamp: ts });
+      }
+      const payload = JSON.stringify({ reviews, status: "complete" }, null, 2);
+      fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+      }).then(() => {
+        document.getElementById("done-overlay").classList.add("visible");
+      }).catch(() => {
+        // Server not available (static mode) — download as file
+        const blob = new Blob([payload], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "feedback.json";
+        a.click();
+        URL.revokeObjectURL(url);
+        document.getElementById("done-overlay").classList.add("visible");
+      });
+    }
+
+    function closeDoneDialog() {
+      // Reset status back to in_progress
+      saveCurrentFeedback();
+      document.getElementById("done-overlay").classList.remove("visible");
+    }
+
+    // ---- Toast ----
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("visible");
+      setTimeout(() => toast.classList.remove("visible"), 2000);
+    }
+
+    // ---- Keyboard nav ----
+    document.addEventListener("keydown", (e) => {
+      // Don't capture when typing in textarea
+      if (e.target.tagName === "TEXTAREA") return;
+
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        navigate(-1);
+      } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        navigate(1);
+      }
+    });
+
+    // ---- Util ----
+    function getDownloadUri(file) {
+      if (file.data_uri) return file.data_uri;
+      if (file.data_b64) return "data:application/octet-stream;base64," + file.data_b64;
+      if (file.type === "text") return "data:text/plain;charset=utf-8," + encodeURIComponent(file.content);
+      return "#";
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML.replace(/"/g, "&quot;");
+    }
+
+    // ---- View switching ----
+    function switchView(view) {
+      document.querySelectorAll(".view-tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".view-panel").forEach(p => p.classList.remove("active"));
+      document.querySelector(`[onclick="switchView('${view}')"]`).classList.add("active");
+      document.getElementById("panel-" + view).classList.add("active");
+    }
+
+    // ---- Benchmark rendering ----
+    function renderBenchmark() {
+      const data = EMBEDDED_DATA.benchmark;
+      if (!data) return;
+
+      // Show the tabs
+      document.getElementById("view-tabs").style.display = "flex";
+
+      const container = document.getElementById("benchmark-content");
+      const summary = data.run_summary || {};
+      const metadata = data.metadata || {};
+      const notes = data.notes || [];
+
+      let html = "";
+
+      // Header
+      html += "<h2 style='font-family: Poppins, sans-serif; margin-bottom: 0.5rem;'>Benchmark Results</h2>";
+      html += "<p style='color: var(--text-muted); font-size: 0.875rem; margin-bottom: 1.25rem;'>";
+      if (metadata.skill_name) html += "<strong>" + escapeHtml(metadata.skill_name) + "</strong> &mdash; ";
+      if (metadata.timestamp) html += escapeHtml(metadata.timestamp) + " &mdash; ";
+      if (metadata.evals_run) html += "Evals: " + escapeHtml(metadata.evals_run.join(", ")) + " &mdash; ";
+      html += escapeHtml(metadata.runs_per_configuration || "?") + (metadata.runs_per_configuration === 1 ? " run" : " runs") + " per configuration";
+      html += "</p>";
+
+      // Summary table
+      html += '<table class="benchmark-table">';
+
+      function fmtStat(stat, pct) {
+        if (!stat) return "—";
+        const suffix = pct ? "%" : "";
+        const m = pct ? (stat.mean * 100).toFixed(0) : stat.mean.toFixed(1);
+        const s = pct ? (stat.stddev * 100).toFixed(0) : stat.stddev.toFixed(1);
+        return m + suffix + " ± " + s + suffix;
+      }
+
+      function deltaClass(val) {
+        if (!val) return "";
+        const n = parseFloat(val);
+        if (n > 0) return "benchmark-delta-positive";
+        if (n < 0) return "benchmark-delta-negative";
+        return "";
+      }
+
+      // Discover config names dynamically (everything except "delta")
+      const configs = Object.keys(summary).filter(k => k !== "delta");
+      const configA = configs[0] || "config_a";
+      const configB = configs[1] || "config_b";
+      const labelA = configA.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const labelB = configB.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      const a = summary[configA] || {};
+      const b = summary[configB] || {};
+      const delta = summary.delta || {};
+      // With a single configuration there is nothing to compare: only its column is shown
+      const compare = cells => configs.length >= 2 ? cells : "";
+
+      html += "<thead><tr><th>Metric</th><th>" + escapeHtml(labelA) + "</th>" + compare("<th>" + escapeHtml(labelB) + "</th><th>Delta</th>") + "</tr></thead>";
+      html += "<tbody>";
+
+      html += "<tr><td><strong>Pass Rate</strong></td>";
+      html += "<td>" + fmtStat(a.pass_rate, true) + "</td>";
+      html += compare("<td>" + fmtStat(b.pass_rate, true) + "</td>");
+      html += compare('<td class="' + deltaClass(delta.pass_rate) + '">' + escapeHtml(delta.pass_rate || "—") + "</td>") + "</tr>";
+
+      // Time (only show row if data exists)
+      if (a.time_seconds || b.time_seconds) {
+        html += "<tr><td><strong>Time (s)</strong></td>";
+        html += "<td>" + fmtStat(a.time_seconds, false) + "</td>";
+        html += compare("<td>" + fmtStat(b.time_seconds, false) + "</td>");
+        html += compare('<td class="' + deltaClass(delta.time_seconds) + '">' + escapeHtml(delta.time_seconds ? delta.time_seconds + "s" : "—") + "</td>") + "</tr>";
+      }
+
+      // Tokens (only show row if data exists)
+      if (a.tokens || b.tokens) {
+        html += "<tr><td><strong>Tokens</strong></td>";
+        html += "<td>" + fmtStat(a.tokens, false) + "</td>";
+        html += compare("<td>" + fmtStat(b.tokens, false) + "</td>");
+        html += compare('<td class="' + deltaClass(delta.tokens) + '">' + escapeHtml(delta.tokens || "—") + "</td>") + "</tr>";
+      }
+
+      html += "</tbody></table>";
+
+      // Per-eval breakdown (if runs data available)
+      const runs = data.runs || [];
+      if (runs.length > 0) {
+        // Numeric ids first, then ids that are names
+        const rank = id => typeof id === "number" ? 0 : 1;
+        const evalIds = [...new Set(runs.map(r => r.eval_id))].sort((a, b) =>
+          rank(a) - rank(b) || (rank(a) ? String(a).localeCompare(String(b)) : a - b));
+
+        html += "<h3 style='font-family: Poppins, sans-serif; margin-bottom: 0.75rem;'>Per-Eval Breakdown</h3>";
+
+        const hasTime = runs.some(r => r.result && r.result.time_seconds != null);
+        const hasErrors = runs.some(r => r.result && r.result.errors > 0);
+
+        for (const evalId of evalIds) {
+          const evalRuns = runs.filter(r => r.eval_id === evalId);
+          const evalName = evalRuns[0] && evalRuns[0].eval_name ? evalRuns[0].eval_name : "Eval " + evalId;
+
+          html += "<h4 style='font-family: Poppins, sans-serif; margin: 1rem 0 0.5rem; color: var(--text);'>" + escapeHtml(evalName) + "</h4>";
+          html += '<table class="benchmark-table">';
+          html += "<thead><tr><th>Config</th><th>Run</th><th>Pass Rate</th>";
+          if (hasTime) html += "<th>Time (s)</th>";
+          if (hasErrors) html += "<th>Crashes During Execution</th>";
+          html += "</tr></thead>";
+          html += "<tbody>";
+
+          // Group by config and render with average rows
+          const configGroups = [...new Set(evalRuns.map(r => r.configuration))];
+          for (let ci = 0; ci < configGroups.length; ci++) {
+            const config = configGroups[ci];
+            const configRuns = evalRuns.filter(r => r.configuration === config);
+            if (configRuns.length === 0) continue;
+
+            const rowClass = ci === 0 ? "benchmark-row-with" : "benchmark-row-without";
+            const configLabel = escapeHtml(config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase()));
+
+            for (const run of configRuns) {
+              const r = run.result || {};
+              const prClass = r.pass_rate >= 0.8 ? "benchmark-delta-positive" : r.pass_rate < 0.5 ? "benchmark-delta-negative" : "";
+              html += '<tr class="' + rowClass + '">';
+              html += "<td>" + configLabel + "</td>";
+              html += "<td>" + escapeHtml(run.run_number) + "</td>";
+              html += '<td class="' + prClass + '">' + ((r.pass_rate || 0) * 100).toFixed(0) + "% (" + escapeHtml(r.passed || 0) + "/" + escapeHtml(r.total || 0) + ")</td>";
+              if (hasTime) html += "<td>" + (r.time_seconds != null ? r.time_seconds.toFixed(1) : "—") + "</td>";
+              if (hasErrors) html += "<td>" + escapeHtml(r.errors || 0) + "</td>";
+              html += "</tr>";
+            }
+
+            // Average row
+            const rates = configRuns.map(r => (r.result || {}).pass_rate || 0);
+            const avgRate = rates.reduce((a, b) => a + b, 0) / rates.length;
+            const avgPrClass = avgRate >= 0.8 ? "benchmark-delta-positive" : avgRate < 0.5 ? "benchmark-delta-negative" : "";
+            html += '<tr class="benchmark-row-avg ' + rowClass + '">';
+            html += "<td>" + configLabel + "</td>";
+            html += "<td>Avg</td>";
+            html += '<td class="' + avgPrClass + '">' + (avgRate * 100).toFixed(0) + "%</td>";
+            if (hasTime) {
+              const times = configRuns.map(r => (r.result || {}).time_seconds).filter(t => t != null);
+              html += "<td>" + (times.length ? (times.reduce((a, b) => a + b, 0) / times.length).toFixed(1) : "—") + "</td>";
+            }
+            if (hasErrors) html += "<td></td>";
+            html += "</tr>";
+          }
+          html += "</tbody></table>";
+
+          // Per-assertion detail for this eval
+          const runsWithExpectations = {};
+          for (const config of configGroups) {
+            runsWithExpectations[config] = evalRuns.filter(r => r.configuration === config && r.expectations && r.expectations.length > 0);
+          }
+          const hasAnyExpectations = Object.values(runsWithExpectations).some(runs => runs.length > 0);
+          if (hasAnyExpectations) {
+            // Collect all unique assertion texts across all configs
+            const allAssertions = [];
+            const seen = new Set();
+            for (const config of configGroups) {
+              for (const run of runsWithExpectations[config]) {
+                for (const exp of (run.expectations || [])) {
+                  if (!seen.has(exp.text)) {
+                    seen.add(exp.text);
+                    allAssertions.push(exp.text);
+                  }
+                }
+              }
+            }
+
+            html += '<table class="benchmark-table" style="margin-top: 0.5rem;">';
+            html += "<thead><tr><th>Assertion</th>";
+            for (const config of configGroups) {
+              const label = config.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+              html += "<th>" + escapeHtml(label) + "</th>";
+            }
+            html += "</tr></thead><tbody>";
+
+            for (const assertionText of allAssertions) {
+              html += "<tr><td>" + escapeHtml(assertionText) + "</td>";
+
+              for (const config of configGroups) {
+                html += "<td>";
+                for (const run of runsWithExpectations[config]) {
+                  const exp = (run.expectations || []).find(e => e.text === assertionText);
+                  if (exp) {
+                    const cls = exp.passed ? "benchmark-delta-positive" : "benchmark-delta-negative";
+                    const icon = exp.passed ? "\u2713" : "\u2717";
+                    html += '<span class="' + cls + '" title="Run ' + escapeHtml(run.run_number) + ': ' + escapeHtml(exp.evidence || "") + '">' + icon + "</span> ";
+                  } else {
+                    html += "— ";
+                  }
+                }
+                html += "</td>";
+              }
+              html += "</tr>";
+            }
+            html += "</tbody></table>";
+          }
+        }
+      }
+
+      // Notes
+      if (notes.length > 0) {
+        html += '<div class="benchmark-notes">';
+        html += "<h3>Analysis Notes</h3>";
+        html += "<ul>";
+        for (const note of notes) {
+          html += "<li>" + escapeHtml(note) + "</li>";
+        }
+        html += "</ul></div>";
+      }
+
+      container.innerHTML = html;
+    }
+
+    // ---- Start ----
+    init();
+    renderBenchmark();
+  </script>
+</body>
+</html>

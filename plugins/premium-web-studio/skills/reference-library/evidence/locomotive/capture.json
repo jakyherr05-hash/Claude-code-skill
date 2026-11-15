@@ -1,0 +1,287 @@
+{
+  "id": "locomotive",
+  "url": "https://locomotive.ca/",
+  "researchedAt": "2026-11-15T03:49:34.147Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://locomotive.ca/en",
+  "title": "Locomotive | Montreal web agency",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 6598,
+    "htmlClasses": "js-focus-visible is-top lenis is-over-home-hero is-loaded is-ready",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgb(255, 255, 255)",
+    "bodyColor": "rgb(0, 0, 0)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "window.preloaderEnterPromise = new Promise(resolve => { setTimeout(resolve, 1200",
+      "fontFamily": "HelveticaNowDisplay, -apple-system, BlinkMacSystemFont, \"avenir next\", avenir, \"segoe ui\", \"helvetica neue\", helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif",
+      "fontSize": "15px",
+      "fontWeight": "400",
+      "lineHeight": "19.5px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 6598
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "🔶 Locomotive® Digital-first Design Agency🍺🔞",
+      "fontFamily": "LocomotiveNew, -apple-system, BlinkMacSystemFont, \"avenir next\", avenir, \"segoe ui\", \"helvetica neue\", helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif",
+      "fontSize": "70px",
+      "fontWeight": "400",
+      "lineHeight": "77px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 40,
+        "y": 716,
+        "w": 1360,
+        "h": 154
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Featured work",
+      "fontFamily": "HelveticaNowDisplay, -apple-system, BlinkMacSystemFont, \"avenir next\", avenir, \"segoe ui\", \"helvetica neue\", helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif",
+      "fontSize": "26px",
+      "fontWeight": "400",
+      "lineHeight": "31.2px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 40,
+        "y": 1857,
+        "w": 1360,
+        "h": 31
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Seven Years Running 2018-2024",
+      "fontFamily": "HelveticaNowDisplay, -apple-system, BlinkMacSystemFont, \"avenir next\", avenir, \"segoe ui\", \"helvetica neue\", helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif",
+      "fontSize": "26px",
+      "fontWeight": "400",
+      "lineHeight": "31.2px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 500,
+        "y": 1050,
+        "w": 440,
+        "h": 31
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Locomotive®",
+      "fontFamily": "HelveticaNowDisplay, -apple-system, BlinkMacSystemFont, \"avenir next\", avenir, \"segoe ui\", \"helvetica neue\", helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif",
+      "fontSize": "26px",
+      "fontWeight": "400",
+      "lineHeight": "31.2px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 40,
+        "y": 14,
+        "w": 210,
+        "h": 31
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "70px",
+      "fontFamily": "LocomotiveNew, -apple-system, BlinkMacSystemFont, \"avenir next\", avenir, \"segoe ui\", \"helvetica neue\", helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "77px",
+      "text": "🔶 Locomotive®  \n                        Digital-first Design Agency🍺🔞"
+    },
+    "loadedFonts": [
+      "HelveticaNowDisplay 400 normal",
+      "LocomotiveNew 400 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "static",
+      "height": 0,
+      "linkCount": 12
+    },
+    "counts": {
+      "sections": 2,
+      "images": 7,
+      "videos": 1,
+      "canvases": 2,
+      "svgs": 0,
+      "links": 54
+    },
+    "canvases": [
+      {
+        "w": 440,
+        "h": 616,
+        "position": "absolute"
+      },
+      {
+        "w": 440,
+        "h": 587,
+        "position": "absolute"
+      }
+    ],
+    "videos": [
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "layer.vimeo.com/progressive_redirect/playback/792718372/rendition/1080p/file.mp4"
+      }
+    ],
+    "imageFormats": {
+      "other": 7
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": true,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": "165",
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 476
+      },
+      {
+        "ms": 100,
+        "y": 576
+      },
+      {
+        "ms": 250,
+        "y": 594
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 96,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 890,
+    "loadMs": 1431,
+    "lcpMs": 936,
+    "cls": 0.923,
+    "requests": 23,
+    "byInitiator": {
+      "script": {
+        "count": 6,
+        "transferKB": 1048
+      },
+      "link": {
+        "count": 1,
+        "transferKB": 32
+      },
+      "other": {
+        "count": 2,
+        "transferKB": 1
+      },
+      "video": {
+        "count": 3,
+        "transferKB": 541
+      },
+      "css": {
+        "count": 5,
+        "transferKB": 112
+      },
+      "beacon": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 3,
+        "transferKB": 695
+      },
+      "img": {
+        "count": 1,
+        "transferKB": 24
+      },
+      "xmlhttprequest": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 9,
+    "libraryHints": [
+      "https://www.google.com/recaptcha/api.js",
+      "https://locomotive.ca/assets/scripts/vendors.js",
+      "https://locomotive.ca/assets/scripts/app.js",
+      "https://matomo.locomotive.ca/matomo.js",
+      "https://locomotive.ca/cdn-cgi/challenge-platform/scripts/jsd/main.js",
+      "https://locomotive.ca/cdn-cgi/challenge-platform/h/b/scripts/jsd/f8df4d4a0cd6/main.js",
+      "blob:https://locomotive.ca/2a3d4f81-a70a-470f-b695-f3cfa466cfa6"
+    ]
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "36px",
+    "largestFontSize": 46.8,
+    "menuButton": true
+  }
+}

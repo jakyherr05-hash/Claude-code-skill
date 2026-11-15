@@ -1,0 +1,362 @@
+[
+  {
+    "id": "capela-do-silencio",
+    "source": "assets-src/capela-do-silencio.png",
+    "sourceWidth": 2400,
+    "sourceHeight": 3000,
+    "aspect": 0.8,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 720,
+        "height": 900,
+        "bytes": 4777,
+        "file": "public/media/capela-do-silencio-720.avif"
+      },
+      {
+        "format": "webp",
+        "width": 720,
+        "height": 900,
+        "bytes": 4556,
+        "file": "public/media/capela-do-silencio-720.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 1600,
+        "bytes": 10310,
+        "file": "public/media/capela-do-silencio-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 1600,
+        "bytes": 9990,
+        "file": "public/media/capela-do-silencio-1280.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1920,
+        "height": 2400,
+        "bytes": 24317,
+        "file": "public/media/capela-do-silencio-1920.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1920,
+        "height": 2400,
+        "bytes": 19110,
+        "file": "public/media/capela-do-silencio-1920.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"capela-do-silencio-720.avif 720w, capela-do-silencio-1280.avif 1280w, capela-do-silencio-1920.avif 1920w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"capela-do-silencio-720.webp 720w, capela-do-silencio-1280.webp 1280w, capela-do-silencio-1920.webp 1920w\" sizes=\"100vw\">\n  <img src=\"capela-do-silencio-1920.webp\" width=\"2400\" height=\"3000\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "casa-sombra",
+    "source": "assets-src/casa-sombra.png",
+    "sourceWidth": 2400,
+    "sourceHeight": 3000,
+    "aspect": 0.8,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 720,
+        "height": 900,
+        "bytes": 7752,
+        "file": "public/media/casa-sombra-720.avif"
+      },
+      {
+        "format": "webp",
+        "width": 720,
+        "height": 900,
+        "bytes": 9508,
+        "file": "public/media/casa-sombra-720.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 1600,
+        "bytes": 14784,
+        "file": "public/media/casa-sombra-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 1600,
+        "bytes": 20124,
+        "file": "public/media/casa-sombra-1280.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1920,
+        "height": 2400,
+        "bytes": 31400,
+        "file": "public/media/casa-sombra-1920.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1920,
+        "height": 2400,
+        "bytes": 36096,
+        "file": "public/media/casa-sombra-1920.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"casa-sombra-720.avif 720w, casa-sombra-1280.avif 1280w, casa-sombra-1920.avif 1920w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"casa-sombra-720.webp 720w, casa-sombra-1280.webp 1280w, casa-sombra-1920.webp 1920w\" sizes=\"100vw\">\n  <img src=\"casa-sombra-1920.webp\" width=\"2400\" height=\"3000\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "hotel-alva",
+    "source": "assets-src/hotel-alva.png",
+    "sourceWidth": 2400,
+    "sourceHeight": 3000,
+    "aspect": 0.8,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 720,
+        "height": 900,
+        "bytes": 12076,
+        "file": "public/media/hotel-alva-720.avif"
+      },
+      {
+        "format": "webp",
+        "width": 720,
+        "height": 900,
+        "bytes": 9512,
+        "file": "public/media/hotel-alva-720.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 1600,
+        "bytes": 25757,
+        "file": "public/media/hotel-alva-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 1600,
+        "bytes": 21588,
+        "file": "public/media/hotel-alva-1280.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1920,
+        "height": 2400,
+        "bytes": 50189,
+        "file": "public/media/hotel-alva-1920.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1920,
+        "height": 2400,
+        "bytes": 39838,
+        "file": "public/media/hotel-alva-1920.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hotel-alva-720.avif 720w, hotel-alva-1280.avif 1280w, hotel-alva-1920.avif 1920w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hotel-alva-720.webp 720w, hotel-alva-1280.webp 1280w, hotel-alva-1920.webp 1920w\" sizes=\"100vw\">\n  <img src=\"hotel-alva-1920.webp\" width=\"2400\" height=\"3000\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "museu-das-mares",
+    "source": "assets-src/museu-das-mares.png",
+    "sourceWidth": 2400,
+    "sourceHeight": 3000,
+    "aspect": 0.8,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 720,
+        "height": 900,
+        "bytes": 5093,
+        "file": "public/media/museu-das-mares-720.avif"
+      },
+      {
+        "format": "webp",
+        "width": 720,
+        "height": 900,
+        "bytes": 4926,
+        "file": "public/media/museu-das-mares-720.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 1600,
+        "bytes": 11286,
+        "file": "public/media/museu-das-mares-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 1600,
+        "bytes": 11212,
+        "file": "public/media/museu-das-mares-1280.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1920,
+        "height": 2400,
+        "bytes": 31694,
+        "file": "public/media/museu-das-mares-1920.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1920,
+        "height": 2400,
+        "bytes": 23090,
+        "file": "public/media/museu-das-mares-1920.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"museu-das-mares-720.avif 720w, museu-das-mares-1280.avif 1280w, museu-das-mares-1920.avif 1920w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"museu-das-mares-720.webp 720w, museu-das-mares-1280.webp 1280w, museu-das-mares-1920.webp 1920w\" sizes=\"100vw\">\n  <img src=\"museu-das-mares-1920.webp\" width=\"2400\" height=\"3000\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "atelier-brass",
+    "source": "assets-src/atelier-brass.png",
+    "sourceWidth": 2400,
+    "sourceHeight": 2400,
+    "aspect": 1,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 480,
+        "height": 480,
+        "bytes": 8360,
+        "file": "public/media/atelier-brass-480.avif"
+      },
+      {
+        "format": "webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 10876,
+        "file": "public/media/atelier-brass-480.webp"
+      },
+      {
+        "format": "avif",
+        "width": 960,
+        "height": 960,
+        "bytes": 23017,
+        "file": "public/media/atelier-brass-960.avif"
+      },
+      {
+        "format": "webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 28138,
+        "file": "public/media/atelier-brass-960.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"atelier-brass-480.avif 480w, atelier-brass-960.avif 960w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"atelier-brass-480.webp 480w, atelier-brass-960.webp 960w\" sizes=\"100vw\">\n  <img src=\"atelier-brass-960.webp\" width=\"2400\" height=\"2400\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "atelier-glass",
+    "source": "assets-src/atelier-glass.png",
+    "sourceWidth": 2400,
+    "sourceHeight": 2400,
+    "aspect": 1,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 480,
+        "height": 480,
+        "bytes": 3128,
+        "file": "public/media/atelier-glass-480.avif"
+      },
+      {
+        "format": "webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 3038,
+        "file": "public/media/atelier-glass-480.webp"
+      },
+      {
+        "format": "avif",
+        "width": 960,
+        "height": 960,
+        "bytes": 5914,
+        "file": "public/media/atelier-glass-960.avif"
+      },
+      {
+        "format": "webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 7174,
+        "file": "public/media/atelier-glass-960.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"atelier-glass-480.avif 480w, atelier-glass-960.avif 960w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"atelier-glass-480.webp 480w, atelier-glass-960.webp 960w\" sizes=\"100vw\">\n  <img src=\"atelier-glass-960.webp\" width=\"2400\" height=\"2400\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "atelier-plate",
+    "source": "assets-src/atelier-plate.png",
+    "sourceWidth": 2400,
+    "sourceHeight": 2400,
+    "aspect": 1,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 480,
+        "height": 480,
+        "bytes": 3462,
+        "file": "public/media/atelier-plate-480.avif"
+      },
+      {
+        "format": "webp",
+        "width": 480,
+        "height": 480,
+        "bytes": 2486,
+        "file": "public/media/atelier-plate-480.webp"
+      },
+      {
+        "format": "avif",
+        "width": 960,
+        "height": 960,
+        "bytes": 8205,
+        "file": "public/media/atelier-plate-960.avif"
+      },
+      {
+        "format": "webp",
+        "width": 960,
+        "height": 960,
+        "bytes": 6612,
+        "file": "public/media/atelier-plate-960.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"atelier-plate-480.avif 480w, atelier-plate-960.avif 960w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"atelier-plate-480.webp 480w, atelier-plate-960.webp 960w\" sizes=\"100vw\">\n  <img src=\"atelier-plate-960.webp\" width=\"2400\" height=\"2400\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "hero-poster",
+    "source": "assets-src/hero-poster.png",
+    "sourceWidth": 2400,
+    "sourceHeight": 1350,
+    "aspect": 1.7778,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 960,
+        "height": 540,
+        "bytes": 2811,
+        "file": "public/media/hero-poster-960.avif"
+      },
+      {
+        "format": "webp",
+        "width": 960,
+        "height": 540,
+        "bytes": 3242,
+        "file": "public/media/hero-poster-960.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 8338,
+        "file": "public/media/hero-poster-1920.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1920,
+        "height": 1080,
+        "bytes": 9268,
+        "file": "public/media/hero-poster-1920.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hero-poster-960.avif 960w, hero-poster-1920.avif 1920w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hero-poster-960.webp 960w, hero-poster-1920.webp 1920w\" sizes=\"100vw\">\n  <img src=\"hero-poster-1920.webp\" width=\"2400\" height=\"1350\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  }
+]

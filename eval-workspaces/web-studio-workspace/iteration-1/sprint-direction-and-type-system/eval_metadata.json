@@ -1,0 +1,14 @@
+{
+  "eval_name": "sprint-direction-and-type-system",
+  "prompt": "We're Aster Cycles, a 14-person e-bike maker in Rotterdam. In March we launch the Aster C1, a \u20ac6,200 carbon commuter e-bike (10.9 kg, belt drive, integrated lights). Audience: design-minded city commuters 30-50 who'd never buy \"sporty\" gear \u2014 they read Monocle, they care about craft and calm. I want the launch page to feel engineered and quiet, like a precision instrument, not an extreme-sports ad. We have no fonts budget, so everything has to be free for commercial use. Before anyone codes anything, give me the creative direction and the typography + spacing system for a single launch page, as files in a studio/ folder. Don't build the site yet.",
+  "assertions": [
+    "A creative direction file exists in studio/ containing a one-sentence concept specific to Aster (engineered, quiet / precision instrument), not a generic tagline",
+    "The palette lists hex values with roles AND contrast ratios that were actually computed (a script or calculation is shown or run), with body text pairs at least 4.5:1",
+    "Every chosen font has its licence stated AND checked against a source during the run (npm/Fontsource licence field, Google Fonts/OFL, Fontshare API or licence page), and all are free for commercial use",
+    "The typography system defines a fluid type scale using clamp() values with explicit min/max viewport assumptions, plus line-height and letter-spacing per step",
+    "A spacing/grid system defines a base unit or scale, grid columns per breakpoint, container width(s) and section spacing",
+    "Motion guidance includes durations/easing and an explicit prefers-reduced-motion behaviour",
+    "The direction includes an explicit list of things deliberately not done (e.g. avoiding sporty/extreme-sports clich\u00e9s)",
+    "No website implementation code (components, pages, CSS for sections) was created \u2014 only direction/system documents (and optionally a token CSS file)"
+  ]
+}

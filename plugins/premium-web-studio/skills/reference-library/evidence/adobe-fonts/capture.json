@@ -1,0 +1,248 @@
+{
+  "id": "adobe-fonts",
+  "url": "https://fonts.adobe.com/",
+  "researchedAt": "2026-11-15T03:54:13.415Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://fonts.adobe.com/",
+  "title": "Adobe Fonts | Explore unlimited fonts",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": " wf-active",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(0, 0, 0)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "{\"hasSuspendedAccount\":false} [{\"label\":\"Date favorited (newest to oldest)\",\"val",
+      "fontFamily": "adobe-clean, adobe-clean-han-japanese, source-sans-pro, \"Helvetica Neue\", Helvetica, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "21px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": null,
+    "h2": {
+      "selector": "h2",
+      "text": "Every font you need, everywhere you need it",
+      "fontFamily": "adobe-clean, adobe-clean-han-japanese, source-sans-pro, \"Helvetica Neue\", Helvetica, sans-serif",
+      "fontSize": "22px",
+      "fontWeight": "400",
+      "lineHeight": "33px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 271,
+        "y": 212,
+        "w": 400,
+        "h": 33
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Discover fonts that support specific characters with our Glyph Finder tool",
+      "fontFamily": "adobe-clean, adobe-clean-han-japanese, source-sans-pro, \"Helvetica Neue\", Helvetica, sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "500",
+      "lineHeight": "20px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 976,
+        "y": 436,
+        "w": 407,
+        "h": 40
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Skip to main content",
+      "fontFamily": "adobe-clean, adobe-clean-han-japanese, source-sans-pro, \"Helvetica Neue\", Helvetica, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "21px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 238)",
+      "box": {
+        "x": -999,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "60px",
+      "fontFamily": "adobe-clean, adobe-clean-han-japanese, source-sans-pro, \"Helvetica Neue\", Helvetica, sans-serif",
+      "fontWeight": "900",
+      "letterSpacing": "normal",
+      "lineHeight": "90px",
+      "text": "Find the perfect font"
+    },
+    "loadedFonts": [
+      "adobe-notdef normal normal",
+      "adobe-clean 400 normal",
+      "adobe-clean 700 normal",
+      "adobe-clean 900 normal",
+      "rszc-normal-400 400 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "sticky",
+      "height": 56,
+      "linkCount": 7
+    },
+    "counts": {
+      "sections": 0,
+      "images": 7,
+      "videos": 0,
+      "canvases": 0,
+      "svgs": 4,
+      "links": 36
+    },
+    "canvases": [],
+    "videos": [],
+    "imageFormats": {
+      "webp": 2,
+      "png": 2,
+      "svg": 3
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 0,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1444,
+    "loadMs": 2733,
+    "lcpMs": 724,
+    "cls": 0.045,
+    "requests": 129,
+    "byInitiator": {
+      "link": {
+        "count": 12,
+        "transferKB": 16
+      },
+      "script": {
+        "count": 19,
+        "transferKB": 32
+      },
+      "other": {
+        "count": 31,
+        "transferKB": 0
+      },
+      "img": {
+        "count": 42,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 14,
+        "transferKB": 325
+      },
+      "xmlhttprequest": {
+        "count": 9,
+        "transferKB": 1
+      },
+      "iframe": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "css": {
+        "count": 1,
+        "transferKB": 31
+      }
+    }
+  },
+  "scripts": {
+    "total": 55,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [
+    "requestStorageAccess: Permission denied.",
+    "Failed to load resource: net::ERR_BLOCKED_BY_RESPONSE.NotSameOriginAfterDefaultedToSameOriginByCoep"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": null,
+    "menuButton": false
+  }
+}

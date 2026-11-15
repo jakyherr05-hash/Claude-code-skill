@@ -1,0 +1,26 @@
+# slug url  — the initial research set (2026-11-15)
+awwwards https://www.awwwards.com/
+cssdesignawards https://www.cssdesignawards.com/
+siteinspire https://www.siteinspire.com/
+behance https://www.behance.net/
+framer https://www.framer.com/
+activetheory https://activetheory.net/
+resn https://resn.co.nz/
+locomotive https://locomotive.ca/
+basement-studio https://basement.studio/
+unseen https://unseen.co/
+instrument https://www.instrument.com/
+obys https://obys.agency/
+google-fonts https://fonts.google.com/
+fontshare https://www.fontshare.com/
+myfonts https://www.myfonts.com/
+adobe-fonts https://fonts.adobe.com/
+typewolf https://www.typewolf.com/
+fontsquirrel https://www.fontsquirrel.com/
+gsap https://gsap.com/
+gsap-docs https://gsap.com/docs/v3/
+gsap-resources https://gsap.com/resources/
+lenis https://lenis.darkroom.engineering/
+threejs https://threejs.org/
+r3f-docs https://r3f.docs.pmnd.rs/
+motion https://motion.dev/

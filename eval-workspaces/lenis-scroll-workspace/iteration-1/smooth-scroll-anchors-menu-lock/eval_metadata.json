@@ -1,0 +1,15 @@
+{
+  "eval_name": "smooth-scroll-anchors-menu-lock",
+  "prompt": "can you add proper smooth scrolling to this little vite + react landing page? we already use gsap scrolltrigger for a couple of reveals (see App.tsx). the header is fixed and 72px tall, so nav links like #pricing currently land under it. also the mobile menu overlay should stop the page scrolling behind it while it's open. please make it production quality \u2014 i don't want two scroll loops fighting or anything that breaks keyboard scrolling. just edit the files, no need to npm install.\n\nInput files: package.json, src/App.tsx, src/main.tsx, src/index.css",
+  "assertions": [
+    "Exactly one Lenis instance is created in the app (no second smooth-scroll library, no autoRaf alongside a manual raf loop)",
+    "Lenis is driven by gsap.ticker (gsap.ticker.add calling lenis.raf with time*1000) and gsap.ticker.lagSmoothing(0) is set",
+    "ScrollTrigger is updated from Lenis scroll events (lenis.on('scroll', ScrollTrigger.update) or equivalent)",
+    "The CSS rule html { scroll-behavior: smooth } is removed or neutralised because it conflicts with Lenis programmatic scrolling",
+    "In-page anchor navigation scrolls with a 72px (or header-height) offset so sections are not hidden under the fixed header",
+    "Anchor navigation moves keyboard focus to the target section (e.g. tabindex=-1 + focus) or otherwise preserves accessible focus",
+    "Opening the mobile menu stops scrolling (lenis.stop() or equivalent) and closing it restores scrolling (lenis.start())",
+    "The Lenis instance and the ticker callback are cleaned up on unmount (lenis.destroy() and gsap.ticker.remove)",
+    "The Lenis stylesheet (lenis/dist/lenis.css) or equivalent recommended CSS is included"
+  ]
+}

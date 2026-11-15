@@ -1,0 +1,17 @@
+/* No CSS scroll-behavior: smooth; it fights Lenis. Native smoothing is not used. */
+html { scroll-padding-top: 72px; }
+body { margin: 0; font-family: system-ui, sans-serif; }
+header { position: fixed; inset: 0 0 auto; height: 72px; display: flex; align-items: center; gap: 1rem; padding: 0 1.5rem; background: #fff; z-index: 10; }
+section { min-height: 100vh; padding: 96px 1.5rem; scroll-margin-top: 72px; }
+.menu { position: fixed; inset: 72px 0 0; background: #fff; padding: 2rem; overscroll-behavior: contain; }
+section:focus { outline: none; }
+
+/* Recommended Lenis base styles */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

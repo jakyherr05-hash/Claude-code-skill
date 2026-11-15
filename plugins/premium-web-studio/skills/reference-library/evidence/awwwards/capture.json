@@ -1,0 +1,139 @@
+{
+  "id": "awwwards",
+  "url": "https://www.awwwards.com/",
+  "researchedAt": "2026-11-15T03:47:45.591Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 502,
+  "finalUrl": "https://www.awwwards.com/",
+  "title": "",
+  "page": {
+    "lang": null,
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(0, 0, 0)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "upstream request failed",
+      "fontFamily": "\"Times New Roman\"",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 8,
+        "y": 13,
+        "w": 1424,
+        "h": 15
+      }
+    },
+    "h1": null,
+    "h2": null,
+    "p": null,
+    "navLink": null,
+    "largestVisibleText": null,
+    "loadedFonts": [],
+    "nav": null,
+    "counts": {
+      "sections": 0,
+      "images": 0,
+      "videos": 0,
+      "canvases": 0,
+      "svgs": 0,
+      "links": 0
+    },
+    "canvases": [],
+    "videos": [],
+    "imageFormats": {},
+    "landmarks": {
+      "header": false,
+      "main": false,
+      "footer": false,
+      "h1Count": 0,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 290,
+    "loadMs": 290,
+    "lcpMs": 300,
+    "cls": 0,
+    "requests": 0,
+    "byInitiator": {}
+  },
+  "scripts": {
+    "total": 0,
+    "libraryHints": []
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 980,
+    "h1FontSize": null,
+    "largestFontSize": 0,
+    "menuButton": false
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "id": "siteinspire",
+  "url": "https://www.siteinspire.com/",
+  "researchedAt": "2026-11-15T03:48:11.987Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 429,
+  "finalUrl": "https://www.siteinspire.com/",
+  "title": "Vercel Security Checkpoint",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "",
+    "bodyBackground": "rgb(255, 255, 255)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(102, 102, 102)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "Failed to verify your browserWebsite owner? Click here to fixCode 21Vercel Secur",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+      "fontSize": "19.2px",
+      "fontWeight": "400",
+      "lineHeight": "31.68px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(102, 102, 102)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": null,
+    "h2": null,
+    "p": {
+      "selector": "p",
+      "text": "Failed to verify your browser",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+      "fontSize": "19.2px",
+      "fontWeight": "500",
+      "lineHeight": "32px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgba(0, 0, 0, 0.91)",
+      "box": {
+        "x": 589,
+        "y": 386,
+        "w": 262,
+        "h": 32
+      }
+    },
+    "navLink": null,
+    "largestVisibleText": {
+      "fontSize": "19.2px",
+      "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"Noto Sans\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+      "fontWeight": "500",
+      "letterSpacing": "normal",
+      "lineHeight": "32px",
+      "text": "Failed to verify your browser"
+    },
+    "loadedFonts": [],
+    "nav": null,
+    "counts": {
+      "sections": 0,
+      "images": 0,
+      "videos": 0,
+      "canvases": 0,
+      "svgs": 0,
+      "links": 1
+    },
+    "canvases": [],
+    "videos": [],
+    "imageFormats": {},
+    "landmarks": {
+      "header": false,
+      "main": true,
+      "footer": true,
+      "h1Count": 0,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 281,
+    "loadMs": 282,
+    "lcpMs": 296,
+    "cls": 0.002,
+    "requests": 1,
+    "byInitiator": {
+      "other": {
+        "count": 1,
+        "transferKB": 15
+      }
+    }
+  },
+  "scripts": {
+    "total": 1,
+    "libraryHints": []
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": 22.4,
+    "menuButton": false
+  }
+}

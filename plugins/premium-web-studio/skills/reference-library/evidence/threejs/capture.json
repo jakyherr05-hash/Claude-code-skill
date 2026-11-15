@@ -1,0 +1,207 @@
+{
+  "id": "threejs",
+  "url": "https://threejs.org/",
+  "researchedAt": "2026-11-15T03:56:54.986Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://threejs.org/",
+  "title": "Three.js – JavaScript 3D Library",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "",
+    "bodyBackground": "rgb(255, 255, 255)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(68, 68, 68)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(argume",
+      "fontFamily": "\"Roboto Mono\", monospace",
+      "fontSize": "15px",
+      "fontWeight": "400",
+      "lineHeight": "25px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(68, 68, 68)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "three.js r187",
+      "fontFamily": "\"Roboto Mono\", monospace",
+      "fontSize": "18px",
+      "fontWeight": "500",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(4, 158, 244)",
+      "box": {
+        "x": 0,
+        "y": 12,
+        "w": 299,
+        "h": 24
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Learn",
+      "fontFamily": "\"Roboto Mono\", monospace",
+      "fontSize": "15px",
+      "fontWeight": "500",
+      "lineHeight": "26px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(4, 158, 244)",
+      "box": {
+        "x": 16,
+        "y": 66,
+        "w": 267,
+        "h": 32
+      }
+    },
+    "p": null,
+    "navLink": null,
+    "largestVisibleText": {
+      "fontSize": "18px",
+      "fontFamily": "\"Roboto Mono\", monospace",
+      "fontWeight": "500",
+      "letterSpacing": "normal",
+      "lineHeight": "24px",
+      "text": "three.js r187"
+    },
+    "loadedFonts": [
+      "Roboto Mono 400 normal",
+      "Roboto Mono 500 normal"
+    ],
+    "nav": null,
+    "counts": {
+      "sections": 0,
+      "images": 264,
+      "videos": 0,
+      "canvases": 0,
+      "svgs": 0,
+      "links": 284
+    },
+    "canvases": [],
+    "videos": [],
+    "imageFormats": {
+      "jpg": 127,
+      "png": 137
+    },
+    "landmarks": {
+      "header": false,
+      "main": false,
+      "footer": false,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 864,
+    "loadMs": 864,
+    "lcpMs": 860,
+    "cls": 0,
+    "requests": 200,
+    "byInitiator": {
+      "link": {
+        "count": 1,
+        "transferKB": 3
+      },
+      "script": {
+        "count": 2,
+        "transferKB": 0
+      },
+      "css": {
+        "count": 2,
+        "transferKB": 22
+      },
+      "img": {
+        "count": 192,
+        "transferKB": 3935
+      },
+      "fetch": {
+        "count": 3,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 2,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "18px",
+    "largestFontSize": 18,
+    "menuButton": false
+  }
+}

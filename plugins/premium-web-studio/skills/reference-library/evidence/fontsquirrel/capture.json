@@ -1,0 +1,308 @@
+{
+  "id": "fontsquirrel",
+  "url": "https://www.fontsquirrel.com/",
+  "researchedAt": "2026-11-15T03:54:45.176Z",
+  "status": "inspected",
+  "errors": [
+    "networkidle timeout (page kept loading; continued)"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://www.fontsquirrel.com/",
+  "title": "Free Fonts! Legit Free & Quality | Font Squirrel",
+  "page": {
+    "lang": null,
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 4798,
+    "htmlClasses": " no-applicationcache audio canvas canvastext geolocation hashchange history indexeddb indexeddb-deletedatabase postmessage svg video webgl websockets cssanimations backgroundsize borderimage borderrad",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(34, 34, 34)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "We value your privacyWe and certain third parties use cookies or similar technol",
+      "fontFamily": "body_font, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "19px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(34, 34, 34)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 4797
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Free Font Utopia",
+      "fontFamily": "fjallaone, Arial, sans-serif",
+      "fontSize": "45px",
+      "fontWeight": "200",
+      "lineHeight": "60px",
+      "letterSpacing": "-1px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(162, 126, 175)",
+      "box": {
+        "x": 174,
+        "y": 163,
+        "w": 730,
+        "h": 60
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Free Fonts for Commercial Use",
+      "fontFamily": "body_font, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "700",
+      "lineHeight": "19.999px",
+      "letterSpacing": "0.28px",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(177, 157, 183)",
+      "box": {
+        "x": 373,
+        "y": 45,
+        "w": 304,
+        "h": 20
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "We value your privacy",
+      "fontFamily": "body_font, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(33, 33, 33)",
+      "box": {
+        "x": 67,
+        "y": 607,
+        "w": 386,
+        "h": 24
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "body_font, \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "19px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(97, 69, 106)",
+      "box": {
+        "x": 173,
+        "y": 30,
+        "w": 150,
+        "h": 83
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "45px",
+      "fontFamily": "fjallaone, Arial, sans-serif",
+      "fontWeight": "200",
+      "letterSpacing": "-1px",
+      "lineHeight": "60px",
+      "text": "Free Font Utopia"
+    },
+    "loadedFonts": [
+      "fjallaone normal normal",
+      "body_font bold normal",
+      "body_font normal normal",
+      "icons normal normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "relative",
+      "height": 143,
+      "linkCount": 9
+    },
+    "counts": {
+      "sections": 0,
+      "images": 59,
+      "videos": 4,
+      "canvases": 0,
+      "svgs": 12,
+      "links": 270
+    },
+    "canvases": [],
+    "videos": [
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": false,
+        "src": ""
+      },
+      {
+        "autoplay": false,
+        "muted": false,
+        "loop": false,
+        "src": ""
+      },
+      {
+        "autoplay": false,
+        "muted": false,
+        "loop": false,
+        "src": ""
+      },
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": false,
+        "src": ""
+      }
+    ],
+    "imageFormats": {
+      "svg": 2,
+      "png": 27,
+      "gif": 2,
+      "jpg": 1,
+      "php": 2,
+      "other": 25
+    },
+    "landmarks": {
+      "header": true,
+      "main": false,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 600
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1277,
+    "loadMs": 2225,
+    "lcpMs": 1300,
+    "cls": 0.002,
+    "requests": 250,
+    "byInitiator": {
+      "script": {
+        "count": 41,
+        "transferKB": 480
+      },
+      "link": {
+        "count": 7,
+        "transferKB": 120
+      },
+      "img": {
+        "count": 45,
+        "transferKB": 651
+      },
+      "beacon": {
+        "count": 6,
+        "transferKB": 0
+      },
+      "css": {
+        "count": 7,
+        "transferKB": 100
+      },
+      "xmlhttprequest": {
+        "count": 18,
+        "transferKB": 1
+      },
+      "fetch": {
+        "count": 122,
+        "transferKB": 1
+      },
+      "iframe": {
+        "count": 4,
+        "transferKB": 12
+      }
+    }
+  },
+  "scripts": {
+    "total": 104,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js",
+      "https://fundingchoicesmessages.google.com/i/8095840",
+      "SARISKeL3A0eZK1250AMVR3WOrZrRgPFZJASFXYXuLCgTZJuGLHXCQamoZwj30RkY5XQMkW8t8gwTL7afDUXj3M8Wam5hmROULgLqabrfwAg==",
+      "6f4YW5Bf1VzzNoQIFdHu_MZ5jy4ZoJnvpaWJRjFh9O1/_/doubleclick.min/newimplugs./250x250-adverts./ads/popup_-120-600.",
+      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
+      "F7D0NIGLxh2q2D_CIwrjq3P7yvV_zkThD9LHzMtb68W20rRf-AYl2FO4LI56ki4kZUl2-q8j2XAfw_SIyy2hy3gmrqFzIQP7Td1V1DrLRH7g==",
+      "yB46DifPUls5VvmH8h3avum-9XeLwi_cA7dGVk7fkA1pCbggMUER3RC0VP8dsIN3drNuqSs2e6Ki5ajqj0R1Gwq9djW_tFbPWxjR30nFdfYg==",
+      "cF-4ccRY3pd_e6bB-cilDmx7hz2KnGvEKE7-XohgQFVyxGnA_0ILNq87SO5hbNLK-gH8xI_--UvvWD4jU7IpSxmuCSg6-JjlZKlFE3Ro-3qA==",
+      "https://imasdk.googleapis.com/js/sdkloader/ima3.js",
+      "https://ep2.adtrafficquality.google/sodar/sodar2.js",
+      "https://pagead2.googlesyndication.com/bg/YG6s1LKAljzOwY8_xnZNe1np91D3HqFyLcXPfThynb0.js",
+      "https://pagead2.googlesyndication.com/omsdk/releases/live/omweb-v1.js"
+    ]
+  },
+  "consoleErrors": [
+    "Access to fetch at 'https://api.rlcdn.com/api/identity/envelope?pid=14034' from origin 'https://www.fontsquirrel.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is presen",
+    "Failed to load resource: net::ERR_FAILED",
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "45px",
+    "largestFontSize": 45,
+    "menuButton": true
+  }
+}

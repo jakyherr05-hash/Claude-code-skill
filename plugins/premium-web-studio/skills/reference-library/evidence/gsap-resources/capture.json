@@ -1,0 +1,119 @@
+{
+  "id": "gsap-resources",
+  "url": "https://gsap.com/resources/",
+  "researchedAt": "2026-11-15T03:56:05.266Z",
+  "status": "inspected",
+  "errors": [
+    "scroll probe failed: page.evaluate: Execution context was destroyed, most likely because of a navigation"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://gsap.com/resources/",
+  "title": "One moment, please...",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(0, 0, 0)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "Loader Please wait while your request is being verified... function a0p(U,g){var",
+      "fontFamily": "\"Times New Roman\"",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 8,
+        "y": 285,
+        "w": 1424,
+        "h": 100
+      }
+    },
+    "h1": null,
+    "h2": null,
+    "p": null,
+    "navLink": null,
+    "largestVisibleText": {
+      "fontSize": "48px",
+      "fontFamily": "Montserrat, sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "2.88px",
+      "lineHeight": "100px",
+      "text": "Please wait while your request is being verified..."
+    },
+    "loadedFonts": [],
+    "nav": null,
+    "counts": {
+      "sections": 0,
+      "images": 0,
+      "videos": 0,
+      "canvases": 0,
+      "svgs": 1,
+      "links": 0
+    },
+    "canvases": [],
+    "videos": [],
+    "imageFormats": {},
+    "landmarks": {
+      "header": false,
+      "main": false,
+      "footer": false,
+      "h1Count": 0,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 229,
+    "loadMs": 230,
+    "lcpMs": null,
+    "cls": 0,
+    "requests": 1,
+    "byInitiator": {
+      "script": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 1,
+    "libraryHints": []
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": 48,
+    "menuButton": false
+  }
+}

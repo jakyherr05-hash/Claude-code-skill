@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: smooth-scroll-anchors-menu-lock
+context:
+  scaffold_script: place-files.sh
+expected_outcome: |
+  The app gets exactly one Lenis instance driven by GSAP's ticker with ScrollTrigger updated on Lenis scroll,
+  anchor links that respect the 72px fixed header (and move focus), scroll locking while the mobile menu is
+  open, proper React cleanup, Lenis CSS included, and the conflicting CSS scroll-behavior: smooth removed.

@@ -1,0 +1,256 @@
+{
+  "id": "unseen",
+  "url": "https://unseen.co/",
+  "researchedAt": "2026-11-15T03:51:03.795Z",
+  "status": "inspected",
+  "errors": [
+    "networkidle timeout (page kept loading; continued)"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://unseen.co/",
+  "title": "Unseen Studio® – Brand, Digital & Motion",
+  "page": {
+    "lang": "en-GB",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "asscroll-disabled",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(0, 0, 0)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "@font-face{font-family:Neue Montreal;font-style:normal;font-weight:400;src:url(/",
+      "fontFamily": "\"Neue Montreal\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif",
+      "fontSize": "14.4px",
+      "fontWeight": "400",
+      "lineHeight": "21.6px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 43
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Home",
+      "fontFamily": "\"Neue Montreal\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif",
+      "fontSize": "28.8px",
+      "fontWeight": "700",
+      "lineHeight": "43.2px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 43
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Say hello",
+      "fontFamily": "\"Neue Montreal\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif",
+      "fontSize": "86.4px",
+      "fontWeight": "700",
+      "lineHeight": "77.76px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "A brand, digital and motion studio creatingrefreshingly unexpected ideas and str",
+      "fontFamily": "\"Neue Montreal\", sans-serif",
+      "fontSize": "14.4px",
+      "fontWeight": "400",
+      "lineHeight": "16.56px",
+      "letterSpacing": "-0.36px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(66, 66, 66)",
+      "box": {
+        "x": 577,
+        "y": 427,
+        "w": 285,
+        "h": 50
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "\"Neue Montreal\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif",
+      "fontSize": "14.4px",
+      "fontWeight": "400",
+      "lineHeight": "21.6px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(33, 33, 33)",
+      "box": {
+        "x": 29,
+        "y": 29,
+        "w": 190,
+        "h": 24
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "90px",
+      "fontFamily": "\"Neue Montreal\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "90px",
+      "text": "01\n\nIndex\nIndex"
+    },
+    "loadedFonts": [
+      "Neue Montreal 400 normal",
+      "Saol Display 400 normal",
+      "Saol Display 400 italic"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "fixed",
+      "height": 82,
+      "linkCount": 4
+    },
+    "counts": {
+      "sections": 0,
+      "images": 0,
+      "videos": 0,
+      "canvases": 1,
+      "svgs": 30,
+      "links": 22
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {},
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": false,
+      "h1Count": 2,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": "143",
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": true,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1587,
+    "loadMs": 9054,
+    "lcpMs": 1192,
+    "cls": 0,
+    "requests": 117,
+    "byInitiator": {
+      "link": {
+        "count": 7,
+        "transferKB": 492
+      },
+      "script": {
+        "count": 2,
+        "transferKB": 0
+      },
+      "other": {
+        "count": 1,
+        "transferKB": 3
+      },
+      "fetch": {
+        "count": 2,
+        "transferKB": 0
+      },
+      "xmlhttprequest": {
+        "count": 31,
+        "transferKB": 4617
+      },
+      "img": {
+        "count": 74,
+        "transferKB": 2025
+      }
+    }
+  },
+  "scripts": {
+    "total": 9,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "28px",
+    "largestFontSize": 87.5,
+    "menuButton": true
+  }
+}

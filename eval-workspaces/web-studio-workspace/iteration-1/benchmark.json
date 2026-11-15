@@ -1,0 +1,186 @@
+{
+  "metadata": {
+    "skill_name": "web-studio",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-11-15T12:50:58Z",
+    "evals_run": [
+      "sprint-direction-and-type-system"
+    ],
+    "runs_per_configuration": 1
+  },
+  "runs": [
+    {
+      "eval_id": "sprint-direction-and-type-system",
+      "eval_name": "sprint-direction-and-type-system",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 8,
+        "failed": 0,
+        "total": 8,
+        "time_seconds": 204.1,
+        "tokens": 120130,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A creative direction file exists in studio/ containing a one-sentence concept specific to Aster (engineered, quiet / precision instrument), not a generic tagline",
+          "passed": true,
+          "evidence": "CREATIVE_DIRECTION.md concept 'Measured, not shouted' \u2014 the C1 as a precision instrument speaking in measurements and materials"
+        },
+        {
+          "text": "The palette lists hex values with roles AND contrast ratios that were actually computed (a script or calculation is shown or run), with body text pairs at least 4.5:1",
+          "passed": true,
+          "evidence": "Palette measured with design-intelligence/scripts/contrast.mjs during the run; stated 15.1:1 ink/paper and 6.0:1 accent/paper; re-measured by grader: 15.09:1 and 6.01:1 (accurate)"
+        },
+        {
+          "text": "Every chosen font has its licence stated AND checked against a source during the run (npm/Fontsource licence field, Google Fonts/OFL, Fontshare API or licence page), and all are free for commercial use",
+          "passed": true,
+          "evidence": "TYPOGRAPHY_SYSTEM.md: Newsreader + Geist, 'OFL-1.1 [M: npm view returned OFL-1.1; LICENSE file in the tarball]'; Fontshare faces explicitly held back because licence page couldn't be re-read"
+        },
+        {
+          "text": "The typography system defines a fluid type scale using clamp() values with explicit min/max viewport assumptions, plus line-height and letter-spacing per step",
+          "passed": true,
+          "evidence": "TYPOGRAPHY_SYSTEM.md: 11 clamp() values generated with type-scale.mjs (min 360 / max 1440 viewport), role, line-height and tracking per step"
+        },
+        {
+          "text": "A spacing/grid system defines a base unit or scale, grid columns per breakpoint, container width(s) and section spacing",
+          "passed": true,
+          "evidence": "SPACING_SYSTEM.md: 8px base, 11-step fluid scale, 4/8/12 columns at 48/64rem, containers wide 1440px / text 60ch / narrow 38rem, section padding, 3 protected rests"
+        },
+        {
+          "text": "Motion guidance includes durations/easing and an explicit prefers-reduced-motion behaviour",
+          "passed": true,
+          "evidence": "CREATIVE_DIRECTION.md: motion durations/eases + 'Reduced motion: every reveal becomes an instant final state; the weight rule renders at 10.9 immediately'"
+        },
+        {
+          "text": "The direction includes an explicit list of things deliberately not done (e.g. avoiding sporty/extreme-sports clich\u00e9s)",
+          "passed": true,
+          "evidence": "CREATIVE_DIRECTION.md \u00a7'Deliberately not doing': speed lines, performance language, wattage hero claims, 3D/WebGL, parallax, countdowns"
+        },
+        {
+          "text": "No website implementation code (components, pages, CSS for sections) was created \u2014 only direction/system documents (and optionally a token CSS file)",
+          "passed": true,
+          "evidence": "Only studio/*.md docs + tokens.draft.css; no components/pages (find *.tsx/*.html \u2192 none)"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": "sprint-direction-and-type-system",
+      "eval_name": "sprint-direction-and-type-system",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.625,
+        "passed": 5,
+        "failed": 3,
+        "total": 8,
+        "time_seconds": 55.4,
+        "tokens": 63881,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "A creative direction file exists in studio/ containing a one-sentence concept specific to Aster (engineered, quiet / precision instrument), not a generic tagline",
+          "passed": true,
+          "evidence": "creative-direction.md \u00a71 'A quiet instrument' \u2014 tied to the brief's precision-instrument framing"
+        },
+        {
+          "text": "The palette lists hex values with roles AND contrast ratios that were actually computed (a script or calculation is shown or run), with body text pairs at least 4.5:1",
+          "passed": false,
+          "evidence": "No computation in the run (2 tool calls, both file writes). Stated ratios are inaccurate when measured with contrast.mjs: Graphite/Paper claimed 15.6:1 \u2192 actual 14.97:1; Signal/Paper claimed 4.3:1 \u2192 actual 3.89:1"
+        },
+        {
+          "text": "Every chosen font has its licence stated AND checked against a source during the run (npm/Fontsource licence field, Google Fonts/OFL, Fontshare API or licence page), and all are free for commercial use",
+          "passed": false,
+          "evidence": "type-system.md states 'all SIL Open Font License 1.1' (Newsreader, Hanken Grotesk, IBM Plex Mono) \u2014 correct in fact, but asserted from memory: no npm/API/licence-page check in the transcript (2 tool calls, both writes)"
+        },
+        {
+          "text": "The typography system defines a fluid type scale using clamp() values with explicit min/max viewport assumptions, plus line-height and letter-spacing per step",
+          "passed": true,
+          "evidence": "type-system.md table: min/max px per step, Newsreader weights, line-height and tracking per step; tokens.css clamp() with '375px \u2026 1440px' assumption"
+        },
+        {
+          "text": "A spacing/grid system defines a base unit or scale, grid columns per breakpoint, container width(s) and section spacing",
+          "passed": true,
+          "evidence": "type-system.md \u00a73/\u00a74: 8px scale (space-1..8), section-y, 12/8/4 columns with breakpoints, gutters, 1280px max width"
+        },
+        {
+          "text": "Motion guidance includes durations/easing and an explicit prefers-reduced-motion behaviour",
+          "passed": false,
+          "evidence": "creative-direction.md principle 4: '400-600 ms ease \u2026 Respect prefers-reduced-motion' \u2014 durations present but no reduced-motion BEHAVIOUR specified"
+        },
+        {
+          "text": "The direction includes an explicit list of things deliberately not done (e.g. avoiding sporty/extreme-sports clich\u00e9s)",
+          "passed": true,
+          "evidence": "creative-direction.md \u00a76 Do/Don't: 'Don't: gradients, glows \u2026 stock cyclists, countdown timers'"
+        },
+        {
+          "text": "No website implementation code (components, pages, CSS for sections) was created \u2014 only direction/system documents (and optionally a token CSS file)",
+          "passed": true,
+          "evidence": "Only creative-direction.md, type-system.md, tokens.css (reference tokens) \u2014 no components/pages"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 204.1,
+        "stddev": 0.0,
+        "min": 204.1,
+        "max": 204.1
+      },
+      "tokens": {
+        "mean": 120130.0,
+        "stddev": 0.0,
+        "min": 120130,
+        "max": 120130
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.625,
+        "stddev": 0.0,
+        "min": 0.625,
+        "max": 0.625
+      },
+      "time_seconds": {
+        "mean": 55.4,
+        "stddev": 0.0,
+        "min": 55.4,
+        "max": 55.4
+      },
+      "tokens": {
+        "mean": 63881.0,
+        "stddev": 0.0,
+        "min": 63881,
+        "max": 63881
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.38",
+      "time_seconds": "+148.7",
+      "tokens": "+56249"
+    }
+  },
+  "notes": [
+    "Discriminating case: +37.5 points (8/8 vs 5/8).",
+    "The three assertions only the skill passed are all verification behaviours: contrast computed with contrast.mjs (baseline's stated ratios were wrong when re-measured: 15.6 claimed vs 14.97 actual; accent 4.3 claimed vs 3.89 actual), font licences checked via npm during the run, and an explicit reduced-motion behaviour.",
+    "Cost: with_skill used ~1.9x tokens (120k vs 64k) and ~3.7x wall time (204s vs 55s), and produced the full studio/ doc set (status, decisions, brief) \u2014 appropriate for a Sprint deliverable, heavier than strictly asked.",
+    "Single run per configuration \u2014 no variance estimate."
+  ]
+}
