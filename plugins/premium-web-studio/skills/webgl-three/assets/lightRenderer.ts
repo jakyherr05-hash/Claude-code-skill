@@ -38,6 +38,14 @@ export type LightState = {
   doorway?: number;
   /** 0..1, default 1. Dissolves the altar block (altar light still falls on wall and floor). */
   altarBlock?: number;
+  /** Metres of clerestory slit along the room's depth, default 5.6. Shorter → the
+   *  blade fades out partway down the back wall and never reaches the floor. */
+  slitLength?: number;
+  /** 0 | 1, default 0. 1 = Threshold-hero framing: on portrait frames (aspect < 1)
+   *  the renderer substitutes HERO_PORTRAIT_OVERRIDES so the blade stays on the
+   *  empty wall above the hero copy. Re-evaluated on every draw, so a resize across
+   *  the aspect boundary re-composes automatically. */
+  heroFraming?: number;
 };
 
 export type HourReadout = {
@@ -68,9 +76,9 @@ export type LightRenderer = {
   /** Re-read the canvas CSS size and DPR; always marks dirty. */
   resize(): void;
   /**
-   * Stop drawing, delete program/VAO/fence, shrink the canvas to 1×1 and remove
-   * listeners — all synchronously and cheaply. The context itself is released in
-   * an idle callback (WEBGL_lose_context), so unmount never waits on the GPU.
+   * Stop drawing, delete program/VAO/fence and remove listeners — synchronously
+   * and cheaply. The context itself is released later (WEBGL_lose_context), once
+   * the GPU is quiet, so unmount never waits on the GPU (see scheduleLoss).
    * Idempotent; `lost` is true afterwards.
    */
   destroy(): void;
@@ -92,7 +100,28 @@ export const HERO_STATE: LightState = {
   reveal: 1,
   doorway: 0, // no opening behind the kicker + H1
   altarBlock: 0, // pure "one shaft across a dark wall" frame
+  slitLength: 5.6,
+  heroFraming: 1, // portrait frames get HERO_PORTRAIT_OVERRIDES
 };
+
+/**
+ * Portrait hero (aspect < 1): the copy fills the lower ~45% of the screen, so the
+ * blade enters at the upper-left edge (35°) and fades out on the empty wall above
+ * the kicker — a short slit ends it mid-wall, so nothing reaches the floor — and
+ * the threshold pool (bottom-left, under the CTA) is off.
+ */
+export const HERO_PORTRAIT_OVERRIDES = {
+  sunAngle: 35,
+  sunX: 0.72,
+  slitLength: 1.0,
+  threshold: 0,
+  nave: 0,
+} as const satisfies Partial<LightState>;
+
+/** The hero state resolved for a frame aspect (width / height): landscape = HERO_STATE. */
+export function heroStateFor(aspect: number): LightState {
+  return aspect < 1 ? { ...HERO_STATE, ...HERO_PORTRAIT_OVERRIDES } : { ...HERO_STATE };
+}
 
 /**
  * The Hour — six designed states from CREATIVE_DIRECTION.md. Kelvin values of
@@ -105,7 +134,7 @@ export const HOUR_PRESETS: HourPreset[] = [
     minutes: 6 * 60 + 10,
     state: {
       sunAngle: 60, sunX: 0.74, daylightK: 2400, daylight: 0.42,
-      altarK: 3000, altar: 0, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1,
+      altarK: 3000, altar: 0, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
     },
     readout: { daylightK: 2400, artificialK: null, altarLux: 30, naveLux: 6 },
     intent: 'Dawn does the work. We stay out of its way.',
@@ -115,7 +144,7 @@ export const HOUR_PRESETS: HourPreset[] = [
     minutes: 10 * 60,
     state: {
       sunAngle: 40, sunX: 0.6, daylightK: 5000, daylight: 0.8,
-      altarK: 3000, altar: 0, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1,
+      altarK: 3000, altar: 0, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
     },
     readout: { daylightK: 5000, artificialK: null, altarLux: 220, naveLux: 90 },
     intent: 'The nave is bright enough. Nothing is added.',
@@ -125,7 +154,7 @@ export const HOUR_PRESETS: HourPreset[] = [
     minutes: 13 * 60 + 30,
     state: {
       sunAngle: 22, sunX: 0.44, daylightK: 5800, daylight: 0.95,
-      altarK: 3000, altar: 0, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1,
+      altarK: 3000, altar: 0, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
     },
     readout: { daylightK: 5800, artificialK: null, altarLux: 300, naveLux: 140 },
     intent: 'Noon flattens everything, so the slit is shaded and the altar keeps its edge.',
@@ -135,7 +164,7 @@ export const HOUR_PRESETS: HourPreset[] = [
     minutes: 18 * 60 + 20,
     state: {
       sunAngle: 54, sunX: 0.7, daylightK: 3200, daylight: 0.2,
-      altarK: 3000, altar: 0.2, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1,
+      altarK: 3000, altar: 0.2, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
     },
     readout: { daylightK: 3200, artificialK: 3000, altarLux: 60, naveLux: 15 },
     intent: 'As the sun leaves, the altar takes over, never brighter than the window was.',
@@ -145,7 +174,7 @@ export const HOUR_PRESETS: HourPreset[] = [
     minutes: 21 * 60,
     state: {
       sunAngle: 58, sunX: 0.74, daylightK: 2400, daylight: 0,
-      altarK: 2700, altar: 0.42, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0.006, reveal: 1, doorway: 1, altarBlock: 1,
+      altarK: 2700, altar: 0.42, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0.006, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
     },
     readout: { daylightK: null, artificialK: 2700, altarLux: 40, naveLux: 2 },
     intent: 'The nave is allowed to be dark.',
@@ -155,7 +184,7 @@ export const HOUR_PRESETS: HourPreset[] = [
     minutes: 0,
     state: {
       sunAngle: 60, sunX: 0.74, daylightK: 2400, daylight: 0,
-      altarK: 2700, altar: 0, thresholdK: 2200, threshold: 0.55, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1,
+      altarK: 2700, altar: 0, thresholdK: 2200, threshold: 0.55, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
     },
     readout: { daylightK: null, artificialK: 2200, altarLux: 0, naveLux: 0, doorLux: 8 },
     intent: 'Only the door. Enough to find it.',
@@ -164,8 +193,13 @@ export const HOUR_PRESETS: HourPreset[] = [
 
 const KEYS: readonly (keyof LightState)[] = [
   'sunAngle', 'sunX', 'daylightK', 'daylight', 'altarK', 'altar',
-  'thresholdK', 'threshold', 'naveK', 'nave', 'reveal', 'doorway', 'altarBlock',
+  'thresholdK', 'threshold', 'naveK', 'nave', 'reveal', 'doorway', 'altarBlock', 'slitLength', 'heroFraming',
 ];
+
+/** Values of the optional keys when a state omits them. */
+const OPTIONAL_DEFAULTS = { doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0 } as const;
+const val = (s: LightState, k: keyof LightState): number =>
+  s[k] ?? OPTIONAL_DEFAULTS[k as keyof typeof OPTIONAL_DEFAULTS];
 
 const DAY = 1440;
 /** Presets sorted by minutes (00:00 first) for segment lookup. */
@@ -196,7 +230,7 @@ function segment(min: number): { a: HourPreset; b: HourPreset; t: number } {
 export function stateAtMinutes(min: number, out?: LightState): LightState {
   const { a, b, t } = segment(min);
   const o = out ?? ({} as LightState);
-  for (const k of KEYS) o[k] = lerp(a.state[k] ?? 1, b.state[k] ?? 1, t);
+  for (const k of KEYS) o[k] = lerp(val(a.state, k), val(b.state, k), t);
   return o;
 }
 
@@ -285,7 +319,7 @@ uniform vec2 uRes;
 uniform vec4 uGeo;    // tan(sunAngle), slit x, landing x, half-width of the view at the wall
 uniform vec2 uLayout; // altar x, door x
 uniform float uZoom;  // >1 widens the view on portrait frames so the room still reads
-uniform vec2 uShow;   // doorway, altar block: 1 = built, 0 = plain wall / floor
+uniform vec3 uShow;   // doorway, altar block (1 = built, 0 = plain wall / floor), slit length (m)
 flat in vec3 vSun;
 flat in vec3 vAltar;
 flat in vec3 vDoor;
@@ -296,7 +330,6 @@ const vec3 RO = vec3(0.0, 1.55, 7.5);
 const float FOCAL = 1.12;
 const float H = 5.4;        // ceiling plane holding the slit
 const float SLIT_W = 0.5;  // slit width (m)
-const float SLIT_L = 5.6;   // slit length along z (m)
 const float KZ = 0.42;      // sun's lean toward the back wall per metre of drop
 const float SOFTK = 0.05;   // penumbra growth per metre from the aperture (exaggerated sun disc)
 const float DOOR_HW = 0.55;
@@ -325,13 +358,15 @@ float fbm(vec2 p) {
 float sunLit(vec3 p) {
   float h = H - p.y;
   if (h <= 0.0) return 0.0;
+  float top = smoothstep(0.0, 0.45, h); // soft ceiling line (only ever visible on portrait frames)
   float u = p.x - uGeo.x * h - uGeo.y;        // across the slit
   float zs = p.z + KZ * h;                    // along the slit
   float soft = 0.02 + h * SOFTK;
   float hw = SLIT_W * 0.5;
   float a = smoothstep(-hw - soft, -hw + soft, u) * (1.0 - smoothstep(hw - soft, hw + soft, u));
-  float b = smoothstep(-1.0 - soft, -1.0 + soft, zs) * (1.0 - smoothstep(SLIT_L - soft * 3.0, SLIT_L + soft * 3.0, zs));
-  return a * b;
+  float slitL = uShow.z;
+  float b = smoothstep(-1.0 - soft, -1.0 + soft, zs) * (1.0 - smoothstep(slitL - soft * 3.0, slitL + soft * 3.0, zs));
+  return a * b * top;
 }
 
 float spot(vec3 p, vec3 n, vec3 pos, vec3 dir, float cosIn, float cosOut, float r0) {
@@ -404,8 +439,11 @@ vec3 shade(vec3 p, vec3 n, int surf, vec2 aa, vec3 sd) {
   float elev = pow(inversesqrt(1.0 + tanA * tanA), 4.0); // cos^4: high sun floods the nave
   E += vSun * ((0.0018 + 0.012 * elev) * sideFill * occl);
   float bandLen = 2.6;
-  E += vSun * (0.07 * pointL(p, n, vec3(xLand, 0.02, bandLen), 2.5) * occl);
-  E += vSun * (0.03 * pointL(p, n, vec3(xLand - tanA * 1.6, 1.6, 0.02), 1.8) * occl);
+  // bounce only from what the blade actually lights (a short slit never reaches the floor)
+  float floorLit = clamp((uShow.z - KZ * H) * 0.5, 0.0, 1.0);
+  float wallLowLit = smoothstep(1.2, 2.0, uShow.z);
+  E += vSun * (0.07 * floorLit * pointL(p, n, vec3(xLand, 0.02, bandLen), 2.5) * occl);
+  E += vSun * (0.03 * wallLowLit * pointL(p, n, vec3(xLand - tanA * 1.6, 1.6, 0.02), 1.8) * occl);
 
   // altar downlight: grazes the apse wall, leaves a scallop and a crisp top
   vec3 aPos = vec3(xA, 4.9, 1.45);
@@ -524,39 +562,91 @@ const waitingRestore = new WeakMap<HTMLCanvasElement, () => void>();
 /** Context losses scheduled by destroy() but not yet run, keyed by canvas → cancel. */
 const scheduledLoss = new WeakMap<HTMLCanvasElement, () => void>();
 
+/** performance.now() of the most recent draw / creation by any renderer in this module. */
+let lastDrawAt = -Infinity;
+let lastCreateAt = -Infinity;
+
 /**
- * loseContext() blocks the main thread until the GPU has drained everything
- * queued for that context (measured 0.6–13 s on a software GPU when called inside
- * a route swap). Run it when the browser is idle instead; a renderer re-created
- * on the same canvas before then cancels it and simply reuses the live context.
+ * Releasing a context is a synchronous round-trip to the GPU process: loseContext()
+ * (and even resizing the drawing buffer) blocks the main thread until the GPU has
+ * worked through everything queued ahead of it — measured 0.6–13 s on a software
+ * GPU when called inside a route swap, and still 0.6–2.3 s from a plain
+ * requestIdleCallback, because "main thread idle" is not "GPU idle".
+ *
+ * So the loss waits until the GPU is demonstrably quiet:
+ *  - at least LOSS_MIN_DELAY after destroy() (route transitions are ≤ 1.2 s),
+ *  - this context's own fence has signalled (its queue is drained),
+ *  - no light renderer has been created or has drawn for LOSS_QUIET,
+ *  - a short burst of animation frames is smooth (the compositor keeps up),
+ * then it runs. After LOSS_MAX_WAIT it runs regardless.
+ * A renderer re-created on the same canvas meanwhile cancels the loss and reuses
+ * the live context.
  */
-function scheduleLoss(canvas: HTMLCanvasElement, ctx: WebGL2RenderingContext, ext: WEBGL_lose_context): void {
-  if ((window as unknown as { __TMP_NOLOSS?: boolean }).__TMP_NOLOSS) return; // TMP-EXPERIMENT
-  let done = false;
-  const run = () => {
-    if (done) return;
-    done = true;
-    scheduledLoss.delete(canvas);
-    if (!ctx.isContextLost()) {
-      lossPending.add(canvas);
-      ext.loseContext();
-    }
+const LOSS_MIN_DELAY = 800;
+const CREATE_SETTLE = 160;
+const LOSS_FRAMES = 8;
+const LOSS_FRAME_MAX = 34;
+const LOSS_QUIET = 1000;
+const LOSS_MAX_WAIT = 15000;
+const LOSS_POLL = 250;
+
+/** Sample a few animation frames; smooth = every interval under ~2 vsyncs. */
+function framesSmooth(cb: (smooth: boolean) => void): void {
+  let n = 0;
+  let prev = 0;
+  let worst = 0;
+  const step = (t: number) => {
+    if (prev) worst = Math.max(worst, t - prev);
+    prev = t;
+    if (++n <= LOSS_FRAMES) requestAnimationFrame(step);
+    else cb(worst < LOSS_FRAME_MAX);
   };
-  let cancel: () => void;
-  if (typeof window.requestIdleCallback === 'function') {
-    const id = window.requestIdleCallback(run, { timeout: 2000 });
-    cancel = () => {
-      done = true;
-      window.cancelIdleCallback(id);
-    };
-  } else {
-    const id = window.setTimeout(run, 250);
-    cancel = () => {
-      done = true;
-      window.clearTimeout(id);
-    };
-  }
-  scheduledLoss.set(canvas, cancel);
+  requestAnimationFrame(step);
+}
+
+function scheduleLoss(canvas: HTMLCanvasElement, ctx: WebGL2RenderingContext, ext: WEBGL_lose_context): void {
+  const t0 = performance.now();
+  // Marks the end of this context's queue; flushed, never waited on.
+  let fence: WebGLSync | null = ctx.fenceSync(ctx.SYNC_GPU_COMMANDS_COMPLETE, 0);
+  ctx.flush();
+  let done = false;
+  let timer = 0;
+  const finish = () => {
+    done = true;
+    window.clearTimeout(timer);
+    scheduledLoss.delete(canvas);
+    if (fence && !ctx.isContextLost()) ctx.deleteSync(fence);
+    fence = null;
+  };
+  const lose = () => {
+    if (done) return;
+    finish();
+    if (ctx.isContextLost()) return;
+    lossPending.add(canvas);
+    ext.loseContext();
+  };
+  const poll = () => {
+    if (done) return;
+    if (ctx.isContextLost()) return finish();
+    const now = performance.now();
+    const drained = !fence || ctx.getSyncParameter(fence, ctx.SYNC_STATUS) === ctx.SIGNALED;
+    // A page that is mounting or animating its light is busy on the GPU: wait.
+    const quiet = now - Math.max(lastDrawAt, lastCreateAt) >= LOSS_QUIET;
+    if (now - t0 >= LOSS_MAX_WAIT) return lose();
+    if (now - t0 >= LOSS_MIN_DELAY && drained && quiet) {
+      // Last check: is the compositor keeping up? When the GPU is behind (a route
+      // transition or reveal being composited), Chrome stretches frame intervals.
+      framesSmooth((smooth) => {
+        if (done) return;
+        if (smooth && performance.now() - Math.max(lastDrawAt, lastCreateAt) >= LOSS_QUIET) lose();
+        else timer = window.setTimeout(poll, LOSS_POLL);
+      });
+      return;
+    }
+    timer = window.setTimeout(poll, LOSS_POLL);
+  };
+  timer = window.setTimeout(poll, LOSS_POLL);
+  scheduledLoss.set(canvas, finish); // cancel: the context stays alive for reuse
 }
 const allowRestore = (e: Event) => {
   e.preventDefault();
@@ -669,10 +759,12 @@ export function createLightRenderer(
   }
 
   // Optional geometry keys default to built (1) so callers that never mention them get the full room.
-  const state: LightState = { ...HERO_STATE, doorway: 1, altarBlock: 1 };
+  const state: LightState = { ...HERO_STATE, ...OPTIONAL_DEFAULTS };
   let res: GLRes | null = null;
   /** Fence after the last draw: GPU backpressure, at most one frame in flight. */
   let fence: WebGLSync | null = null;
+  let targetW = canvas.width;
+  let targetH = canvas.height;
   let dirty = true;
   let lost = ctx.isContextLost();
   let destroyed = false;
@@ -710,13 +802,19 @@ export function createLightRenderer(
   function resize(): void {
     if (destroyed) return;
     const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
-    const w = Math.max(1, Math.round(canvas.clientWidth * dpr));
-    const h = Math.max(1, Math.round(canvas.clientHeight * dpr));
-    if (canvas.width !== w || canvas.height !== h) {
-      canvas.width = w;
-      canvas.height = h;
-    }
+    targetW = Math.max(1, Math.round(canvas.clientWidth * dpr));
+    targetH = Math.max(1, Math.round(canvas.clientHeight * dpr));
+    // Reallocating the drawing buffer is a GPU round-trip, so it is deferred to
+    // render(): a canvas resized during a route swap and then destroyed (or one that
+    // stays off-screen) never pays for it. createLightRenderer sizes once, up front.
     dirty = true;
+  }
+
+  function applySize(): void {
+    if (canvas.width !== targetW || canvas.height !== targetH) {
+      canvas.width = targetW;
+      canvas.height = targetH;
+    }
   }
 
   function set(s: Partial<LightState>): void {
@@ -731,6 +829,10 @@ export function createLightRenderer(
 
   function render(force = false): void {
     if (!dirty || lost || destroyed || !res) return;
+    // Hold GPU work briefly after any context creation: a page usually creates its
+    // renderers within ~100 ms, and a context created while the GPU is busy with a
+    // first frame (pipeline compile + full-res draw) blocks the main thread far longer.
+    if (!force && performance.now() - lastCreateAt < CREATE_SETTLE) return;
     if (fence) {
       // Non-blocking: WebGL only updates sync status between tasks. If the GPU is
       // still on the previous frame, skip this tick instead of queueing another.
@@ -739,13 +841,20 @@ export function createLightRenderer(
       fence = null;
     }
     dirty = false;
-    const w = canvas.width, h = canvas.height;
+    applySize();
+    const w = targetW, h = targetH;
     const aspect = w / h;
     // Portrait: pull back until ~5 m of wall is in frame (altar + door stay legible).
     const zoom = Math.max(1, MIN_HALF_W / (VIEW_HALF_H * aspect));
     const halfW = VIEW_HALF_H * aspect * zoom;
-    const tanA = Math.tan((Math.min(75, Math.max(5, state.sunAngle)) * Math.PI) / 180);
-    const xLand = (state.sunX - 0.5) * 2 * halfW * 0.85;
+    const P = val(state, 'heroFraming') >= 0.5 && aspect < 1 ? HERO_PORTRAIT_OVERRIDES : null;
+    const sunAngle = P ? P.sunAngle : state.sunAngle;
+    const sunX = P ? P.sunX : state.sunX;
+    const slitL = P ? P.slitLength : val(state, 'slitLength');
+    const threshold = P ? P.threshold : state.threshold;
+    const nave = P ? P.nave : state.nave;
+    const tanA = Math.tan((Math.min(75, Math.max(5, sunAngle)) * Math.PI) / 180);
+    const xLand = (sunX - 0.5) * 2 * halfW * 0.85;
     const xSlit = xLand - tanA * CEILING;
     // Layout scales with the frame so portrait crops keep altar + door in view.
     const xAltar = Math.min(2.2, Math.max(0.5, halfW * 0.32));
@@ -761,13 +870,14 @@ export function createLightRenderer(
     ctx.uniform4f(res.uGeo, tanA, xSlit, xLand, halfW);
     ctx.uniform2f(res.uLayout, xAltar, xDoor);
     ctx.uniform4f(res.uK, state.daylightK, state.altarK, state.thresholdK, state.naveK);
-    ctx.uniform4f(res.uI, state.daylight * ri, state.altar * ri, state.threshold * ri, state.nave * ri);
+    ctx.uniform4f(res.uI, state.daylight * ri, state.altar * ri, threshold * ri, nave * ri);
     ctx.uniform1f(res.uWarm, warm);
     ctx.uniform1f(res.uZoom, zoom);
-    ctx.uniform2f(res.uShow, clamp01(state.doorway ?? 1), clamp01(state.altarBlock ?? 1));
+    ctx.uniform3f(res.uShow, clamp01(val(state, 'doorway')), clamp01(val(state, 'altarBlock')), Math.max(0.1, slitL));
     ctx.drawArrays(ctx.TRIANGLES, 0, 3);
     fence = ctx.fenceSync(ctx.SYNC_GPU_COMMANDS_COMPLETE, 0);
     ctx.flush();
+    lastDrawAt = performance.now();
   }
 
   function destroy(): void {
@@ -784,9 +894,8 @@ export function createLightRenderer(
         ctx.deleteProgram(res.program);
         ctx.deleteVertexArray(res.vao);
       }
-      // Drop the full-size drawing buffer now; the context goes at idle time.
-      canvas.width = 1;
-      canvas.height = 1;
+      // No canvas resize here: reallocating the drawing buffer is itself a GPU
+      // round-trip (measured 160–630 ms during a route swap). The buffer goes with the context.
       if (ext) scheduleLoss(canvas, ctx, ext);
     }
     res = null;
@@ -795,6 +904,8 @@ export function createLightRenderer(
   }
 
   resize();
+  applySize(); // fresh context: allocating the drawing buffer now is cheap
+  lastCreateAt = performance.now();
 
   return {
     set,

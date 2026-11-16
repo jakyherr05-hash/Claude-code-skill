@@ -2,6 +2,14 @@
  * Verification harness for src/webgl/lightRenderer.ts.
  * Serve with `npx vite --port 5179` from demo/ and open /lab/light.html.
  * `?clean` hides the UI (for screenshots). Exposes window.__lab.
+ *
+ * Capture mode (poster / still masters — the shader's own settled frame, reveal 1, DPR 1):
+ *   /lab/light.html?clean&shot=hero-landscape&w=2400&h=1350
+ *   /lab/light.html?clean&shot=hero-portrait&w=1170&h=2532
+ *   /lab/light.html?clean&shot=hour-0..5&w=1280&h=720      (HOUR_PRESETS order: 06:10 … 00:00)
+ * The canvas is fixed at w×h CSS px at the top-left; with a w×h viewport at
+ * deviceScaleFactor 1 a full-page screenshot is the master. window.__ready = true
+ * once the frame is drawn and presented (window.__shot describes what was drawn).
  */
 import { gsap } from 'gsap';
 import {
@@ -11,6 +19,7 @@ import {
   readoutAtMinutes,
   HOUR_PRESETS,
   HERO_STATE,
+  heroStateFor,
   type LightRenderer,
   type LightState,
 } from '../src/webgl/lightRenderer';
@@ -26,7 +35,9 @@ type Stats = {
   meanRGB: [number, number, number];
 };
 
-if (new URLSearchParams(location.search).has('clean')) document.body.classList.add('clean');
+const params = new URLSearchParams(location.search);
+if (params.has('clean')) document.body.classList.add('clean');
+const shot = params.get('shot');
 
 let canvas = document.getElementById('c') as HTMLCanvasElement;
 let renderer: LightRenderer | null = null;
@@ -159,10 +170,37 @@ document.getElementById('ui')!.addEventListener('click', (e) => {
 range.addEventListener('input', () => setMinutes(Number(range.value)));
 window.addEventListener('resize', () => renderer?.resize());
 
+/** Resolve a capture-mode shot name to its exact state (null = unknown name). */
+function shotState(name: string): LightState | null {
+  if (name === 'hero-landscape') return { ...HERO_STATE, reveal: 1 };
+  if (name === 'hero-portrait') return { ...heroStateFor(0.5), reveal: 1 };
+  const m = /^hour-([0-5])$/.exec(name);
+  return m ? { ...HOUR_PRESETS[Number(m[1])]!.state, reveal: 1 } : null;
+}
+
 const supported = supportsWebGL2();
-mount();
-gsap.ticker.add(tick);
-setPreset(-1);
+if (shot) {
+  const state = shotState(shot);
+  const w = Math.max(1, Math.round(Number(params.get('w')) || 1280));
+  const h = Math.max(1, Math.round(Number(params.get('h')) || 720));
+  document.body.classList.add('clean');
+  document.documentElement.style.cssText = 'margin:0;background:#0d0c0b;overflow:hidden';
+  canvas.style.cssText = `position:fixed;left:0;top:0;width:${w}px;height:${h}px`;
+  if (!state) throw new Error(`[light-lab] unknown shot "${shot}" (hero-landscape | hero-portrait | hour-0..5)`);
+  renderer = createLightRenderer(canvas, { maxDpr: 1 }); // masters are authored at DPR 1
+  if (renderer) {
+    renderer.set(state);
+    renderer.resize();
+    renderer.render(true);
+    (window as unknown as { __shot: unknown }).__shot = { shot, w, h, canvas: [canvas.width, canvas.height], state };
+    // two frames: the drawn buffer has been composited before anyone screenshots
+    requestAnimationFrame(() => requestAnimationFrame(() => ((window as unknown as { __ready: boolean }).__ready = true)));
+  }
+} else {
+  mount();
+  gsap.ticker.add(tick);
+  setPreset(-1);
+}
 
 declare global {
   interface Window {
