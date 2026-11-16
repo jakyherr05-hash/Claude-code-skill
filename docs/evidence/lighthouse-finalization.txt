@@ -1,0 +1,24 @@
+Lighthouse 13.6.0, mobile preset (simulated throttling), --disable-3d-apis, prerendered production build.
+new = current branch (font fix W23 + W24). old = the exact 486c933 build behind lighthouse-486c933.txt.
+Series 1 and 2 ran right after the full Playwright suite (host load avg ~1.7-1.8); series 3 interleaves old/new on the same host.
+fontBody = sum of Font resourceSize (decoded bytes).
+
+Series 1 (new):
+  lh2/m1.json  2026-11-16T06:39:23.683Z perf=92 LCP=762ms TBT=343ms CLS=0 fontBody=212608
+  lh2/m2.json  2026-11-16T06:39:36.956Z perf=95 LCP=758ms TBT=262ms CLS=0 fontBody=212608
+  lh2/m3.json  2026-11-16T06:39:50.196Z perf=91 LCP=761ms TBT=370ms CLS=0 fontBody=212608
+Series 2 (new):
+  lh2/m4.json  2026-11-16T06:40:18.602Z perf=95 LCP=760ms TBT=258ms CLS=0 fontBody=212608
+  lh2/m5.json  2026-11-16T06:40:31.777Z perf=98 LCP=759ms TBT=139ms CLS=0 fontBody=212608
+  lh2/m6.json  2026-11-16T06:40:45.245Z perf=94 LCP=754ms TBT=268ms CLS=0 fontBody=212608
+Series 3 (interleaved A/B):
+  lh3/old1.json 2026-11-16T06:41:12.694Z perf=97 LCP=774ms TBT=176ms CLS=0 fontBody=353980
+  lh3/new1.json 2026-11-16T06:41:26.042Z perf=98 LCP=766ms TBT=165ms CLS=0 fontBody=212608
+  lh3/old2.json 2026-11-16T06:41:39.055Z perf=98 LCP=758ms TBT=155ms CLS=0 fontBody=353980
+  lh3/new2.json 2026-11-16T06:41:52.031Z perf=97 LCP=757ms TBT=182ms CLS=0 fontBody=212608
+  lh3/old3.json 2026-11-16T06:42:05.009Z perf=98 LCP=766ms TBT=165ms CLS=0 fontBody=353980
+  lh3/new3.json 2026-11-16T06:42:17.837Z perf=96 LCP=758ms TBT=218ms CLS=0 fontBody=212608
+  lh3/old4.json 2026-11-16T06:42:30.927Z perf=97 LCP=760ms TBT=192ms CLS=0 fontBody=353980
+  lh3/new4.json 2026-11-16T06:42:43.783Z perf=96 LCP=754ms TBT=215ms CLS=0 fontBody=212608
+
+Series 3 TBT median: old 170.5 ms, new 198.5 ms (ranges 155-192 vs 165-218 overlap). LCP 754-774 ms both. CLS 0 both.

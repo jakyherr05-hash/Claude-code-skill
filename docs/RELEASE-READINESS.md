@@ -29,4 +29,5 @@ Evidence for every line is in [VALIDATION-REPORT.md](VALIDATION-REPORT.md) and [
 ## Accepted trade-offs
 
 - Mono labels specified at weight 500 render with the 400 face, to keep first-load fonts at 212.6 KB (budget 220 KB). Creative sign-off not obtained.
+- Mobile TBT with WebGL off is at the edge of its budget (198.5 ms vs 200 ms, interleaved A/B on this host); any added main-thread work will need an offset.
 - The hosted preview uses `VITE_MEMORY_ROUTER=1`: the address bar does not change between pages. Normal builds use real URLs.

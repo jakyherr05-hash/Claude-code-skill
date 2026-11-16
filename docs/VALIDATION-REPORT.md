@@ -60,7 +60,8 @@ Production build (static prerender + route-matched hydration), served by `vite p
 | Run | Commit | Result | Evidence |
 |---|---|---|---|
 | Before the font and router changes | `486c933` | PASS 49/49, 0 flaky | [evidence/playwright-final.json](evidence/playwright-final.json) |
-| Finalization re-run (fonts + router changed since) | `4ebc866` + template sync | IN PROGRESS at this commit; result recorded in the next commit | [evidence/playwright-finalization.json](evidence/playwright-finalization.json) |
+| Finalization re-run 1 (fonts + router changed since) | `ea8d6e9` | **FAIL 45/49**: 4 visual baselines. The 390 px Hour intent grew 28 px with "was." alone on a third line (real regression, W24); 3 others glyph-only (mono 500 → 400 face, same size and layout) | `/tmp` log, summarised in [BUGS-FIXES.md](BUGS-FIXES.md) W24 |
+| Finalization re-run 2, after the W24 fix and regenerating the 4 changed baselines | `c38f050` + baselines | **PASS 49/49**, 0 flaky, 0 skipped | [evidence/playwright-finalization.json](evidence/playwright-finalization.json), [run log](evidence/playwright-finalization-run.log) |
 
 Covered by the suite: routing, back/forward restore, anchor offsets, mobile menu focus trap and scroll lock, Flip filter, The Hour presets and keyboard, Lenis/ScrollTrigger sync, pinned Method sequence, route-change leak test (renderer and tween counts), reduced motion, 6-width responsive matrix, axe (WCAG 2.2 AA, 0 serious/critical) on home and detail, keyboard order, fonts/images blocked, no-WebGL fallback, hero text contrast at 8 viewports, 12 visual baselines (0.1 % tolerance).
 
@@ -76,10 +77,12 @@ Worst pixel under each line's glyph rectangles, measured from screenshots: kicke
 
 Budget: LCP ≤ 2.5 s PASS · CLS ≤ 0.05 PASS · TBT ≤ 200 ms PASS with WebGL off; **with software WebGL it fails**, and real-GPU cost is NOT TESTED. Raw numbers: [evidence/lighthouse-486c933.txt](evidence/lighthouse-486c933.txt).
 
+**Re-measured after the font change (W23/W24), WebGL off, mobile:** LCP 754–766 ms, CLS 0, fonts 212,608 B: PASS. TBT is noisy on this host (the container restarted between the two measurements). Right after the suite, two series gave medians 343 and 258 ms. An interleaved A/B on the same host then gave **old build 170.5 ms vs new build 198.5 ms** (ranges 155–192 vs 165–218 overlap). Verdict: **TBT PASS, marginal** (198.5 ≤ 200 ms). There is no clear regression from the font change, but there is no headroom either. Evidence: [evidence/lighthouse-finalization.txt](evidence/lighthouse-finalization.txt).
+
 ### B.4 Weight
 | Item | Budget | Measured | Status |
 |---|---|---|---|
-| First-load fonts | ≤ 220 KB | 347–355 KB at `486c933` → **212,608 B** after W23 (four files, same at 390 and 1440; preloads match downloads) | PASS after fix |
+| First-load fonts | ≤ 220 KB | 347–355 KB at `486c933` → **212,608 B** after W23 (four files, same at 390 and 1440; preloads match downloads; confirmed by Lighthouse on the final build) | PASS after fix |
 | Initial JS | ≤ 170 KB gz | 152 KB transferred | PASS |
 
 ### B.5 Static-host build (`VITE_MEMORY_ROUTER=1`, used for the hosted preview)
@@ -107,4 +110,6 @@ Served from a nested sub-path at 1440×900 and 390×844: 0 failed requests, 0 co
 | Ten-phase run to a full Gate B pass | PARTIAL | stopped by the account usage limit (A.3) |
 | Demo Gate B round 2 | NOT DONE | B.6 |
 | Mono labels at weight 500 now render with the 400 face | ACCEPTED trade-off | keeps fonts under budget; creative sign-off not obtained |
+| Mobile TBT headroom (WebGL off) | MARGINAL | 198.5 ms median vs 200 ms budget on this host (B.3) |
+| Italic intent at 360–390 px now three lines (was two) | ACCEPTED | wider static italic; no single-word last line (W24) |
 | Agent-team mode, Cowork, claude.ai upload | NOT TESTED | AGENT-VALIDATION §6 |
