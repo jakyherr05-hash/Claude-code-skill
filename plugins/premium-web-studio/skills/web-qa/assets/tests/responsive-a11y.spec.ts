@@ -117,3 +117,35 @@ test.describe('resilience', () => {
     c.assertClean();
   });
 });
+
+test.describe('hero text contrast over the light (axe cannot see through the WebGL canvas)', () => {
+  // Worst pixel under each text line's glyph rects, with the text hidden, against the ink colour #ece6da.
+  // Reduced motion = the shader's settled frame, deterministic. Thresholds: WCAG AA (large text 3:1 for the H1).
+  test.use({ reducedMotion: 'reduce' });
+  const VIEWS = [[360, 740], [390, 844], [430, 932], [768, 1024], [1024, 768], [1366, 768], [1440, 900], [1920, 1080]] as const;
+  for (const [w, h] of VIEWS) {
+    test(`${w}×${h}: kicker/sub ≥ 4.5:1, H1 ≥ 3:1`, async ({ page }) => {
+      await page.setViewportSize({ width: w, height: h });
+      await open(page);
+      await page.waitForTimeout(2500);
+      const rects = await page.evaluate(() => ['.hero .kicker', '.hero__title', '.hero__sub'].map((s) => {
+        const r = document.createRange(); r.selectNodeContents(document.querySelector(s)!);
+        return [...r.getClientRects()].map((q) => [q.x, q.y, q.width, q.height]);
+      }));
+      await page.addStyleTag({ content: '.hero__content,.site-header{visibility:hidden!important} body::after{display:none!important}' });
+      await page.waitForTimeout(300);
+      const b64 = (await page.screenshot()).toString('base64');
+      const ratios = await page.evaluate(async ({ b64, rects }) => {
+        const lum = (r: number, g: number, b: number) => { const f = (v: number) => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+        const i = new Image(); i.src = 'data:image/png;base64,' + b64; await i.decode();
+        const c = new OffscreenCanvas(i.width, i.height); const x = c.getContext('2d')!; x.drawImage(i, 0, 0);
+        const d = x.getImageData(0, 0, i.width, i.height).data;
+        return rects.map((rs) => { let max = 0; for (const [rx, ry, rw, rh] of rs) for (let yy = Math.max(0, ry | 0); yy < Math.min(i.height, ry + rh); yy += 2) for (let xx = Math.max(0, rx | 0); xx < Math.min(i.width, rx + rw); xx += 2) { const k = (yy * i.width + xx) * 4; max = Math.max(max, lum(d[k], d[k + 1], d[k + 2])); } return +((lum(236, 230, 218) + 0.05) / (max + 0.05)).toFixed(2); });
+      }, { b64, rects });
+      test.info().annotations.push({ type: 'contrast', description: JSON.stringify({ kicker: ratios[0], h1: ratios[1], sub: ratios[2] }) });
+      expect(ratios[0], 'kicker').toBeGreaterThanOrEqual(4.5);
+      expect(ratios[1], 'H1 (large text)').toBeGreaterThanOrEqual(3);
+      expect(ratios[2], 'sub-line').toBeGreaterThanOrEqual(4.5);
+    });
+  }
+});

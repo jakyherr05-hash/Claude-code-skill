@@ -121,3 +121,16 @@ export function kelvinToHex(k: number): string {
   const c = (v: number) => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, '0');
   return `#${c(r)}${c(g)}${c(b)}`;
 }
+
+/** Shader-rendered stills of The Hour's six presets (ai-visual-producer, lab capture mode). */
+export const HOUR_STILLS = [
+  { time: '06:10', minutes: 370, id: 'hour-0610' }, { time: '10:00', minutes: 600, id: 'hour-1000' },
+  { time: '13:30', minutes: 810, id: 'hour-1330' }, { time: '18:20', minutes: 1100, id: 'hour-1820' },
+  { time: '21:00', minutes: 1260, id: 'hour-2100' }, { time: '00:00', minutes: 0, id: 'hour-0000' },
+];
+const toMin = (t: string) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
+/** Nearest preset still on the 24 h circle. */
+export const stillFor = (time: string) => {
+  const m = toMin(time);
+  return HOUR_STILLS.reduce((a, b) => (Math.abs(((b.minutes - m + 720 + 1440) % 1440) - 720) < Math.abs(((a.minutes - m + 720 + 1440) % 1440) - 720) ? b : a));
+};

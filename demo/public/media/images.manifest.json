@@ -323,7 +323,7 @@
   },
   {
     "id": "hero-poster",
-    "source": "assets-src/hero-poster.png",
+    "source": "assets-src/hero-landscape.png",
     "sourceWidth": 2400,
     "sourceHeight": 1350,
     "aspect": 1.7778,
@@ -332,31 +332,311 @@
         "format": "avif",
         "width": 960,
         "height": 540,
-        "bytes": 2811,
+        "bytes": 4717,
         "file": "public/media/hero-poster-960.avif"
       },
       {
         "format": "webp",
         "width": 960,
         "height": 540,
-        "bytes": 3242,
+        "bytes": 3826,
         "file": "public/media/hero-poster-960.webp"
       },
       {
         "format": "avif",
         "width": 1920,
         "height": 1080,
-        "bytes": 8338,
+        "bytes": 10532,
         "file": "public/media/hero-poster-1920.avif"
       },
       {
         "format": "webp",
         "width": 1920,
         "height": 1080,
-        "bytes": 9268,
+        "bytes": 10444,
         "file": "public/media/hero-poster-1920.webp"
       }
     ],
     "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hero-poster-960.avif 960w, hero-poster-1920.avif 1920w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hero-poster-960.webp 960w, hero-poster-1920.webp 1920w\" sizes=\"100vw\">\n  <img src=\"hero-poster-1920.webp\" width=\"2400\" height=\"1350\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "hero-poster-portrait",
+    "source": "assets-src/hero-portrait.png",
+    "sourceWidth": 1170,
+    "sourceHeight": 2532,
+    "aspect": 0.4621,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 390,
+        "height": 844,
+        "bytes": 2028,
+        "file": "public/media/hero-poster-portrait-390.avif"
+      },
+      {
+        "format": "webp",
+        "width": 390,
+        "height": 844,
+        "bytes": 1738,
+        "file": "public/media/hero-poster-portrait-390.webp"
+      },
+      {
+        "format": "avif",
+        "width": 780,
+        "height": 1688,
+        "bytes": 4022,
+        "file": "public/media/hero-poster-portrait-780.avif"
+      },
+      {
+        "format": "webp",
+        "width": 780,
+        "height": 1688,
+        "bytes": 4942,
+        "file": "public/media/hero-poster-portrait-780.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1170,
+        "height": 2532,
+        "bytes": 6752,
+        "file": "public/media/hero-poster-portrait-1170.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1170,
+        "height": 2532,
+        "bytes": 9400,
+        "file": "public/media/hero-poster-portrait-1170.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hero-poster-portrait-390.avif 390w, hero-poster-portrait-780.avif 780w, hero-poster-portrait-1170.avif 1170w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hero-poster-portrait-390.webp 390w, hero-poster-portrait-780.webp 780w, hero-poster-portrait-1170.webp 1170w\" sizes=\"100vw\">\n  <img src=\"hero-poster-portrait-1170.webp\" width=\"1170\" height=\"2532\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "hour-0000",
+    "source": "assets-src/hour-0000.png",
+    "sourceWidth": 1280,
+    "sourceHeight": 720,
+    "aspect": 1.7778,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 640,
+        "height": 360,
+        "bytes": 1331,
+        "file": "public/media/hour-0000-640.avif"
+      },
+      {
+        "format": "webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 1160,
+        "file": "public/media/hour-0000-640.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 720,
+        "bytes": 2768,
+        "file": "public/media/hour-0000-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 720,
+        "bytes": 3128,
+        "file": "public/media/hour-0000-1280.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hour-0000-640.avif 640w, hour-0000-1280.avif 1280w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hour-0000-640.webp 640w, hour-0000-1280.webp 1280w\" sizes=\"100vw\">\n  <img src=\"hour-0000-1280.webp\" width=\"1280\" height=\"720\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "hour-0610",
+    "source": "assets-src/hour-0610.png",
+    "sourceWidth": 1280,
+    "sourceHeight": 720,
+    "aspect": 1.7778,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 640,
+        "height": 360,
+        "bytes": 3024,
+        "file": "public/media/hour-0610-640.avif"
+      },
+      {
+        "format": "webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 2410,
+        "file": "public/media/hour-0610-640.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 720,
+        "bytes": 6270,
+        "file": "public/media/hour-0610-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 720,
+        "bytes": 6298,
+        "file": "public/media/hour-0610-1280.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hour-0610-640.avif 640w, hour-0610-1280.avif 1280w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hour-0610-640.webp 640w, hour-0610-1280.webp 1280w\" sizes=\"100vw\">\n  <img src=\"hour-0610-1280.webp\" width=\"1280\" height=\"720\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "hour-1000",
+    "source": "assets-src/hour-1000.png",
+    "sourceWidth": 1280,
+    "sourceHeight": 720,
+    "aspect": 1.7778,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 640,
+        "height": 360,
+        "bytes": 2648,
+        "file": "public/media/hour-1000-640.avif"
+      },
+      {
+        "format": "webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 1790,
+        "file": "public/media/hour-1000-640.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 720,
+        "bytes": 5451,
+        "file": "public/media/hour-1000-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 720,
+        "bytes": 4960,
+        "file": "public/media/hour-1000-1280.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hour-1000-640.avif 640w, hour-1000-1280.avif 1280w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hour-1000-640.webp 640w, hour-1000-1280.webp 1280w\" sizes=\"100vw\">\n  <img src=\"hour-1000-1280.webp\" width=\"1280\" height=\"720\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "hour-1330",
+    "source": "assets-src/hour-1330.png",
+    "sourceWidth": 1280,
+    "sourceHeight": 720,
+    "aspect": 1.7778,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 640,
+        "height": 360,
+        "bytes": 3026,
+        "file": "public/media/hour-1330-640.avif"
+      },
+      {
+        "format": "webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 1786,
+        "file": "public/media/hour-1330-640.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 720,
+        "bytes": 5930,
+        "file": "public/media/hour-1330-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 720,
+        "bytes": 5284,
+        "file": "public/media/hour-1330-1280.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hour-1330-640.avif 640w, hour-1330-1280.avif 1280w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hour-1330-640.webp 640w, hour-1330-1280.webp 1280w\" sizes=\"100vw\">\n  <img src=\"hour-1330-1280.webp\" width=\"1280\" height=\"720\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "hour-1820",
+    "source": "assets-src/hour-1820.png",
+    "sourceWidth": 1280,
+    "sourceHeight": 720,
+    "aspect": 1.7778,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 640,
+        "height": 360,
+        "bytes": 3345,
+        "file": "public/media/hour-1820-640.avif"
+      },
+      {
+        "format": "webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 2552,
+        "file": "public/media/hour-1820-640.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 720,
+        "bytes": 6803,
+        "file": "public/media/hour-1820-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 720,
+        "bytes": 6308,
+        "file": "public/media/hour-1820-1280.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hour-1820-640.avif 640w, hour-1820-1280.avif 1280w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hour-1820-640.webp 640w, hour-1820-1280.webp 1280w\" sizes=\"100vw\">\n  <img src=\"hour-1820-1280.webp\" width=\"1280\" height=\"720\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "hour-2100",
+    "source": "assets-src/hour-2100.png",
+    "sourceWidth": 1280,
+    "sourceHeight": 720,
+    "aspect": 1.7778,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 640,
+        "height": 360,
+        "bytes": 2559,
+        "file": "public/media/hour-2100-640.avif"
+      },
+      {
+        "format": "webp",
+        "width": 640,
+        "height": 360,
+        "bytes": 1780,
+        "file": "public/media/hour-2100-640.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 720,
+        "bytes": 4975,
+        "file": "public/media/hour-2100-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 720,
+        "bytes": 4504,
+        "file": "public/media/hour-2100-1280.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"hour-2100-640.avif 640w, hour-2100-1280.avif 1280w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"hour-2100-640.webp 640w, hour-2100-1280.webp 1280w\" sizes=\"100vw\">\n  <img src=\"hour-2100-1280.webp\" width=\"1280\" height=\"720\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
   }
 ]

@@ -73,7 +73,9 @@ async function inspect(browser, url, outDir, id, { mobile = true } = {}) {
     if (result.httpStatus >= 400) {
       // Bot walls / rate limits: the DOM we'd measure is an error or challenge page, not the site.
       result.status = 'blocked';
-      result.errors.push(`HTTP ${result.httpStatus} — automated access refused or rate-limited; page content is not the real site`);
+      const why = { 401: 'authentication required', 403: 'automated access refused', 404: 'page not found', 429: 'rate-limited', 451: 'unavailable for legal reasons' }[result.httpStatus]
+        || (result.httpStatus >= 500 ? 'server error' : 'request refused');
+      result.errors.push(`HTTP ${result.httpStatus} — ${why}; the page content is not the real site, nothing was measured`);
       await page.screenshot({ path: path.join(dir, 'blocked.jpg'), type: 'jpeg', quality: 50 });
       await ctx.close();
       fs.writeFileSync(path.join(dir, 'capture.json'), JSON.stringify(result, null, 2));

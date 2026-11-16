@@ -1,0 +1,41 @@
+# Bugs found and fixed
+
+Each row was found by executing something (a test, a browser probe, a review), not by reading code. "Found by" names the independent check that exposed it. The commit columns refer to `claude/awesome-ritchie-a31l7f`.
+
+## A. Claude Code skill / plugin tooling
+
+| # | Defect | Root cause | Fix | Found by | Regression guard |
+|---|---|---|---|---|---|
+| S1 | `encode-video.sh` silently skipped AV1 although SVT-AV1 was installed | `ffmpeg -encoders \| grep -q` under `set -o pipefail`: grep exits early, ffmpeg gets SIGPIPE, the pipeline reads as "not found" | Capture the encoder list first, then grep | Encoding a real clip + ffprobe | `tests/skill-scripts.sh` asserts h264 + vp9 + **av1** when libsvtav1 exists |
+| S2 | `optimize-images.mjs` reported "sharp is not installed" when sharp was available via `NODE_PATH` (global/shared installs) | ESM `import()` ignores `NODE_PATH` | Fall back to `createRequire(import.meta.url)('sharp')` | `tests/skill-scripts.sh` | same test (AVIF/WebP outputs, magic bytes, no upscaling) |
+| S3 | `capture-reference.mjs` recorded HTTP 4xx/5xx pages (bot walls) as `inspected` | No status check after navigation | Status ≥ 400 → `blocked`, nothing measured; status-specific reason (404 "page not found", 403 "automated access refused", 429 "rate-limited"…) | Reviewing the first 25-site crawl (Awwwards 502, Behance 403, SiteInspire 429) | skill-scripts capture test; library entries marked `blocked` |
+| S4 | lenis-scroll skill stated that `respectReducedMotion` makes scrolling instant | Lenis 1.3.27 only makes **programmatic** scrolls instant; wheel input still damps (lerp forced to 1 → damp λ=60, ≈70 ms; `lenis.mjs` L753–757, L86) | Skill text corrected; template sets `smoothWheel: false` under reduced motion, tracked live | QA Gate B (D-1), confirmed in source | demo test "reduced motion": ≤ 1 intermediate frame, sampled in-page |
+| S5 | lenis-scroll skill/template allowed double-counting the fixed-header offset | `lenis.scrollTo(element)` already subtracts CSS `scroll-margin-top` + `scroll-padding-top` (`lenis.mjs` L787–790) | Skill rule "one offset mechanism"; template skips its own offset when CSS margin/padding exists | skill-creator eval iteration 1: **both** runs landed anchors at 144/216 px for a 72 px header (runtime-measured) | eval iteration 2: with skill 72 px (100%), baseline 144 px (88.9%) |
+| S6 | `@gsap/react` licence listed as MIT in the tool registry | Assumed, not read | Corrected to GSAP Standard licence (from its installed `package.json`) | Re-reading installed package metadata | — |
+| S7 | Skill templates could drift from the tested demo code | Copies were hand-synced | `scripts/sync-templates.sh` + `--check`; `tests/validate.py` fails on drift | Design review | `validate.py`, `skill-scripts.sh` |
+| S8 | Test harness defects of my own: three `cmd \| grep -q` pipefail traps, a broken PNG generator, an orphaned HTTP server | — | Fixed in `tests/skill-scripts.sh` (random port, explicit cleanup, capture-then-grep) | Running the smoke test | the test itself |
+
+## B. Demo website (validation project)
+
+| # | Defect | Root cause | Fix | Found by | Regression guard |
+|---|---|---|---|---|---|
+| W1 | Anchors landed 4 px from the top instead of under the 64 px header | `parseFloat('4rem')` = 4 treated as px | `cssVarPx()` resolves CSS lengths via the browser | Playwright anchor test | "anchor navigation applies header offset" |
+| W2 | Cross-route `/#contact` and back/forward restore landed at the old page's limit | Lenis' ResizeObserver hadn't measured the new page; `scrollTo` clamped to the old height | `lenis.resize()` before post-swap scrolls | Playwright | functional "section nav from the project page", "back/forward restores" |
+| W3 | Route transition could hang (URL changed, page didn't) | Transition awaited tweens on rAF (paused in background tabs/starved) | Wall-clock deadline alongside each veil tween | Playwright under load | lifecycle tests |
+| W4 | **Multi-second main-thread stalls on route change (0.8–13 s)** | WebGL `destroy()` called `loseContext()` synchronously while the GPU drained queued frames; renderer queued a frame every tick | Fence-based backpressure (≤ 1 frame in flight), cheap destroy, context release deferred until the GPU is quiet | tech-lead Gate B (B1) long-task instrumentation | webgl probe: Home→Detail longest task 69 ms; strict leak test |
+| W5 | 515–811 ms blocked at load | `supportsWebGL2()` created and lost a probe context | Feature check without a context | tech-lead (B2) | load probe 77–106 ms |
+| W6 | Mobile LCP 5.3 s | Sub-line (LCP) faded from opacity 0; page client-rendered | Light from 0.08; static prerender + route-matched hydration; font preloads | performance-engineer, tech-lead (B4) | see PERFORMANCE section of VALIDATION-REPORT |
+| W7 | Hydration mismatch (React #418) on detail routes behind SPA fallbacks | Host served home HTML for `/work/x` | `data-prerendered` route check → hydrate only on match; `<slug>.html` twins | Browser check after adding prerender | verified per route (home, detail, trailing slash, 404, reduced) |
+| W8 | The Hour: presets landed on snapped values (18:20 → 18:15); keys stepped from stale values | `step=15` vs presets at 5-min resolution; keys based on the animated value | `step=5`, keys ±15/±60 from the **target** value; slider synced on tween end; `aria-valuetext` HH:MM | Playwright The Hour test | functional "The Hour…" (exact values 60/75/1395/1100) |
+| W9 | Room plates unclickable while unrevealed | `clip-path` on the `<a>` also clips hit-testing | Clip the inner `<picture>` | Playwright route tests | route tests |
+| W10 | Method drawing labels collided at ≤ 768 px; "E. SLIT"/"NICHE" painted over | Fixed label positions; paint order | Left-anchored beam labels, vertical ambulatory label, labels painted last | QA (D-2), creative-director (fix 6) | visual baselines |
+| W11 | Visual regression tolerance 1% let a moved label pass | Tolerance too loose | 0.1% + per-pixel threshold 0.2; baselines regenerated from a fresh build and compared twice | `--update-snapshots` not rewriting a changed image | visual suite |
+| W12 | Stale preview server made baselines from an old build | `reuseExistingServer` | Port/outDir isolation (`PW_PORT`, `PW_OUT`), stale servers killed | Inspecting regenerated baselines | process note in QA report |
+| W13 | Manifesto underline never drew | SplitText `autoSplit` clones nested spans; tween targeted a stale node | Class-driven CSS transition on the paragraph | creative-director (fix 3) | browser check `background-size: 100% 1px` |
+| W14 | **Mobile hero failed contrast** (kicker 1.2:1, sub 2.3–3.1:1) | Shaft composition crossed the text column in portrait | Portrait framing in the shader; shader-rendered portrait poster via `<picture>` art direction + matching preloads | creative-director (blocker) | contrast regression test (8 viewports) |
+| W15 | Hero lit → dimmed → lit on load | Poster ≠ shader frame; shader restarted from 0 | Posters rendered from the shader; CSS warm-on from first paint, shader continues from poster opacity; no-JS fallback | creative-director (fix 2) | — (visual/intro review) |
+| W16 | Detail H1 cut at the fold; flat colour chips inverted the concept; no-WebGL Hour had no room | Layout/asset choices | Hero 62svh; shader-rendered hour stills in the strip and as the crossfading fallback | creative-director (fixes 4, 5) | browser measurements, resilience test |
+| W17 | `aria-label` on `<p>` (prohibited) | SplitText `aria:'auto'` on line splits | `aria:'none'` for line splits | Lighthouse | axe test |
+| W18 | Focus frame drawn across the hero after keyboard navigation | `:focus-visible` box-shadow on programmatically focused h1 | `box-shadow: none` for programmatic focus targets | tech-lead (B5) | — |
+| W19 | Two `playwright-core` versions | Peer dep of axe | `overrides` pin | tech-lead (N9) | `npm ls` |
+| W20 | Hero H1 contrast on short landscape screens (1024×768 1.8:1, 1366×768 2.1:1) | Landscape composition tuned at 1440×900 only | see VALIDATION-REPORT (status recorded there) | contrast regression test added during final validation | contrast regression test |

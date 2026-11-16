@@ -14,7 +14,10 @@ import path from 'node:path';
 
 let sharp;
 try { sharp = (await import('sharp')).default; } catch {
-  console.error('sharp is not installed. Run: npm i -D sharp'); process.exit(2);
+  // ESM import() ignores NODE_PATH; fall back to CommonJS resolution so global/shared installs work too
+  try { const { createRequire } = await import('node:module'); sharp = createRequire(import.meta.url)('sharp'); } catch {
+    console.error('sharp is not installed. Run: npm i -D sharp'); process.exit(2);
+  }
 }
 const args = process.argv.slice(2);
 const opt = (k, d) => { const i = args.indexOf(`--${k}`); return i >= 0 ? args[i + 1] : d; };

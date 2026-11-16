@@ -10,13 +10,20 @@ type Props = {
   height: number;
   priority?: boolean;
   className?: string;
+  /** Art direction: a separate composition for portrait viewports (e.g. hero with the light above the text). */
+  portrait?: { id: string; widths: number[] };
 };
 
-export function Picture({ id, widths, sizes, alt, width, height, priority, className }: Props) {
-  const set = (fmt: string) => widths.map((w) => `${BASE}${id}-${w}.${fmt} ${w}w`).join(', ');
+export const PORTRAIT_MEDIA = '(max-aspect-ratio: 1/1)';
+
+export function Picture({ id, widths, sizes, alt, width, height, priority, className, portrait }: Props) {
+  const setOf = (pid: string, ws: number[], fmt: string) => ws.map((w) => `${BASE}${pid}-${w}.${fmt} ${w}w`).join(', ');
+  const set = (fmt: string) => setOf(id, widths, fmt);
   const fallback = `${BASE}${id}-${widths[Math.min(1, widths.length - 1)]}.webp`;
   return (
     <picture className={className}>
+      {portrait && <source type="image/avif" media={PORTRAIT_MEDIA} srcSet={setOf(portrait.id, portrait.widths, 'avif')} sizes={sizes} />}
+      {portrait && <source type="image/webp" media={PORTRAIT_MEDIA} srcSet={setOf(portrait.id, portrait.widths, 'webp')} sizes={sizes} />}
       <source type="image/avif" srcSet={set('avif')} sizes={sizes} />
       <source type="image/webp" srcSet={set('webp')} sizes={sizes} />
       <img

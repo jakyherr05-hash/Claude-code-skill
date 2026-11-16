@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap, useGSAP } from '../motion/registry';
 import { motionTokens, prefersReducedMotion } from '../motion/tokens';
-import { site, kelvinToHex } from '../data/content';
+import { site, kelvinToHex, HOUR_STILLS } from '../data/content';
+import { Picture } from '../components/Picture';
 import { LightCanvas, type LightHandle } from '../components/LightCanvas';
 import { HOUR_PRESETS, stateAtMinutes, readoutAtMinutes } from '../webgl/lightRenderer';
 
@@ -123,12 +124,19 @@ export function TheHour() {
             <LightCanvas
               ref={light}
               className="hour__canvas"
+              lazy
               initial={stateAtMinutes(START)}
               label="Rendered view of the chapel interior at the selected hour"
               onReady={(ok) => setGlFailed(!ok)}
             />
           )}
-          <div ref={fallback} className="hour__fallback" data-active={glFailed} aria-hidden="true" />
+          {/* no-WebGL fallback: the six shader-rendered stills, crossfaded to the nearest preset (CD fix 4) */}
+          <div ref={fallback} className="hour__fallback" data-active={glFailed} aria-hidden="true">
+            {glFailed && HOUR_STILLS.map((st) => (
+              <Picture key={st.id} id={st.id} widths={[640, 1280]} sizes="(min-width: 64rem) 60vw, 100vw" alt="" width={1280} height={720}
+                className={`hour__still${st.time === active ? ' is-active' : ''}`} />
+            ))}
+          </div>
         </div>
           <figcaption className="hour__intent" aria-live="polite">{intent}</figcaption>
         </figure>

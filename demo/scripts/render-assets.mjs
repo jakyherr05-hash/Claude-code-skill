@@ -8,6 +8,7 @@
  *   NODE_PATH=$(npm root -g) node scripts/render-assets.mjs [scene ...] [--out assets-src] [--scale 1]
  *
  * Scenes: capela museu casa hotel brass glass plate hero grain   (default: all)
+ * --from-shader captures hero-landscape/hero-portrait/hour-* PNGs from the live shader (lab capture mode) instead.
  * --scale 0.25 renders quarter-size previews (for iteration).
  * Deterministic: fixed seeds, no Math.random.
  *
@@ -517,6 +518,37 @@ function browserLib() {
 }
 
 // ----------------------------------------------------------------------------------------------
+// --from-shader: capture the live shader's own settled frames (hero posters + six Hour stills).
+//   npm run assets -- --from-shader   (starts `vite --port 5179`, captures, stops it)
+// Posters must be the shader's frame so the light does not jump when the canvas takes over.
+if (args.includes('--from-shader')) {
+  const { spawn } = await import('node:child_process');
+  const { chromium: pwc } = require('@playwright/test');
+  const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+  const port = 5179;
+  const vite = spawn('npx', ['vite', '--port', String(port), '--strictPort'], { cwd: root, stdio: 'ignore' });
+  const SHOTS = [
+    ['hero-landscape', 2400, 1350], ['hero-portrait', 1170, 2532],
+    ['hour-0610', 1280, 720, 'hour-0'], ['hour-1000', 1280, 720, 'hour-1'], ['hour-1330', 1280, 720, 'hour-2'],
+    ['hour-1820', 1280, 720, 'hour-3'], ['hour-2100', 1280, 720, 'hour-4'], ['hour-0000', 1280, 720, 'hour-5'],
+  ];
+  try {
+    for (let i = 0; i < 60; i++) { try { if ((await fetch(`http://localhost:${port}/lab/light.html`)).ok) break; } catch {} await new Promise((r) => setTimeout(r, 500)); }
+    fs.mkdirSync(outDir, { recursive: true });
+    const b = await pwc.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+    for (const [id, w, h, shotName] of SHOTS) {
+      const pg = await b.newPage({ viewport: { width: w, height: h }, deviceScaleFactor: 1 });
+      await pg.goto(`http://localhost:${port}/lab/light.html?clean&shot=${shotName || id}&w=${w}&h=${h}`);
+      await pg.waitForFunction('window.__ready === true', null, { timeout: 120000 });
+      await pg.screenshot({ path: path.join(outDir, `${id}.png`) });
+      await pg.close();
+      console.log(`${id}.png ${w}x${h} (shader capture)`);
+    }
+    await b.close();
+  } finally { vite.kill(); }
+  process.exit(0);
+}
+
 const todo = positional.length ? positional : null;
 const names = Object.keys(SCENES).filter((id) => !todo || todo.includes(id) || todo.includes(SCENES[id][0]));
 fs.mkdirSync(outDir, { recursive: true });

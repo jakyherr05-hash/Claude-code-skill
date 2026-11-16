@@ -10,12 +10,17 @@ import { createLightRenderer, supportsWebGL2, type LightState } from '../webgl/l
 
 export type LightHandle = { set: (s: Partial<LightState>) => void; ready: boolean };
 
-type Props = { initial: Partial<LightState>; label: string; className?: string; onReady?: (ok: boolean) => void };
+type Props = {
+  initial: Partial<LightState>; label: string; className?: string; onReady?: (ok: boolean) => void;
+  /** Create the GL context only when the canvas comes within ~1 viewport of the screen. Below-the-fold canvases
+   *  should be lazy: creating two contexts at route mount cost 245–808 ms on software GL (webgl-specialist 1b). */
+  lazy?: boolean;
+};
 
 const live = () => ((window as unknown as { __lightRenderers?: number }).__lightRenderers ??= 0);
 const bump = (d: number) => { (window as unknown as { __lightRenderers: number }).__lightRenderers = live() + d; };
 
-export const LightCanvas = forwardRef<LightHandle, Props>(function LightCanvas({ initial, label, className, onReady }, ref) {
+export const LightCanvas = forwardRef<LightHandle, Props>(function LightCanvas({ initial, label, className, onReady, lazy }, ref) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const renderer = useRef<ReturnType<typeof createLightRenderer>>(null);
   const pending = useRef<Partial<LightState>>({ ...initial });
@@ -44,9 +49,9 @@ export const LightCanvas = forwardRef<LightHandle, Props>(function LightCanvas({
 
     // Defer GL setup until after first paint so the poster/H1 (LCP) is never blocked by shader compile.
     const idle = (cb: () => void) => ('requestIdleCallback' in window ? requestIdleCallback(cb, { timeout: 600 }) : setTimeout(cb, 1));
-    idle(() => {
+    let nearIo: IntersectionObserver | undefined;
+    const create = () => {
       if (disposed || !canvas.current) return;
-      if (!supportsWebGL2()) { onReady?.(false); return; }
       const mobile = matchMedia('(max-width: 47.99rem)').matches;
       const r = createLightRenderer(canvas.current, { maxDpr: mobile ? 1 : 1.5 });
       if (!r) { onReady?.(false); return; }
@@ -61,12 +66,23 @@ export const LightCanvas = forwardRef<LightHandle, Props>(function LightCanvas({
       document.addEventListener('visibilitychange', onVis);
       setReady(true);
       onReady?.(true);
-    });
+    };
+    // the support check is cheap (no context) → fallbacks activate immediately, even for lazy canvases
+    if (!supportsWebGL2()) { onReady?.(false); }
+    else if (lazy && canvas.current) {
+      nearIo = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        nearIo?.disconnect();
+        idle(create);
+      }, { rootMargin: '100% 0px' });
+      nearIo.observe(canvas.current);
+    } else idle(create);
 
     return () => {
       disposed = true;
       gsap.ticker.remove(tick);
       document.removeEventListener('visibilitychange', onVis);
+      nearIo?.disconnect();
       io?.disconnect();
       ro?.disconnect();
       if (renderer.current) { renderer.current.destroy(); renderer.current = null; bump(-1); }

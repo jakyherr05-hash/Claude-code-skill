@@ -186,7 +186,7 @@
 .detail__strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); gap: var(--space-s); }
 .detail__hour { display: grid; gap: var(--space-3xs); font-size: var(--step--1); border-top: 1px solid var(--line); padding-top: var(--space-xs); }
 .detail__hour span:last-child { color: var(--ink-muted); }
-.detail__chip { height: 3rem; opacity: 0.9; }
+.detail__still img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: var(--ground); }
 .detail__paper { background: var(--paper); color: var(--paper-ink); padding-block: var(--space-3xl); }
 .detail__paper .kicker { color: var(--paper-accent); margin-bottom: var(--space-m); }
 .paper__table { width: 100%; border-collapse: collapse; font-size: var(--step--1); }
@@ -228,3 +228,10 @@
 @keyframes hero-lit-fallback { to { opacity: 1; } }
 .motion-ok .hero__poster img { animation: hero-warm var(--dur-xl) var(--ease-dimmer) both; }
 .motion-ok .hero__title, .motion-ok .hero [data-hero-sub] { opacity: 0.08; animation: hero-lit-fallback var(--dur-m) var(--ease-dimmer) 3s forwards; }
+
+/* CD fix 4: The Hour no-WebGL fallback = shader stills crossfaded per preset */
+.hour__still { position: absolute; inset: 0; opacity: 0; transition: opacity var(--dur-s) linear; }
+.hour__still.is-active { opacity: 1; }
+.hour__still img { width: 100%; height: 100%; object-fit: cover; }
+/* portrait hero poster is composed for tall viewports */
+@media (max-aspect-ratio: 1/1) { .hero__poster img { object-position: 50% 50%; } }

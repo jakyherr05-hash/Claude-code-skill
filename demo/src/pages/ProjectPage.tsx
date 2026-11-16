@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { gsap, useGSAP } from '../motion/registry';
 import { litWords } from '../motion/lit';
 import { motionTokens } from '../motion/tokens';
-import { featured, kelvinToHex, type Project } from '../data/content';
+import { featured, stillFor, type Project } from '../data/content';
 import { Picture } from '../components/Picture';
 import { Link } from '../router/Router';
 import { MethodDrawing } from '../sections/MethodDrawing';
@@ -47,7 +47,8 @@ export function ProjectPage({ project }: { project: Project }) {
         <ol className="detail__strip">
           {project.hours?.map((h) => (
             <li key={h.time} className="detail__hour">
-              <span className="detail__chip" aria-hidden="true" style={{ background: h.k ? kelvinToHex(h.k) : 'var(--ground)' }} />
+              {/* a real render of the room at the nearest designed hour — light AND darkness, not a colour chip (CD fix 4) */}
+              <Picture id={stillFor(h.time).id} widths={[640, 1280]} sizes="(min-width: 64rem) 16vw, 45vw" alt="" width={1280} height={720} className="detail__still" />
               <span className="mono">{h.time}</span>
               <span className="mono">{h.k ? `${h.k}\u00a0K` : 'off'}</span>
               <span>{h.note}</span>

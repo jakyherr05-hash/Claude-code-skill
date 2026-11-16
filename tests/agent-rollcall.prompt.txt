@@ -1,0 +1,13 @@
+This is an automated acceptance test of the installed premium-web-studio plugin. Delegate the following 12 tasks IN PARALLEL (one Agent call each, all in a single message) to the named premium-web-studio subagents, then output one line per agent: "<agent> | <its answer in ≤20 words> | HANDOFF:<yes/no>". Pass each task text verbatim and append: "Load the skill named in your instructions with the Skill tool first. End with your HANDOFF block. Do not modify any files unless the task says to."
+1. premium-web-studio:creative-director — Name the 2 design languages from your design-intelligence skill you'd shortlist for a calm, engineered premium e-bike brand, one line each.
+2. premium-web-studio:reference-researcher — Run your reference-library search for "webgl" (limit 3) and report the top slug and its confidence.
+3. premium-web-studio:ui-ux-designer — List the interaction states your instructions require for every interactive element.
+4. premium-web-studio:typography-spacing — Run your skill's type-scale script with --steps 7,7 and report the exact clamp() it prints.
+5. premium-web-studio:gsap-animator — Per your gsap-motion skill, what must wrap every animation in React and what does it revert on unmount?
+6. premium-web-studio:lenis-scroll — Per your lenis-scroll skill: a project has section[id]{scroll-margin-top:72px} and also passes offset:-72 to lenis.scrollTo(el). What happens and what is the fix?
+7. premium-web-studio:webgl-specialist — Per your webgl-three skill: full-screen animated colour gradient behind a hero — raw WebGL2, Three.js or video? One sentence with the reason.
+8. premium-web-studio:ai-visual-producer — Run your skill's providers.py check, then try ONE image with `--provider pollinations --prompt "test" --out /tmp/pws-acceptance.png`. Report the exit code and the status word it printed.
+9. premium-web-studio:frontend-engineer — What default stack does the studio use when the user has no preference, and when does it switch to Next.js?
+10. premium-web-studio:performance-engineer — Per your web-qa skill, what is reported in place of INP in a lab run, and why?
+11. premium-web-studio:qa-engineer — List the exact viewport widths of the responsive matrix your skill requires.
+12. premium-web-studio:tech-lead — NOTES.md in the current directory has a typo ("Teh"). Fix it.

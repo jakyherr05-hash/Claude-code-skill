@@ -41,7 +41,8 @@ export function Hero() {
   return (
     <section ref={root} className="hero" aria-labelledby="hero-title">
       <div className="hero__media" aria-hidden="true">
-        <Picture id="hero-poster" widths={[960, 1920]} sizes="100vw" alt="" width={1920} height={1080} priority className="hero__poster" />
+        <Picture id="hero-poster" widths={[960, 1920]} sizes="100vw" alt="" width={1920} height={1080} priority className="hero__poster"
+          portrait={{ id: 'hero-poster-portrait', widths: [390, 780, 1170] }} />
         <LightCanvas ref={light} className="hero__canvas" initial={{ ...HERO_STATE, reveal: 0 }} label="" />
         <div className="hero__scrim" />
       </div>

@@ -105,7 +105,7 @@ test.describe('lifecycle & cleanup across routes', () => {
     await wheelTo(page, 1200); // let some triggers fire
     await page.waitForTimeout(1500);
     const home = await stats(page);
-    expect(home.lightRenderers).toBe(2);   // hero + The Hour
+    expect(home.lightRenderers).toBe(1);   // hero only: The Hour's context is lazy (created ~1 viewport before it shows)
     const history: unknown[] = [home];
     for (let i = 0; i < 3; i++) {
       await page.evaluate(() => (window as any).__lenis.scrollTo('#work', { immediate: true }));
@@ -140,7 +140,7 @@ test.describe('lifecycle & cleanup across routes', () => {
     await page.waitForTimeout(1200);
     const counts = async () => ({ ...(await stats(page)), nodes: await page.evaluate(() => document.querySelectorAll('*').length) });
     const first = await counts();
-    expect(first.lightRenderers).toBe(2);
+    expect(first.lightRenderers).toBe(1); // at the top only the hero has a context (The Hour is lazy)
     const seen = [first];
     for (let i = 0; i < 5; i++) {
       await page.evaluate(() => (document.querySelector('.room__plate') as HTMLElement).click()); // no scroll-into-view
@@ -153,10 +153,22 @@ test.describe('lifecycle & cleanup across routes', () => {
     test.info().annotations.push({ type: 'round-trips', description: JSON.stringify(seen) });
     for (const s of seen) {
       expect(s.scrollTriggers).toBe(first.scrollTriggers);
-      expect(s.lightRenderers).toBe(2);
+      expect(s.lightRenderers).toBe(1);
       expect(s.nodes).toBe(first.nodes);
     }
     c.assertClean();
+  });
+
+  test('below-the-fold WebGL is lazy: The Hour gets its context only when approached, and keeps it', async ({ page }) => {
+    await open(page);
+    await page.waitForTimeout(800);
+    expect((await stats(page)).lightRenderers).toBe(1);
+    await page.evaluate(() => (window as any).__lenis.scrollTo('#the-hour', { immediate: true }));
+    await expect.poll(async () => (await stats(page)).lightRenderers, { timeout: 8000 }).toBe(2);
+    await expect(page.locator('.hour__canvas')).toHaveAttribute('data-ready', 'true');
+    await page.evaluate(() => (window as any).__lenis.scrollTo(0, { immediate: true }));
+    await page.waitForTimeout(600);
+    expect((await stats(page)).lightRenderers).toBe(2); // not recreated/destroyed on scroll
   });
 
   test('back/forward restores scroll position', async ({ page }) => {
