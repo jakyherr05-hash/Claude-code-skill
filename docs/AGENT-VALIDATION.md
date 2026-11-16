@@ -41,7 +41,26 @@ Earlier single-agent test: the main session delegated to `typography-spacing`, w
 
 ## 3. Orchestration through all ten phases (fresh project, headless)
 
-See §3 detail below (filled in from the Run B transcript).
+`claude -p "/premium-web-studio:web-studio <brief>"` in an unrelated temp repo (prompt: `tests/ten-phase.prompt.txt`). The brief was a fictional ceramics studio, one page, no build step, local GSAP/Lenis copies. The main session was sonnet; specialists used their frontmatter models. Evidence: `docs/evidence/ten-phase-run/` (all 13 studio docs + Gate B verdict files).
+
+| Phase | Who ran it (from the transcript) | Outcome | Evidence |
+|---|---|---|---|
+| 1 Discovery | orchestrator (no questions, as instructed; assumptions recorded) | done | `studio/PROJECT_BRIEF.md` |
+| 2 Research | reference-researcher (library only, as instructed) | done; stated honestly that the library had no ceramics references | `REFERENCE_RESEARCH.md` |
+| 3 Creative direction | creative-director (opus) | done | `CREATIVE_DIRECTION.md` |
+| 4 Design spec | ui-ux-designer ∥ typography-spacing (parallel), then gsap-animator | done | `DESIGN_SPECIFICATION.md`, `TYPOGRAPHY_SYSTEM.md`, `SPACING_SYSTEM.md`, `ANIMATION_SPECIFICATION.md` |
+| 5 Architecture + **Gate A** | frontend-engineer; tech-lead (opus) | **Gate A failed 3 times** (TA-1..8, R2-1..6, R2-3/5b); owners revised each time; **PASS on round 4** | `TECHNICAL_ARCHITECTURE.md`, `DECISIONS.md`, `PROJECT_STATUS.md` |
+| 6 Development | frontend-engineer, ai-visual-producer, typography-spacing (tokens) | done: `index.html`, `styles.css`, `main.js` | project files |
+| 7 Motion | lenis-scroll → gsap-animator, then frontend fixes | done | `evidence/phase7*` |
+| 8 Visual production | ai-visual-producer (typographic/CSS assets, as briefed) | done | `ASSET_MANIFEST.md` |
+| 9 Testing | qa-engineer ∥ performance-engineer; QA wrote `tests/qa-run.mjs` and **ran Chromium** at 390/1440 | done: 44 → 56 checks, all PASS; QA also fixed its own test-timing defect | `QA_REPORT.md`, `PERFORMANCE_REPORT.md`, `tests/qa-results.json` |
+| 10 **Gate B** | creative-director ∥ tech-lead ∥ qa-engineer, independently | Round 1: creative PASS (1 major), QA PASS, **technical FAIL** (evidence gaps) → fixes → Round 2: creative **PASS**, QA **PASS**, technical **FAIL** (the axe scan was reported impossible, but tooling exists). The tech-lead **re-ran QA's suite itself** (56/0) rather than trusting the report | `gate-b-verdicts/*` |
+
+**Outcome: PARTIAL.** Every phase executed through the right specialists, with **40 delegations, all 40 returning a HANDOFF block**. Parallelism followed the ownership rules, and both gates enforced quality through real FAIL→fix loops (Gate A three times, Gate B twice). The run **stopped before completion**: the account hit its 5-hour usage limit ("resets 9:10am UTC") after the Gate B round-2 verdicts, so the orchestrator never routed the final tech-lead item. The run then hit my 60-minute timeout (exit 124). The mini-site therefore did **not** reach a full Gate B pass in this run.
+
+Observations for users (not skill defects):
+- With a narrow `--allowedTools` such as `Bash(node:*)`, the tech-lead's compound commands (`cd … && node …`) were denied, and it reproduced partly with Read/Glob. Grant the commands reviewers need, or run interactively.
+- Long full-production runs are token-heavy (40 delegations for a one-page site). Use the Sprint or Spot tracks for small jobs, as the skill instructs.
 
 ## 4. Scripts, templates, referenced files
 

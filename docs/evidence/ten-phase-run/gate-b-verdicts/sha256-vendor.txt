@@ -1,0 +1,7 @@
+Run by orchestrator 2026-11-16 after Gate B fix loop: sha256sum vendor/gsap.min.js vendor/ScrollTrigger.min.js vendor/lenis.min.js vendor/lenis.css
+3d1bea374ab1b703cc5c4105358eec63c4465efdc573931dc116e34a0a190c1b  vendor/gsap.min.js          == vendor/PROVENANCE.md (match)
+b5bb360661f478f0ff6ffa11500d8ce5e2b6aaf6f7288237cdca3aac9548035a  vendor/ScrollTrigger.min.js == vendor/PROVENANCE.md (match)
+80f53e77f1c13e379fc246d2b5e299188e20bcb2b2fe7ebb13e8e8c7563a6da7  vendor/lenis.min.js        == vendor/PROVENANCE.md (match)
+2f668ae84a668327f246faf8a770383a2bf69196d214290fbc4d5548910606c5  vendor/lenis.css           == vendor/PROVENANCE.md (match)
+NOT done: comparison against official npm package hashes (no network). Licence texts not stored.
+node --check main.js: OK. node tests/qa-run.mjs: 56 pass / 0 fail (tests/qa-results.json, regenerated this run; R2-5b 2538 ms, R2-5b2 2616 ms).
