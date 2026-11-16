@@ -2,8 +2,8 @@
 _Single source of truth. Update at every phase boundary._
 
 - Track: spot | sprint | full
-- Current phase: 10 · Final approval — Gate B re-review pending after fix wave
-- Last updated: 2026-11-15
+- Current phase: 10 · Final approval — fix wave done and re-tested; Gate B round 2 review still pending
+- Last updated: 2026-11-16
 
 ## Phase log
 | Phase | Owner(s) | Status | Exit evidence | Date |
@@ -21,10 +21,11 @@ _Single source of truth. Update at every phase boundary._
 ## Open tasks
 | Task | Owner | Blocked by |
 |---|---|---|
-| B1/B2 WebGL main-thread stalls; portrait hero composition (CD fix 1); lab capture mode for shader-rendered posters | webgl-specialist | — |
-| Shader-rendered posters (landscape + portrait) and six Hour stills (CD fixes 1, 2, 4) | ai-visual-producer | webgl capture mode |
-| Wire portrait poster `<picture>` source + preloads; Hour stills in detail strip and no-WebGL fallback | frontend-engineer (orchestrator) | assets |
-| Re-measure Lighthouse (median of 3, quiet host) after fixes | performance-engineer | fix wave |
+| ~~B1/B2 stalls; portrait hero; lab capture mode~~ DONE (W4, W5, W14, W20) | webgl-specialist | — |
+| ~~Shader-rendered posters and six Hour stills~~ DONE (W15, W16) | ai-visual-producer | — |
+| ~~Portrait poster + preloads; Hour stills in strip and fallback~~ DONE | frontend-engineer | — |
+| ~~Lighthouse re-measure~~ DONE (docs/VALIDATION-REPORT.md B.3); font budget fixed (W23) | performance-engineer | — |
+| Detail→Home long tasks (161–754 ms in hero getContext, SwiftShader) — real-GPU trace | webgl-specialist | a real GPU |
 | Gate B round 2 | creative-director, tech-lead, qa-engineer | all of the above |
 
 ## Handoffs received (latest first, ≤10 lines each)

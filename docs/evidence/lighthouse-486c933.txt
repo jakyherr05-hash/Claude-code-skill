@@ -1,0 +1,13 @@
+Lighthouse 13.6 runs against the prerendered production build at commit 486c933 (before the W23 font change).
+runs/: default flags (WebGL via SwiftShader). nogl/: mobile with --disable-3d-apis, performance category only.
+fontB = sum of Font transferSize from network-requests (includes headers).
+
+nogl/m1.json                 2026-11-16T05:32:35.732Z mobile   performance=98                                          LCP=764ms TBT=157ms CLS=0 fontB=355264
+nogl/m2.json                 2026-11-16T05:32:47.872Z mobile   performance=99                                          LCP=756ms TBT=120ms CLS=0 fontB=355264
+nogl/m3.json                 2026-11-16T05:33:00.007Z mobile   performance=98                                          LCP=756ms TBT=152ms CLS=0 fontB=355264
+runs/desktop-1.report.json   2026-11-16T05:31:34.635Z desktop  performance=70 accessibility=97 best-practices=100 seo=100 LCP=215ms TBT=1066ms CLS=0 fontB=355264
+runs/desktop-2.report.json   2026-11-16T05:31:49.939Z desktop  performance=73 accessibility=97 best-practices=100 seo=100 LCP=209ms TBT=684ms CLS=0 fontB=355264
+runs/desktop-3.report.json   2026-11-16T05:32:05.347Z desktop  performance=71 accessibility=97 best-practices=100 seo=100 LCP=204ms TBT=920ms CLS=0 fontB=355264
+runs/mobile-1.report.json    2026-11-16T05:30:53.814Z mobile   performance=69 accessibility=97 best-practices=100 seo=100 LCP=764ms TBT=4435ms CLS=0 fontB=355264
+runs/mobile-2.report.json    2026-11-16T05:31:07.507Z mobile   performance=69 accessibility=97 best-practices=100 seo=100 LCP=757ms TBT=4516ms CLS=0 fontB=355264
+runs/mobile-3.report.json    2026-11-16T05:31:20.917Z mobile   performance=69 accessibility=97 best-practices=100 seo=100 LCP=763ms TBT=4471ms CLS=0 fontB=355264

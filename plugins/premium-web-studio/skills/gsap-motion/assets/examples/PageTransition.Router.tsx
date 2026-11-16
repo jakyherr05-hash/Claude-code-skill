@@ -16,7 +16,10 @@ import { useScroll, headerOffset } from '../scroll/SmoothScroll';
 
 export type Route = { name: 'home' } | { name: 'project'; slug: string } | { name: 'not-found' };
 
-const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+/** Static-host mode (e.g. a claude.ai artifact page): the host serves one document at an opaque URL and only lets a
+ *  plain #fragment through, so routes live in history.state instead of the path. Build with VITE_MEMORY_ROUTER=1. */
+export const MEMORY_ROUTER = import.meta.env.VITE_MEMORY_ROUTER === '1';
+const BASE = MEMORY_ROUTER ? '' : import.meta.env.BASE_URL.replace(/\/$/, '');
 export function parse(pathname: string): Route {
   const p = pathname.startsWith(BASE) ? pathname.slice(BASE.length) || '/' : pathname;
   if (p === '/' || p === '') return { name: 'home' };
@@ -39,7 +42,8 @@ const RouterContext = createContext<Nav | null>(null);
 
 /** `initialPath` is required for server prerendering (no `location` there); the client reads location. */
 export function Router({ children, initialPath }: { children: (route: Route) => ReactNode; initialPath?: string }) {
-  const [route, setRoute] = useState<Route>(() => parse(initialPath ?? location.pathname));
+  const [route, setRoute] = useState<Route>(() => parse(initialPath ?? (MEMORY_ROUTER ? '/' : location.pathname)));
+  const memPath = useRef(initialPath ?? '/');
   // scroll lock is held from Dim until Rise completes (released in done())
   const releaseLock = useRef<(() => void) | null>(null);
   const veil = useRef<HTMLDivElement>(null);
@@ -110,6 +114,16 @@ export function Router({ children, initialPath }: { children: (route: Route) => 
   }, [route, lenis]);
 
   const navigate = useCallback((path: string) => {
+    if (MEMORY_ROUTER) {
+      if (path === memPath.current) return;
+      try {
+        history.replaceState({ ...(history.state || {}), y: scrollY, path: memPath.current }, '');
+        history.pushState({ y: 0, path }, ''); // same URL; the route travels in state
+      } catch { /* sandboxed hosts may refuse history writes — routing still works in memory */ }
+      memPath.current = path;
+      void swap(path, null);
+      return;
+    }
     if (path === location.pathname + location.hash) return;
     history.replaceState({ ...(history.state || {}), y: scrollY }, '');
     history.pushState({ y: 0 }, '', path);
@@ -117,7 +131,14 @@ export function Router({ children, initialPath }: { children: (route: Route) => 
   }, [swap]);
 
   useEffect(() => {
- const onPop = (e: PopStateEvent) => void swap(location.pathname, (e.state && typeof e.state.y === 'number') ? e.state.y : 0);
+    const onPop = (e: PopStateEvent) => {
+      const y = (e.state && typeof e.state.y === 'number') ? e.state.y : 0;
+      if (MEMORY_ROUTER) {
+        const p = (e.state && typeof e.state.path === 'string') ? e.state.path : '/';
+        memPath.current = p;
+        void swap(p, y);
+      } else void swap(location.pathname, y);
+    };
     addEventListener('popstate', onPop);
     return () => removeEventListener('popstate', onPop);
   }, [swap]);
@@ -141,7 +162,7 @@ export function Link({ to, children, ...rest }: { to: string; children: ReactNod
   const { navigate } = useRouter();
   return (
     <a
-      href={href(to)}
+      href={MEMORY_ROUTER ? '#main' : href(to)}
       {...rest}
       onClick={(e) => {
         rest.onClick?.(e);
