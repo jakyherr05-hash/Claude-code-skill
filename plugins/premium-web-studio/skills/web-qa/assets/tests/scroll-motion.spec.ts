@@ -121,7 +121,10 @@ test.describe('lifecycle & cleanup across routes', () => {
       await page.waitForTimeout(1500);
       const back = await stats(page);
       history.push(back);
-      expect(back.lightRenderers).toBe(2);
+      // hero is eager; The Hour is lazy (exists only if approached) — the invariant here is NO accumulation.
+      // Exact counts are asserted by the strict round-trip test and the lazy-context test.
+      expect(back.lightRenderers).toBeGreaterThanOrEqual(1);
+      expect(back.lightRenderers).toBeLessThanOrEqual(2);
       expect(back.scrollTriggers).toBeLessThanOrEqual(home.scrollTriggers + 8); // once-triggers re-created, never accumulating
     }
     const homes = history.filter((_, i) => i % 2 === 0) as { scrollTriggers: number }[];

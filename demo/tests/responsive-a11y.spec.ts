@@ -111,7 +111,12 @@ test.describe('resilience', () => {
     await open(page);
     await page.waitForTimeout(800);
     expect((await page.evaluate(() => (window as any).__gsapStats())).lightRenderers).toBe(0);
+    // The Hour's context is lazy, so its fallback decision happens when the section is approached
+    await page.evaluate(() => (window as any).__lenis.scrollTo('#the-hour', { immediate: true }));
     await expect(page.locator('.hour__fallback')).toHaveAttribute('data-active', 'true');
+    await expect(page.locator('.hour__fallback .hour__still')).toHaveCount(6); // shader-rendered stills, not a CSS glow
+    await expect(page.locator('.hour__fallback .hour__still.is-active')).toHaveCount(1);
+    expect((await page.evaluate(() => (window as any).__gsapStats())).lightRenderers).toBe(0);
     await page.locator('#the-hour').getByRole('button', { name: '21:00' }).click();
     await expect(page.locator('.hour__time')).toHaveText('21:00', { timeout: 4000 });
     c.assertClean();

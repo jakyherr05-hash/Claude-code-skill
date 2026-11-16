@@ -717,6 +717,27 @@ function compile(gl: WebGL2RenderingContext): GLRes | null {
 }
 
 const VIEW_HALF_H = 7.5 * 0.5 / 1.12; // half view height at the wall (matches RO.z / FOCAL)
+
+/**
+ * Landscape hero (heroFraming 1, aspect ≥ 1): the blade is placed in SCREEN terms,
+ * not by sunX. Its visible left edge (penumbra + halo) passes through
+ * (x, y) = HERO_LANDSCAPE_ANCHOR as fractions of the frame (y from the top), so it
+ * clears the headline column (H1 ends at ~45–60% of the width and starts ~42–58%
+ * down on 768–1440 px tall screens) on every landscape size, and lands just past
+ * "first." the way the approved 1440×900 frame does.
+ */
+export const HERO_LANDSCAPE_ANCHOR = { x: 0.6, y: 0.56 } as const;
+const HALO_M = 0.18; // haze/bloom beyond the penumbra on the wall (m)
+
+function heroLandscapeXLand(aspect: number, zoom: number, tanA: number): number {
+  const k = (7.5 * zoom) / 1.12; // wall metres per unit of uv (RO.z / FOCAL)
+  const ux = (HERO_LANDSCAPE_ANCHOR.x - 0.5) * aspect;
+  const uy = 0.5 - HERO_LANDSCAPE_ANCHOR.y;
+  const yW = 1.55 + uy * k;
+  const xLeft = ux * k;
+  const edge = 0.25 + 0.02 + Math.max(0, CEILING - yW) * 0.05 + HALO_M; // SLIT_W/2 + soft(h) + halo
+  return xLeft + edge + tanA * yW; // blade centre at yW is xLand - tanA·yW
+}
 const CEILING = 5.4;
 const MIN_HALF_W = 2.6;
 
@@ -847,14 +868,16 @@ export function createLightRenderer(
     // Portrait: pull back until ~5 m of wall is in frame (altar + door stay legible).
     const zoom = Math.max(1, MIN_HALF_W / (VIEW_HALF_H * aspect));
     const halfW = VIEW_HALF_H * aspect * zoom;
-    const P = val(state, 'heroFraming') >= 0.5 && aspect < 1 ? HERO_PORTRAIT_OVERRIDES : null;
+    const hero = val(state, 'heroFraming') >= 0.5;
+    const P = hero && aspect < 1 ? HERO_PORTRAIT_OVERRIDES : null;
     const sunAngle = P ? P.sunAngle : state.sunAngle;
     const sunX = P ? P.sunX : state.sunX;
     const slitL = P ? P.slitLength : val(state, 'slitLength');
     const threshold = P ? P.threshold : state.threshold;
     const nave = P ? P.nave : state.nave;
     const tanA = Math.tan((Math.min(75, Math.max(5, sunAngle)) * Math.PI) / 180);
-    const xLand = (sunX - 0.5) * 2 * halfW * 0.85;
+    let xLand = (sunX - 0.5) * 2 * halfW * 0.85;
+    if (hero && !P) xLand = heroLandscapeXLand(aspect, zoom, tanA);
     const xSlit = xLand - tanA * CEILING;
     // Layout scales with the frame so portrait crops keep altar + door in view.
     const xAltar = Math.min(2.2, Math.max(0.5, halfW * 0.32));

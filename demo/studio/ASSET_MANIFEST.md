@@ -70,3 +70,4 @@ What would unblock it: a free Hugging Face token in `HF_TOKEN` (raises ZeroGPU q
 | Date | Change | By | Reason |
 |---|---|---|---|
 | 2026-11-15 | `grain.png` (62,543 B) → `grain.webp` (21,744 B, sharp q60), CSS updated | orchestrator (integrator) | PERFORMANCE_REPORT action 4: Lighthouse flagged ~50 KiB saving on first view |
+| 2026-11-16 | `hero-poster-{960,1920}` re-rendered from the shader (`render-assets.mjs --from-shader`) after the landscape composition fix (blade anchored to clear the headline); AVIF 1920 = 13,479 B | orchestrator (ran the producer's script) | Poster must equal the shader's settled frame (CD fix 2) |

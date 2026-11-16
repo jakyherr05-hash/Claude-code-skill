@@ -11,7 +11,6 @@ export function ScheduleIndex() {
   const root = useRef<HTMLElement>(null);
   const [filter, setFilter] = useState<(typeof TYPES)[number]>('All');
   const flipState = useRef<Flip.FlipState | null>(null);
-  const mounted = useRef(false);
   const { contextSafe } = useGSAP({ scope: root });
   const visible = projects.filter((p) => filter === 'All' || p.type === filter);
 
@@ -27,9 +26,11 @@ export function ScheduleIndex() {
   useLayoutEffect(() => {
     const state = flipState.current;
     flipState.current = null;
-    // first run is mount: the router already refreshes after layout, so only refresh on real filter changes
-    if (!state) { if (mounted.current) ScrollTrigger.refresh(); mounted.current = true; return; }
-    mounted.current = true;
+    // KEEP the refresh on mount. It looks redundant with the router's post-layout refresh (tech-lead N6), but removing
+    // it made back-navigation crash inside ScrollTrigger ("reading 'end'" → Context.getTweens recursion): the line-split
+    // reveals create their triggers later (SplitText autoSplit re-splits after fonts), and they need the page measured
+    // at mount. Bisected in BUGS-FIXES W21; guarded by the back/forward + lifecycle tests.
+    if (!state) { ScrollTrigger.refresh(); return; }
     const ctx = gsap.context(() => {
       Flip.from(state, {
         targets: root.current!.querySelectorAll('.sched__row'),
