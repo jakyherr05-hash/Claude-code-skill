@@ -50,7 +50,7 @@
 .method__step { grid-area: 1 / 1; display: grid; gap: var(--space-2xs); }
 .method__step-title { font-family: var(--font-display); font-weight: 300; font-size: var(--step-5); line-height: var(--lh-5); letter-spacing: var(--tr-5); }
 .method__step p, .method__static-step p { color: var(--ink-muted); max-width: 36ch; }
-.method__closing { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: var(--step-3); color: var(--accent-warm); }
+.method__closing { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: var(--step-3); color: var(--accent-warm); text-wrap: pretty; }
 .method__figure { width: 100%; }
 .method-drawing { width: 100%; height: auto; overflow: visible; }
 .method-drawing text { font-family: var(--font-mono); }
@@ -97,7 +97,7 @@
 .hour__readout dd { font-size: var(--step-2); }
 .is-cool { color: var(--accent-cool); }
 .is-warm { color: var(--accent-warm); }
-.hour__intent { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: var(--step-2); line-height: var(--lh-3, 1.2); max-width: 30ch; }
+.hour__intent { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: var(--step-2); line-height: var(--lh-3, 1.2); max-width: 30ch; text-wrap: pretty; }
 @media (min-width: 64rem) {
   .hour__head { grid-column: 1 / 5; }
   .hour__controls { grid-column: 1 / 5; }
@@ -179,7 +179,7 @@
 .detail__head .kicker a { color: inherit; }
 .detail__meta { color: var(--ink-muted); font-size: var(--step--1); }
 .detail__body { row-gap: var(--space-l); padding-bottom: var(--space-3xl); }
-.detail__intent { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: var(--step-3); line-height: 1.2; color: var(--accent-warm); }
+.detail__intent { font-family: var(--font-display); font-style: italic; font-weight: 300; font-size: var(--step-3); line-height: 1.2; color: var(--accent-warm); text-wrap: pretty; }
 .detail__narrative { display: grid; gap: var(--space-s); max-width: var(--measure); color: var(--ink); }
 @media (min-width: 64rem) { .detail__intent { grid-column: 1 / 6; } .detail__narrative { grid-column: 7 / 12; } }
 .detail__hours { padding-bottom: var(--space-3xl); row-gap: var(--space-m); }
