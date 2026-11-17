@@ -106,7 +106,7 @@ export function MethodDrawing({ step, idPrefix, animated }: Props) {
       {/* room labels last so neither the dark flood nor the hatching paints over them */}
       <g className="method-drawing__labels mono" fill="var(--ink-muted)" fontSize="11">
         <text x="612" y="338">ALTAR</text><text x="110" y="338">THRESHOLD</text><text x="506" y="218">NICHE</text>
-        <text x="20" y="114">E. SLIT</text>
+        <text x="20" y="100">E. SLIT</text>
       </g>
     </svg>
   );

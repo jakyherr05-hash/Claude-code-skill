@@ -14,6 +14,8 @@ Each row was found by executing something (a test, a browser probe, a review), n
 | S6 | `@gsap/react` licence listed as MIT in the tool registry | Assumed, not read | Corrected to GSAP Standard licence (from its installed `package.json`) | Re-reading installed package metadata | — |
 | S7 | Skill templates could drift from the tested demo code | Copies were hand-synced | `scripts/sync-templates.sh` + `--check`; `tests/validate.py` fails on drift | Design review | `validate.py`, `skill-scripts.sh` |
 | S9 | `gsap-motion` template `PageTransition.Router.tsx` drifted from the tested demo router in `4ebc866` (static-host build mode added to the demo only) | Demo file edited without running `scripts/sync-templates.sh` | Template re-synced in the finalization commit | `sync-templates.sh --check` during finalization | `validate.py` drift check, `sync-templates.sh --check` |
+| S10 | `tests/skill-scripts.sh`: library filter / stale / build checks failed intermittently (`BrokenPipeError`) | Three more `python … \| grep -q` pipelines under `pipefail` that S8 missed; `build` also hard-coded "indexed 25" | Capture output, then match; the expected count is read from `sites/` | Running the suite during the design-first upgrade (22/23 once) | the suite itself (23/23 after) |
+| S11 | `gsap-motion` templates `OnceReveal.Rooms.tsx` drifted in WIP commit `8f3bf3d` | Demo edited before `sync-templates.sh` was re-run | Re-synced in the next commit | `sync-templates.sh --check` | `validate.py` drift check |
 | S8 | Test harness defects of my own: three `cmd \| grep -q` pipefail traps, a broken PNG generator, an orphaned HTTP server | — | Fixed in `tests/skill-scripts.sh` (random port, explicit cleanup, capture-then-grep) | Running the smoke test | the test itself |
 
 ## B. Demo website (validation project)
@@ -45,5 +47,23 @@ Each row was found by executing something (a test, a browser probe, a review), n
 | W23 | First-load fonts 347–355 KB vs the 220 KB budget | 147 KB variable-opsz Newsreader italic and 40 KB variable mono loaded on first paint | Static Newsreader 300 italic (24.7 KB) + static JetBrains Mono 400 (21.2 KB, serves 400–500): 212.6 KB | Lighthouse font bytes; typography-spacing agent | measured in browser at 390 and 1440 (see VALIDATION-REPORT B.4) |
 
 | W24 | At 360–390 px The Hour's italic intent wrapped to three lines with the single word "was." alone on the last line | W23's static italic is wider than the variable-opsz cut; the typography agent compared line breaks at 1440 only | `text-wrap: pretty` on the three italic display lines (`.method__closing`, `.hour__intent`, `.detail__intent`). Re-measured at 360/390/430/768/1024/1440/1920 (home) and 360/390/768/1440 (all four detail pages): no single-word last line remains | Finalization re-run of the full suite: 4 visual baselines failed (45/49); this was the only layout change, the other three were glyph-only (mono 500→400 face) | visual baselines regenerated from the fixed build |
+
+### Design defects found by the render-critique loop (2026-11-17)
+Found by independent creative-director critiques of screenshots of the built site, using design-intelligence `visual-critique.md`. Before/after images: [evidence/design-critique/](evidence/design-critique/README.md).
+
+| # | Width | Defect (measured) | Fix | Status |
+|---|---|---|---|---|
+| W25 | all | Header faded to transparent; scrolled content collided with the wordmark and nav (r1 #1) | Solid ground + hairline once `scrollY > 8`; transparent over the hero | fixed, r2 did not re-report it |
+| W26 | 768 | Hero CTA stretched to 712 px; resting underline 249 px under a 168 px label (r1 #2) | `.cta { width: fit-content }` | fixed |
+| W27 | 768 | Six-column project table squeezed: Year/Type 12 px apart, place/type wrapped (r1 #3) | Stacked row layout up to 63.999rem | fixed (r2: subjective note that 768 now reads as a widened phone layout) |
+| W28 | 768 | Atelier plates 2 + 1 (r1 #4) | 3 columns from 48rem | fixed |
+| W29 | 390–1440 | Lone last words (atelier, Hour intro, room meta, Method step titles, schedule intents); time presets wrapped 5 + 1 / 4 + 2; Method closing line-height 1.6 at 38–45 px (r1 minors, r2 #3/#6) | `text-wrap: pretty/balance`; presets in a 3-column grid; closing line-height `--lh-3` | fixed |
+| W30 | all | Room intent (body copy) faded from 0.08 opacity, against CREATIVE_DIRECTION "body copy is never animated" (r1) | `data-lit` removed from body copy | fixed |
+| W31 | 390 | Contact e-mail link 18 px tall (below the 24 px WCAG 2.2 target minimum) | `min-height: 44px` | fixed |
+| W32 | 1024 | Method drawing annotations rendered at 8.4 px (r2 #1) | SVG text sized inversely to the viewport ≥ 64rem: 11.6 px at 1024, 12 px at 1440, 14.1 px at 1920 | fixed, measured |
+| W33 | all | "24° · 8 lux" printed inside its own beam, crossed by the door, contrast ~4.47:1 (r2 #2; same class as W10) | Label moved beside the beam's source, on plain ground | fixed, measured no text overlaps at 390–1920 in both motion modes |
+| — | 768/1024 | My first W32 follow-up moved "E. SLIT" onto the slit's hatch lines (caught by comparing the regenerated baseline) | Reverted to the original position | regression caught before commit |
+
+Not fixed, by decision: filter chip "HOSPITALITY" wrapping alone (unordered categories), manifesto underline splitting across a line wrap, room meta breaking after a "·" separator (r2 minor), hero bottom seam (r2 minor), header vs content edges at 1920, The Hour readout below the fold at 768 with the stage in view, an empty raised box shown before each room plate's reveal, the manifesto's lone "design." (it already has `text-wrap: pretty`), all r2 minors and open; and all SUBJECTIVE items.
 
 **Open (not fixed):** Detail→Home navigation produces 161–754 ms main-thread tasks, all inside the hero canvas's `getContext('webgl2')` under SwiftShader. Home→Detail is 69 ms. Whether this matters on a real GPU is NOT TESTED; see VALIDATION-REPORT C.
