@@ -113,3 +113,28 @@ Served from a nested sub-path at 1440×900 and 390×844: 0 failed requests, 0 co
 | Mobile TBT headroom (WebGL off) | MARGINAL | 198.5 ms median vs 200 ms budget on this host (B.3) |
 | Italic intent at 360–390 px now three lines (was two) | ACCEPTED | wider static italic; no single-word last line (W24) |
 | Agent-team mode, Cowork, claude.ai upload | NOT TESTED | AGENT-VALIDATION §6 |
+
+---
+
+## Part D · Design-first upgrade (2026-11-17)
+
+### D.1 Rendered website (visual results)
+| Check | Result | Evidence |
+|---|---|---|
+| Independent rubric critique r1 of the built demo (390/768/1024/1440 + filmstrip) | FAIL: 4 majors, 12 minors (3 majors at 768, never checked by earlier reviews) | [evidence/design-critique/critique-r1.md](evidence/design-critique/critique-r1.md) |
+| Blind re-critique r2 after fixes (same prompt, rubric and widths) | PASS (conditional): none of r1's 4 majors reported again; 2 new majors in older, untouched code | [critique-r2.md](evidence/design-critique/critique-r2.md) |
+| r2 majors fixed (Method drawing label size and placement) | PASS by measurement (11.6 px at 1024; no text overlaps 390–1920, both motion modes). No r3 critique was run | [BUGS-FIXES](BUGS-FIXES.md) W32, W33 |
+| Before/after screenshots at identical widths and scroll positions | 8 comparisons | [evidence/design-critique/](evidence/design-critique/README.md) |
+| Full demo suite on the final state | PASS 49/49, 0 flaky | [evidence/playwright-design-upgrade.json](evidence/playwright-design-upgrade.json) |
+| The plugin produces better *new* websites | **NOT TESTED**: the loop improved one existing site; no new site was built with and without the upgrade | — |
+
+### D.2 Plugin and tooling (code-quality changes, not visual results by themselves)
+| Check | Result | Evidence |
+|---|---|---|
+| `capture-reference.mjs` defaults unchanged (no flags → same 4 files, no new keys) | PASS | `tests/skill-scripts.sh` |
+| `--filmstrip N` samples the whole page, detects a pinned scene; `--tablet` adds 768×1024 / 1024×768 | PASS (local fixture); on the demo, 12 frames reached the end of 14,071 px | `tests/skill-scripts.sh`, design-critique README |
+| `--filmstrip` on 19 live sites | 12 sampled end to end; 7 did not scroll under wheel input (virtual scrollers, gates). Documented as a blind spot | reference-library entries |
+| Image-sequence recipe run as documented (frames → `optimize-images.mjs` 640/320 → `imageSequence()`) | PASS: desktop 48 × 640 w frames 0→24→47; mobile 24 × 320 w 0→12→23; reduced motion 1 still, no pin; cleanup 0 triggers. React wrapper, Safari/Firefox: NOT TESTED | `tests/skill-scripts.sh` |
+| `tests/skill-scripts.sh` | PASS 23/23 | run log in the final report |
+| `tests/validate.py` | PASS 173/173 | — |
+| Award examples dated 2025–2026 | 6 Awwwards Site of the Day, Nov 9–15 2026, quoted verbatim from each site's Awwwards page | reference-library entries tagged `awwwards-sotd-2026` |
