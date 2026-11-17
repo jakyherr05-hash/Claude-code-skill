@@ -1,0 +1,2417 @@
+{
+ "config": {
+  "argv": [
+   "/opt/node22/bin/node",
+   "/home/user/Claude-code-skill/demo/node_modules/.bin/playwright",
+   "test",
+   "--reporter=list,json"
+  ],
+  "configFile": "/home/user/Claude-code-skill/demo/playwright.config.ts",
+  "rootDir": "/home/user/Claude-code-skill/demo/tests",
+  "failOnFlakyTests": false,
+  "forbidOnly": false,
+  "fullyParallel": true,
+  "globalSetup": null,
+  "globalTeardown": null,
+  "globalTimeout": 0,
+  "grep": {},
+  "grepInvert": null,
+  "maxFailures": 0,
+  "metadata": {
+   "actualWorkers": 1
+  },
+  "preserveOutput": "always",
+  "projects": [
+   {
+    "outputDir": "/home/user/Claude-code-skill/demo/test-results",
+    "repeatEach": 1,
+    "retries": 0,
+    "metadata": {
+     "actualWorkers": 1
+    },
+    "id": "chromium-desktop",
+    "name": "chromium-desktop",
+    "testDir": "/home/user/Claude-code-skill/demo/tests",
+    "testIgnore": [],
+    "testMatch": [
+     "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+    ],
+    "timeout": 60000
+   }
+  ],
+  "quiet": false,
+  "reporter": [
+   [
+    "list"
+   ],
+   [
+    "json"
+   ]
+  ],
+  "reportSlowTests": {
+   "max": 5,
+   "threshold": 300000
+  },
+  "shard": null,
+  "tags": [],
+  "updateSnapshots": "missing",
+  "updateSourceMethod": "patch",
+  "version": "1.63.0",
+  "workers": 1,
+  "webServer": {
+   "command": "npx tsc --noEmit && node scripts/build.mjs dist-f && npx vite preview --outDir dist-f --port 4376 --strictPort",
+   "url": "http://localhost:4376",
+   "reuseExistingServer": true,
+   "timeout": 180000
+  }
+ },
+ "suites": [
+  {
+   "title": "functional.spec.ts",
+   "file": "functional.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [],
+   "suites": [
+    {
+     "title": "rendering & navigation",
+     "file": "functional.spec.ts",
+     "line": 4,
+     "column": 6,
+     "specs": [
+      {
+       "title": "home renders every section with correct landmarks and no console errors",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 669,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:18:16.749Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "011e9001526c2e3d879a-566562fc3471dc23008c",
+       "file": "functional.spec.ts",
+       "line": 5,
+       "column": 3
+      },
+      {
+       "title": "every internal link and media URL resolves",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2254,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:18:17.527Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "011e9001526c2e3d879a-d6a919007c02a762e2e4",
+       "file": "functional.spec.ts",
+       "line": 17,
+       "column": 3
+      },
+      {
+       "title": "project route renders, has its own h1, prev/next and back to home",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 6682,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:18:19.792Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "011e9001526c2e3d879a-74e3cc20653d12262ff0",
+       "file": "functional.spec.ts",
+       "line": 37,
+       "column": 3
+      },
+      {
+       "title": "deep link to a project and unknown route work (SPA fallback)",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 4324,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:18:26.491Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "011e9001526c2e3d879a-9b4721d3d5578df510e7",
+       "file": "functional.spec.ts",
+       "line": 54,
+       "column": 3
+      },
+      {
+       "title": "section nav from the project page lands on the home section",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2926,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:18:30.827Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "011e9001526c2e3d879a-12d6d1b2bf6188157888",
+       "file": "functional.spec.ts",
+       "line": 65,
+       "column": 3
+      },
+      {
+       "title": "lighting schedule filter (Flip) shows only matching rows and announces count",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2899,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:18:33.765Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "011e9001526c2e3d879a-c61f527bed51dd8a12ff",
+       "file": "functional.spec.ts",
+       "line": 74,
+       "column": 3
+      },
+      {
+       "title": "The Hour: presets drive readout + announce intent; keyboard works",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 6943,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:18:36.692Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "011e9001526c2e3d879a-71fd15fed522ba6185b3",
+       "file": "functional.spec.ts",
+       "line": 88,
+       "column": 3
+      },
+      {
+       "title": "mobile menu: opens, traps focus, locks scroll, Escape closes and restores focus",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1492,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:18:43.650Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "011e9001526c2e3d879a-528b0c1ec3a8b43124d1",
+       "file": "functional.spec.ts",
+       "line": 118,
+       "column": 3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "responsive-a11y.spec.ts",
+   "file": "responsive-a11y.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [],
+   "suites": [
+    {
+     "title": "responsive matrix",
+     "file": "responsive-a11y.spec.ts",
+     "line": 5,
+     "column": 6,
+     "specs": [
+      {
+       "title": "360px: no horizontal overflow, nav pattern, type scale, full-page capture",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "metrics",
+           "description": "{\"scrollWidth\":360,\"innerWidth\":360,\"offenders\":[],\"h1Size\":56.0004,\"h1Right\":340,\"bodySize\":17,\"minTarget\":44}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 16024,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:18:45.286Z",
+           "annotations": [
+            {
+             "type": "metrics",
+             "description": "{\"scrollWidth\":360,\"innerWidth\":360,\"offenders\":[],\"h1Size\":56.0004,\"h1Right\":340,\"bodySize\":17,\"minTarget\":44}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-b120974cf0c70ec8b4b7",
+       "file": "responsive-a11y.spec.ts",
+       "line": 7,
+       "column": 5
+      },
+      {
+       "title": "390px: no horizontal overflow, nav pattern, type scale, full-page capture",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "metrics",
+           "description": "{\"scrollWidth\":390,\"innerWidth\":390,\"offenders\":[],\"h1Size\":58.4448,\"h1Right\":369.40625,\"bodySize\":17.0551,\"minTarget\":44}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 15511,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:19:01.321Z",
+           "annotations": [
+            {
+             "type": "metrics",
+             "description": "{\"scrollWidth\":390,\"innerWidth\":390,\"offenders\":[],\"h1Size\":58.4448,\"h1Right\":369.40625,\"bodySize\":17.0551,\"minTarget\":44}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-42c06804f42e3ed2cc5d",
+       "file": "responsive-a11y.spec.ts",
+       "line": 7,
+       "column": 5
+      },
+      {
+       "title": "768px: no horizontal overflow, nav pattern, type scale, full-page capture",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "metrics",
+           "description": "{\"scrollWidth\":768,\"innerWidth\":768,\"offenders\":[],\"h1Size\":89.2446,\"h1Right\":739.84375,\"bodySize\":17.7551,\"minTarget\":44}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 16859,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:19:16.843Z",
+           "annotations": [
+            {
+             "type": "metrics",
+             "description": "{\"scrollWidth\":768,\"innerWidth\":768,\"offenders\":[],\"h1Size\":89.2446,\"h1Right\":739.84375,\"bodySize\":17.7551,\"minTarget\":44}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-d3e80931018c0666b55d",
+       "file": "responsive-a11y.spec.ts",
+       "line": 7,
+       "column": 5
+      },
+      {
+       "title": "1024px: no horizontal overflow, nav pattern, type scale, full-page capture",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "metrics",
+           "description": "{\"scrollWidth\":1024,\"innerWidth\":1024,\"offenders\":[],\"h1Size\":110.104,\"h1Right\":827.453125,\"bodySize\":18.2292,\"minTarget\":44}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 16933,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:19:33.712Z",
+           "annotations": [
+            {
+             "type": "metrics",
+             "description": "{\"scrollWidth\":1024,\"innerWidth\":1024,\"offenders\":[],\"h1Size\":110.104,\"h1Right\":827.453125,\"bodySize\":18.2292,\"minTarget\":44}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-1460ac938a6c0cd8e2a7",
+       "file": "responsive-a11y.spec.ts",
+       "line": 7,
+       "column": 5
+      },
+      {
+       "title": "1440px: no horizontal overflow, nav pattern, type scale, full-page capture",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "metrics",
+           "description": "{\"scrollWidth\":1440,\"innerWidth\":1440,\"offenders\":[],\"h1Size\":144,\"h1Right\":1168.265625,\"bodySize\":18.9997,\"minTarget\":44}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 17993,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:19:50.654Z",
+           "annotations": [
+            {
+             "type": "metrics",
+             "description": "{\"scrollWidth\":1440,\"innerWidth\":1440,\"offenders\":[],\"h1Size\":144,\"h1Right\":1168.265625,\"bodySize\":18.9997,\"minTarget\":44}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-7e4096c51cbf1053f85f",
+       "file": "responsive-a11y.spec.ts",
+       "line": 7,
+       "column": 5
+      },
+      {
+       "title": "1920px: no horizontal overflow, nav pattern, type scale, full-page capture",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "metrics",
+           "description": "{\"scrollWidth\":1920,\"innerWidth\":1920,\"offenders\":[],\"h1Size\":144,\"h1Right\":1484,\"bodySize\":19,\"minTarget\":44}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 20173,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:08.655Z",
+           "annotations": [
+            {
+             "type": "metrics",
+             "description": "{\"scrollWidth\":1920,\"innerWidth\":1920,\"offenders\":[],\"h1Size\":144,\"h1Right\":1484,\"bodySize\":19,\"minTarget\":44}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-1fa66954e5c61ee4aa9e",
+       "file": "responsive-a11y.spec.ts",
+       "line": 7,
+       "column": 5
+      }
+     ]
+    },
+    {
+     "title": "accessibility",
+     "file": "responsive-a11y.spec.ts",
+     "line": 60,
+     "column": 6,
+     "specs": [
+      {
+       "title": "axe: no serious/critical violations on / at 1440px",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "axe",
+           "description": "[]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2793,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:28.840Z",
+           "annotations": [
+            {
+             "type": "axe",
+             "description": "[]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-4ebc4f37478aa2ae44be",
+       "file": "responsive-a11y.spec.ts",
+       "line": 64,
+       "column": 5
+      },
+      {
+       "title": "axe: no serious/critical violations on /work/capela-do-silencio at 1440px",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "axe",
+           "description": "[]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1271,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:31.642Z",
+           "annotations": [
+            {
+             "type": "axe",
+             "description": "[]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-f5e3aaa4813d3e3794b4",
+       "file": "responsive-a11y.spec.ts",
+       "line": 64,
+       "column": 5
+      },
+      {
+       "title": "axe: no serious/critical violations on / at 768px",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "axe",
+           "description": "[]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1642,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:32.925Z",
+           "annotations": [
+            {
+             "type": "axe",
+             "description": "[]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-63cd8ccdcef9ee7b6787",
+       "file": "responsive-a11y.spec.ts",
+       "line": 64,
+       "column": 5
+      },
+      {
+       "title": "axe: no serious/critical violations on /work/capela-do-silencio at 768px",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "axe",
+           "description": "[]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1210,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:34.575Z",
+           "annotations": [
+            {
+             "type": "axe",
+             "description": "[]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-68ac3e0ea53c4f98fd6c",
+       "file": "responsive-a11y.spec.ts",
+       "line": 64,
+       "column": 5
+      },
+      {
+       "title": "axe: no serious/critical violations on / at 390px",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "axe",
+           "description": "[]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1482,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:35.793Z",
+           "annotations": [
+            {
+             "type": "axe",
+             "description": "[]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-2ae8c840e17c81409991",
+       "file": "responsive-a11y.spec.ts",
+       "line": 64,
+       "column": 5
+      },
+      {
+       "title": "axe: no serious/critical violations on /work/capela-do-silencio at 390px",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "axe",
+           "description": "[]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1096,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:37.285Z",
+           "annotations": [
+            {
+             "type": "axe",
+             "description": "[]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-bc81c5290ae876578afc",
+       "file": "responsive-a11y.spec.ts",
+       "line": 64,
+       "column": 5
+      },
+      {
+       "title": "keyboard: skip link first, then logo, then primary nav; focus is visible",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "tab-order",
+           "description": "[\"PENUMBRA\",\"Method\",\"The Hour\",\"Work\",\"Contact\",\"Start a project\"]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2363,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:38.391Z",
+           "annotations": [
+            {
+             "type": "tab-order",
+             "description": "[\"PENUMBRA\",\"Method\",\"The Hour\",\"Work\",\"Contact\",\"Start a project\"]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-5178ba3ede2ea19fed93",
+       "file": "responsive-a11y.spec.ts",
+       "line": 74,
+       "column": 3
+      }
+     ]
+    },
+    {
+     "title": "resilience",
+     "file": "responsive-a11y.spec.ts",
+     "line": 95,
+     "column": 6,
+     "specs": [
+      {
+       "title": "fonts and images blocked: content still renders and is readable",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1172,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:40.763Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-ada01a4e284a151a0006",
+       "file": "responsive-a11y.spec.ts",
+       "line": 96,
+       "column": 3
+      },
+      {
+       "title": "no WebGL2: canvases are skipped, poster + The Hour fallback render, readout still works",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 4190,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:41.943Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-1ef95698f6e2b8fd2b8d",
+       "file": "responsive-a11y.spec.ts",
+       "line": 106,
+       "column": 3
+      }
+     ]
+    },
+    {
+     "title": "hero text contrast over the light (axe cannot see through the WebGL canvas)",
+     "file": "responsive-a11y.spec.ts",
+     "line": 128,
+     "column": 6,
+     "specs": [
+      {
+       "title": "360\u00d7740: kicker/sub \u2265 4.5:1, H1 \u2265 3:1",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "{\"kicker\":13.08,\"h1\":13.67,\"sub\":14.89}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 6220,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:46.148Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "{\"kicker\":13.08,\"h1\":13.67,\"sub\":14.89}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-1269f0f5607cd57ce58a",
+       "file": "responsive-a11y.spec.ts",
+       "line": 134,
+       "column": 5
+      },
+      {
+       "title": "390\u00d7844: kicker/sub \u2265 4.5:1, H1 \u2265 3:1",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "{\"kicker\":13.81,\"h1\":14.34,\"sub\":14.89}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 3533,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:52.383Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "{\"kicker\":13.81,\"h1\":14.34,\"sub\":14.89}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-9cfbb7f3d38f6384cfeb",
+       "file": "responsive-a11y.spec.ts",
+       "line": 134,
+       "column": 5
+      },
+      {
+       "title": "430\u00d7932: kicker/sub \u2265 4.5:1, H1 \u2265 3:1",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "{\"kicker\":14.27,\"h1\":14.62,\"sub\":15.02}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 3587,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:55.926Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "{\"kicker\":14.27,\"h1\":14.62,\"sub\":15.02}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-cf1c5d31792e7806c66a",
+       "file": "responsive-a11y.spec.ts",
+       "line": 134,
+       "column": 5
+      },
+      {
+       "title": "768\u00d71024: kicker/sub \u2265 4.5:1, H1 \u2265 3:1",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "{\"kicker\":13.52,\"h1\":13.75,\"sub\":14.93}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 3847,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:20:59.526Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "{\"kicker\":13.52,\"h1\":13.75,\"sub\":14.93}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-4bdca7d6d7966619fdba",
+       "file": "responsive-a11y.spec.ts",
+       "line": 134,
+       "column": 5
+      },
+      {
+       "title": "1024\u00d7768: kicker/sub \u2265 4.5:1, H1 \u2265 3:1",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "{\"kicker\":12.69,\"h1\":12.23,\"sub\":13.06}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 3761,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:03.384Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "{\"kicker\":12.69,\"h1\":12.23,\"sub\":13.06}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-10ee6eae9edc2d2a2a68",
+       "file": "responsive-a11y.spec.ts",
+       "line": 134,
+       "column": 5
+      },
+      {
+       "title": "1366\u00d7768: kicker/sub \u2265 4.5:1, H1 \u2265 3:1",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "{\"kicker\":12.39,\"h1\":12.29,\"sub\":13.16}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 3927,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:07.157Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "{\"kicker\":12.39,\"h1\":12.29,\"sub\":13.16}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-9679cf0223f4aecc3d3e",
+       "file": "responsive-a11y.spec.ts",
+       "line": 134,
+       "column": 5
+      },
+      {
+       "title": "1440\u00d7900: kicker/sub \u2265 4.5:1, H1 \u2265 3:1",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "{\"kicker\":12.89,\"h1\":12.43,\"sub\":13.49}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 4039,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:11.093Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "{\"kicker\":12.89,\"h1\":12.43,\"sub\":13.49}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-e11c008fd7b3196ab367",
+       "file": "responsive-a11y.spec.ts",
+       "line": 134,
+       "column": 5
+      },
+      {
+       "title": "1920\u00d71080: kicker/sub \u2265 4.5:1, H1 \u2265 3:1",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "{\"kicker\":13.08,\"h1\":12.43,\"sub\":14}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 4416,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:15.143Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "{\"kicker\":13.08,\"h1\":12.43,\"sub\":14}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-91d0475e5ec96f0525df",
+       "file": "responsive-a11y.spec.ts",
+       "line": 134,
+       "column": 5
+      }
+     ]
+    },
+    {
+     "title": "header links over the project-page hero (transparent header over imagery)",
+     "file": "responsive-a11y.spec.ts",
+     "line": 160,
+     "column": 6,
+     "specs": [
+      {
+       "title": "1024\u00d7768: every header link \u2265 4.5:1 on all four project pages",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "[[\"hotel-alva: The Hour\",6.14],[\"museu-das-mares: Method\",6.22],[\"casa-sombra: The Hour\",6.29]]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 5817,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:19.572Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "[[\"hotel-alva: The Hour\",6.14],[\"museu-das-mares: Method\",6.22],[\"casa-sombra: The Hour\",6.29]]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-51a45ea636ea1fbc54bf",
+       "file": "responsive-a11y.spec.ts",
+       "line": 164,
+       "column": 5
+      },
+      {
+       "title": "1440\u00d7900: every header link \u2265 4.5:1 on all four project pages",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "[[\"hotel-alva: Method\",5.52],[\"museu-das-mares: Method\",6.09],[\"museu-das-mares: The Hour\",6.13]]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 6912,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:25.397Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "[[\"hotel-alva: Method\",5.52],[\"museu-das-mares: Method\",6.09],[\"museu-das-mares: The Hour\",6.13]]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-f28776391945a200bb2e",
+       "file": "responsive-a11y.spec.ts",
+       "line": 164,
+       "column": 5
+      },
+      {
+       "title": "1920\u00d71080: every header link \u2265 4.5:1 on all four project pages",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "contrast",
+           "description": "[[\"museu-das-mares: The Hour\",6.08],[\"museu-das-mares: Method\",6.15],[\"museu-das-mares: Work\",6.15]]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 8397,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:32.318Z",
+           "annotations": [
+            {
+             "type": "contrast",
+             "description": "[[\"museu-das-mares: The Hour\",6.08],[\"museu-das-mares: Method\",6.15],[\"museu-das-mares: Work\",6.15]]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "6856d3672aaa6581c509-6de2f9b3ff29c3e2f845",
+       "file": "responsive-a11y.spec.ts",
+       "line": 164,
+       "column": 5
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "scroll-motion.spec.ts",
+   "file": "scroll-motion.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [],
+   "suites": [
+    {
+     "title": "Lenis + GSAP integration",
+     "file": "scroll-motion.spec.ts",
+     "line": 4,
+     "column": 6,
+     "specs": [
+      {
+       "title": "one wheel gesture is smoothed (interpolated), not instant",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "scroll-samples",
+           "description": "{\"final\":519,\"frames\":22,\"midGlideFrames\":19,\"first\":[\"7ms:0\",\"17ms:0\",\"40ms:68\",\"51ms:111\",\"67ms:156\",\"83ms:199\",\"100ms:235\",\"118ms:271\",\"138ms:311\",\"150ms:331\",\"167ms:356\",\"184ms:380\"]}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2658,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:40.735Z",
+           "annotations": [
+            {
+             "type": "scroll-samples",
+             "description": "{\"final\":519,\"frames\":22,\"midGlideFrames\":19,\"first\":[\"7ms:0\",\"17ms:0\",\"40ms:68\",\"51ms:111\",\"67ms:156\",\"83ms:199\",\"100ms:235\",\"118ms:271\",\"138ms:311\",\"150ms:331\",\"167ms:356\",\"184ms:380\"]}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-18e43622b979fbe7bbff",
+       "file": "scroll-motion.spec.ts",
+       "line": 5,
+       "column": 3
+      },
+      {
+       "title": "exactly one Lenis instance and it drives ScrollTrigger during the glide",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "pin-progress",
+           "description": "{\"frames\":100,\"distinct\":75,\"intermediate\":95,\"maxErr\":0.00020000000000003348,\"sample\":[0,0.1056,0.1833,0.2344,0.2681,0.2904,0.3052,0.3148,0.3211,0.3256,0.3281,0.33,0.3311,0.3322,0.3326,0.333,0.3333]}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 3732,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:43.409Z",
+           "annotations": [
+            {
+             "type": "pin-progress",
+             "description": "{\"frames\":100,\"distinct\":75,\"intermediate\":95,\"maxErr\":0.00020000000000003348,\"sample\":[0,0.1056,0.1833,0.2344,0.2681,0.2904,0.3052,0.3148,0.3211,0.3256,0.3281,0.33,0.3311,0.3322,0.3326,0.333,0.3333]}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-9677c19b3981569d30eb",
+       "file": "scroll-motion.spec.ts",
+       "line": 27,
+       "column": 3
+      },
+      {
+       "title": "anchor navigation applies header offset and moves focus",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 3091,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:47.149Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-17319cddd621c5161fd8",
+       "file": "scroll-motion.spec.ts",
+       "line": 65,
+       "column": 3
+      },
+      {
+       "title": "pinned Method sequence: beams appear and step text swaps as scroll progresses",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "method-states",
+           "description": "{\"s1\":{\"beams\":[0,0,0],\"active\":0,\"closing\":0,\"pinned\":\"fixed\"},\"s2\":{\"beams\":[1,1,0.8],\"active\":1,\"closing\":0,\"pinned\":\"fixed\"},\"s3\":{\"beams\":[1,1,1],\"active\":2,\"closing\":1,\"pinned\":\"fixed\"}}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 4578,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:50.255Z",
+           "annotations": [
+            {
+             "type": "method-states",
+             "description": "{\"s1\":{\"beams\":[0,0,0],\"active\":0,\"closing\":0,\"pinned\":\"fixed\"},\"s2\":{\"beams\":[1,1,0.8],\"active\":1,\"closing\":0,\"pinned\":\"fixed\"},\"s3\":{\"beams\":[1,1,1],\"active\":2,\"closing\":1,\"pinned\":\"fixed\"}}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-4db3c6a1d28f7111155f",
+       "file": "scroll-motion.spec.ts",
+       "line": 76,
+       "column": 3
+      },
+      {
+       "title": "hero headline is split into words and all words end fully lit",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2849,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:54.844Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-83e981c8e3d1c538eda4",
+       "file": "scroll-motion.spec.ts",
+       "line": 104,
+       "column": 3
+      }
+     ]
+    },
+    {
+     "title": "lifecycle & cleanup across routes",
+     "file": "scroll-motion.spec.ts",
+     "line": 115,
+     "column": 6,
+     "specs": [
+      {
+       "title": "ScrollTriggers, tweens and WebGL contexts return to baseline after Home \u2192 Detail \u2192 Home (\u00d73)",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "stats",
+           "description": "[{\"scrollTriggers\":10,\"globalChildren\":19,\"lightRenderers\":1},{\"scrollTriggers\":0,\"globalChildren\":1,\"lightRenderers\":0},{\"scrollTriggers\":5,\"globalChildren\":17,\"lightRenderers\":2},{\"scrollTriggers\":0,\"globalChildren\":3,\"lightRenderers\":0},{\"scrollTriggers\":5,\"globalChildren\":16,\"lightRenderers\":1},{\"scrollTriggers\":0,\"globalChildren\":4,\"lightRenderers\":0},{\"scrollTriggers\":5,\"globalChildren\":17,\"lightRenderers\":1}]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 18464,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:21:57.711Z",
+           "annotations": [
+            {
+             "type": "stats",
+             "description": "[{\"scrollTriggers\":10,\"globalChildren\":19,\"lightRenderers\":1},{\"scrollTriggers\":0,\"globalChildren\":1,\"lightRenderers\":0},{\"scrollTriggers\":5,\"globalChildren\":17,\"lightRenderers\":2},{\"scrollTriggers\":0,\"globalChildren\":3,\"lightRenderers\":0},{\"scrollTriggers\":5,\"globalChildren\":16,\"lightRenderers\":1},{\"scrollTriggers\":0,\"globalChildren\":4,\"lightRenderers\":0},{\"scrollTriggers\":5,\"globalChildren\":17,\"lightRenderers\":1}]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-871953e6585614dfb1b0",
+       "file": "scroll-motion.spec.ts",
+       "line": 116,
+       "column": 3
+      },
+      {
+       "title": "strict leak check: Link round trips at the top keep EXACT trigger, renderer and DOM counts (\u00d75)",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "round-trips",
+           "description": "[{\"scrollTriggers\":10,\"globalChildren\":20,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":21,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":20,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":20,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":21,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":22,\"lightRenderers\":1,\"nodes\":452}]"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 24354,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:22:16.186Z",
+           "annotations": [
+            {
+             "type": "round-trips",
+             "description": "[{\"scrollTriggers\":10,\"globalChildren\":20,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":21,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":20,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":20,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":21,\"lightRenderers\":1,\"nodes\":452},{\"scrollTriggers\":10,\"globalChildren\":22,\"lightRenderers\":1,\"nodes\":452}]"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-04a9046d8ccc1adcc576",
+       "file": "scroll-motion.spec.ts",
+       "line": 152,
+       "column": 3
+      },
+      {
+       "title": "below-the-fold WebGL is lazy: The Hour gets its context only when approached, and keeps it",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 5395,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:22:40.550Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-d7c0259dba8bb0899cdf",
+       "file": "scroll-motion.spec.ts",
+       "line": 179,
+       "column": 3
+      },
+      {
+       "title": "back/forward restores scroll position",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "restore",
+           "description": "{\"before\":6507,\"saved\":6704,\"now\":6704}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 5565,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:22:45.962Z",
+           "annotations": [
+            {
+             "type": "restore",
+             "description": "{\"before\":6507,\"saved\":6704,\"now\":6704}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-9ea8049154b43b9815e2",
+       "file": "scroll-motion.spec.ts",
+       "line": 191,
+       "column": 3
+      }
+     ]
+    },
+    {
+     "title": "reduced motion",
+     "file": "scroll-motion.spec.ts",
+     "line": 211,
+     "column": 6,
+     "specs": [
+      {
+       "title": "no smoothing, no pin, static method steps, everything visible",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [
+          {
+           "type": "reduced-scroll",
+           "description": "{\"final\":600,\"frames\":25,\"intermediate\":[]}"
+          }
+         ],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 5134,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:22:51.539Z",
+           "annotations": [
+            {
+             "type": "reduced-scroll",
+             "description": "{\"final\":600,\"frames\":25,\"intermediate\":[]}"
+            }
+           ],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "cb3c7488b7ace272285c-6b864fd5811db3c408dd",
+       "file": "scroll-motion.spec.ts",
+       "line": 214,
+       "column": 3
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "visual.spec.ts",
+   "file": "visual.spec.ts",
+   "column": 0,
+   "line": 0,
+   "specs": [],
+   "suites": [
+    {
+     "title": "390px",
+     "file": "visual.spec.ts",
+     "line": 21,
+     "column": 8,
+     "specs": [
+      {
+       "title": "hero",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1299,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:22:56.687Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-e086f5e1875008df3d87",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "method-static",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1602,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:22:57.996Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-0bef219e6b1bde064468",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "the-hour",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1484,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:22:59.613Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-10eefef0d62191e799db",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "schedule",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1328,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:23:01.114Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-4dbfa15a073f7b2afbe6",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "contact",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1220,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:23:02.457Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-3bb8706c6b76450b0e45",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "detail-head",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1158,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:23:03.712Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-828d367dd3c05dc2857a",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      }
+     ]
+    },
+    {
+     "title": "1440px",
+     "file": "visual.spec.ts",
+     "line": 21,
+     "column": 8,
+     "specs": [
+      {
+       "title": "hero",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2596,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:23:04.893Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-96919dc182569c06f594",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "method-static",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 3175,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:23:07.501Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-78e36ae40f11dab60f87",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "the-hour",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2523,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:23:10.689Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-33c90ec159b46c387813",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "schedule",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2451,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:23:13.232Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-c322e76050508391ba28",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "contact",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 2441,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:23:15.694Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-5c1b4fc482b75e28287a",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      },
+      {
+       "title": "detail-head",
+       "ok": true,
+       "tags": [],
+       "tests": [
+        {
+         "timeout": 60000,
+         "annotations": [],
+         "expectedStatus": "passed",
+         "projectId": "chromium-desktop",
+         "projectName": "chromium-desktop",
+         "results": [
+          {
+           "workerIndex": 0,
+           "parallelIndex": 0,
+           "status": "passed",
+           "duration": 1324,
+           "errors": [],
+           "stdout": [],
+           "stderr": [],
+           "retry": 0,
+           "startTime": "2026-11-17T07:23:18.155Z",
+           "annotations": [],
+           "attachments": []
+          }
+         ],
+         "status": "expected"
+        }
+       ],
+       "id": "8324bb52c49185e48ff4-342f3cc050539cb917af",
+       "file": "visual.spec.ts",
+       "line": 24,
+       "column": 7
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "stats": {
+  "startTime": "2026-11-17T07:18:14.340Z",
+  "duration": 305281.114,
+  "expected": 56,
+  "skipped": 0,
+  "unexpected": 0,
+  "flaky": 0
+ }
+}
