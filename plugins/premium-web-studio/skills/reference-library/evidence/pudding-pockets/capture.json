@@ -1,0 +1,411 @@
+{
+  "id": "pudding-pockets",
+  "url": "https://pudding.cool/2018/08/pockets/",
+  "researchedAt": "2026-11-17T18:22:52.514Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://pudding.cool/2018/08/pockets/",
+  "title": "Women's Pockets are Inferior.",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 10930,
+    "htmlClasses": "loaded-canela loaded-publico loaded-atlas",
+    "bodyBackground": "rgb(231, 238, 248)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(40, 40, 40)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "Skip to main content The Pudding The Pudding explains ideas debated in culture w",
+      "fontFamily": "\"Publico Text Web\", Georgia, Times, serif",
+      "fontSize": "17px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(40, 40, 40)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 10930
+      }
+    },
+    "h1": null,
+    "h2": null,
+    "p": {
+      "selector": "p",
+      "text": "The Pudding explains ideas debated in culture with visual essays.",
+      "fontFamily": "\"Atlas Grotesk Web\", Helvetica, Arial, sans-serif",
+      "fontSize": "17px",
+      "fontWeight": "400",
+      "lineHeight": "28.9px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(40, 40, 40)",
+      "box": {
+        "x": 1465,
+        "y": 40,
+        "w": 431,
+        "h": 58
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "The Pudding",
+      "fontFamily": "\"Publico Text Web\", Georgia, Times, serif",
+      "fontSize": "17px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(40, 40, 40)",
+      "box": {
+        "x": 1396,
+        "y": 92,
+        "w": 48,
+        "h": 32
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "32px",
+      "fontFamily": "\"Atlas Grotesk Web\", Helvetica, Arial, sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "normal",
+      "text": "Greatest Hits"
+    },
+    "loadedFonts": [
+      "Canela Web 300 normal",
+      "Canela Web 700 normal",
+      "Publico Text Web 400 normal",
+      "Publico Text Web 700 normal",
+      "Publico Text Web 400 italic",
+      "Atlas Grotesk Web 400 normal",
+      "Atlas Grotesk Web 500 normal",
+      "Atlas Grotesk Web 600 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "fixed",
+      "height": 155,
+      "linkCount": 7
+    },
+    "counts": {
+      "sections": 5,
+      "images": 9,
+      "videos": 0,
+      "canvases": 0,
+      "svgs": 100,
+      "links": 41
+    },
+    "canvases": [],
+    "videos": [],
+    "imageFormats": {
+      "png": 9
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 0,
+      "skipLink": true
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 600
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 912,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 1824,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 2736,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 3648,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Fashion over function: What can actually fit?",
+          "fontSize": "24px",
+          "family": "Atlas Grotesk Web"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 4560,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 5472,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 6384,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "What about different styles?",
+          "fontSize": "24px",
+          "family": "Atlas Grotesk Web"
+        },
+        {
+          "text": "What about back pockets?",
+          "fontSize": "24px",
+          "family": "Atlas Grotesk Web"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 7296,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "What about back pockets?",
+          "fontSize": "24px",
+          "family": "Atlas Grotesk Web"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 8208,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 10,
+      "frame": "scroll-10.jpg",
+      "scrollY": 9120,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 11,
+      "frame": "scroll-11.jpg",
+      "scrollY": 10030,
+      "docHeight": 10930,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 912,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 814,
+    "loadMs": 918,
+    "lcpMs": 396,
+    "cls": 0.028,
+    "requests": 35,
+    "byInitiator": {
+      "script": {
+        "count": 8,
+        "transferKB": 137
+      },
+      "img": {
+        "count": 9,
+        "transferKB": 55
+      },
+      "css": {
+        "count": 12,
+        "transferKB": 756
+      },
+      "beacon": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "xmlhttprequest": {
+        "count": 4,
+        "transferKB": 57
+      },
+      "iframe": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 8,
+    "libraryHints": []
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": 24,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    }
+  }
+}

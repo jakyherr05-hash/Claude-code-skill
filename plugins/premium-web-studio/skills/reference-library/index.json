@@ -238,6 +238,29 @@
     "file": "sites/cyera-ai-guardian.md"
   },
   {
+    "name": "Dogstudio / Dept",
+    "url": "https://dogstudio.co/",
+    "slug": "dogstudio",
+    "category": "studio",
+    "tags": [
+      "atmosphere",
+      "webgl",
+      "painted-3d",
+      "dark-blue",
+      "serif-display",
+      "gt-sectra",
+      "text-over-image",
+      "scroll-driven",
+      "cookie-banner",
+      "outdated-browser-banner"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/dogstudio/",
+    "file": "sites/dogstudio.md"
+  },
+  {
     "name": "Dropbox Brand Guidelines",
     "url": "https://brand.dropbox.com/",
     "slug": "dropbox-brand",
@@ -426,6 +449,44 @@
     "confidence": "high",
     "evidence": "../evidence/gsap/",
     "file": "sites/gsap.md"
+  },
+  {
+    "name": "The Guardian - The Parting of the Ways",
+    "url": "https://www.theguardian.com/environment/ng-interactive/2015/dec/04/the-parting-of-ways",
+    "slug": "guardian-parting-of-ways",
+    "category": "other",
+    "tags": [
+      "not-inspected",
+      "editorial",
+      "interactive"
+    ],
+    "researched": "2026-11-17",
+    "status": "not-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/guardian-parting-of-ways/",
+    "file": "sites/guardian-parting-of-ways.md"
+  },
+  {
+    "name": "Igloo Inc.",
+    "url": "https://www.igloo.inc/",
+    "slug": "igloo-inc",
+    "category": "studio",
+    "tags": [
+      "atmosphere",
+      "fog",
+      "snow",
+      "webgl",
+      "three-js",
+      "hud-ui",
+      "monochrome",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/igloo-inc/",
+    "file": "sites/igloo-inc.md"
   },
   {
     "name": "Immersive Garden",
@@ -699,6 +760,30 @@
     "file": "sites/preymaker.md"
   },
   {
+    "name": "The Pudding: Women's Pockets are Inferior",
+    "url": "https://pudding.cool/2018/08/pockets/",
+    "slug": "pudding-pockets",
+    "category": "other",
+    "tags": [
+      "editorial",
+      "data-scrollytelling",
+      "sticky-graphic",
+      "svg",
+      "publico",
+      "atlas-grotesk",
+      "canela",
+      "light-theme",
+      "native-scroll",
+      "step-captions",
+      "methods-section"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/pudding-pockets/",
+    "file": "sites/pudding-pockets.md"
+  },
+  {
     "name": "React Three Fiber Docs",
     "url": "https://r3f.docs.pmnd.rs/",
     "slug": "r3f-docs",
@@ -719,6 +804,28 @@
     "confidence": "high",
     "evidence": "../evidence/r3f-docs/",
     "file": "sites/r3f-docs.md"
+  },
+  {
+    "name": "The Real Cost - Vapes (U.S. FDA/HHS)",
+    "url": "https://therealcost.betobaccofree.hhs.gov/",
+    "slug": "real-cost-hhs",
+    "category": "other",
+    "tags": [
+      "youth-prevention",
+      "government-campaign",
+      "anton",
+      "yellow-highlight",
+      "black-chalk",
+      "carousel",
+      "q-and-a-bubbles",
+      "sources-accordion",
+      "mobile-ok"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/real-cost-hhs/",
+    "file": "sites/real-cost-hhs.md"
   },
   {
     "name": "Resn",
@@ -764,6 +871,28 @@
     "confidence": "medium",
     "evidence": "../evidence/santal/",
     "file": "sites/santal.md"
+  },
+  {
+    "name": "SBS: The Boat",
+    "url": "https://www.sbs.com.au/theboat/",
+    "slug": "sbs-the-boat",
+    "category": "other",
+    "tags": [
+      "documentary",
+      "scrollytelling",
+      "graphic-novel",
+      "canvas",
+      "gate",
+      "click-to-start",
+      "audio",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/sbs-the-boat/",
+    "file": "sites/sbs-the-boat.md"
   },
   {
     "name": "Scrollytelling.ai (scrolling-websites guide)",
@@ -852,6 +981,29 @@
     "file": "sites/thefwa.md"
   },
   {
+    "name": "truth (thetruth.com)",
+    "url": "https://www.thetruth.com/",
+    "slug": "thetruth",
+    "category": "other",
+    "tags": [
+      "youth-prevention",
+      "campaign",
+      "collage",
+      "bebas-neue",
+      "din",
+      "orange-black",
+      "native-scroll",
+      "video-hero",
+      "cta-quit-help",
+      "mobile-ok"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/thetruth/",
+    "file": "sites/thetruth.md"
+  },
+  {
     "name": "three.js",
     "url": "https://threejs.org/",
     "slug": "threejs",
@@ -871,6 +1023,29 @@
     "confidence": "medium",
     "evidence": "../evidence/threejs/",
     "file": "sites/threejs.md"
+  },
+  {
+    "name": "Truth Initiative",
+    "url": "https://truthinitiative.org/",
+    "slug": "truth-initiative",
+    "category": "other",
+    "tags": [
+      "youth-prevention",
+      "nonprofit",
+      "health",
+      "research-hub",
+      "jeko",
+      "din",
+      "cream-purple",
+      "help-line-cta",
+      "mobile-ok",
+      "native-scroll"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/truth-initiative/",
+    "file": "sites/truth-initiative.md"
   },
   {
     "name": "Typewolf",

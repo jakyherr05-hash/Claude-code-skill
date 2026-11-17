@@ -1,0 +1,369 @@
+{
+  "id": "sbs-the-boat",
+  "url": "https://www.sbs.com.au/theboat",
+  "researchedAt": "2026-11-17T18:23:34.244Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://www.sbs.com.au/theboat/",
+  "title": "The Boat | SBS",
+  "page": {
+    "lang": null,
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius ",
+    "bodyBackground": "rgb(0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "The crosswind surged in, filtering through the apertures in the rotten wood, sou",
+      "fontFamily": "StoneInformalITCW01-Md, Arial, sans-serif",
+      "fontSize": "12px",
+      "fontWeight": "400",
+      "lineHeight": "17.1429px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": null,
+    "h2": null,
+    "p": {
+      "selector": "p",
+      "text": "The crosswind surged in, filtering through the apertures in the rotten wood, sou",
+      "fontFamily": "\"Plantin Infant W01\", Arial, sans-serif",
+      "fontSize": "32px",
+      "fontWeight": "400",
+      "lineHeight": "45px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 303,
+        "y": 1821,
+        "w": 835,
+        "h": 72
+      }
+    },
+    "navLink": null,
+    "largestVisibleText": {
+      "fontSize": "12px",
+      "fontFamily": "Roboto, sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "24px",
+      "text": "Terms & Conditions"
+    },
+    "loadedFonts": [
+      "Plantin Infant W01 normal normal",
+      "Roboto 400 normal"
+    ],
+    "nav": null,
+    "counts": {
+      "sections": 0,
+      "images": 2,
+      "videos": 0,
+      "canvases": 1,
+      "svgs": 0,
+      "links": 3
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "fixed"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "png": 2
+    },
+    "landmarks": {
+      "header": false,
+      "main": false,
+      "footer": false,
+      "h1Count": 0,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 10,
+      "frame": "scroll-10.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 11,
+      "frame": "scroll-11.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 2045,
+    "loadMs": 2045,
+    "lcpMs": 2668,
+    "cls": 0,
+    "requests": 74,
+    "byInitiator": {
+      "link": {
+        "count": 2,
+        "transferKB": 23
+      },
+      "css": {
+        "count": 7,
+        "transferKB": 74
+      },
+      "script": {
+        "count": 5,
+        "transferKB": 293
+      },
+      "xmlhttprequest": {
+        "count": 1,
+        "transferKB": 1
+      },
+      "img": {
+        "count": 34,
+        "transferKB": 2489
+      },
+      "audio": {
+        "count": 25,
+        "transferKB": 2131
+      }
+    }
+  },
+  "scripts": {
+    "total": 5,
+    "libraryHints": []
+  },
+  "consoleErrors": [
+    "Mixed Content: The page at 'https://www.sbs.com.au/theboat/' was loaded over HTTPS, but requested an insecure stylesheet 'http://fast.fonts.net/t/1.css?apiType=css&projectid=c9679629-df1b-4e00-a222-57",
+    "Mixed Content: The page at 'https://www.sbs.com.au/theboat/' was loaded over HTTPS, but requested an insecure stylesheet 'http://fast.fonts.net/t/1.css?apiType=css&projectid=c9679629-df1b-4e00-a222-57"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": 12,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    }
+  }
+}

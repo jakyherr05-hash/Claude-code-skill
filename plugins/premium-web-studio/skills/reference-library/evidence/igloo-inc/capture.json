@@ -1,0 +1,319 @@
+{
+  "id": "igloo-inc",
+  "url": "https://www.igloo.inc/",
+  "researchedAt": "2026-11-17T18:24:43.608Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://www.igloo.inc/",
+  "title": "Igloo Inc.",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "en desktop linux chrome",
+    "bodyBackground": "rgb(160, 165, 177)",
+    "htmlBackground": "rgb(160, 165, 177)",
+    "bodyColor": "rgb(0, 0, 0)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "/* js */ div#webgl { display: block; position: absolute; width: 100%; height: 10",
+      "fontFamily": "\"Times New Roman\"",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": null,
+    "h2": null,
+    "p": null,
+    "navLink": null,
+    "largestVisibleText": null,
+    "loadedFonts": [],
+    "nav": null,
+    "counts": {
+      "sections": 0,
+      "images": 0,
+      "videos": 0,
+      "canvases": 0,
+      "svgs": 0,
+      "links": 0
+    },
+    "canvases": [],
+    "videos": [],
+    "imageFormats": {},
+    "landmarks": {
+      "header": false,
+      "main": false,
+      "footer": false,
+      "h1Count": 0,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": "165",
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 10,
+      "frame": "scroll-10.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 11,
+      "frame": "scroll-11.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 528,
+    "loadMs": 534,
+    "lcpMs": 780,
+    "cls": 0,
+    "requests": 94,
+    "byInitiator": {
+      "script": {
+        "count": 2,
+        "transferKB": 419
+      },
+      "fetch": {
+        "count": 88,
+        "transferKB": 14512
+      },
+      "other": {
+        "count": 4,
+        "transferKB": 108
+      }
+    }
+  },
+  "scripts": {
+    "total": 8,
+    "libraryHints": []
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": 16,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    }
+  }
+}

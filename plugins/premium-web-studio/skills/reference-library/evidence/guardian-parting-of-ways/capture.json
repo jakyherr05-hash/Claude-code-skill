@@ -1,0 +1,10 @@
+{
+  "id": "guardian-parting-of-ways",
+  "url": "https://www.theguardian.com/environment/ng-interactive/2015/dec/04/the-parting-of-ways",
+  "researchedAt": "2026-11-17T18:24:37.661Z",
+  "status": "blocked",
+  "errors": [
+    "HTTP 404 — page not found; the page content is not the real site, nothing was measured"
+  ],
+  "httpStatus": 404
+}

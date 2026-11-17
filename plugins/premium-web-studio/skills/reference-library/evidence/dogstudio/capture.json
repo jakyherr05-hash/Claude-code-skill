@@ -1,0 +1,430 @@
+{
+  "id": "dogstudio",
+  "url": "https://dogstudio.co/",
+  "researchedAt": "2026-11-17T18:28:36.205Z",
+  "status": "inspected",
+  "errors": [
+    "networkidle timeout (page kept loading; continued)"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://dogstudio.co/",
+  "title": "Dogstudio. Multidisciplinary Creative Studio.",
+  "page": {
+    "lang": "en-US",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 3881,
+    "htmlClasses": " no-touchevents backgroundcliptext objectfit object-fit",
+    "bodyBackground": "rgb(19, 20, 25)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "Your web browser (Chrome 140) is out of date. Update your browser for more secur",
+      "fontFamily": "Heebo, Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "29.4px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 0,
+        "y": 81,
+        "w": 1440,
+        "h": 3800
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Dogstudio",
+      "fontFamily": "Heebo, Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "29.4px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": -1,
+        "y": 80,
+        "w": 1,
+        "h": 1
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "We Make Good Shit",
+      "fontFamily": "Heebo, Helvetica, Arial, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "29.4px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": -1,
+        "y": 80,
+        "w": 1,
+        "h": 1
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "W e M a k e G o o d S h i t",
+      "fontFamily": "\"GT Sectra Display\", Times, Georgia, serif",
+      "fontSize": "120px",
+      "fontWeight": "700",
+      "lineHeight": "107px",
+      "letterSpacing": "-4.8px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 437,
+        "y": 281,
+        "w": 269,
+        "h": 404
+      }
+    },
+    "navLink": null,
+    "largestVisibleText": {
+      "fontSize": "120px",
+      "fontFamily": "\"GT Sectra Display\", Times, Georgia, serif",
+      "fontWeight": "700",
+      "letterSpacing": "-23px",
+      "lineHeight": "107px",
+      "text": "W\n                                  e"
+    },
+    "loadedFonts": [
+      "Heebo 400 normal",
+      "Heebo 500 normal",
+      "Heebo 300 normal",
+      "Heebo 200 normal",
+      "GT Sectra Display 700 normal",
+      "GT Sectra Display 400 normal",
+      "Gilroy 700 normal",
+      "Gilroy 500 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "relative",
+      "height": 546,
+      "linkCount": 0
+    },
+    "counts": {
+      "sections": 3,
+      "images": 13,
+      "videos": 0,
+      "canvases": 1,
+      "svgs": 34,
+      "links": 45
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 1190,
+        "position": "static"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "png": 10,
+      "other": 1,
+      "jpg": 2
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": false,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 3881,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "W e M a k e G o o d S h i t",
+          "fontSize": "120px",
+          "family": "GT Sectra Display"
+        },
+        {
+          "text": "Dogstudio",
+          "fontSize": "14px",
+          "family": "Heebo"
+        },
+        {
+          "text": "Dogstudio",
+          "fontSize": "14px",
+          "family": "Heebo"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 765,
+      "docHeight": 3881,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Tomorrowland",
+          "fontSize": "14px",
+          "family": "Heebo"
+        },
+        {
+          "text": "Navy Pier",
+          "fontSize": "14px",
+          "family": "Heebo"
+        },
+        {
+          "text": "MSI Chicago",
+          "fontSize": "14px",
+          "family": "Heebo"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 1530,
+      "docHeight": 3881,
+      "pinnedLargeFixedOrSticky": 8,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 2295,
+      "docHeight": 3881,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "W e ' r e c r a f t i n g e m o t i o n a l e x p e r i e n ",
+          "fontSize": "50px",
+          "family": "GT Sectra Display"
+        },
+        {
+          "text": "We're crafting emotional experiences aimed at improving resu",
+          "fontSize": "14px",
+          "family": "Heebo"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 2981,
+      "docHeight": 3881,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "W e ' r e c r a f t i n g e m o t i o n a l e x p e r i e n ",
+          "fontSize": "50px",
+          "family": "GT Sectra Display"
+        },
+        {
+          "text": "Chicago .",
+          "fontSize": "22px",
+          "family": "Heebo"
+        },
+        {
+          "text": "Amsterdam .",
+          "fontSize": "22px",
+          "family": "Heebo"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 2981,
+      "docHeight": 3881,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "W e ' r e c r a f t i n g e m o t i o n a l e x p e r i e n ",
+          "fontSize": "50px",
+          "family": "GT Sectra Display"
+        },
+        {
+          "text": "Chicago .",
+          "fontSize": "22px",
+          "family": "Heebo"
+        },
+        {
+          "text": "Amsterdam .",
+          "fontSize": "22px",
+          "family": "Heebo"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 3185,
+    "loadMs": 6248,
+    "lcpMs": 5148,
+    "cls": 0.07,
+    "requests": 56,
+    "byInitiator": {
+      "link": {
+        "count": 2,
+        "transferKB": 53
+      },
+      "img": {
+        "count": 16,
+        "transferKB": 4620
+      },
+      "script": {
+        "count": 13,
+        "transferKB": 521
+      },
+      "other": {
+        "count": 1,
+        "transferKB": 3
+      },
+      "css": {
+        "count": 12,
+        "transferKB": 327
+      },
+      "xmlhttprequest": {
+        "count": 10,
+        "transferKB": 2412
+      },
+      "fetch": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "iframe": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 25,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtm.js",
+      "https://www.google-analytics.com/analytics.js",
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "%c%d font-size:0;color:transparent NaN",
+    "%c%d font-size:0;color:transparent NaN",
+    "%c%o font-size:0;color:transparent {}",
+    "%c%o font-size:0;color:transparent {}"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "14px",
+    "largestFontSize": 80,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "14px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "14px"
+    }
+  }
+}

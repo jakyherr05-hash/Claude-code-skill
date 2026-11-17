@@ -1,0 +1,529 @@
+{
+  "id": "thetruth",
+  "url": "https://www.thetruth.com/",
+  "researchedAt": "2026-11-17T18:19:55.597Z",
+  "status": "inspected",
+  "errors": [
+    "networkidle timeout (page kept loading; continued)"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://www.thetruth.com/",
+  "title": "we are truth",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 5198,
+    "htmlClasses": " js",
+    "bodyBackground": "rgb(255, 255, 255)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(0, 0, 0)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "<iframe src=\"https://www.googletagmanager.com/ns.html?id=GTM-N9RJ3NL\" height=\"0\"",
+      "fontFamily": "Din, Arial, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "400",
+      "lineHeight": "25.92px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 5198
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Nothing But The",
+      "fontFamily": "\"Bebas Neue\", Helvetica, sans-serif",
+      "fontSize": "40px",
+      "fontWeight": "500",
+      "lineHeight": "30px",
+      "letterSpacing": "normal",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 830,
+        "y": 703,
+        "w": 500,
+        "h": 30
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Main navigation (Do Not Remove)",
+      "fontFamily": "\"Bebas Neue\", Helvetica, sans-serif",
+      "fontSize": "40px",
+      "fontWeight": "500",
+      "lineHeight": "48px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 490,
+        "y": 15,
+        "w": 1,
+        "h": 1
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "truth delivers the facts about smoking, vaping, and nicotine use, exposes the ta",
+      "fontFamily": "Din, Arial, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "400",
+      "lineHeight": "28.8px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 830,
+        "y": 947,
+        "w": 500,
+        "h": 230
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "Din, Arial, sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "400",
+      "lineHeight": "25.92px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(220, 52, 0)",
+      "box": {
+        "x": 39,
+        "y": 15,
+        "w": 149,
+        "h": 48
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "40px",
+      "fontFamily": "\"Bebas Neue\", Helvetica, sans-serif",
+      "fontWeight": "500",
+      "letterSpacing": "normal",
+      "lineHeight": "48px",
+      "text": "Main navigation (Do Not Remove)"
+    },
+    "loadedFonts": [
+      "Bebas Neue 400 normal",
+      "Din 400 normal",
+      "DINPro Bold 400 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "relative",
+      "height": 78,
+      "linkCount": 6
+    },
+    "counts": {
+      "sections": 7,
+      "images": 9,
+      "videos": 1,
+      "canvases": 0,
+      "svgs": 4,
+      "links": 25
+    },
+    "canvases": [],
+    "videos": [
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "src": "www.thetruth.com/sites/default/files/2026-06/truth%20site%20gif_r4%20%281%29.mp4"
+      }
+    ],
+    "imageFormats": {
+      "png": 3,
+      "jpg": 3,
+      "jpeg": 1,
+      "other": 2
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 6,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 600
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 5198,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Main navigation (Do Not Remove)",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Nothing But The",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": ".wavy-filter { filter: url('#wavy'); }",
+          "fontSize": "18px",
+          "family": "Din"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 1
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 765,
+      "docHeight": 5198,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "truth through the decades",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "truth through the decades",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": ".wavy-filter { filter: url('#wavy'); }",
+          "fontSize": "18px",
+          "family": "Din"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 1530,
+      "docHeight": 5198,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "truth through the decades",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "truth through the decades",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Campaigns that make history",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 2295,
+      "docHeight": 5198,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Campaigns that make history",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Campaigns that make history",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Driven by science",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 3060,
+      "docHeight": 5198,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Driven by science",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Driven by science",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Share your story",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 3825,
+      "docHeight": 5198,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Share your story",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Share your story",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Need help quitting nicotine?",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 4298,
+      "docHeight": 5198,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Need help quitting nicotine?",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Need help quitting nicotine?",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Footer menu",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 4298,
+      "docHeight": 5198,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Need help quitting nicotine?",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Need help quitting nicotine?",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        },
+        {
+          "text": "Footer menu",
+          "fontSize": "40px",
+          "family": "Bebas Neue"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1424,
+    "loadMs": 2402,
+    "lcpMs": 1148,
+    "cls": 0.13,
+    "requests": 153,
+    "byInitiator": {
+      "script": {
+        "count": 39,
+        "transferKB": 307
+      },
+      "link": {
+        "count": 31,
+        "transferKB": 1387
+      },
+      "video": {
+        "count": 5,
+        "transferKB": 36588
+      },
+      "img": {
+        "count": 12,
+        "transferKB": 365
+      },
+      "css": {
+        "count": 7,
+        "transferKB": 52
+      },
+      "other": {
+        "count": 1,
+        "transferKB": 30
+      },
+      "xmlhttprequest": {
+        "count": 15,
+        "transferKB": 118
+      },
+      "fetch": {
+        "count": 20,
+        "transferKB": 3
+      },
+      "beacon": {
+        "count": 15,
+        "transferKB": 0
+      },
+      "iframe": {
+        "count": 8,
+        "transferKB": 1
+      }
+    }
+  },
+  "scripts": {
+    "total": 63,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtm.js",
+      "https://www.google-analytics.com/analytics.js",
+      "https://www.googletagmanager.com/gtag/js",
+      "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/859026525/"
+    ]
+  },
+  "consoleErrors": [
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED",
+    "Failed to load resource: net::ERR_TUNNEL_CONNECTION_FAILED"
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "32px",
+    "largestFontSize": 40,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "40px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "40px"
+    }
+  }
+}
