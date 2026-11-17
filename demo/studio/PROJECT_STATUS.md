@@ -3,7 +3,7 @@ _Single source of truth. Update at every phase boundary._
 
 - Track: spot | sprint | full
 - Current phase: 10 · Final approval — Gate B round 2 done (2026-11-17); majors fixed and closed by the reviewer
-- Last updated: 2026-11-16
+- Last updated: 2026-11-17
 
 ## Phase log
 | Phase | Owner(s) | Status | Exit evidence | Date |
@@ -20,6 +20,8 @@ _Single source of truth. Update at every phase boundary._
 | B · Creative (round 2) | creative-director | PASS (0 blockers, 2 majors) → majors fixed (W34 detail crops + wide renders, W36 Hour exposure) → closure re-check: both CLOSED | docs/BUGS-FIXES.md W34–W41; reviewer captures | 2026-11-17 |
 | B · QA (round 2) | qa-engineer | FAIL on one intermittent test → root cause + deterministic test (S14) → suite 56/56 | docs/evidence/playwright-gate-b-r2.json | 2026-11-17 |
 | B · Technical (round 2) | tech-lead | code correct; FAIL on stale evidence counts + in-progress tree → evidence regenerated at the final commit, docs reconciled, templates in sync | docs/VALIDATION-REPORT.md B.6 | 2026-11-17 |
+| B · QA closure (round 2) | qa-engineer | **PASS**: rewritten Lenis test not weaker, 5/5; evidence covers all 56 tests | scratchpad closure-qa.md (summarised here) | 2026-11-17 |
+| B · Technical closure (round 2) | tech-lead | both round-2 required fixes CLOSED; new FAIL: Hour preset test load-sensitive + 3 stale doc statements → fixed (S15, README, BUGS-FIXES); narrow re-gate pending | docs/BUGS-FIXES.md S15 | 2026-11-17 |
 ## Open tasks
 | Task | Owner | Blocked by |
 |---|---|---|

@@ -488,7 +488,7 @@ vec3 shade(vec3 p, vec3 n, int surf, vec2 aa, vec3 sd) {
   // E = E_sun * rho_floor * width / pi * sum(cos_e * cos_r / r^2) dz. Lights what stands near the patch.
   if (uDay.y > 0.0) {
     float z0 = max(uDay.x - KZ * H, 0.0), z1 = max(uShow.z - KZ * H, 0.0);
-    float dz = (z1 - z0) * 0.25;
+    float dz = max(z1 - z0, 0.0) * 0.25; // a slit start past the lit length must give no bounce, never negative light
     float acc = 0.0;
     for (int i = 0; i < 4; i++) {
       vec3 L = vec3(xLand, 0.0, z0 + (float(i) + 0.5) * dz) - p;

@@ -88,10 +88,14 @@ test.describe('rendering & navigation', () => {
   });
 
   test('The Hour: presets drive readout + announce intent; keyboard works', async ({ page }) => {
+    // Fake clock: the preset tweens advance in exact frames (runFor), so a shared host that starves rAF can't stall
+    // the readout past a wall-clock timeout (S15; same root cause as S14).
+    await page.clock.install();
     await open(page);
     const hour = page.locator('#the-hour');
     await hour.scrollIntoViewIfNeeded();
     await hour.getByRole('button', { name: '13:30' }).click();
+    await page.clock.runFor(2000);
     await expect(hour.locator('.hour__time')).toHaveText('13:30', { timeout: 4000 });
     await expect(hour.locator('[aria-live]')).toContainText('Noon flattens everything');
     await expect(hour.getByRole('button', { name: '13:30' })).toHaveAttribute('aria-pressed', 'true');
@@ -99,6 +103,7 @@ test.describe('rendering & navigation', () => {
     expect(day).toMatch(/5\d{3}\sK/); // number and unit joined by a no-break space
     // midnight: no daylight, door only
     await hour.getByRole('button', { name: '00:00' }).click();
+    await page.clock.runFor(2000);
     await expect(hour.locator('.hour__time')).toHaveText('00:00', { timeout: 4000 });
     await expect(hour.locator('.hour__readout dd').first()).toHaveText('—');
     // keyboard: focus slider, PageUp = +1h
@@ -106,6 +111,7 @@ test.describe('rendering & navigation', () => {
     await slider.focus();
     await page.keyboard.press('PageUp');
     await expect(slider).toHaveValue('60');
+    await page.clock.runFor(2000);
     await expect(hour.locator('.hour__time')).toHaveText('01:00', { timeout: 4000 });
     await expect(slider).toHaveAttribute('aria-valuetext', '01:00');
     await page.keyboard.press('ArrowRight');
@@ -114,6 +120,7 @@ test.describe('rendering & navigation', () => {
     await expect(slider).toHaveValue('1395'); // wraps past midnight → 23:15
     // presets land on exact values (step=5 keeps 18:20 = 1100 unsnapped)
     await hour.getByRole('button', { name: '18:20' }).click();
+    await page.clock.runFor(2000);
     await expect(slider).toHaveValue('1100', { timeout: 4000 });
   });
 

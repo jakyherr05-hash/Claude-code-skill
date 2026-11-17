@@ -20,7 +20,7 @@ Then describe your project, e.g. *"Build a launch page for our €6k carbon e-bi
 | `…/skills/webgl-three/` | When 3D is worth it; raw WebGL2 light renderer + React wrapper; Three.js stage with full disposal (tested) |
 | `…/skills/ai-visual-pipeline/` | Provider registry with licences checked against the HF model API, `providers.py` (check/generate, honest BLOCKED), AVIF/WebP optimiser, H.264/VP9/AV1 encoder |
 | `…/skills/reference-study/` | Playwright capture tool that measures a live site (fonts, stack, scroll smoothing, timings) |
-| `…/skills/reference-library/` | **25 researched sites** with [M]/[O]/[I]/[?]-labelled reports, evidence screenshots and a search CLI |
+| `…/skills/reference-library/` | **52 researched sites** with [M]/[O]/[I]/[?]-labelled reports, evidence screenshots and a search CLI |
 | `…/skills/web-qa/` | Playwright suite template, Lighthouse runner, scroll-jank probe, QA report template |
 | `demo/` | **Penumbra**, a fictional lighting atelier site built by the agents, with its `studio/` docs and a 56-test Playwright suite |
 | `docs/` | Install, usage, orchestration, tool registry, **validation report** (with known limitations), agent validation, bugs/fixes, release readiness, evidence |

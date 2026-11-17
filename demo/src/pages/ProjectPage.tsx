@@ -37,7 +37,7 @@ export function ProjectPage({ project }: { project: Project }) {
       <header className="detail__head grid">
         <p className="kicker mono" data-detail-meta><Link to="/">Penumbra</Link> / Work / {project.no}</p>
         <h1 id="detail-title" tabIndex={-1}>{project.name}</h1>
-        <p className="detail__meta mono" data-detail-meta>{project.place} · {project.year} · {project.typeLabel} · {project.spec}</p>
+        <p className="detail__meta mono" data-detail-meta>{[project.place, String(project.year), project.typeLabel, project.spec].flatMap((t, k) => [k ? ' ' : null, <span key={t}>{t}</span>])}</p>
       </header>
       <div className="detail__body grid">
         <p className="detail__intent">{project.intent}</p>
