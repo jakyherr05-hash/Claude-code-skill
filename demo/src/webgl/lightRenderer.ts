@@ -46,6 +46,16 @@ export type LightState = {
    *  empty wall above the hero copy. Re-evaluated on every draw, so a resize across
    *  the aspect boundary re-composes automatically. */
   heroFraming?: number;
+  /** 0..1, default 0. Diffuse daylight (sky seen through the slit), coloured by daylightK. Lights every
+   *  surface softly, horizontal ones more. The hero leaves it 0. */
+  sky?: number;
+  /** 0 | 1, default 0. 1 = the sun patch on the floor re-radiates (stone-floor bounce, physical
+   *  coefficient). The Hour uses 1; the hero's tuned frame predates it and leaves it 0. */
+  bounce?: number;
+  /** Metres along the room's depth where the open part of the slit begins, default -1 (whole slit).
+   *  Larger values shade the apse end of the slit: the blade leaves the back wall and lands only on
+   *  the floor (and what stands on it) further out. */
+  slitStart?: number;
 };
 
 export type HourReadout = {
@@ -127,14 +137,27 @@ export function heroStateFor(aspect: number): LightState {
  * The Hour — six designed states from CREATIVE_DIRECTION.md. Kelvin values of
  * sources that are off are set to their neighbours' values so the interpolation
  * never swings colour through an invisible source.
+ *
+ * Exposure model: ONE FIXED EXPOSURE for the whole day (no auto-exposure; the
+ * grade at the end of FRAG is the same for every hour). The picture is therefore
+ * honest about level, not only colour: the noon room is lighter than the night
+ * room, and a higher lux reading never renders darker than a lower one for the
+ * same surface. Source intensities below are set so that, measured on the
+ * rendered frame, the altar face and the nave wall rise and fall in the same
+ * order as `readout.altarLux` / `readout.naveLux` (ordering checked per preset
+ * in studio/ASSET_MANIFEST.md, "The Hour exposure"). Direct sun is far brighter
+ * than any reading and shows clipped to the limewash cap, as it would on a camera
+ * at a fixed exposure. Daylight on the altar at 10:00 and 13:30 comes from the sun
+ * itself (blade + its floor-patch `bounce`); the nave level comes from `sky`.
  */
 export const HOUR_PRESETS: HourPreset[] = [
   {
     time: '06:10',
     minutes: 6 * 60 + 10,
     state: {
-      sunAngle: 60, sunX: 0.74, daylightK: 2400, daylight: 0.42,
+      sunAngle: 60, sunX: 0.6, daylightK: 2400, daylight: 0.42,
       altarK: 3000, altar: 0, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
+      sky: 0.01, bounce: 1, slitStart: -1,
     },
     readout: { daylightK: 2400, artificialK: null, altarLux: 30, naveLux: 6 },
     intent: 'Dawn does the work. We stay out of its way.',
@@ -143,8 +166,9 @@ export const HOUR_PRESETS: HourPreset[] = [
     time: '10:00',
     minutes: 10 * 60,
     state: {
-      sunAngle: 40, sunX: 0.6, daylightK: 5000, daylight: 0.8,
+      sunAngle: 40, sunX: 0.66, daylightK: 5000, daylight: 0.9,
       altarK: 3000, altar: 0, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
+      sky: 0.25, bounce: 1, slitStart: -1,
     },
     readout: { daylightK: 5000, artificialK: null, altarLux: 220, naveLux: 90 },
     intent: 'The nave is bright enough. Nothing is added.',
@@ -153,8 +177,11 @@ export const HOUR_PRESETS: HourPreset[] = [
     time: '13:30',
     minutes: 13 * 60 + 30,
     state: {
-      sunAngle: 22, sunX: 0.44, daylightK: 5800, daylight: 0.95,
+      // the apse end of the slit is shaded (slitStart): the steep noon shaft leaves the back wall
+      // and lands only on the altar and the floor in front of it, so the altar keeps its edge
+      sunAngle: 22, sunX: 0.71, daylightK: 5800, daylight: 0.95,
       altarK: 3000, altar: 0, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
+      sky: 0.4, bounce: 1, slitStart: 2.2,
     },
     readout: { daylightK: 5800, artificialK: null, altarLux: 300, naveLux: 140 },
     intent: 'Noon flattens everything, so the slit is shaded and the altar keeps its edge.',
@@ -163,8 +190,9 @@ export const HOUR_PRESETS: HourPreset[] = [
     time: '18:20',
     minutes: 18 * 60 + 20,
     state: {
-      sunAngle: 54, sunX: 0.7, daylightK: 3200, daylight: 0.2,
+      sunAngle: 54, sunX: 0.7, daylightK: 3200, daylight: 0.24,
       altarK: 3000, altar: 0.2, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
+      sky: 0.06, bounce: 1, slitStart: -1,
     },
     readout: { daylightK: 3200, artificialK: 3000, altarLux: 60, naveLux: 15 },
     intent: 'As the sun leaves, the altar takes over, never brighter than the window was.',
@@ -174,7 +202,8 @@ export const HOUR_PRESETS: HourPreset[] = [
     minutes: 21 * 60,
     state: {
       sunAngle: 58, sunX: 0.74, daylightK: 2400, daylight: 0,
-      altarK: 2700, altar: 0.42, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0.006, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
+      altarK: 2700, altar: 0.32, thresholdK: 2200, threshold: 0, naveK: 2700, nave: 0.002, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
+      sky: 0, bounce: 1, slitStart: -1,
     },
     readout: { daylightK: null, artificialK: 2700, altarLux: 40, naveLux: 2 },
     intent: 'The nave is allowed to be dark.',
@@ -185,6 +214,7 @@ export const HOUR_PRESETS: HourPreset[] = [
     state: {
       sunAngle: 60, sunX: 0.74, daylightK: 2400, daylight: 0,
       altarK: 2700, altar: 0, thresholdK: 2200, threshold: 0.55, naveK: 2700, nave: 0, reveal: 1, doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0,
+      sky: 0, bounce: 1, slitStart: -1,
     },
     readout: { daylightK: null, artificialK: 2200, altarLux: 0, naveLux: 0, doorLux: 8 },
     intent: 'Only the door. Enough to find it.',
@@ -194,10 +224,11 @@ export const HOUR_PRESETS: HourPreset[] = [
 const KEYS: readonly (keyof LightState)[] = [
   'sunAngle', 'sunX', 'daylightK', 'daylight', 'altarK', 'altar',
   'thresholdK', 'threshold', 'naveK', 'nave', 'reveal', 'doorway', 'altarBlock', 'slitLength', 'heroFraming',
+  'sky', 'bounce', 'slitStart',
 ];
 
 /** Values of the optional keys when a state omits them. */
-const OPTIONAL_DEFAULTS = { doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0 } as const;
+const OPTIONAL_DEFAULTS = { doorway: 1, altarBlock: 1, slitLength: 5.6, heroFraming: 0, sky: 0, bounce: 0, slitStart: -1 } as const;
 const val = (s: LightState, k: keyof LightState): number =>
   s[k] ?? OPTIONAL_DEFAULTS[k as keyof typeof OPTIONAL_DEFAULTS];
 
@@ -278,7 +309,9 @@ precision highp float;
 uniform vec4 uK;      // kelvin: sun, altar, door, nave
 uniform vec4 uI;      // intensity (already * reveal): sun, altar, door, nave
 uniform float uWarm;  // dim-to-warm factor from reveal (1 = nominal CCT)
+uniform float uSkyI;  // diffuse daylight intensity (already * reveal)
 flat out vec3 vSun;
+flat out vec3 vSky;
 flat out vec3 vAltar;
 flat out vec3 vDoor;
 flat out vec3 vNave;
@@ -306,6 +339,7 @@ void main() {
   vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));
   gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
   vSun = kelvin(uK.x * uWarm) * uI.x;
+  vSky = kelvin(uK.x * uWarm) * uSkyI;
   vAltar = kelvin(uK.y * uWarm) * uI.y;
   vDoor = kelvin(uK.z * uWarm) * uI.z;
   vNave = kelvin(uK.w * uWarm) * uI.w;
@@ -320,7 +354,9 @@ uniform vec4 uGeo;    // tan(sunAngle), slit x, landing x, half-width of the vie
 uniform vec2 uLayout; // altar x, door x
 uniform float uZoom;  // >1 widens the view on portrait frames so the room still reads
 uniform vec3 uShow;   // doorway, altar block (1 = built, 0 = plain wall / floor), slit length (m)
+uniform vec2 uDay;    // slit start (m along the depth), floor-bounce switch
 flat in vec3 vSun;
+flat in vec3 vSky;
 flat in vec3 vAltar;
 flat in vec3 vDoor;
 flat in vec3 vNave;
@@ -365,7 +401,8 @@ float sunLit(vec3 p) {
   float hw = SLIT_W * 0.5;
   float a = smoothstep(-hw - soft, -hw + soft, u) * (1.0 - smoothstep(hw - soft, hw + soft, u));
   float slitL = uShow.z;
-  float b = smoothstep(-1.0 - soft, -1.0 + soft, zs) * (1.0 - smoothstep(slitL - soft * 3.0, slitL + soft * 3.0, zs));
+  float s0 = uDay.x;
+  float b = smoothstep(s0 - soft, s0 + soft, zs) * (1.0 - smoothstep(slitL - soft * 3.0, slitL + soft * 3.0, zs));
   return a * b * top;
 }
 
@@ -444,6 +481,24 @@ vec3 shade(vec3 p, vec3 n, int surf, vec2 aa, vec3 sd) {
   float wallLowLit = smoothstep(1.2, 2.0, uShow.z);
   E += vSun * (0.07 * floorLit * pointL(p, n, vec3(xLand, 0.02, bandLen), 2.5) * occl);
   E += vSun * (0.03 * wallLowLit * pointL(p, n, vec3(xLand - tanA * 1.6, 1.6, 0.02), 1.8) * occl);
+
+  // diffuse daylight: the sky seen through the slit; horizontal faces see more of it
+  E += vSky * (0.11 * (0.55 + 0.45 * max(n.y, 0.0)) * occl);
+  // the sun patch on the stone floor re-radiates (Lambertian strip along the band, 4 samples):
+  // E = E_sun * rho_floor * width / pi * sum(cos_e * cos_r / r^2) dz. Lights what stands near the patch.
+  if (uDay.y > 0.0) {
+    float z0 = max(uDay.x - KZ * H, 0.0), z1 = max(uShow.z - KZ * H, 0.0);
+    float dz = (z1 - z0) * 0.25;
+    float acc = 0.0;
+    for (int i = 0; i < 4; i++) {
+      vec3 L = vec3(xLand, 0.0, z0 + (float(i) + 0.5) * dz) - p;
+      float r2 = dot(L, L) + 0.04;
+      vec3 l = L * inversesqrt(r2);
+      acc += max(-l.y, 0.0) * max(dot(n, l), 0.0) / r2;
+    }
+    float eSun = 3.2 * inversesqrt(1.0 + tanA * tanA + KZ * KZ); // sun irradiance on the floor per unit vSun
+    E += vSun * (uDay.y * eSun * 0.36 * (SLIT_W + 0.2) / 3.14159 * acc * dz);
+  }
 
   // altar downlight: grazes the apse wall, leaves a scallop and a crisp top
   vec3 aPos = vec3(xA, 4.9, 1.45);
@@ -670,6 +725,8 @@ type GLRes = {
   uWarm: WebGLUniformLocation | null;
   uZoom: WebGLUniformLocation | null;
   uShow: WebGLUniformLocation | null;
+  uSkyI: WebGLUniformLocation | null;
+  uDay: WebGLUniformLocation | null;
 };
 
 function compile(gl: WebGL2RenderingContext): GLRes | null {
@@ -713,6 +770,8 @@ function compile(gl: WebGL2RenderingContext): GLRes | null {
     uWarm: gl.getUniformLocation(program, 'uWarm'),
     uZoom: gl.getUniformLocation(program, 'uZoom'),
     uShow: gl.getUniformLocation(program, 'uShow'),
+    uSkyI: gl.getUniformLocation(program, 'uSkyI'),
+    uDay: gl.getUniformLocation(program, 'uDay'),
   };
 }
 
@@ -897,6 +956,8 @@ export function createLightRenderer(
     ctx.uniform1f(res.uWarm, warm);
     ctx.uniform1f(res.uZoom, zoom);
     ctx.uniform3f(res.uShow, clamp01(val(state, 'doorway')), clamp01(val(state, 'altarBlock')), Math.max(0.1, slitL));
+    ctx.uniform1f(res.uSkyI, Math.max(0, val(state, 'sky')) * ri);
+    ctx.uniform2f(res.uDay, val(state, 'slitStart'), clamp01(val(state, 'bounce')));
     ctx.drawArrays(ctx.TRIANGLES, 0, 3);
     fence = ctx.fenceSync(ctx.SYNC_GPU_COMMANDS_COMPLETE, 0);
     ctx.flush();

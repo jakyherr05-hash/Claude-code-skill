@@ -460,28 +460,28 @@
         "format": "avif",
         "width": 640,
         "height": 360,
-        "bytes": 3024,
+        "bytes": 3774,
         "file": "public/media/hour-0610-640.avif"
       },
       {
         "format": "webp",
         "width": 640,
         "height": 360,
-        "bytes": 2410,
+        "bytes": 2494,
         "file": "public/media/hour-0610-640.webp"
       },
       {
         "format": "avif",
         "width": 1280,
         "height": 720,
-        "bytes": 6270,
+        "bytes": 7855,
         "file": "public/media/hour-0610-1280.avif"
       },
       {
         "format": "webp",
         "width": 1280,
         "height": 720,
-        "bytes": 6298,
+        "bytes": 6482,
         "file": "public/media/hour-0610-1280.webp"
       }
     ],
@@ -498,28 +498,28 @@
         "format": "avif",
         "width": 640,
         "height": 360,
-        "bytes": 2648,
+        "bytes": 3114,
         "file": "public/media/hour-1000-640.avif"
       },
       {
         "format": "webp",
         "width": 640,
         "height": 360,
-        "bytes": 1790,
+        "bytes": 1944,
         "file": "public/media/hour-1000-640.webp"
       },
       {
         "format": "avif",
         "width": 1280,
         "height": 720,
-        "bytes": 5451,
+        "bytes": 6673,
         "file": "public/media/hour-1000-1280.avif"
       },
       {
         "format": "webp",
         "width": 1280,
         "height": 720,
-        "bytes": 4960,
+        "bytes": 5028,
         "file": "public/media/hour-1000-1280.webp"
       }
     ],
@@ -536,28 +536,28 @@
         "format": "avif",
         "width": 640,
         "height": 360,
-        "bytes": 3026,
+        "bytes": 3122,
         "file": "public/media/hour-1330-640.avif"
       },
       {
         "format": "webp",
         "width": 640,
         "height": 360,
-        "bytes": 1786,
+        "bytes": 1706,
         "file": "public/media/hour-1330-640.webp"
       },
       {
         "format": "avif",
         "width": 1280,
         "height": 720,
-        "bytes": 5930,
+        "bytes": 6352,
         "file": "public/media/hour-1330-1280.avif"
       },
       {
         "format": "webp",
         "width": 1280,
         "height": 720,
-        "bytes": 5284,
+        "bytes": 5294,
         "file": "public/media/hour-1330-1280.webp"
       }
     ],
@@ -574,28 +574,28 @@
         "format": "avif",
         "width": 640,
         "height": 360,
-        "bytes": 3345,
+        "bytes": 3498,
         "file": "public/media/hour-1820-640.avif"
       },
       {
         "format": "webp",
         "width": 640,
         "height": 360,
-        "bytes": 2552,
+        "bytes": 2558,
         "file": "public/media/hour-1820-640.webp"
       },
       {
         "format": "avif",
         "width": 1280,
         "height": 720,
-        "bytes": 6803,
+        "bytes": 7309,
         "file": "public/media/hour-1820-1280.avif"
       },
       {
         "format": "webp",
         "width": 1280,
         "height": 720,
-        "bytes": 6308,
+        "bytes": 6442,
         "file": "public/media/hour-1820-1280.webp"
       }
     ],
@@ -612,28 +612,28 @@
         "format": "avif",
         "width": 640,
         "height": 360,
-        "bytes": 2559,
+        "bytes": 2300,
         "file": "public/media/hour-2100-640.avif"
       },
       {
         "format": "webp",
         "width": 640,
         "height": 360,
-        "bytes": 1780,
+        "bytes": 1610,
         "file": "public/media/hour-2100-640.webp"
       },
       {
         "format": "avif",
         "width": 1280,
         "height": 720,
-        "bytes": 4975,
+        "bytes": 4391,
         "file": "public/media/hour-2100-1280.avif"
       },
       {
         "format": "webp",
         "width": 1280,
         "height": 720,
-        "bytes": 4504,
+        "bytes": 4186,
         "file": "public/media/hour-2100-1280.webp"
       }
     ],

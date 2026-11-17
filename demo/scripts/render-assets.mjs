@@ -519,13 +519,13 @@ function browserLib() {
 
 // ----------------------------------------------------------------------------------------------
 // --from-shader: capture the live shader's own settled frames (hero posters + six Hour stills).
-//   npm run assets -- --from-shader   (starts `vite --port 5179`, captures, stops it)
+//   npm run assets -- --from-shader   (starts `vite --port $ASSETS_PORT` (default 5179), captures, stops it)
 // Posters must be the shader's frame so the light does not jump when the canvas takes over.
 if (args.includes('--from-shader')) {
   const { spawn } = await import('node:child_process');
   const { chromium: pwc } = require('@playwright/test');
   const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-  const port = 5179;
+  const port = Number(process.env.ASSETS_PORT || 5179); // ASSETS_PORT: run beside other servers (port isolation, as PW_PORT does for tests)
   const vite = spawn('npx', ['vite', '--port', String(port), '--strictPort'], { cwd: root, stdio: 'ignore' });
   const SHOTS = [
     ['hero-landscape', 2400, 1350], ['hero-portrait', 1170, 2532],

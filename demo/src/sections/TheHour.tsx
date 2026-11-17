@@ -52,6 +52,7 @@ export function TheHour() {
       if (o.art) o.art.textContent = r.artificialK ? `${r.artificialK}\u00a0K` : 'off';
       if (o.altar) o.altar.textContent = `${r.altarLux}`;
       if (o.nave) o.nave.textContent = `${r.naveLux}`;
+      if (o.door) o.door.textContent = r.doorLux !== undefined ? `${r.doorLux}` : '—';
       if (fallback.current) {
         fallback.current.style.setProperty('--day', r.daylightK ? kelvinToHex(r.daylightK) : '#0d0c0b');
         fallback.current.style.setProperty('--art', r.artificialK ? kelvinToHex(r.artificialK) : '#0d0c0b');
@@ -185,6 +186,8 @@ export function TheHour() {
           <div><dt>Penumbra</dt><dd ref={reg('art')} className="is-warm">—</dd></div>
           <div><dt>Altar lux</dt><dd ref={reg('altar')}>—</dd></div>
           <div><dt>Nave lux</dt><dd ref={reg('nave')}>—</dd></div>
+          {/* always in the list (no layout shift while scrubbing); reads "—" while the door source is off */}
+          <div><dt>Door lux</dt><dd ref={reg('door')}>—</dd></div>
         </dl>
 
       </div>
