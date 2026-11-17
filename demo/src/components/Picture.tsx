@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const PORTRAIT_MEDIA = '(max-aspect-ratio: 1/1)';
-export const WIDE_MEDIA = '(min-width: 64rem)';
+export const WIDE_MEDIA = '(min-width: 64rem) and (min-aspect-ratio: 1001/1000)'; // landscape only: a portrait tablet would stretch it
 
 export function Picture({ id, widths, sizes, alt, width, height, priority, className, portrait, wide }: Props) {
   const setOf = (pid: string, ws: number[], fmt: string) => ws.map((w) => `${BASE}${pid}-${w}.${fmt} ${w}w`).join(', ');

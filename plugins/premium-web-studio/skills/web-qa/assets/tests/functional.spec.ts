@@ -56,7 +56,9 @@ test.describe('rendering & navigation', () => {
     await expect(page.locator('main h1')).toHaveAccessibleName('Hotel Alva');
     await expect(page).toHaveTitle(/^Hotel Alva — Penumbra/);
     // the prerendered HTML ships the right title before any script runs
-    expect((await (await page.request.get('/work/hotel-alva')).text()).match(/<title>([^<]*)/)?.[1]).toMatch(/^Hotel Alva — Penumbra/);
+    const html = await (await page.request.get('/work/hotel-alva')).text();
+    expect(html.match(/<title>([^<]*)/)?.[1]).toMatch(/^Hotel Alva — Penumbra/);
+    expect(html, 'project pages must not preload the home hero poster').not.toMatch(/rel="preload" as="image"/);
     await open(page, '/does-not-exist');
     await expect(page.locator('main h1')).toHaveText('This room is dark.');
     await expect(page).toHaveTitle(/^Page not found — Penumbra/);

@@ -40,6 +40,8 @@ for (const r of routes) {
     // (hosts' SPA fallbacks may serve the home HTML for /work/x — hydrating that would mismatch)
     .replace('<div id="root"></div>', `<div id="root" data-prerendered="${r}">${html}</div>`)
     .replace(/<title>[^<]*<\/title>/, `<title>${title(r)}</title>`)
+    // the home hero's poster preloads only belong on the home page (project pages never show that image)
+    .replace(r === '/' ? /^$/ : /\s*<!-- preloads mirror[^\n]*\n(\s*<link rel="preload" as="image"[^\n]*\n)+/, r === '/' ? '' : '\n')
     .replace('</head>', `    ${preloadFonts}\n  </head>`);
   const file = r === '/' ? path.join(outDir, 'index.html') : path.join(outDir, r.slice(1), 'index.html');
   fs.mkdirSync(path.dirname(file), { recursive: true });

@@ -40,6 +40,7 @@ const SCENES = {
   // wide variant for the >= 1024 px detail hero (strip ~2.6:1): the portrait plate's subject spans ~65% of its height
   'capela-do-silencio-wide': ['capela', 2880, 1120],
   'museu-das-mares': ['museu', 2400, 3000],
+  'museu-das-mares-wide': ['museu', 2880, 1120],
   'casa-sombra': ['casa', 2400, 3000],
   'hotel-alva': ['hotel', 2400, 3000],
   'atelier-brass': ['brass', 2400, 2400],
@@ -158,7 +159,8 @@ function browserLib() {
 
   /* ================= MUSEU DAS MARES: three low vitrines, 4000 K, polished floor ================= */
   scenes.museu = (W, H, S) => {
-    const f = 1.55 * W, cx = W / 2, cy = H * 0.40, ch = 3.3, hw = 5.5, RH = 5, Dz = 34;
+    // focal length from the frame's short side (portrait unchanged); landscape sits a little higher to keep the front vitrine clear of the edge
+    const f = 1.55 * Math.min(W, H * 0.8), cx = W / 2, cy = H * (W > H ? 0.34 : 0.40), ch = 3.3, hw = 5.5, RH = 5, Dz = 34;
     const boxes = [
       { x: -1.2, z: 8.2, hx: 1.05, hz: 0.5, hy: 0.5, E: 1.0, seed: 3 },
       { x: 1.05, z: 11.6, hx: 1.05, hz: 0.5, hy: 0.5, E: 0.85, seed: 8 },

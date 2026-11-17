@@ -20,7 +20,8 @@ export type Project = {
    *  (the subject is the light), then solved so the strip centres on it; capped at 100 %. */
   focusY?: number;
   /** has a wide (2880x1120) render, `<plate>-wide-{1280,1920,2880}`, for >= 1024 px: used when no vertical crop of the
-   *  portrait plate can hold the subject (Capela's spans ~65% of the plate height; the strip shows ~31%). */
+   *  portrait plate can hold the subject (Capela's spans ~65% of the plate height; the strip shows ~31%) or keep the
+   *  frame mostly in shadow (Museu's crop was 94-97% lit). */
   wide?: boolean;
   alt?: string;
   narrative?: string[];
@@ -69,7 +70,7 @@ export const projects: Project[] = [
   {
     slug: 'museu-das-mares', no: '02', name: 'Museu das Marés', place: 'Peniche, Portugal', year: 2024,
     type: 'Museum', typeLabel: 'Museum', intent: 'Vitrines glow like rock pools in a dark hall.',
-    spec: '4000 K · 50 lux on objects · 2 lux hall', cct: [3000, 4000], featured: true, plate: 'museu-das-mares', focusY: 100,
+    spec: '4000 K · 50 lux on objects · 2 lux hall', cct: [3000, 4000], featured: true, plate: 'museu-das-mares', focusY: 100, wide: true,
     alt: 'A dark exhibition hall with three low vitrines glowing from within, their light pooling on a polished floor.',
     narrative: [
       'A maritime collection in a former cannery: salt-fragile objects, a hall the size of a hangar.',

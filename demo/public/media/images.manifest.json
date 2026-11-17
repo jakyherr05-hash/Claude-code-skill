@@ -690,5 +690,57 @@
       }
     ],
     "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"capela-do-silencio-wide-1280.avif 1280w, capela-do-silencio-wide-1920.avif 1920w, capela-do-silencio-wide-2880.avif 2880w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"capela-do-silencio-wide-1280.webp 1280w, capela-do-silencio-wide-1920.webp 1920w, capela-do-silencio-wide-2880.webp 2880w\" sizes=\"100vw\">\n  <img src=\"capela-do-silencio-wide-2880.webp\" width=\"2880\" height=\"1120\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
+  },
+  {
+    "id": "museu-das-mares-wide",
+    "source": "/tmp/claude-0/-home-user-Claude-code-skill/224276a2-c2aa-5898-b6d9-eebe905c6165/scratchpad/wide/m/opt/museu-das-mares-wide.png",
+    "sourceWidth": 2880,
+    "sourceHeight": 1120,
+    "aspect": 2.5714,
+    "outputs": [
+      {
+        "format": "avif",
+        "width": 1280,
+        "height": 498,
+        "bytes": 3044,
+        "file": "/tmp/claude-0/-home-user-Claude-code-skill/224276a2-c2aa-5898-b6d9-eebe905c6165/scratchpad/wide/m/enc/museu-das-mares-wide-1280.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1280,
+        "height": 498,
+        "bytes": 4070,
+        "file": "/tmp/claude-0/-home-user-Claude-code-skill/224276a2-c2aa-5898-b6d9-eebe905c6165/scratchpad/wide/m/enc/museu-das-mares-wide-1280.webp"
+      },
+      {
+        "format": "avif",
+        "width": 1920,
+        "height": 747,
+        "bytes": 5258,
+        "file": "/tmp/claude-0/-home-user-Claude-code-skill/224276a2-c2aa-5898-b6d9-eebe905c6165/scratchpad/wide/m/enc/museu-das-mares-wide-1920.avif"
+      },
+      {
+        "format": "webp",
+        "width": 1920,
+        "height": 747,
+        "bytes": 7322,
+        "file": "/tmp/claude-0/-home-user-Claude-code-skill/224276a2-c2aa-5898-b6d9-eebe905c6165/scratchpad/wide/m/enc/museu-das-mares-wide-1920.webp"
+      },
+      {
+        "format": "avif",
+        "width": 2880,
+        "height": 1120,
+        "bytes": 10189,
+        "file": "/tmp/claude-0/-home-user-Claude-code-skill/224276a2-c2aa-5898-b6d9-eebe905c6165/scratchpad/wide/m/enc/museu-das-mares-wide-2880.avif"
+      },
+      {
+        "format": "webp",
+        "width": 2880,
+        "height": 1120,
+        "bytes": 14608,
+        "file": "/tmp/claude-0/-home-user-Claude-code-skill/224276a2-c2aa-5898-b6d9-eebe905c6165/scratchpad/wide/m/enc/museu-das-mares-wide-2880.webp"
+      }
+    ],
+    "picture": "<picture>\n  <source type=\"image/avif\" srcset=\"museu-das-mares-wide-1280.avif 1280w, museu-das-mares-wide-1920.avif 1920w, museu-das-mares-wide-2880.avif 2880w\" sizes=\"100vw\">\n  <source type=\"image/webp\" srcset=\"museu-das-mares-wide-1280.webp 1280w, museu-das-mares-wide-1920.webp 1920w, museu-das-mares-wide-2880.webp 2880w\" sizes=\"100vw\">\n  <img src=\"museu-das-mares-wide-2880.webp\" width=\"2880\" height=\"1120\" alt=\"TODO: describe\" loading=\"lazy\" decoding=\"async\">\n</picture>"
   }
 ]
