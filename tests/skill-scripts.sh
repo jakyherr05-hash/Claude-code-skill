@@ -113,8 +113,11 @@ if node -e "require('playwright');require('sharp');require.resolve('gsap/dist/Sc
 <script src="gsap.min.js"></script><script src="ScrollTrigger.min.js"></script><script src="ImageSequence.js"></script>
 <script>gsap.registerPlugin(ScrollTrigger);
 const small=matchMedia('(max-width: 600px)').matches;
+const q=new URLSearchParams(location.search);
 const frames=Array.from({length:48},(_,i)=>`frames/f${String(i+1).padStart(3,'0')}-${small?320:640}.avif`);
-window.__cleanup=imageSequence({section:document.getElementById('seq'),canvas:document.getElementById('c'),frames,poster:frames[47],step:small?2:1});</script></body></html>
+if(q.has('broken'))frames[24]='frames/missing-404.avif';
+window.__cleanup=imageSequence({section:document.getElementById('seq'),canvas:document.getElementById('c'),frames,poster:frames[47],step:small?2:1});
+if(q.has('unmount'))setTimeout(()=>window.__cleanup(),30);</script></body></html>
 H
   cat > "$Q/run.cjs" <<'J'
 const { chromium } = require('playwright'); const http = require('http'), fs = require('fs'), path = require('path');
@@ -122,9 +125,9 @@ const root = process.argv[2]; let reqs = 0; const widths = new Set();
 const srv = http.createServer((q, r) => { const u = q.url.split('?')[0]; if (u.includes('frames/')) { reqs++; widths.add(u.match(/-(\d+)\.avif$/)?.[1]); } fs.readFile(path.join(root, u === '/' ? 'index.html' : u), (e, d) => { if (e) { r.writeHead(404); return r.end(); } r.writeHead(200, { 'content-type': u.endsWith('.avif') ? 'image/avif' : u.endsWith('.js') ? 'text/javascript' : 'text/html' }); r.end(d); }); });
 srv.listen(0, async () => {
   const port = srv.address().port, b = await chromium.launch(), out = {};
-  for (const [n, o] of [['desktop', { viewport: { width: 1280, height: 720 } }], ['mobile', { viewport: { width: 390, height: 844 }, isMobile: true }], ['reduced', { viewport: { width: 1280, height: 720 }, reducedMotion: 'reduce' }]]) {
+  for (const [n, o, qs] of [['desktop', { viewport: { width: 1280, height: 720 } }, ''], ['mobile', { viewport: { width: 390, height: 844 }, isMobile: true }, ''], ['reduced', { viewport: { width: 1280, height: 720 }, reducedMotion: 'reduce' }, ''], ['broken', { viewport: { width: 1280, height: 720 } }, '?broken'], ['unmount', { viewport: { width: 1280, height: 720 } }, '?unmount']]) {
     reqs = 0; widths.clear(); const p = await b.newPage(o); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
-    await p.goto(`http://localhost:${port}/`); await p.waitForTimeout(1500);
+    await p.goto(`http://localhost:${port}/${qs}`); await p.waitForTimeout(1500);
     const vh = await p.evaluate(() => innerHeight), shown = [];
     for (const f of [0, 0.5, 1]) { await p.evaluate((y) => scrollTo(0, y), vh + f * 2.5 * vh); await p.waitForTimeout(900); shown.push(await p.evaluate(() => document.getElementById('c').dataset.frame)); }
     out[n] = { shown: shown.join(','), reqs, w: [...widths].join(','), pins: await p.evaluate(() => ScrollTrigger.getAll().length), after: await p.evaluate(() => { __cleanup(); return ScrollTrigger.getAll().length; }), errs: errs.length };
@@ -134,12 +137,16 @@ srv.listen(0, async () => {
 });
 J
   R="$(node "$Q/run.cjs" "$Q" 2>&1)"
-  python3 - "$R" <<'PY' && ok "ImageSequence.js (optimiser → helper): desktop 48×640w 0→24→47; mobile 24×320w 0→12→23; reduced 1 still unpinned; cleanup 0" || bad "ImageSequence.js" "$R"
+  python3 - "$R" <<'PY' && ok "ImageSequence.js (optimiser → helper): desktop 48×640w 0→24→47; mobile 24×320w 0→12→23; reduced 1 still unpinned; missing frame skipped; unmount stops preload; cleanup 0" || bad "ImageSequence.js" "$R"
 import json,sys
 d=json.loads(sys.argv[1])
 assert d['desktop']=={'shown':'0,24,47','reqs':48,'w':'640','pins':1,'after':0,'errs':0}, d['desktop']
 assert d['mobile']=={'shown':'0,12,23','reqs':24,'w':'320','pins':1,'after':0,'errs':0}, d['mobile']
 assert d['reduced']=={'shown':'0,0,0','reqs':1,'w':'640','pins':0,'after':0,'errs':0}, d['reduced']
+# a missing frame is skipped (nearest decoded frame shown instead), never drawn, no error
+assert d['broken']['shown'] in ('0,23,47','0,25,47') and d['broken']['errs']==0 and d['broken']['after']==0, d['broken']
+# cleanup during preload stops downloading and leaves no trigger
+assert d['unmount']['reqs'] < 10 and d['unmount']['pins']==0 and d['unmount']['errs']==0, d['unmount']
 PY
 else skp "ImageSequence.js" "playwright, sharp, gsap (demo/node_modules) or ffmpeg missing"; fi
 

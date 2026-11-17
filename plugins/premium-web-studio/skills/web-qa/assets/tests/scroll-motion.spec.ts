@@ -25,27 +25,41 @@ test.describe('Lenis + GSAP integration', () => {
   });
 
   test('exactly one Lenis instance and it drives ScrollTrigger during the glide', async ({ page }) => {
+    // Fake clock (Date, timers, rAF, performance.now): the glide advances in exact 16 ms frames. With real time, a shared
+    // host + software GL sometimes produced no frames for ~1.5 s mid-glide (no main-thread long task), so the test
+    // measured the host, not the sync. Every frame is still checked below.
+    await page.clock.install();
     await open(page);
     const lenisCount = await page.evaluate(() => document.querySelectorAll('html.lenis').length);
     expect(lenisCount).toBe(1);
-    // Method pin trigger progress must update WHILE Lenis animates, not only at the end
+    // Method pin trigger progress must update WHILE Lenis animates, in the same frame as Lenis' scroll, not only at the end.
+    // Start just above the pin so the whole glide crosses the pinned range: from the page top the progress changed only in
+    // the glide's slow tail, so under host load (starved rAF) only 2-3 frames landed there and a value count flaked.
     const methodTop = await page.locator('#method').evaluate((el) => el.getBoundingClientRect().top + scrollY);
-    // sample the pinned trigger's progress on EVERY frame, in-page (Playwright-side polling misses frames under load)
-    const progress: number[] = await page.evaluate(async (y) => {
+    await page.evaluate((y) => (window as any).__lenis.scrollTo(y - 100, { immediate: true }), methodTop);
+    await page.clock.runFor(300);
+    // Sample on Lenis' own scroll event. The app registered ScrollTrigger.update on it first, so this listener runs after
+    // ScrollTrigger has processed the same frame: progress must equal the value implied by Lenis' scroll position.
+    await page.evaluate((y) => {
+      const lenis = (window as any).__lenis;
       const st = (window as any).__ScrollTrigger.getAll().find((t: any) => t.pin);
-      if (!st) return [-1];
-      const out: number[] = [];
-      (window as any).__lenis.scrollTo(y + 900, { duration: 1.6 });
-      const t0 = performance.now();
-      await new Promise<void>((done) => {
-        const loop = () => { out.push(Math.round(st.progress * 1000) / 1000); performance.now() - t0 < 2000 ? requestAnimationFrame(loop) : done(); };
-        requestAnimationFrame(loop);
+      const w = window as any; w.__frames = [];
+      if (!st) return;
+      w.__off = lenis.on('scroll', (l: any) => {
+        const e = Math.min(1, Math.max(0, (l.scroll - st.start) / (st.end - st.start)));
+        w.__frames.push({ p: Math.round(st.progress * 10000) / 10000, e: Math.round(e * 10000) / 10000 });
       });
-      return out;
+      lenis.scrollTo(y + 900, { duration: 1.6 });
     }, methodTop);
-    test.info().annotations.push({ type: 'pin-progress', description: JSON.stringify({ frames: progress.length, distinct: new Set(progress).size, sample: progress.filter((_, k) => k % 6 === 0) }) });
-    expect(progress[0]).toBeGreaterThanOrEqual(0);
-    expect(new Set(progress).size).toBeGreaterThan(3); // many intermediate values = synced per frame
+    await page.clock.runFor(2200);
+    const frames: { p: number; e: number }[] = await page.evaluate(() => { (window as any).__off?.(); return (window as any).__frames; });
+    const progress = frames.map((f) => f.p);
+    const maxErr = Math.max(...frames.map((f) => Math.abs(f.p - f.e)));
+    const intermediate = progress.filter((v) => v > 0 && v < progress[progress.length - 1]).length;
+    test.info().annotations.push({ type: 'pin-progress', description: JSON.stringify({ frames: frames.length, distinct: new Set(progress).size, intermediate, maxErr, sample: progress.filter((_, k) => k % 6 === 0) }) });
+    expect(frames.length, 'Lenis emitted scroll events during the glide').toBeGreaterThan(3);
+    expect(maxErr, 'ScrollTrigger progress matches Lenis scroll in the same frame').toBeLessThan(0.002);
+    expect(intermediate, 'progress moved through intermediate values during the glide').toBeGreaterThan(1);
   });
 
   test('anchor navigation applies header offset and moves focus', async ({ page }) => {

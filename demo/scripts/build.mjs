@@ -21,7 +21,7 @@ const ssrDir = path.join(root, 'node_modules', '.cache', 'penumbra-ssr');
 await build({ root, logLevel: 'warn', build: { outDir, emptyOutDir: true } });
 await build({ root, logLevel: 'warn', build: { ssr: 'src/entry-server.tsx', outDir: ssrDir, emptyOutDir: true } });
 
-const { render, routes } = await import(pathToFileURL(path.join(ssrDir, 'entry-server.js')).href);
+const { render, routes, title } = await import(pathToFileURL(path.join(ssrDir, 'entry-server.js')).href);
 
 const template = fs.readFileSync(path.join(outDir, 'index.html'), 'utf8');
 // Preload only the two faces that paint above the fold: the hero H1 (Newsreader, latin, normal) and the
@@ -39,6 +39,7 @@ for (const r of routes) {
     // data-prerendered records which route this HTML is: the client only hydrates when it matches the URL
     // (hosts' SPA fallbacks may serve the home HTML for /work/x — hydrating that would mismatch)
     .replace('<div id="root"></div>', `<div id="root" data-prerendered="${r}">${html}</div>`)
+    .replace(/<title>[^<]*<\/title>/, `<title>${title(r)}</title>`)
     .replace('</head>', `    ${preloadFonts}\n  </head>`);
   const file = r === '/' ? path.join(outDir, 'index.html') : path.join(outDir, r.slice(1), 'index.html');
   fs.mkdirSync(path.dirname(file), { recursive: true });

@@ -41,18 +41,25 @@ test.describe('rendering & navigation', () => {
     await expect(page).toHaveURL(/\/work\/capela-do-silencio$/);
     await expect(page.locator('main h1')).toHaveAccessibleName('Capela do Silêncio');
     await expect(page.locator('main h1')).toBeFocused();
+    await expect(page).toHaveTitle(/^Capela do Silêncio — Penumbra/); // one title per page (WCAG 2.4.2)
     await page.getByRole('link', { name: /Museu das Marés/ }).click();
     await expect(page).toHaveURL(/museu-das-mares/);
+    await expect(page).toHaveTitle(/^Museu das Marés — Penumbra/);
     await page.goBack();
     await expect(page).toHaveURL(/capela-do-silencio/);
+    await expect(page).toHaveTitle(/^Capela do Silêncio — Penumbra/);
     c.assertClean();
   });
 
   test('deep link to a project and unknown route work (SPA fallback)', async ({ page }) => {
     await open(page, '/work/hotel-alva');
     await expect(page.locator('main h1')).toHaveAccessibleName('Hotel Alva');
+    await expect(page).toHaveTitle(/^Hotel Alva — Penumbra/);
+    // the prerendered HTML ships the right title before any script runs
+    expect((await (await page.request.get('/work/hotel-alva')).text()).match(/<title>([^<]*)/)?.[1]).toMatch(/^Hotel Alva — Penumbra/);
     await open(page, '/does-not-exist');
     await expect(page.locator('main h1')).toHaveText('This room is dark.');
+    await expect(page).toHaveTitle(/^Page not found — Penumbra/);
   });
 
   test('section nav from the project page lands on the home section', async ({ page }) => {

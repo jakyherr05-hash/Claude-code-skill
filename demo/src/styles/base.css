@@ -92,12 +92,15 @@ main:focus, h1:focus, [tabindex='-1']:focus { outline: none; box-shadow: none; }
 /* ---- Header ---- */
 .site-header {
   position: fixed; inset: 0 0 auto; z-index: 100; height: var(--header-h);
-  display: flex; align-items: center; gap: var(--space-m); padding-inline: var(--margin);
+  display: flex; align-items: center; gap: var(--space-m);
+  /* same left/right edges as .grid content: beyond --container-max the content is centred, so the header must be too */
+  padding-inline: max(var(--margin), calc((100% - var(--container-max)) / 2 + var(--margin)));
   background: linear-gradient(var(--ground) 0%, color-mix(in srgb, var(--ground) 0%, transparent) 100%);
-  transition: background-color var(--dur-xs) linear, box-shadow var(--dur-xs) linear;
 }
-/* over the hero the light reaches the top edge; once content scrolls underneath, the header gets solid ground */
-.site-header[data-scrolled='true'] { background: var(--ground); box-shadow: 0 1px 0 var(--line); }
+/* over the hero the light reaches the top edge; once content scrolls underneath, the header gets solid ground.
+   A separate layer fades in over the gradient (swapping `background` would drop the gradient for one frame). */
+.site-header::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--ground); box-shadow: 0 1px 0 var(--line); opacity: 0; transition: opacity var(--dur-xs) linear; pointer-events: none; }
+.site-header[data-scrolled='true']::before { opacity: 1; }
 .wordmark {
   font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.32em; font-weight: 500;
   text-decoration: none; margin-right: auto; min-height: 44px; display: inline-flex; align-items: center;

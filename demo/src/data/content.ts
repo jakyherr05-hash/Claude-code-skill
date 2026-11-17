@@ -15,6 +15,10 @@ export type Project = {
   cct: [number, number];
   featured: boolean;
   plate?: string;          // public/media basename
+  /** vertical focal point of the plate for wide crops (object-position y %): the plates are portrait 4:5, and on the
+   *  ≥ 1024 px detail hero only ~31 % of their height shows. Measured as the centroid of the brightest 5 % of pixels
+   *  (the subject is the light), then solved so the strip centres on it; capped at 100 %. */
+  focusY?: number;
   alt?: string;
   narrative?: string[];
   hours?: { time: string; k: number | null; note: string }[];
@@ -26,7 +30,7 @@ export const site = {
   h1: 'We design the dark first.',
   sub: 'Penumbra is a lighting atelier in Lisbon. Sacred spaces, museums, hotels and houses, lit with precision hour by hour.',
   manifesto:
-    'Most rooms are over-lit. We start by deciding where darkness must stay — over the nave, behind the vitrine, along the corridor at night. Then we place light only where it gives meaning, at the temperature the hour asks for. Shadow is not what is left over. It is the first thing we design.',
+    'Most rooms are over-lit. We start by deciding where darkness must stay — over the nave, behind the vitrine, along the corridor at night. Then we place light only where it gives meaning, at the temperature the hour asks for. Shadow is not what is left over. It is the first thing we\u00a0design.',
   manifestoMark: 'where darkness must stay',
   method: [
     { title: 'Survey the dark.', text: 'We map where shadow must remain before a single fitting is drawn.' },
@@ -46,7 +50,7 @@ export const projects: Project[] = [
   {
     slug: 'capela-do-silencio', no: '01', name: 'Capela do Silêncio', place: 'Évora, Portugal', year: 2025,
     type: 'Sacred', typeLabel: 'Sacred space', intent: 'One slit of dawn; the altar answers it at night.',
-    spec: '2400–2700 K · 40 lux · 3 sources', cct: [2200, 5800], featured: true, plate: 'capela-do-silencio',
+    spec: '2400–2700 K · 40 lux · 3 sources', cct: [2200, 5800], featured: true, plate: 'capela-do-silencio', focusY: 40,
     alt: 'A dark barrel-vaulted nave; a single blade of dawn light from a high slit falls on the limewashed apse wall.',
     narrative: [
       'A sixteenth-century chapel had been lit like a supermarket: eleven floodlights, one level, all day.',
@@ -62,7 +66,7 @@ export const projects: Project[] = [
   {
     slug: 'museu-das-mares', no: '02', name: 'Museu das Marés', place: 'Peniche, Portugal', year: 2024,
     type: 'Museum', typeLabel: 'Museum', intent: 'Vitrines glow like rock pools in a dark hall.',
-    spec: '4000 K · 50 lux on objects · 2 lux hall', cct: [3000, 4000], featured: true, plate: 'museu-das-mares',
+    spec: '4000 K · 50 lux on objects · 2 lux hall', cct: [3000, 4000], featured: true, plate: 'museu-das-mares', focusY: 100,
     alt: 'A dark exhibition hall with three low vitrines glowing from within, their light pooling on a polished floor.',
     narrative: [
       'A maritime collection in a former cannery: salt-fragile objects, a hall the size of a hangar.',
@@ -76,7 +80,7 @@ export const projects: Project[] = [
   {
     slug: 'casa-sombra', no: '03', name: 'Casa Sombra', place: 'Comporta, Portugal', year: 2023,
     type: 'House', typeLabel: 'Private house', intent: 'Louvre shadows that tell the time across the floor.',
-    spec: '3000 K · 4 sources · daylight-led', cct: [2700, 5600], featured: true, plate: 'casa-sombra',
+    spec: '3000 K · 4 sources · daylight-led', cct: [2700, 5600], featured: true, plate: 'casa-sombra', focusY: 100,
     alt: 'Soft-edged stripes of late-afternoon louvre shadow across a concrete floor and up a wall.',
     narrative: [
       'A single-storey house in pine and sand. The architect drew deep timber louvres; we drew their shadows.',
@@ -90,7 +94,7 @@ export const projects: Project[] = [
   {
     slug: 'hotel-alva', no: '04', name: 'Hotel Alva', place: 'Porto, Portugal', year: 2026,
     type: 'Hospitality', typeLabel: 'Hospitality', intent: 'Corridors lit at ankle height; faces lit only at the bar.',
-    spec: '2200 K · grazing slots · 1.5 lux corridor', cct: [2200, 2700], featured: true, plate: 'hotel-alva',
+    spec: '2200 K · grazing slots · 1.5 lux corridor', cct: [2200, 2700], featured: true, plate: 'hotel-alva', focusY: 95,
     alt: 'A long stone corridor in perspective, lit only by low grazing slots that leave regular warm pools on the floor.',
     narrative: [
       'Sixty rooms in a granite warehouse by the river. Guests arrive late; the building should feel like it is already asleep.',

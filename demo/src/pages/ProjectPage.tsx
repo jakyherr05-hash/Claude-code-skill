@@ -30,7 +30,7 @@ export function ProjectPage({ project }: { project: Project }) {
 
   return (
     <article ref={root} className="detail" aria-labelledby="detail-title">
-      <div className="detail__hero">
+      <div className="detail__hero" style={{ ['--focus-y' as string]: `${project.focusY ?? 40}%` }}>
         <Picture id={project.plate!} widths={[720, 1280, 1920]} sizes="100vw" alt={project.alt!} width={1600} height={2000} priority />
       </div>
       <header className="detail__head grid">

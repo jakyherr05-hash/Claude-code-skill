@@ -156,3 +156,37 @@ test.describe('hero text contrast over the light (axe cannot see through the Web
     });
   }
 });
+
+test.describe('header links over the project-page hero (transparent header over imagery)', () => {
+  // Same worst-pixel method as the hero test. Guards W34: per-plate focal points moved bright light under the nav.
+  test.use({ reducedMotion: 'reduce' });
+  for (const [w, h] of [[1024, 768], [1440, 900], [1920, 1080]] as const) {
+    test(`${w}×${h}: every header link ≥ 4.5:1 on all four project pages`, async ({ page }) => {
+      await page.setViewportSize({ width: w, height: h });
+      const worst: [string, number][] = [];
+      for (const slug of ['capela-do-silencio', 'museu-das-mares', 'casa-sombra', 'hotel-alva']) {
+        await open(page, `/work/${slug}`);
+        await page.waitForTimeout(500);
+        const links = await page.evaluate(() => [...document.querySelectorAll('.site-header a, .site-header button')]
+          .filter((e) => (e as HTMLElement).offsetParent && !e.matches('.skip-link, .skip') && e.getBoundingClientRect().top >= 0 && e.getBoundingClientRect().width > 0)
+          .map((e) => { const r = document.createRange(); r.selectNodeContents(e); const q = r.getClientRects()[0] || e.getBoundingClientRect();
+            return { t: (e.textContent || '').trim(), rect: [q.x, q.y, q.width, q.height], col: getComputedStyle(e).color }; }));
+        await page.addStyleTag({ content: '.site-header a, .site-header button { color: transparent !important; border-color: transparent !important }' });
+        await page.waitForTimeout(150);
+        const b64 = (await page.screenshot()).toString('base64');
+        const r = await page.evaluate(async ({ b64, links }) => {
+          const lum = (r: number, g: number, b: number) => { const f = (v: number) => { v /= 255; return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+          const i = new Image(); i.src = 'data:image/png;base64,' + b64; await i.decode();
+          const c = new OffscreenCanvas(i.width, i.height); const x = c.getContext('2d')!; x.drawImage(i, 0, 0); const d = x.getImageData(0, 0, i.width, i.height).data;
+          return links.map(({ t, rect: [rx, ry, rw, rh], col }) => { let mx = 0;
+            for (let yy = ry | 0; yy < ry + rh; yy++) for (let xx = rx | 0; xx < rx + rw; xx++) { const k = (yy * i.width + xx) * 4; mx = Math.max(mx, lum(d[k], d[k + 1], d[k + 2])); }
+            const [cr, cg, cb] = col.match(/\d+/g)!.map(Number); return [t, +((lum(cr, cg, cb) + 0.05) / (mx + 0.05)).toFixed(2)] as [string, number]; });
+        }, { b64, links });
+        worst.push(...r.map(([t, v]) => [`${slug}: ${t}`, v] as [string, number]));
+      }
+      worst.sort((a, b) => a[1] - b[1]);
+      test.info().annotations.push({ type: 'contrast', description: JSON.stringify(worst.slice(0, 3)) });
+      expect(worst[0][1], `lowest: ${worst[0][0]}`).toBeGreaterThanOrEqual(4.5);
+    });
+  }
+});
