@@ -31,7 +31,8 @@ export function ProjectPage({ project }: { project: Project }) {
   return (
     <article ref={root} className="detail" aria-labelledby="detail-title">
       <div className="detail__hero" style={{ ['--focus-y' as string]: `${project.focusY ?? 40}%` }}>
-        <Picture id={project.plate!} widths={[720, 1280, 1920]} sizes="100vw" alt={project.alt!} width={1600} height={2000} priority />
+        <Picture id={project.plate!} widths={[720, 1280, 1920]} sizes="100vw" alt={project.alt!} width={1600} height={2000} priority
+          wide={project.wide ? { id: `${project.plate}-wide`, widths: [1280, 1920, 2880] } : undefined} />
       </div>
       <header className="detail__head grid">
         <p className="kicker mono" data-detail-meta><Link to="/">Penumbra</Link> / Work / {project.no}</p>

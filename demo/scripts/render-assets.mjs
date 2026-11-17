@@ -37,6 +37,8 @@ const positional = args.filter((a, i) => !a.startsWith('--') && !(i > 0 && args[
 // id -> [width, height] at scale 1 (2400px wide masters)
 const SCENES = {
   'capela-do-silencio': ['capela', 2400, 3000],
+  // wide variant for the >= 1024 px detail hero (strip ~2.6:1): the portrait plate's subject spans ~65% of its height
+  'capela-do-silencio-wide': ['capela', 2880, 1120],
   'museu-das-mares': ['museu', 2400, 3000],
   'casa-sombra': ['casa', 2400, 3000],
   'hotel-alva': ['hotel', 2400, 3000],
@@ -99,7 +101,8 @@ function browserLib() {
 
   /* ================= CAPELA DO SILENCIO: barrel vault, dawn blade on apse wall ================= */
   scenes.capela = (W, H, S) => {
-    const f = 1.5 * W, cx = W / 2, cy = H * 0.575, ch = 1.7, hw = 3, D = 19, SY = 6, R = 3;
+    // focal length from the frame's short side (portrait 2400x3000: W = H*0.8, so unchanged); landscape keeps the vertical view
+    const f = 1.5 * Math.min(W, H * 0.8), cx = W / 2, cy = H * (W > H ? 0.66 : 0.575), ch = 1.7, hw = 3, D = 19, SY = 6, R = 3;
     const el = 35 * Math.PI / 180, az = 35 * Math.PI / 180;
     const ldx = Math.cos(el) * Math.sin(az), ldy = -Math.sin(el), ldz = Math.cos(el) * Math.cos(az);
     const slitZ = 15.3, slitW = 1.0, slitY0 = 2.5, slitY1 = 5.8, slope = 1.25;

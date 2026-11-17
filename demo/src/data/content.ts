@@ -19,6 +19,9 @@ export type Project = {
    *  ≥ 1024 px detail hero only ~31 % of their height shows. Measured as the centroid of the brightest 5 % of pixels
    *  (the subject is the light), then solved so the strip centres on it; capped at 100 %. */
   focusY?: number;
+  /** has a wide (2880x1120) render, `<plate>-wide-{1280,1920,2880}`, for >= 1024 px: used when no vertical crop of the
+   *  portrait plate can hold the subject (Capela's spans ~65% of the plate height; the strip shows ~31%). */
+  wide?: boolean;
   alt?: string;
   narrative?: string[];
   hours?: { time: string; k: number | null; note: string }[];
@@ -50,7 +53,7 @@ export const projects: Project[] = [
   {
     slug: 'capela-do-silencio', no: '01', name: 'Capela do Silêncio', place: 'Évora, Portugal', year: 2025,
     type: 'Sacred', typeLabel: 'Sacred space', intent: 'One slit of dawn; the altar answers it at night.',
-    spec: '2400–2700 K · 40 lux · 3 sources', cct: [2200, 5800], featured: true, plate: 'capela-do-silencio', focusY: 40,
+    spec: '2400–2700 K · 40 lux · 3 sources', cct: [2200, 5800], featured: true, plate: 'capela-do-silencio', focusY: 40, wide: true,
     alt: 'A dark barrel-vaulted nave; a single blade of dawn light from a high slit falls on the limewashed apse wall.',
     narrative: [
       'A sixteenth-century chapel had been lit like a supermarket: eleven floodlights, one level, all day.',
