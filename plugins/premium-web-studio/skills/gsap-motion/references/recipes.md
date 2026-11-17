@@ -121,14 +121,25 @@ gsap.ticker.add(() => stage.setProgress(cam.t));
 
 ## 15. Scroll-scrubbed image sequence [tested: `assets/examples/ImageSequence.js`]
 The product-film technique (an object turning, opening or assembling as you scroll). Use it when the *object itself* is the story and real 3D would cost more than pre-rendered frames; use recipe 14 when the user must interact with the model.
+Workflow, exactly as `tests/skill-scripts.sh` runs it:
+```bash
+# 1. render/export the frames as numbered stills (f001.png …), same aspect ratio
+# 2. encode a desktop and a mobile width with the ai-visual-pipeline optimiser (needs sharp)
+node <ai-visual-pipeline>/scripts/optimize-images.mjs frames-raw/ public/seq --widths 1600,800 --no-jpg
+#    → public/seq/f001-1600.avif, f001-1600.webp, f001-800.avif, … + images.manifest.json
+```
 ```js
+// 3. pick the width and the frame step per viewport, then hand the URLs to the helper
+const small = matchMedia('(max-width: 600px)').matches;
+const frames = Array.from({ length: N }, (_, i) => `/seq/f${String(i + 1).padStart(3, '0')}-${small ? 800 : 1600}.avif`);
 const cleanup = imageSequence({
-  section, canvas, frames,                  // frames: URLs of same-aspect AVIF/WebP stills, in order
+  section, canvas, frames,
   poster: frames.at(-1),                    // reduced motion: one meaningful still, no pin, no scrub
-  step: matchMedia('(max-width: 600px)').matches ? 2 : 1,   // mobile: half the frames
+  step: small ? 2 : 1,                      // mobile: half the frames, at half the width
   scrollLength: '+=250%',
 });
 ```
+AVIF decodes in all current evergreen browsers; serve the `.webp` set instead if you must support older Safari.
 What the helper does, and why:
 - **Never blank.** It draws the nearest *decoded* frame, so a fast scroll during loading still shows the motion. Load order is frame 0, then every 8th keyframe, then the gaps.
 - **Cover-fit at DPR ≤ 2** on resize. Frames are drawn to a canvas, not swapped in `<img>`, so there is no layout or decode flash.
@@ -140,4 +151,4 @@ Budget it before you commit to it:
 - **Scroll length ≈ frames × 25–40 px** per frame on desktop. Too short reads as a flicker, too long reads as stuck.
 - **Text.** Pair captions with frame ranges (labels on the same timeline), keep them in the DOM, and never make the only copy part of the frames.
 
-Verified in `tests/skill-scripts.sh`: 48 frames over the pin show frames 0 → 24 → 47 on desktop; on a 390 px phone 24 frames are requested and 0 → 12 → 23 shown; reduced motion makes 1 request, does not pin, shows the poster; cleanup leaves 0 ScrollTriggers.
+Verified in `tests/skill-scripts.sh` with the workflow above (48 frames, widths 640/320 in the test): desktop requests 48 frames at 640 w and shows 0 → 24 → 47 across the pin; a 390 px phone requests 24 frames at 320 w and shows 0 → 12 → 23; reduced motion makes 1 request, does not pin and shows the poster; cleanup leaves 0 ScrollTriggers; no page errors. **Not covered by that test:** the React/`useGSAP` wrapper, Safari/Firefox, and real-device decode cost.

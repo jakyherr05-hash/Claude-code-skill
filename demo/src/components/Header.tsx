@@ -17,6 +17,13 @@ export function Header() {
   const toggle = useRef<HTMLButtonElement>(null);
   useScrollLock(open);
   const onHome = route.name === 'home';
+  // Once content scrolls under it, the header needs its own ground or text collides with the logo/nav (critique r1 #1).
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const on = () => setScrolled(scrollY > 8);
+    on(); addEventListener('scroll', on, { passive: true });
+    return () => removeEventListener('scroll', on);
+  }, []);
 
   // Escape closes; focus is trapped inside the open panel; focus returns to the toggle on close.
   useEffect(() => {
@@ -49,7 +56,7 @@ export function Header() {
   );
 
   return (
-    <header className="site-header" data-menu-open={open}>
+    <header className="site-header" data-menu-open={open} data-scrolled={scrolled}>
       <a className="skip-link" href="#main">Skip to content</a>
       <Link to="/" className="wordmark" aria-label="Penumbra — home">PENUMBRA</Link>
       <nav className="nav-desktop" aria-label="Primary">

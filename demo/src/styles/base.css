@@ -67,6 +67,7 @@ main:focus, h1:focus, [tabindex='-1']:focus { outline: none; box-shadow: none; }
   display: inline-flex; align-items: center; gap: 0.4em; min-height: 44px;
   font-family: var(--font-mono); font-size: var(--step--1); text-transform: uppercase; letter-spacing: var(--tr-label);
   color: var(--ink); text-decoration: none; position: relative; padding-block: var(--space-2xs);
+  width: fit-content; /* never stretch in grid/flex parents: the resting underline is a fraction of the link's width */
 }
 .cta::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0.35em; height: 1px; background: var(--accent-warm);
@@ -93,7 +94,10 @@ main:focus, h1:focus, [tabindex='-1']:focus { outline: none; box-shadow: none; }
   position: fixed; inset: 0 0 auto; z-index: 100; height: var(--header-h);
   display: flex; align-items: center; gap: var(--space-m); padding-inline: var(--margin);
   background: linear-gradient(var(--ground) 0%, color-mix(in srgb, var(--ground) 0%, transparent) 100%);
+  transition: background-color var(--dur-xs) linear, box-shadow var(--dur-xs) linear;
 }
+/* over the hero the light reaches the top edge; once content scrolls underneath, the header gets solid ground */
+.site-header[data-scrolled='true'] { background: var(--ground); box-shadow: 0 1px 0 var(--line); }
 .wordmark {
   font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.32em; font-weight: 500;
   text-decoration: none; margin-right: auto; min-height: 44px; display: inline-flex; align-items: center;

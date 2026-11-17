@@ -45,9 +45,9 @@ PY
 lib="$S/reference-library"
 out=$(python3 "$lib/scripts/library.py" search lenis --limit 3)
 echo "$out" | head -1 | grep -q "lenis" && ok "library.py search: 'lenis' ranks the Lenis entry first" || bad "library.py search" "$out"
-python3 "$lib/scripts/library.py" search --tag webgl --min-confidence high | grep -q "basement-studio" && ok "library.py: tag + confidence filters" || bad "library.py filters" "basement-studio missing"
-python3 "$lib/scripts/library.py" stale --days 0 | grep -q "researched" && ok "library.py stale: flags entries older than N days" || bad "library.py stale" "no output"
-cp -r "$lib" "$T/lib" && python3 "$T/lib/scripts/library.py" build | grep -q "indexed 25" && cmp -s "$T/lib/index.json" "$lib/index.json" \
+LIBF="$(python3 "$lib/scripts/library.py" search --tag webgl --min-confidence high)"; [[ "$LIBF" == *basement-studio* ]] && ok "library.py: tag + confidence filters" || bad "library.py filters" "basement-studio missing"
+LIBS="$(python3 "$lib/scripts/library.py" stale --days 0)"; [[ "$LIBS" == *researched* ]] && ok "library.py stale: flags entries older than N days" || bad "library.py stale" "no output"
+NSITES=$(ls "$lib/sites" | grep -vc '^_'); cp -r "$lib" "$T/lib" && LIBB="$(python3 "$T/lib/scripts/library.py" build)" && [[ "$LIBB" == *"indexed $NSITES"* ]] && cmp -s "$T/lib/index.json" "$lib/index.json" \
   && ok "library.py build: deterministic and committed index is current" || bad "library.py build" "index differs from committed"
 
 # reference-study: capture a local page (no network dependency)
@@ -99,9 +99,12 @@ PY
 else skp "capture-reference.mjs --filmstrip" "playwright not installed"; fi
 
 # gsap-motion: ImageSequence helper — frames follow scroll, mobile loads half, reduced motion = 1 still and no pin, cleanup is total
-if node -e "require('playwright');require.resolve('gsap/dist/ScrollTrigger.min.js')" 2>/dev/null && has ffmpeg; then
-  Q="$T/seq"; mkdir -p "$Q/frames"
-  ffmpeg -loglevel error -y -f lavfi -i "testsrc=size=320x180:rate=30:duration=2" -frames:v 48 -c:v libwebp -quality 50 "$Q/frames/f%03d.webp"
+# Runs the DOCUMENTED workflow (recipes.md §15): raw frames → ai-visual-pipeline optimize-images.mjs at a desktop and a
+# mobile width → imageSequence() picks the width + step per viewport.
+if node -e "require('playwright');require('sharp');require.resolve('gsap/dist/ScrollTrigger.min.js')" 2>/dev/null && has ffmpeg; then
+  Q="$T/seq"; mkdir -p "$Q/raw"
+  ffmpeg -loglevel error -y -f lavfi -i "testsrc=size=640x360:rate=30:duration=2" -frames:v 48 "$Q/raw/f%03d.png"
+  node "$S/ai-visual-pipeline/scripts/optimize-images.mjs" "$Q/raw" "$Q/frames" --widths 640,320 --no-jpg >/dev/null
   G="$(node -e "console.log(require('path').dirname(require.resolve('gsap/dist/gsap.min.js')))")"
   cp "$G/gsap.min.js" "$G/ScrollTrigger.min.js" "$S/gsap-motion/assets/examples/ImageSequence.js" "$Q/"
   cat > "$Q/index.html" <<'H'
@@ -109,35 +112,36 @@ if node -e "require('playwright');require.resolve('gsap/dist/ScrollTrigger.min.j
 <body><div class="s"></div><section id="seq"><canvas id="c"></canvas></section><div class="s"></div>
 <script src="gsap.min.js"></script><script src="ScrollTrigger.min.js"></script><script src="ImageSequence.js"></script>
 <script>gsap.registerPlugin(ScrollTrigger);
-const frames=Array.from({length:48},(_,i)=>`frames/f${String(i+1).padStart(3,'0')}.webp`);
-window.__cleanup=imageSequence({section:document.getElementById('seq'),canvas:document.getElementById('c'),frames,poster:frames[47],step:matchMedia('(max-width: 600px)').matches?2:1});</script></body></html>
+const small=matchMedia('(max-width: 600px)').matches;
+const frames=Array.from({length:48},(_,i)=>`frames/f${String(i+1).padStart(3,'0')}-${small?320:640}.avif`);
+window.__cleanup=imageSequence({section:document.getElementById('seq'),canvas:document.getElementById('c'),frames,poster:frames[47],step:small?2:1});</script></body></html>
 H
   cat > "$Q/run.cjs" <<'J'
 const { chromium } = require('playwright'); const http = require('http'), fs = require('fs'), path = require('path');
-const root = process.argv[2]; let reqs = 0;
-const srv = http.createServer((q, r) => { const u = q.url.split('?')[0]; if (u.includes('frames/')) reqs++; fs.readFile(path.join(root, u === '/' ? 'index.html' : u), (e, d) => { if (e) { r.writeHead(404); return r.end(); } r.writeHead(200, { 'content-type': u.endsWith('.webp') ? 'image/webp' : u.endsWith('.js') ? 'text/javascript' : 'text/html' }); r.end(d); }); });
+const root = process.argv[2]; let reqs = 0; const widths = new Set();
+const srv = http.createServer((q, r) => { const u = q.url.split('?')[0]; if (u.includes('frames/')) { reqs++; widths.add(u.match(/-(\d+)\.avif$/)?.[1]); } fs.readFile(path.join(root, u === '/' ? 'index.html' : u), (e, d) => { if (e) { r.writeHead(404); return r.end(); } r.writeHead(200, { 'content-type': u.endsWith('.avif') ? 'image/avif' : u.endsWith('.js') ? 'text/javascript' : 'text/html' }); r.end(d); }); });
 srv.listen(0, async () => {
   const port = srv.address().port, b = await chromium.launch(), out = {};
   for (const [n, o] of [['desktop', { viewport: { width: 1280, height: 720 } }], ['mobile', { viewport: { width: 390, height: 844 }, isMobile: true }], ['reduced', { viewport: { width: 1280, height: 720 }, reducedMotion: 'reduce' }]]) {
-    reqs = 0; const p = await b.newPage(o); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
+    reqs = 0; widths.clear(); const p = await b.newPage(o); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
     await p.goto(`http://localhost:${port}/`); await p.waitForTimeout(1500);
     const vh = await p.evaluate(() => innerHeight), shown = [];
     for (const f of [0, 0.5, 1]) { await p.evaluate((y) => scrollTo(0, y), vh + f * 2.5 * vh); await p.waitForTimeout(900); shown.push(await p.evaluate(() => document.getElementById('c').dataset.frame)); }
-    out[n] = { shown: shown.join(','), reqs, pins: await p.evaluate(() => ScrollTrigger.getAll().length), after: await p.evaluate(() => { __cleanup(); return ScrollTrigger.getAll().length; }), errs: errs.length };
+    out[n] = { shown: shown.join(','), reqs, w: [...widths].join(','), pins: await p.evaluate(() => ScrollTrigger.getAll().length), after: await p.evaluate(() => { __cleanup(); return ScrollTrigger.getAll().length; }), errs: errs.length };
     await p.close();
   }
   console.log(JSON.stringify(out)); await b.close(); srv.close();
 });
 J
   R="$(node "$Q/run.cjs" "$Q" 2>&1)"
-  python3 - "$R" <<'PY' && ok "ImageSequence.js: 0→24→47 desktop, 24 frames/0→12→23 mobile, reduced = 1 still unpinned, cleanup 0" || bad "ImageSequence.js" "$R"
+  python3 - "$R" <<'PY' && ok "ImageSequence.js (optimiser → helper): desktop 48×640w 0→24→47; mobile 24×320w 0→12→23; reduced 1 still unpinned; cleanup 0" || bad "ImageSequence.js" "$R"
 import json,sys
 d=json.loads(sys.argv[1])
-assert d['desktop']=={'shown':'0,24,47','reqs':48,'pins':1,'after':0,'errs':0}, d['desktop']
-assert d['mobile']=={'shown':'0,12,23','reqs':24,'pins':1,'after':0,'errs':0}, d['mobile']
-assert d['reduced']=={'shown':'0,0,0','reqs':1,'pins':0,'after':0,'errs':0}, d['reduced']
+assert d['desktop']=={'shown':'0,24,47','reqs':48,'w':'640','pins':1,'after':0,'errs':0}, d['desktop']
+assert d['mobile']=={'shown':'0,12,23','reqs':24,'w':'320','pins':1,'after':0,'errs':0}, d['mobile']
+assert d['reduced']=={'shown':'0,0,0','reqs':1,'w':'640','pins':0,'after':0,'errs':0}, d['reduced']
 PY
-else skp "ImageSequence.js" "playwright, gsap (demo/node_modules) or ffmpeg missing"; fi
+else skp "ImageSequence.js" "playwright, sharp, gsap (demo/node_modules) or ffmpeg missing"; fi
 
 # ai-visual-pipeline: provider check never crashes; generation without credentials exits 3 (BLOCKED), not 0
 out=$(env -u HF_TOKEN -u POLLINATIONS_KEY python3 "$S/ai-visual-pipeline/scripts/providers.py" check 2>&1); rc=$?
