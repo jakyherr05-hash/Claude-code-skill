@@ -16,6 +16,9 @@ Each row was found by executing something (a test, a browser probe, a review), n
 | S9 | `gsap-motion` template `PageTransition.Router.tsx` drifted from the tested demo router in `4ebc866` (static-host build mode added to the demo only) | Demo file edited without running `scripts/sync-templates.sh` | Template re-synced in the finalization commit | `sync-templates.sh --check` during finalization | `validate.py` drift check, `sync-templates.sh --check` |
 | S10 | `tests/skill-scripts.sh`: library filter / stale / build checks failed intermittently (`BrokenPipeError`) | Three more `python … \| grep -q` pipelines under `pipefail` that S8 missed; `build` also hard-coded "indexed 25" | Capture output, then match; the expected count is read from `sites/` | Running the suite during the design-first upgrade (22/23 once) | the suite itself (23/23 after) |
 | S11 | `gsap-motion` templates `OnceReveal.Rooms.tsx` drifted in WIP commit `8f3bf3d` | Demo edited before `sync-templates.sh` was re-run | Re-synced in the next commit | `sync-templates.sh --check` | `validate.py` drift check |
+| S12 | `ImageSequence.js` drew a frame that failed to load (Chromium silently, spec says throw) and kept preloading after cleanup | `onerror` stored the image as loaded; no lifecycle flag | `naturalWidth > 0` check; `alive` flag stops the loop and late `onload`s | tech-lead Gate B r2 (404-frame probe) | `skill-scripts.sh`: missing-frame and unmount cases |
+| S13 | `render-assets.mjs --from-shader` unusable beside other servers | Port 5179 hard-coded | `ASSETS_PORT` (default unchanged); a capture on 4384 is byte-identical to the masters | webgl-specialist Gate B r2 fix | re-run evidence in this row |
+| S14 | `scroll-motion` "exactly one Lenis…" failed ~1 in 3 under host load | Measured in wall-clock frames: with software GL on a shared host Chromium produced no frames for ~1.5 s mid-glide (no main-thread long task; rAF 22–59 in 2.2 s), so 2–3 samples landed in the pinned range | Playwright fake clock drives the glide in exact 16 ms frames; the test now checks ScrollTrigger progress equals the Lenis-implied value on every frame (stronger than the old distinct-value count) | QA Gate B r2 | 8/8 under load, 100 frames each; full suite |
 | S8 | Test harness defects of my own: three `cmd \| grep -q` pipefail traps, a broken PNG generator, an orphaned HTTP server | — | Fixed in `tests/skill-scripts.sh` (random port, explicit cleanup, capture-then-grep) | Running the smoke test | the test itself |
 
 ## B. Demo website (validation project)
@@ -63,6 +66,19 @@ Found by independent creative-director critiques of screenshots of the built sit
 | W32 | 1024 | Method drawing annotations rendered at 8.4 px (r2 #1) | SVG text sized inversely to the viewport ≥ 64rem: 11.6 px at 1024, 12 px at 1440, 14.1 px at 1920 | fixed, measured |
 | W33 | all | "24° · 8 lux" printed inside its own beam, crossed by the door, contrast ~4.47:1 (r2 #2; same class as W10) | Label moved beside the beam's source, on plain ground | fixed, measured no text overlaps at 390–1920 in both motion modes |
 | — | 768/1024 | My first W32 follow-up moved "E. SLIT" onto the slit's hatch lines (caught by comparing the regenerated baseline) | Reverted to the original position | regression caught before commit |
+
+### Gate B round 2 on the demo (2026-11-17)
+| # | Width | Defect (measured) | Fix | Status |
+|---|---|---|---|---|
+| W34 | 1024–1920 | Detail heroes cropped the subject out (Museu an empty strip; Hotel Alva lost its pools; Capela lost vault and apse) — creative major #1 | Per-plate focal point `focusY` (centroid of the brightest 5 % of pixels); Capela, whose subject spans ~65 % of the plate, gets a wide 2880×1120 render as a `<picture>` source ≥ 64rem | Museu/Hotel/Casa closed by the creative reviewer; Capela re-check below |
+| W35 | 1024–1920 | My W34 change moved bright light under the transparent nav (Hotel Alva 1.43:1) | Ground scrim over the hero's top; all links ≥ 5.54:1 | fixed; guard test fails without the scrim |
+| W36 | all | The Hour contradicted its readout: 13:30 altar 1.05:1 to its wall while the intent says it "keeps its edge"; the 40-lux 21:00 altar 5.6× the 300-lux noon altar — creative major #2 | One fixed exposure for the day (new `sky`/`bounce`/`slitStart` terms; hero pixel-identical); six stills re-rendered | closed by the creative reviewer (altar and nave luminance follow the lux columns; 13:30 altar 2.74:1) |
+| W37 | all | No per-page `<title>` (WCAG 2.4.2) | `titleFor(route)` used by the client and the prerender | fixed; asserted in the route tests |
+| W38 | 1920+ | Header edges at x=48 vs content at x=168 | Header padding follows the centred container | fixed, measured 390–2560 |
+| W39 | 360, 1024 | Room meta left "·" at a line end | Unbreakable items, separators clipped at every line start | fixed, measured 6 widths (0 leading/trailing separators) |
+| W40 | 768, 1440 | Manifesto ended on a lone "design." | No-break space before the last word | fixed |
+| W41 | 00:00 | Door reading computed but not shown | "Door lux" row in the readout | fixed |
+| — | — | Museu plate "cooler than its 4000 K label" (creative minor #7) | Not a defect: against the site's 2700 K adaptation 4000 K normalises to ≈ [0.53, 0.66, 1.0]; the plate uses [0.60, 0.80, 1.0] (slightly less cool) | rejected with this computation |
 
 Not fixed, by decision: filter chip "HOSPITALITY" wrapping alone (unordered categories), manifesto underline splitting across a line wrap, room meta breaking after a "·" separator (r2 minor), hero bottom seam (r2 minor), header vs content edges at 1920, The Hour readout below the fold at 768 with the stage in view, an empty raised box shown before each room plate's reveal, the manifesto's lone "design." (it already has `text-wrap: pretty`), all r2 minors and open; and all SUBJECTIVE items.
 
