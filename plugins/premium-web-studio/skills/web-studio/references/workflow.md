@@ -32,7 +32,7 @@ Write answers + assumptions to `PROJECT_BRIEF.md`. Don't run a questionnaire; un
 
 **Reads:** brief, research. **Writes:** CREATIVE_DIRECTION.md.
 
-> Read studio/PROJECT_BRIEF.md and studio/REFERENCE_RESEARCH.md. Load the design-intelligence skill. Develop ONE original concept (offer up to two alternates only as short paragraphs). Fill CREATIVE_DIRECTION.md: concept line, narrative arc across the page, design language and why it fits this audience, palette with roles and contrast targets, type personality (not final fonts), image/video direction, motion personality, signature moment(s), and what we deliberately won't do. Return the handoff block.
+> Read studio/PROJECT_BRIEF.md and studio/REFERENCE_RESEARCH.md. Load the design-intelligence skill. Develop ONE original concept (offer up to two alternates only as short paragraphs). Fill CREATIVE_DIRECTION.md: concept line, narrative arc across the page, design language and why it fits this audience, palette with roles and contrast targets, type personality (not final fonts), image/video direction, motion personality, signature moment(s), how the first viewport composes at 390 / 768 / 1440, and what we deliberately won't do. Return the handoff block.
 
 **Exit:** a concept you can say in one sentence; a signature moment that justifies any heavy tech (WebGL, video); no copied reference identity. Show the user the concept line + signature moment and continue unless they object.
 
@@ -42,7 +42,7 @@ Write answers + assumptions to `PROJECT_BRIEF.md`. Don't run a questionnaire; un
 
 `typography-spacing` → TYPOGRAPHY_SYSTEM.md + SPACING_SYSTEM.md: chosen fonts with licence + source, variable axes, fluid type scale (clamp values), line-height/tracking per step, grid, containers, section rhythm. Produces the token list later landed in `src/styles/tokens.css`.
 
-Then `gsap-animator` → ANIMATION_SPECIFICATION.md: per section, trigger, timeline, durations/eases from the motion scale, scrub/pin decisions, reduced-motion variant, mobile variant, performance notes.
+Then `gsap-animator` → ANIMATION_SPECIFICATION.md: the opening (time to readable content), a **story-beat table** for any scroll-driven section (design-intelligence → motion-system "Scroll storytelling"), then per section: trigger, timeline, durations/eases from the motion scale, scrub/pin decisions, reduced-motion variant, mobile variant, performance notes.
 
 **Exit:** a developer could build every section without inventing anything; every animation has a stated purpose and a reduced-motion variant.
 
@@ -58,14 +58,16 @@ Default stack when the user has no preference: **Vite + React + TypeScript**, pl
 
 Wave 1 (parallel): `frontend-engineer` (app shell, routing, section components with semantic HTML, no motion), `typography-spacing` (tokens.css + font loading), `ai-visual-producer` (first asset pass, placeholders with correct aspect ratios).
 
-Wave 2: `frontend-engineer` integrates tokens and assets. You review the running page at 390 and 1440 before motion begins — layout must work with zero animation.
+Wave 2: `frontend-engineer` integrates tokens and assets.
+
+**Render → critique → refine (before motion begins).** Layout must work with zero animation. Capture the running build at 390, 768, 1024 and 1440 (`capture-reference.mjs <local url> studio/critique --id layout-r1 --tablet --filmstrip 12` from the reference-study skill), then delegate the critique to `creative-director` with design-intelligence → `references/visual-critique.md` (sections A–E, G). Fixes go to their owners (layout → frontend-engineer, type/spacing → typography-spacing, crops → ai-visual-producer); re-capture and compare. Repeat until no blocker and ≤ 3 majors. This loop is cheap now and expensive after motion is layered on.
 
 ## 7 · Motion
 
 Wave 1: `lenis-scroll` lands `src/scroll/` from the lenis-scroll skill template and proves sync (handoff must include the measured scroll-sample evidence).
 Wave 2 (parallel, disjoint paths): `gsap-animator` (`src/motion/**` + hooks into sections via data attributes / refs agreed in the spec), `webgl-specialist` (`src/webgl/**`).
 
-**Exit:** every spec'd animation exists, reduced-motion path verified, `ScrollTrigger.getAll().length` stable across route changes.
+**Exit:** every spec'd animation exists, reduced-motion path verified, `ScrollTrigger.getAll().length` stable across route changes, and a motion critique passed: re-capture with `--filmstrip`, compare the frames with the story-beat table, and run visual-critique §F (readable pinned frames, text in step with picture, opening ≤ ~1.5 s to content, reduced-motion final state complete).
 
 ## 8 · Visual production — `ai-visual-producer`
 
@@ -83,7 +85,7 @@ Fix loop: each failure → owner agent with evidence → fix → the same check 
 
 Three independent verdicts, each recorded in PROJECT_STATUS.md with evidence links:
 
-- `creative-director`: screenshots at 390/1440 + a scroll-through video/frames — does it deliver the concept and signature moment? Any off-brand detail?
+- `creative-director`: screenshots at 390/768/1024/1440 + the scroll filmstrip, judged with the full visual-critique rubric — does it deliver the concept and signature moment? Any off-brand or generic detail?
 - `tech-lead`: code review of the diff, dependency audit, build + test run reproduced personally.
 - `qa-engineer`: full suite green, no unexplained visual diffs, a11y and reduced motion pass.
 

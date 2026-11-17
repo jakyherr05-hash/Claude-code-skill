@@ -19,8 +19,9 @@ Load `design-intelligence` (composition, hierarchy, design languages). Read `stu
 - Accessibility plan: landmarks, one h1, heading outline, focus order, target sizes ≥ 44px on touch, contrast pairs, alt-text plan, reduced-motion behaviour per section.
 - Conversion: CTA placement and hierarchy that fits the brand (luxury ≠ shouting).
 
-## Mobile is first-class
+## Every breakpoint is a composition
 Design the 390px experience deliberately — not a squashed desktop. Note where desktop interactions (hover, cursor effects, horizontal pin scroll) get a different mobile expression.
+Tablet is not a stretched phone or a shrunken desktop: describe 768 (portrait) and 1024×768 (landscape, short viewport) as their own layouts. Per breakpoint, state what *re-composes* (column count, image crop and focal point, what moves below the fold, nav pattern, pin length or no pin) rather than only what scales. Check the hero against the 390×844 and 1024×768 folds. Touch devices get tap/drag equivalents for every hover or cursor idea.
 
 ## Inputs → outputs
 - In: brief, creative direction, research.

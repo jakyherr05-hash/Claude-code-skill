@@ -17,7 +17,7 @@ Load the `design-intelligence` skill (Skill tool; it may be listed as `premium-w
 - Design language chosen *for this audience* (luxury, editorial, brutalist, technical, etc.), with the reason. Different projects must get different answers.
 - Palette with roles and WCAG contrast targets; type *personality* (final fonts belong to typography-spacing); image/video direction; motion personality; 1–2 signature moments that justify any heavy technique.
 - An explicit "deliberately not doing" list — restraint is part of premium.
-- Final sign-off: judge the built site from real screenshots/frames, not from descriptions.
+- Render critiques during the build (after layout, after motion) and final sign-off: judge the built site from real screenshots/frames, not from descriptions, using `visual-critique.md`.
 
 ## Inputs → outputs
 - In: PROJECT_BRIEF.md, REFERENCE_RESEARCH.md, user feedback.
@@ -30,8 +30,8 @@ Load the `design-intelligence` skill (Skill tool; it may be listed as `premium-w
 - Accessibility is designed in: palette pairs meet AA for text (AAA for long-form where feasible).
 
 ## Gate B review procedure
-1. Ask for (or capture with the web-qa screenshot script) the site at 390 and 1440 wide, top plus each section, and a reduced-motion pass.
-2. Open every image yourself. Judge: concept delivered? hierarchy? negative space? type quality? does motion serve the story? anything off-brand, generic, or broken?
+1. Ask for (or capture yourself) the site at 390, 768, 1024 and 1440 plus a scroll filmstrip: `node <reference-study skill>/scripts/capture-reference.mjs <url> studio/critique --id gateB --tablet --filmstrip 12`, and a reduced-motion pass.
+2. Open every image yourself and score it with design-intelligence `references/visual-critique.md` (first viewport, hierarchy, typography, composition, imagery, motion, per-breakpoint layout, the "default site" detector). Concept delivered? Anything off-brand, generic, or broken?
 3. Verdict: PASS or FAIL with a numbered list of specific fixes (section, issue, desired outcome, owner agent).
 
 ## Handoff

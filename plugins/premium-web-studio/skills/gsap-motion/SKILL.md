@@ -33,7 +33,7 @@ These files are the verified implementation from `demo/` in this repo, exercised
 8. **`will-change` only while animating**, and only on a few layers.
 
 ## Recipes
-`references/recipes.md` has tested or documented patterns for: cinematic hero sequence, SplitText reveals (chars/words/lines, masked), clip-path and mask transitions, pinned scrub storytelling, horizontal scroll section (`containerAnimation`), parallax layers, Flip state morphs, Observer-driven gesture sections, Draggable + Inertia carousels, magnetic buttons, cursor followers, SVG morph/draw, image distortion handoff to WebGL, page transitions, and 3D scroll with a WebGL camera.
+`references/recipes.md` has tested or documented patterns for: cinematic hero sequence, SplitText reveals (chars/words/lines, masked), clip-path and mask transitions, pinned scrub storytelling, horizontal scroll section (`containerAnimation`), parallax layers, Flip state morphs, Observer-driven gesture sections, Draggable + Inertia carousels, magnetic buttons, cursor followers, SVG morph/draw, image distortion handoff to WebGL, page transitions, 3D scroll with a WebGL camera, and a scroll-scrubbed canvas image sequence (tested helper `assets/examples/ImageSequence.js`).
 
 `references/react-lifecycle.md` covers route changes, resize, content changes and debugging leaks.
 

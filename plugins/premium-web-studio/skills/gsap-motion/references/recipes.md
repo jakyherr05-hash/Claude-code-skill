@@ -1,8 +1,8 @@
 # GSAP recipes
 
-Contents: 1 Hero sequence · 2 Text reveals · 3 Clip-path/mask · 4 Pinned scrub story · 5 Horizontal scroll · 6 Parallax · 7 Flip morphs · 8 Observer gestures · 9 Draggable + Inertia · 10 Magnetic & cursor · 11 SVG morph/draw · 12 Image distortion · 13 Page transitions · 14 3D scroll
+Contents: 1 Hero sequence · 2 Text reveals · 3 Clip-path/mask · 4 Pinned scrub story · 5 Horizontal scroll · 6 Parallax · 7 Flip morphs · 8 Observer gestures · 9 Draggable + Inertia · 10 Magnetic & cursor · 11 SVG morph/draw · 12 Image distortion · 13 Page transitions · 14 3D scroll · 15 Image sequence
 
-Status key: **[demo]** = implemented and tested in `demo/` (see `assets/examples/`). **[doc]** = written against the official API (gsap 3.15.1 d.ts), not exercised in the demo; test it in your project.
+Status key: **[demo]** = implemented and tested in `demo/` (see `assets/examples/`). **[doc]** = written against the official API (gsap 3.15.1 d.ts), not exercised in the demo; test it in your project. **[tested]** = exercised in Chromium by `tests/skill-scripts.sh`, not used in the demo.
 
 All snippets assume `import { gsap, ScrollTrigger, SplitText, Flip, ... } from './registry'` and that they run inside `useGSAP(() => { ... }, { scope })`.
 
@@ -118,3 +118,26 @@ const cam = { t: 0 };
 gsap.to(cam, { t: 1, ease: 'none', scrollTrigger: { trigger: section, start: 'top top', end: '+=200%', scrub: 1, pin: true } });
 gsap.ticker.add(() => stage.setProgress(cam.t));
 ```
+
+## 15. Scroll-scrubbed image sequence [tested: `assets/examples/ImageSequence.js`]
+The product-film technique (an object turning, opening or assembling as you scroll). Use it when the *object itself* is the story and real 3D would cost more than pre-rendered frames; use recipe 14 when the user must interact with the model.
+```js
+const cleanup = imageSequence({
+  section, canvas, frames,                  // frames: URLs of same-aspect AVIF/WebP stills, in order
+  poster: frames.at(-1),                    // reduced motion: one meaningful still, no pin, no scrub
+  step: matchMedia('(max-width: 600px)').matches ? 2 : 1,   // mobile: half the frames
+  scrollLength: '+=250%',
+});
+```
+What the helper does, and why:
+- **Never blank.** It draws the nearest *decoded* frame, so a fast scroll during loading still shows the motion. Load order is frame 0, then every 8th keyframe, then the gaps.
+- **Cover-fit at DPR ≤ 2** on resize. Frames are drawn to a canvas, not swapped in `<img>`, so there is no layout or decode flash.
+- **`snap: 'frame'`** with `scrub: 0.5` keeps whole frames and a slight glide. Inside React, call it inside `useGSAP` and return its cleanup.
+
+Budget it before you commit to it:
+- **Frames.** 60–120 desktop / 30–60 mobile is usually enough; more frames ≠ smoother if the scroll length is short.
+- **Weight.** Encode at the canvas size actually shown (≈ 1600 px wide desktop, 800 px mobile) with `ai-visual-pipeline`'s optimiser. Target ≤ 3–4 MB desktop / ≤ 1.5 MB mobile for the whole sequence and record it in PERFORMANCE_REPORT.md. A 300 MB sequence is the classic failure (design-languages → Automotive pitfalls).
+- **Scroll length ≈ frames × 25–40 px** per frame on desktop. Too short reads as a flicker, too long reads as stuck.
+- **Text.** Pair captions with frame ranges (labels on the same timeline), keep them in the DOM, and never make the only copy part of the frames.
+
+Verified in `tests/skill-scripts.sh`: 48 frames over the pin show frames 0 → 24 → 47 on desktop; on a 390 px phone 24 frames are requested and 0 → 12 → 23 shown; reduced motion makes 1 request, does not pin, shows the poster; cleanup leaves 0 ScrollTriggers.

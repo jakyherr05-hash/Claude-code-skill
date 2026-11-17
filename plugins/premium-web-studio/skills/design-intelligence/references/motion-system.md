@@ -33,6 +33,25 @@ Stagger only siblings of equal importance. 0.03–0.06s for characters, 0.06–0
 - Parallax ≤ 15% displacement for content, more only for decorative layers.
 - Scroll-triggered reveals fire once (`once: true` or `toggleActions: "play none none none"`) unless the spec says otherwise — replays are distracting.
 
+## Openings
+The first seconds set the tempo for the whole site, so make them intentional and short.
+- Content first: the headline (usually the LCP element) is in the HTML and visible at first paint. The intro *adds* light, depth or movement to it; it never withholds it. Readable content within ~1.5 s, no full-screen preloader for a page that weighs under a few MB.
+- If assets truly need loading (image sequence, 3D), show the poster/first frame immediately and stream the rest. A progress counter is a design element, not an excuse.
+- One opening per session: returning to the home page or navigating back skips the intro.
+
+## Scroll storytelling: storyboard before timeline
+For any page that tells a story with scroll (pinned chapters, image sequences, camera moves), write the beats in ANIMATION_SPECIFICATION.md **before** writing a tween:
+
+| Beat | What the visitor should feel/learn | Picture (what is on screen) | Words (≤ 12 at a time) | Scroll length | Mobile expression | Reduced motion |
+|---|---|---|---|---|---|---|
+
+- **One idea per beat.** Text and picture change together; a caption describes the frame it sits on.
+- **Budget scroll length** per beat (≈ 50–120 % of a viewport) and per page; total pinned length ≤ ~4 viewports before the visitor gets control back. Leave a rest at the end of each pin.
+- **Pace like film:** establish → tension → reveal → release. Alternate dense, pinned beats with free-scrolling, quiet ones.
+- **Choose the cheapest medium that tells it:** CSS/GSAP transforms → video → image sequence (gsap-motion recipe 15) → WebGL. Go up a step only when the step below can't express the beat.
+- **Mobile is its own cut,** not a shrunk desktop: shorter pins, fewer frames, vertical crops, captions below rather than over the picture where contrast is fragile.
+- Verify the storyboard against the rendered filmstrip (`visual-critique.md` §F).
+
 ## Transitions
 Page transitions ≤ 1.2s total; keep the next page's content interactive as soon as it's visible; move focus to the new page's `h1`/main for screen readers.
 

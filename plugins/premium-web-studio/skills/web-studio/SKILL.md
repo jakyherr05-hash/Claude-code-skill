@@ -57,8 +57,8 @@ Full detail, gate checklists and the exact delegation prompts are in `references
 3. **Creative direction** — `creative-director`, from brief + research. Must produce an *original* concept, not a mash-up of references.
 4. **Design specification** — in parallel: `ui-ux-designer` (structure, sections, interaction, responsive, a11y) and `typography-spacing` (type + spacing systems). Both read CREATIVE_DIRECTION.md. Then `gsap-animator` writes ANIMATION_SPECIFICATION.md against the merged spec.
 5. **Architecture** — `frontend-engineer` drafts TECHNICAL_ARCHITECTURE.md; **gate A: `tech-lead` approves** stack, dependency list and file ownership before code.
-6. **Development** — `frontend-engineer` builds shell + sections; `typography-spacing` lands tokens; `ai-visual-producer` produces assets in parallel.
-7. **Motion** — `lenis-scroll` lands the scroll system first (one Lenis instance, GSAP ticker), then `gsap-animator` and `webgl-specialist` build on it.
+6. **Development** — `frontend-engineer` builds shell + sections; `typography-spacing` lands tokens; `ai-visual-producer` produces assets in parallel. Then **render → critique → refine**: capture the running page at 390/768/1024/1440, `creative-director` critiques it against design-intelligence `visual-critique.md`, owners fix, re-capture. Motion starts only on a layout that already works.
+7. **Motion** — `lenis-scroll` lands the scroll system first (one Lenis instance, GSAP ticker), then `gsap-animator` and `webgl-specialist` build on it. Exit with a filmstrip critique of the motion against the story-beat table.
 8. **Visual production** — `ai-visual-producer` finalises, optimises and documents licensing for every asset.
 9. **Testing** — `qa-engineer` (functional, responsive at 360/390/768/1024/1440/1920, a11y, visual regression) and `performance-engineer` (Lighthouse, bundle, media weight) in parallel. Failures route back to owners; re-test after fixes.
 10. **Final approval** — **gate B**: `creative-director`, `tech-lead` and `qa-engineer` each inspect independently (screenshots, running build, test output) and record a verdict. All three must pass.

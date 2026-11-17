@@ -12,6 +12,14 @@ _Owner: gsap-animator · Date: {{DATE}}_
 - Page transitions:
 - Reduced motion policy:
 
+## Opening
+- First readable content at (s), LCP element and how it stays visible:
+- What the intro adds (light / depth / movement), total duration, skipped on return visits?:
+
+## Story beats (scroll-driven pages; see design-intelligence → motion-system "Scroll storytelling")
+| Beat | Feel / learn | Picture | Words | Scroll length | Mobile | Reduced motion |
+|---|---|---|---|---|---|---|
+
 ## Per-section choreography
 ### S1 · <name>
 - Purpose of motion:

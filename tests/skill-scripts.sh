@@ -68,8 +68,76 @@ h=d['page']['h1']
 assert d['status']=='inspected' and h['fontSize']=='64px' and h['letterSpacing']=='-2px', h
 assert d['scroll']['likelySmoothed'] is False and d['scroll']['movedPx']>0, d['scroll']
 for f in ('desktop-0.jpg','desktop-1.jpg','mobile-0.jpg'): assert os.path.getsize(os.path.join(os.path.dirname(sys.argv[1]),f))>1000
+# defaults unchanged: no filmstrip/tablet output unless asked for
+assert 'filmstrip' not in d and 'tablet' not in d, list(d)
+assert sorted(os.listdir(os.path.dirname(sys.argv[1])))==['capture.json','desktop-0.jpg','desktop-1.jpg','mobile-0.jpg'], os.listdir(os.path.dirname(sys.argv[1]))
 PY
 else skp "capture-reference.mjs" "playwright not installed"; fi
+
+# reference-study: --filmstrip spreads frames over the whole page and detects a pinned (sticky) scene; --tablet adds 2 shots
+if node -e "require('playwright')" 2>/dev/null; then
+  cat > "$T/story.html" <<'H'
+<!doctype html><html lang="en"><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}
+section{height:100vh}.pin{height:300vh}.pin>div{position:sticky;top:0;height:100vh;background:#111;color:#eee}h2{font:400 48px/1 serif;margin:0}</style></head>
+<body><main><section><h1>Opening</h1></section><section class="pin"><div><h2>Pinned scene</h2></div></section><section><h2>Ending</h2></section></main></body></html>
+H
+  PORT=$(python3 -c 'import socket;s=socket.socket();s.bind(("",0));print(s.getsockname()[1])')
+  python3 -m http.server "$PORT" --directory "$T" >/dev/null 2>&1 & echo $! > "$T/srv.pid"; sleep 1
+  node "$S/reference-study/scripts/capture-reference.mjs" "http://localhost:$PORT/story.html" "$T/ev" --id story --no-mobile --tablet --filmstrip 5 >"$T/cap2.log" 2>&1 || cat "$T/cap2.log"
+  kill "$(cat "$T/srv.pid")" 2>/dev/null
+  python3 - "$T/ev/story/capture.json" <<'PY' && ok "capture-reference.mjs --filmstrip/--tablet: whole page sampled, pinned scene detected, tablet shots" || bad "capture-reference.mjs --filmstrip/--tablet" "see capture.json"
+import json,sys,os
+d=json.load(open(sys.argv[1])); fs=d['filmstrip']; base=os.path.dirname(sys.argv[1])
+assert d['status']=='inspected' and len(fs)==5, len(fs)
+assert fs[-1]['scrollY'] >= fs[-1]['docHeight'] - 900 - 2, (fs[-1]['scrollY'], fs[-1]['docHeight'])   # reached the end
+assert any(f['pinnedLargeFixedOrSticky']>0 and f['headings'] and f['headings'][0]['text']=='Pinned scene' for f in fs), fs
+assert fs[0]['pinnedLargeFixedOrSticky']==0, fs[0]
+for f in fs: assert os.path.getsize(os.path.join(base,f['frame']))>500
+for t in ('tablet-portrait-0.jpg','tablet-landscape-0.jpg'): assert os.path.getsize(os.path.join(base,t))>500
+assert 'mobile' not in d   # --no-mobile still respected
+PY
+else skp "capture-reference.mjs --filmstrip" "playwright not installed"; fi
+
+# gsap-motion: ImageSequence helper — frames follow scroll, mobile loads half, reduced motion = 1 still and no pin, cleanup is total
+if node -e "require('playwright');require.resolve('gsap/dist/ScrollTrigger.min.js')" 2>/dev/null && has ffmpeg; then
+  Q="$T/seq"; mkdir -p "$Q/frames"
+  ffmpeg -loglevel error -y -f lavfi -i "testsrc=size=320x180:rate=30:duration=2" -frames:v 48 -c:v libwebp -quality 50 "$Q/frames/f%03d.webp"
+  G="$(node -e "console.log(require('path').dirname(require.resolve('gsap/dist/gsap.min.js')))")"
+  cp "$G/gsap.min.js" "$G/ScrollTrigger.min.js" "$S/gsap-motion/assets/examples/ImageSequence.js" "$Q/"
+  cat > "$Q/index.html" <<'H'
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}.s{height:100vh}canvas{width:100%;height:100vh;display:block}</style></head>
+<body><div class="s"></div><section id="seq"><canvas id="c"></canvas></section><div class="s"></div>
+<script src="gsap.min.js"></script><script src="ScrollTrigger.min.js"></script><script src="ImageSequence.js"></script>
+<script>gsap.registerPlugin(ScrollTrigger);
+const frames=Array.from({length:48},(_,i)=>`frames/f${String(i+1).padStart(3,'0')}.webp`);
+window.__cleanup=imageSequence({section:document.getElementById('seq'),canvas:document.getElementById('c'),frames,poster:frames[47],step:matchMedia('(max-width: 600px)').matches?2:1});</script></body></html>
+H
+  cat > "$Q/run.cjs" <<'J'
+const { chromium } = require('playwright'); const http = require('http'), fs = require('fs'), path = require('path');
+const root = process.argv[2]; let reqs = 0;
+const srv = http.createServer((q, r) => { const u = q.url.split('?')[0]; if (u.includes('frames/')) reqs++; fs.readFile(path.join(root, u === '/' ? 'index.html' : u), (e, d) => { if (e) { r.writeHead(404); return r.end(); } r.writeHead(200, { 'content-type': u.endsWith('.webp') ? 'image/webp' : u.endsWith('.js') ? 'text/javascript' : 'text/html' }); r.end(d); }); });
+srv.listen(0, async () => {
+  const port = srv.address().port, b = await chromium.launch(), out = {};
+  for (const [n, o] of [['desktop', { viewport: { width: 1280, height: 720 } }], ['mobile', { viewport: { width: 390, height: 844 }, isMobile: true }], ['reduced', { viewport: { width: 1280, height: 720 }, reducedMotion: 'reduce' }]]) {
+    reqs = 0; const p = await b.newPage(o); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
+    await p.goto(`http://localhost:${port}/`); await p.waitForTimeout(1500);
+    const vh = await p.evaluate(() => innerHeight), shown = [];
+    for (const f of [0, 0.5, 1]) { await p.evaluate((y) => scrollTo(0, y), vh + f * 2.5 * vh); await p.waitForTimeout(900); shown.push(await p.evaluate(() => document.getElementById('c').dataset.frame)); }
+    out[n] = { shown: shown.join(','), reqs, pins: await p.evaluate(() => ScrollTrigger.getAll().length), after: await p.evaluate(() => { __cleanup(); return ScrollTrigger.getAll().length; }), errs: errs.length };
+    await p.close();
+  }
+  console.log(JSON.stringify(out)); await b.close(); srv.close();
+});
+J
+  R="$(node "$Q/run.cjs" "$Q" 2>&1)"
+  python3 - "$R" <<'PY' && ok "ImageSequence.js: 0→24→47 desktop, 24 frames/0→12→23 mobile, reduced = 1 still unpinned, cleanup 0" || bad "ImageSequence.js" "$R"
+import json,sys
+d=json.loads(sys.argv[1])
+assert d['desktop']=={'shown':'0,24,47','reqs':48,'pins':1,'after':0,'errs':0}, d['desktop']
+assert d['mobile']=={'shown':'0,12,23','reqs':24,'pins':1,'after':0,'errs':0}, d['mobile']
+assert d['reduced']=={'shown':'0,0,0','reqs':1,'pins':0,'after':0,'errs':0}, d['reduced']
+PY
+else skp "ImageSequence.js" "playwright, gsap (demo/node_modules) or ffmpeg missing"; fi
 
 # ai-visual-pipeline: provider check never crashes; generation without credentials exits 3 (BLOCKED), not 0
 out=$(env -u HF_TOKEN -u POLLINATIONS_KEY python3 "$S/ai-visual-pipeline/scripts/providers.py" check 2>&1); rc=$?

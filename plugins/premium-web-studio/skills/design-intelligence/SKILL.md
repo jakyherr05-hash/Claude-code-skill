@@ -34,6 +34,10 @@ The failure mode this skill prevents is the **default site**: the same Inter-on-
 - **Text over images needs a plan** (scrim, grade, placement in quiet areas), never luck.
 - **Contrast is non-negotiable.** Check every text/background pair with `scripts/contrast.mjs` (WCAG 2.x ratio; AA 4.5:1 body, 3:1 large text ≥ 24px or ≥ 18.66px bold).
 
+## Judge the render, not the spec
+
+Taste is applied to what the browser draws. When sections land, after motion, and at Gate B, capture the running build at 390, 768, 1024 and 1440 plus a scroll filmstrip and critique it with `references/visual-critique.md` (first viewport, hierarchy, typography, composition, imagery, motion, per-breakpoint layout, a "default site" detector). Specs can't show a lone word on a heading's last line, an H1 cut by the fold or text over a light that fails contrast. Screenshots do.
+
 ## Output
 
 Feed decisions into `studio/CREATIVE_DIRECTION.md` (concept, language + rationale, palette with roles and measured contrast, image/motion direction, signature moment, not-doing list). Keep exact type/spacing numbers for the typography-spacing specialist.

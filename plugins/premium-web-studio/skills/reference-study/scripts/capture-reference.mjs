@@ -3,14 +3,22 @@
  * capture-reference.mjs — inspect a live website and record VERIFIABLE evidence.
  *
  * Usage:
- *   node capture-reference.mjs <url> <outDir> [--id slug] [--no-mobile]
- *   node capture-reference.mjs --batch urls.txt <outDir>     (one "slug url" per line)
+ *   node capture-reference.mjs <url> <outDir> [--id slug] [--no-mobile] [--tablet] [--filmstrip N]
+ *   node capture-reference.mjs --batch urls.txt <outDir> [same flags]   (one "slug url" per line)
+ *
+ *   --filmstrip N   scroll through the page in N wheel steps (spread over the full page height, at least 0.85 viewport each; 1.2 s apart so scroll-driven
+ *                   animation plays) and record one frame + measurements per step: what is pinned, which headings are
+ *                   on screen and how big, visible canvases/videos. This is how you study a scroll STORY, not a hero.
+ *                   Also works on your own build (http://localhost:…) for the render-critique loop.
+ *   --tablet        also capture 768x1024 and 1024x768 at the top (tablet-portrait-0.jpg, tablet-landscape-0.jpg).
  *
  * Produces in <outDir>/<slug>/:
  *   capture.json        machine-readable evidence (measured values only)
  *   desktop-0.jpg       1440x900 viewport at top (after settle)
  *   desktop-1.jpg       after scrolling one viewport
  *   mobile-0.jpg        390x844 viewport at top
+ *   scroll-NN.jpg       (--filmstrip) one frame per scroll step; measurements in capture.json → filmstrip[]
+ *   tablet-*.jpg        (--tablet)
  *
  * Everything in capture.json is MEASURED from the running page. Nothing is inferred.
  * Interpretation belongs in the human/agent-written report, labelled as such.
@@ -35,12 +43,15 @@ try {
 const args = process.argv.slice(2);
 const flag = (n) => args.includes(n);
 const opt = (n) => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
+const VALUE_OPTS = ['--id', '--filmstrip', '--batch'];
+const positional = () => args.filter((a, i) => !a.startsWith('--') && !VALUE_OPTS.includes(args[i - 1]));
+const FILMSTRIP = Math.max(0, Math.min(40, parseInt(opt('--filmstrip') || '0', 10) || 0));
 
 function slugify(u) {
   return new URL(u).hostname.replace(/^www\./, '').replace(/[^a-z0-9]+/gi, '-').replace(/-+$/, '');
 }
 
-async function inspect(browser, url, outDir, id, { mobile = true } = {}) {
+async function inspect(browser, url, outDir, id, { mobile = true, tablet = false, filmstrip = 0 } = {}) {
   const dir = path.join(outDir, id);
   fs.mkdirSync(dir, { recursive: true });
   const result = { id, url, researchedAt: new Date().toISOString(), status: 'inspected', errors: [] };
@@ -195,6 +206,44 @@ async function inspect(browser, url, outDir, id, { mobile = true } = {}) {
     await page.screenshot({ path: path.join(dir, 'desktop-1.jpg'), type: 'jpeg', quality: 60 });
   } catch (e) { result.errors.push(`scroll probe failed: ${e.message.split('\n')[0]}`); }
 
+  // ---- scroll filmstrip: the page as a sequence of scenes (opt-in) ----
+  if (filmstrip > 0) {
+    result.filmstrip = [];
+    try {
+      await page.evaluate(() => scrollTo(0, 0)); await page.waitForTimeout(1200);
+      // spread the N frames over the whole page (never less than ~0.85 viewport per step), so long stories are sampled end to end
+      const { docH, vh } = await page.evaluate(() => ({ docH: document.documentElement.scrollHeight, vh: innerHeight }));
+      const delta = Math.round(Math.max(vh * 0.85, (docH - vh) / Math.max(1, filmstrip - 1)));
+      result.filmstripStepPx = delta;
+      for (let i = 0; i < filmstrip; i++) {
+        if (i > 0) { await page.mouse.move(720, 450); await page.mouse.wheel(0, delta); await page.waitForTimeout(1200); }
+        const name = `scroll-${String(i).padStart(2, '0')}.jpg`;
+        await page.screenshot({ path: path.join(dir, name), type: 'jpeg', quality: 55 });
+        const m = await page.evaluate(() => {
+          const vis = (r) => r.bottom > 0 && r.top < innerHeight && r.width > 0 && r.height > 0;
+          const big = (r) => r.width * r.height > innerWidth * innerHeight * 0.25;
+          const pinned = [...document.querySelectorAll('body *')].filter((e) => {
+            const cs = getComputedStyle(e); if (cs.position !== 'fixed' && cs.position !== 'sticky') return false;
+            const r = e.getBoundingClientRect(); return vis(r) && big(r);
+          }).length;
+          // GSAP pin-spacer wrappers are the reliable marker for ScrollTrigger pins
+          const pinSpacers = [...document.querySelectorAll('.pin-spacer')].filter((e) => vis(e.getBoundingClientRect())).length;
+          const heads = [...document.querySelectorAll('h1,h2,h3,[class*="title" i],[class*="heading" i]')]
+            .map((e) => ({ e, r: e.getBoundingClientRect(), cs: getComputedStyle(e) }))
+            .filter(({ r, cs }) => vis(r) && cs.visibility !== 'hidden' && parseFloat(cs.opacity) > 0.05)
+            .sort((a, b) => parseFloat(b.cs.fontSize) - parseFloat(a.cs.fontSize)).slice(0, 3)
+            .map(({ e, cs }) => ({ text: (e.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60), fontSize: cs.fontSize, family: cs.fontFamily.split(',')[0].replace(/["']/g, '') }));
+          const media = { canvases: [...document.querySelectorAll('canvas')].filter((c) => { const r = c.getBoundingClientRect(); return vis(r) && big(r); }).length,
+            videos: [...document.querySelectorAll('video')].filter((v) => vis(v.getBoundingClientRect())).length };
+          return { scrollY: Math.round(scrollY), docHeight: document.documentElement.scrollHeight, pinnedLargeFixedOrSticky: pinned, pinSpacersInView: pinSpacers, headings: heads, media };
+        });
+        result.filmstrip.push({ step: i, frame: name, ...m });
+        if (i > 0 && m.scrollY === result.filmstrip[i - 1].scrollY && m.scrollY > 0) break; // reached the end
+      }
+      // a step where scrollY advanced but the frame's headings did not change and something large is pinned = a pinned scene
+    } catch (e) { result.errors.push(`filmstrip failed: ${e.message.split('\n')[0]}`); }
+  }
+
   // ---- performance (lab, single run, this container's network — indicative only) ----
   result.performance = await page.evaluate(() => {
     const nav = performance.getEntriesByType('navigation')[0];
@@ -234,25 +283,40 @@ async function inspect(browser, url, outDir, id, { mobile = true } = {}) {
     } catch (e) { result.errors.push(`mobile pass failed: ${e.message.split('\n')[0]}`); }
     await m.close();
   }
+  if (tablet) {
+    for (const [nm, vp] of [['tablet-portrait-0.jpg', { width: 768, height: 1024 }], ['tablet-landscape-0.jpg', { width: 1024, height: 768 }]]) {
+      const t = await browser.newContext({ viewport: vp, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
+      const tp = await t.newPage();
+      try {
+        await tp.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 });
+        try { await tp.waitForLoadState('networkidle', { timeout: 12000 }); } catch {}
+        await tp.waitForTimeout(3500);
+        await tp.screenshot({ path: path.join(dir, nm), type: 'jpeg', quality: 60 });
+        (result.tablet ||= {})[nm.replace('-0.jpg', '')] = await tp.evaluate(() => ({ horizontalOverflow: document.documentElement.scrollWidth > innerWidth + 1, h1FontSize: document.querySelector('h1') ? getComputedStyle(document.querySelector('h1')).fontSize : null }));
+      } catch (e) { result.errors.push(`${nm} failed: ${e.message.split('\n')[0]}`); }
+      await t.close();
+    }
+  }
   fs.writeFileSync(path.join(dir, 'capture.json'), JSON.stringify(result, null, 2));
   return result;
 }
 
 const browser = await chromium.launch();
+const passOpts = { mobile: !flag('--no-mobile'), tablet: flag('--tablet'), filmstrip: FILMSTRIP };
 try {
   if (flag('--batch')) {
     const list = fs.readFileSync(opt('--batch'), 'utf8').split('\n').map((l) => l.trim()).filter((l) => l && !l.startsWith('#'));
-    const outDir = args[args.indexOf('--batch') + 2];
+    const outDir = positional()[0];
     for (const line of list) {
       const [id, url] = line.split(/\s+/);
       process.stdout.write(`→ ${id} ${url} … `);
-      const r = await inspect(browser, url, outDir, id, { mobile: !flag('--no-mobile') });
+      const r = await inspect(browser, url, outDir, id, passOpts);
       console.log(r.status, r.httpStatus ?? '', r.errors.join('; '));
     }
   } else {
-    const [url, outDir] = args.filter((a) => !a.startsWith('--') && a !== opt('--id'));
-    if (!url || !outDir) { console.error('usage: capture-reference.mjs <url> <outDir> [--id slug]'); process.exit(1); }
-    const r = await inspect(browser, url, outDir, opt('--id') || slugify(url), { mobile: !flag('--no-mobile') });
+    const [url, outDir] = positional();
+    if (!url || !outDir) { console.error('usage: capture-reference.mjs <url> <outDir> [--id slug] [--no-mobile] [--tablet] [--filmstrip N]'); process.exit(1); }
+    const r = await inspect(browser, url, outDir, opt('--id') || slugify(url), passOpts);
     console.log(JSON.stringify({ id: r.id, status: r.status, errors: r.errors }, null, 2));
   }
 } finally {
