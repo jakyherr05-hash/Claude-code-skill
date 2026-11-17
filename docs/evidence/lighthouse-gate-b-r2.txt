@@ -1,0 +1,21 @@
+Lighthouse 13.6, mobile preset (simulated throttling), --disable-3d-apis. Interleaved A/B on one host, 5 runs each:
+old = the exact 486c933 build behind lighthouse-486c933.txt; new = current tree after the Gate B r2 fixes (7a7bd6f).
+benchmarkIndex = Lighthouse's host CPU score (2026-11-16 runs: ~2,360-2,650).
+
+old1 2026-11-17T17:58:10.348Z perf=78 LCP=764ms TBT=961ms CLS=0 fontBody=353980 benchmarkIndex=2292
+old2 2026-11-17T17:58:37.288Z perf=94 LCP=760ms TBT=267ms CLS=0 fontBody=353980 benchmarkIndex=2431
+old3 2026-11-17T17:59:04.344Z perf=95 LCP=754ms TBT=232ms CLS=0 fontBody=353980 benchmarkIndex=2014
+old4 2026-11-17T17:59:31.420Z perf=93 LCP=757ms TBT=311ms CLS=0 fontBody=353980 benchmarkIndex=2156
+old5 2026-11-17T17:59:58.466Z perf=94 LCP=756ms TBT=274ms CLS=0 fontBody=353980 benchmarkIndex=1810
+  old: TBT median 274 ms, LCP median 757 ms
+
+new1 2026-11-17T17:58:23.856Z perf=91 LCP=767ms TBT=358ms CLS=0 fontBody=212608 benchmarkIndex=2596
+new2 2026-11-17T17:58:50.941Z perf=95 LCP=775ms TBT=247ms CLS=0 fontBody=212608 benchmarkIndex=2026
+new3 2026-11-17T17:59:18.248Z perf=89 LCP=755ms TBT=431ms CLS=0 fontBody=212608 benchmarkIndex=1900
+new4 2026-11-17T17:59:44.819Z perf=97 LCP=759ms TBT=198ms CLS=0 fontBody=212608 benchmarkIndex=2090
+new5 2026-11-17T18:00:11.681Z perf=94 LCP=763ms TBT=288ms CLS=0 fontBody=212608 benchmarkIndex=2308
+  new: TBT median 288 ms, LCP median 763 ms
+
+Reading: new vs old TBT +14 ms (+5%), inside the run-to-run spread -> no regression from these changes.
+The same old build measured 170.5 ms on 2026-11-16 (faster host); today's host is ~16% slower, so the absolute
+200 ms budget is not decidable from these runs.
