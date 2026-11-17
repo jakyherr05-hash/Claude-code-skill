@@ -6,3 +6,4 @@ lighthouse/*.html
 .cache
 reports
 _gateb-*.mjs
+dist-*/
