@@ -59,8 +59,10 @@ test.describe('responsive matrix', () => {
 
 test.describe('accessibility', () => {
   test.use({ reducedMotion: 'reduce' }); // final visual state for contrast checks
-  for (const path of ['/', '/work/capela-do-silencio']) {
-    test(`axe: no serious/critical violations on ${path}`, async ({ page }) => {
+  // Each breakpoint is its own composition (stacked table and 3-up plates at 768, phone nav at 390), so scan each one.
+  for (const [w, h] of [[1440, 900], [768, 1024], [390, 844]] as const) for (const path of ['/', '/work/capela-do-silencio']) {
+    test(`axe: no serious/critical violations on ${path} at ${w}px`, async ({ page }) => {
+      await page.setViewportSize({ width: w, height: h });
       await open(page, path);
       const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
       const bad = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');

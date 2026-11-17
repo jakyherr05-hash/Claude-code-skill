@@ -45,7 +45,7 @@ Full detail, per-agent tables and transcripts: [AGENT-VALIDATION.md](AGENT-VALID
 ### A.4 Scripts, templates, structure
 | Check | Result | Evidence |
 |---|---|---|
-| `tests/skill-scripts.sh` executes all 12 bundled scripts with assertions | PASS (21/21) | AGENT-VALIDATION §4 |
+| `tests/skill-scripts.sh` executes all 10 skill scripts, the `ImageSequence.js` helper and the repo tooling with assertions | PASS (23/23) | [evidence/skill-scripts-run.log](evidence/skill-scripts-run.log) |
 | `tests/validate.py` structural checks | PASS (173/173) — see the finalization re-run below | — |
 | Skill templates byte-identical to the tested demo (`sync-templates.sh --check`) | **FAIL at `4ebc866`** (router template drifted, S9) → fixed and PASS in the finalization commit | [BUGS-FIXES.md](BUGS-FIXES.md) S9 |
 | Skill evals (with vs without skill) | web-studio 8/8 vs 5/8; lenis-scroll 9/9 vs 8/9 (iteration 2) | AGENT-VALIDATION §5, `eval-workspaces/` |
@@ -135,6 +135,6 @@ Served from a nested sub-path at 1440×900 and 390×844: 0 failed requests, 0 co
 | `--filmstrip N` samples the whole page, detects a pinned scene; `--tablet` adds 768×1024 / 1024×768 | PASS (local fixture); on the demo, 12 frames reached the end of 14,071 px | `tests/skill-scripts.sh`, design-critique README |
 | `--filmstrip` on 19 live sites | 12 sampled end to end; 7 did not scroll under wheel input (virtual scrollers, gates). Documented as a blind spot | reference-library entries |
 | Image-sequence recipe run as documented (frames → `optimize-images.mjs` 640/320 → `imageSequence()`) | PASS: desktop 48 × 640 w frames 0→24→47; mobile 24 × 320 w 0→12→23; reduced motion 1 still, no pin; cleanup 0 triggers. React wrapper, Safari/Firefox: NOT TESTED | `tests/skill-scripts.sh` |
-| `tests/skill-scripts.sh` | PASS 23/23 | run log in the final report |
+| `tests/skill-scripts.sh` | PASS 23/23 | [evidence/skill-scripts-run.log](evidence/skill-scripts-run.log) |
 | `tests/validate.py` | PASS 173/173 | — |
 | Award examples dated 2025–2026 | 6 Awwwards Site of the Day, Nov 9–15 2026, quoted verbatim from each site's Awwwards page | reference-library entries tagged `awwwards-sotd-2026` |

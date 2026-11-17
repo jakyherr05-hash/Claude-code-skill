@@ -10,6 +10,7 @@ Status vocabulary: **PASS** (executed, evidence linked) · **FAIL** · **NOT TES
 |---|---|---|---|
 | Manifests valid | `claude plugin validate` (plugin + marketplace) | PASS | `tests/validate.py` |
 | Install via marketplace (user scope) | `claude plugin install …` → `claude plugin list` shows enabled 1.0.0 | PASS | session log; `claude plugin list` |
+| Install from GitHub exactly as the README says (`claude plugin marketplace add jakyherr05-hash/claude-code-skill` + `plugin install`), isolated `CLAUDE_CONFIG_DIR` | PASS: cloned the pushed commit `0fe7c42`; a fresh session in a new repo listed all 12 agents and 10 skills | [evidence/github-install.txt](evidence/github-install.txt) |
 | Discovery in a fresh session | `claude -p` lists all 12 `premium-web-studio:*` agents and 10 skills | PASS | `docs/evidence/discovery.txt` |
 | Global availability across separate projects | Roll call run from an unrelated temp git repo (`projA`), and the ten-phase run from another (`projB`) | PASS | `docs/evidence/agent-rollcall.md`, §3 |
 | Alternative install: project scope via `install.sh --project` | Fresh `claude -p` in a third temp repo (`projC`) lists the unprefixed agents and skills | PASS | session log (see VALIDATION-REPORT A.1) |
@@ -66,7 +67,7 @@ Observations for users (not skill defects):
 
 | Check | Result | Evidence |
 |---|---|---|
-| `tests/skill-scripts.sh`: **executes** all 12 bundled scripts with assertions (init-project, contrast, type-scale math, library search/stale/build determinism, live capture of a served page, providers check + BLOCKED path, AVIF/WebP optimisation incl. no-upscale + magic bytes, H.264/VP9/AV1 encode via ffprobe, lighthouse usage, install/uninstall, template drift, validator) | **21/21 PASS** | run log in VALIDATION-REPORT |
+| `tests/skill-scripts.sh`: **executes** all 10 skill scripts plus the tested `ImageSequence.js` helper and the repo tooling, with assertions (init-project, contrast, type-scale math, library search/stale/build determinism, live capture of a served page incl. `--filmstrip`/`--tablet` and unchanged defaults, providers check + BLOCKED path, AVIF/WebP optimisation incl. no-upscale + magic bytes, image sequence via the optimiser, H.264/VP9/AV1 encode via ffprobe, lighthouse usage, install/uninstall, template drift, validator) | **23/23 PASS** (was 21/21 before the design-first checks were added) | [evidence/skill-scripts-run.log](evidence/skill-scripts-run.log) |
 | `tests/validate.py`: 173 structural checks (frontmatter fields, name/dir match, description length, tool names, models, every path referenced in a SKILL.md exists, script syntax, template drift, index freshness, secrets scan, `claude plugin validate`) | 173/173 PASS (necessary, **not** sufficient on its own) | — |
 | Templates = tested code | 23 files byte-identical to the demo exercised by the 49-test suite (`sync-templates.sh --check`) | PASS |
 | `lighthouse.sh`, `scroll-probe.mjs` used for real | Run by performance-engineer on the demo | PASS (PERFORMANCE_REPORT) |

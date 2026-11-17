@@ -1,0 +1,33 @@
+# GitHub marketplace install, isolated config (CLAUDE_CONFIG_DIR=<fresh temp dir>), 2026-11-17T06:29:49Z, Claude Code 2.1.326 (Claude Code)
+$ claude plugin marketplace add jakyherr05-hash/claude-code-skill
+  -> Clone complete, validating marketplace… / Successfully added marketplace: premium-web-studio-marketplace (rc=0)
+$ claude plugin install premium-web-studio@premium-web-studio-marketplace
+  -> Successfully installed plugin: premium-web-studio@premium-web-studio-marketplace (scope: user) (rc=0)
+$ claude plugin list  -> premium-web-studio@premium-web-studio-marketplace 1.0.0, user scope, enabled
+Installed marketplace clone HEAD: 0fe7c424fc3ed3bc6b61ba6c14b5ab999bab8fcd
+
+$ claude -p "List the names of every subagent type and every skill ... starting with premium-web-studio" (fresh session, same isolated config, new temp git repo)
+premium-web-studio:ai-visual-pipeline
+premium-web-studio:ai-visual-producer
+premium-web-studio:creative-director
+premium-web-studio:design-intelligence
+premium-web-studio:frontend-engineer
+premium-web-studio:gsap-animator
+premium-web-studio:gsap-motion
+premium-web-studio:lenis-scroll
+premium-web-studio:lenis-scroll
+premium-web-studio:performance-engineer
+premium-web-studio:qa-engineer
+premium-web-studio:reference-library
+premium-web-studio:reference-researcher
+premium-web-studio:reference-study
+premium-web-studio:tech-lead
+premium-web-studio:typography-spacing
+premium-web-studio:typography-system
+premium-web-studio:ui-ux-designer
+premium-web-studio:web-qa
+premium-web-studio:web-studio
+premium-web-studio:webgl-specialist
+premium-web-studio:webgl-three
+
+Lines: 22 = 12 agents + 10 skills (lenis-scroll is both an agent and a skill)
