@@ -1,0 +1,541 @@
+{
+  "id": "auge-experience",
+  "url": "https://auge-xp.com/",
+  "researchedAt": "2026-11-17T02:01:11.237Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://auge-xp.com/",
+  "title": "Digital Experience Studio | AUGE Experience",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "ppneuemontreal_f02daa13-module__qtcTEa__variable greedbold_5cf46213-module__jnljuW__variable farnhamdisplay_2f2692c7-module__OHqs7q__variable",
+    "bodyBackground": "rgb(237, 238, 229)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(0, 0, 0)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "ConsentDetails[#IABV2SETTINGS#]AboutThis website uses cookiesWe use cookies to p",
+      "fontFamily": "ppNeueMontreal, \"ppNeueMontreal Fallback\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "AUGE EXPERIENCE©RCCS YFZVYTYHHV©",
+      "fontFamily": "ppNeueMontreal, \"ppNeueMontreal Fallback\", sans-serif",
+      "fontSize": "18px",
+      "fontWeight": "400",
+      "lineHeight": "22.5px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    "h2": null,
+    "p": {
+      "selector": "p",
+      "text": "We do not use cookies of this type.",
+      "fontFamily": "sans-serif",
+      "fontSize": "15px",
+      "fontWeight": "600",
+      "lineHeight": "24px",
+      "letterSpacing": "0.1px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(20, 20, 20)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "ppNeueMontreal, \"ppNeueMontreal Fallback\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 1367,
+        "y": 30,
+        "w": 43,
+        "h": 40
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "38px",
+      "fontFamily": "ppNeueMontreal, \"ppNeueMontreal Fallback\", sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "38px",
+      "text": "Works"
+    },
+    "loadedFonts": [
+      "ppNeueMontreal 400 normal",
+      "ppNeueMontreal 500 normal",
+      "greedBold normal normal",
+      "farnhamDisplay normal normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "static",
+      "height": 0,
+      "linkCount": 1
+    },
+    "counts": {
+      "sections": 0,
+      "images": 27,
+      "videos": 0,
+      "canvases": 1,
+      "svgs": 4,
+      "links": 26
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "fixed"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "other": 5,
+      "jpg": 21,
+      "svg": 1
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 2,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": true,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "ViruGroup",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "MaisonAUGE",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        },
+        {
+          "text": "AC40Lunarossa",
+          "fontSize": "28.5px",
+          "family": "greedBold"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1564,
+    "loadMs": 4760,
+    "lcpMs": 8896,
+    "cls": 0.468,
+    "requests": 50,
+    "byInitiator": {
+      "link": {
+        "count": 16,
+        "transferKB": 948
+      },
+      "script": {
+        "count": 13,
+        "transferKB": 277
+      },
+      "iframe": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "xmlhttprequest": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 19,
+        "transferKB": 97
+      }
+    }
+  },
+  "scripts": {
+    "total": 16,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "13px",
+    "largestFontSize": 111.431,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "13px"
+    }
+  }
+}

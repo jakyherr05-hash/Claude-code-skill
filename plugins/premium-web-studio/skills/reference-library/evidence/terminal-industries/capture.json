@@ -1,0 +1,562 @@
+{
+  "id": "terminal-industries",
+  "url": "https://terminal-industries.com/",
+  "researchedAt": "2026-11-17T01:42:13.716Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://terminal-industries.com/",
+  "title": "Terminal Yard Operating System | The New Industry Standard in Yard Operations",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 15896,
+    "htmlClasses": "lenis",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgb(255, 255, 255)",
+    "bodyColor": "rgb(5, 36, 36)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "System Markets Featured Resources AboutRead MoreWhat is YOS™SmartYard™ YMSThe Ag",
+      "fontFamily": "SuisseIntl, sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(5, 36, 36)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 15896
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "The yard of the future starts today.",
+      "fontFamily": "SuisseIntl, sans-serif",
+      "fontSize": "70px",
+      "fontWeight": "400",
+      "lineHeight": "66.5px",
+      "letterSpacing": "-3.6px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 308,
+        "y": 14889,
+        "w": 825,
+        "h": 133
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "We have reinvented the future of logistics through the yard.",
+      "fontFamily": "SuisseIntl, sans-serif",
+      "fontSize": "82.4976px",
+      "fontWeight": "400",
+      "lineHeight": "78.3727px",
+      "letterSpacing": "-1.46667px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 270,
+        "y": 530,
+        "w": 900,
+        "h": 235
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Scroll to explore",
+      "fontFamily": "\"Geist Mono\", monospace",
+      "fontSize": "11px",
+      "fontWeight": "600",
+      "lineHeight": "9.35px",
+      "letterSpacing": "18%",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 29,
+        "y": 0,
+        "w": 146,
+        "h": 9
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "SuisseIntl, sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 182,
+        "y": 64,
+        "w": 112,
+        "h": 42
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "82.4976px",
+      "fontFamily": "SuisseIntl, sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "-1.46667px",
+      "lineHeight": "78.3727px",
+      "text": "We have reinvented the future of logistics through the yard."
+    },
+    "loadedFonts": [
+      "SuisseIntl 400 normal",
+      "SuisseIntl 450 normal",
+      "SuisseIntl 600 normal",
+      "SuisseIntl 500 normal",
+      "Geist Mono 400 normal",
+      "Geist Mono 600 normal",
+      "Poppins 400 normal",
+      "Poppins 500 normal",
+      "Poppins 700 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "fixed",
+      "height": 78,
+      "linkCount": 70
+    },
+    "counts": {
+      "sections": 10,
+      "images": 40,
+      "videos": 4,
+      "canvases": 1,
+      "svgs": 50,
+      "links": 88
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "absolute"
+      }
+    ],
+    "videos": [
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "https://a.storyblok.com/f/337048/x/f0f51ea10f/vid_3-1_prerender_1.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "https://a.storyblok.com/f/337048/x/5c039660e1/vid_3-3_prerender_1.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "https://a.storyblok.com/f/337048/x/daeedd63c8/vid_3-5_prerender_1.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "https://a.storyblok.com/f/337048/x/5d1992bef6/vid_3-2_prerender_1.mp4"
+      }
+    ],
+    "imageFormats": {
+      "svg": 25,
+      "png": 5,
+      "other": 10
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": false,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": true,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": true,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 311
+      },
+      {
+        "ms": 100,
+        "y": 449
+      },
+      {
+        "ms": 250,
+        "y": 548
+      },
+      {
+        "ms": 500,
+        "y": 590
+      },
+      {
+        "ms": 900,
+        "y": 599
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 75,
+    "likelySmoothed": true,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "We have reinvented the future of logistics through the yard.",
+          "fontSize": "82.4976px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "AI-native technology that turns the space between your gate ",
+          "fontSize": "82.4976px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "into one connected, automated system.",
+          "fontSize": "82.4976px",
+          "family": "SuisseIntl"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 1665,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "We have reinvented the future of logistics through the yard.",
+          "fontSize": "82.4976px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "AI-native technology that turns the space between your gate ",
+          "fontSize": "82.4976px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "into one connected, automated system.",
+          "fontSize": "82.4976px",
+          "family": "SuisseIntl"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 3331,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Fix one yard problem today. Expand on your timetable.",
+          "fontSize": "70px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "Fix One Problem in the Yard",
+          "fontSize": "22.5072px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "I Have a Few Yards to Optimize",
+          "fontSize": "22.5072px",
+          "family": "SuisseIntl"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 4997,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "23%",
+          "fontSize": "27px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "Want to know more?",
+          "fontSize": "27px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "$255,528",
+          "fontSize": "22px",
+          "family": "SuisseIntl"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 6664,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 4
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 8329,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 4
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 9995,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Automate and Expedite Gate Operations",
+          "fontSize": "46px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "Real-Time Visibility and Workflow Automation",
+          "fontSize": "46px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "Optimize Loading and Improve Dock Efficiency",
+          "fontSize": "46px",
+          "family": "SuisseIntl"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 11662,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "“We have not seen this kind of accuracy with computer-vision",
+          "fontSize": "34.5024px",
+          "family": "SuisseIntl"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 13327,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "FAQs",
+          "fontSize": "34.5024px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "What does Terminal actually do?",
+          "fontSize": "22.5072px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "How is this different from a traditional Yard Management Sys",
+          "fontSize": "22.5072px",
+          "family": "SuisseIntl"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 14994,
+      "docHeight": 15896,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "The yard of the future starts today.",
+          "fontSize": "70px",
+          "family": "SuisseIntl"
+        },
+        {
+          "text": "The yard of the future starts today.",
+          "fontSize": "70px",
+          "family": "SuisseIntl"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 1666,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 4200,
+    "loadMs": 5468,
+    "lcpMs": 6188,
+    "cls": 1.006,
+    "requests": 159,
+    "byInitiator": {
+      "script": {
+        "count": 53,
+        "transferKB": 565
+      },
+      "link": {
+        "count": 47,
+        "transferKB": 144
+      },
+      "img": {
+        "count": 33,
+        "transferKB": 3
+      },
+      "video": {
+        "count": 4,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 13,
+        "transferKB": 0
+      },
+      "css": {
+        "count": 4,
+        "transferKB": 130
+      },
+      "xmlhttprequest": {
+        "count": 2,
+        "transferKB": 1
+      },
+      "beacon": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "other": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "iframe": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 67,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtm.js",
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "29.9988px",
+    "largestFontSize": 58,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "59.0746px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "70px"
+    }
+  }
+}

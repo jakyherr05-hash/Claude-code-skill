@@ -1,0 +1,518 @@
+{
+  "id": "creative-reference-library",
+  "url": "https://crl-2026.webflow.io/",
+  "researchedAt": "2026-11-17T02:02:35.549Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://crl-2026.webflow.io/",
+  "title": "Creative Reference Library | CRL",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "w-mod-js wf-oswald-n6-active wf-oswald-n5-active wf-oswald-n7-active wf-oswald-n4-active wf-oswald-n3-active wf-oswald-n2-active wf-active lenis lenis-stopped",
+    "bodyBackground": "rgb(161, 160, 152)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(255, 255, 255)",
+    "bodyFont": {
+      "selector": "body",
+      "text": ":root { --grid-main: repeat(var(--site--column-count), minmax(0, 1fr)); --grid-1",
+      "fontFamily": "\"Neue Haas Grotesk Text Pro\", Arial, sans-serif",
+      "fontSize": "14.788px",
+      "fontWeight": "500",
+      "lineHeight": "14.788px",
+      "letterSpacing": "-0.14788px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Creative Reference Library",
+      "fontFamily": "\"Neue Haas Grotesk Text Pro\", Arial, sans-serif",
+      "fontSize": "14.788px",
+      "fontWeight": "500",
+      "lineHeight": "14.788px",
+      "letterSpacing": "-0.14788px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 183,
+        "y": 14,
+        "w": 1,
+        "h": 1
+      }
+    },
+    "h2": null,
+    "p": {
+      "selector": "p",
+      "text": "Index",
+      "fontFamily": "\"Neue Haas Grotesk Text Pro\", Arial, sans-serif",
+      "fontSize": "95.1px",
+      "fontWeight": "500",
+      "lineHeight": "95.1px",
+      "letterSpacing": "-2.853px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    "navLink": null,
+    "largestVisibleText": {
+      "fontSize": "95.1px",
+      "fontFamily": "\"Neue Haas Grotesk Text Pro\", Arial, sans-serif",
+      "fontWeight": "500",
+      "letterSpacing": "-2.853px",
+      "lineHeight": "95.1px",
+      "text": "crl®"
+    },
+    "loadedFonts": [
+      "Neue Haas Grotesk Text Pro 400 normal",
+      "Oswald 200 normal",
+      "Oswald 300 normal",
+      "Oswald 400 normal",
+      "Oswald 500 normal",
+      "Oswald 600 normal",
+      "Oswald 700 normal"
+    ],
+    "nav": null,
+    "counts": {
+      "sections": 1,
+      "images": 0,
+      "videos": 0,
+      "canvases": 1,
+      "svgs": 6,
+      "links": 17
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {},
+    "landmarks": {
+      "header": false,
+      "main": true,
+      "footer": false,
+      "h1Count": 7,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": true,
+      "lenisGlobal": true,
+      "locomotiveScroll": false,
+      "threeRevision": "180",
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": true,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Creative Reference Library",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®/V.01(2026)Enter Library [data-cursor-item] { opacity:0;",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        },
+        {
+          "text": "crl®",
+          "fontSize": "14.788px",
+          "family": "Neue Haas Grotesk Text Pro"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 716,
+    "loadMs": 716,
+    "lcpMs": 6772,
+    "cls": 0.004,
+    "requests": 11,
+    "byInitiator": {
+      "link": {
+        "count": 2,
+        "transferKB": 1
+      },
+      "script": {
+        "count": 5,
+        "transferKB": 6
+      },
+      "css": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "img": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 2,
+        "transferKB": 20
+      }
+    }
+  },
+  "scripts": {
+    "total": 5,
+    "libraryHints": [
+      "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "12.1368px",
+    "largestFontSize": 40.6312,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "13.0912px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "13.7376px"
+    }
+  }
+}

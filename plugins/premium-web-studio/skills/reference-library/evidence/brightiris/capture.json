@@ -1,0 +1,544 @@
+{
+  "id": "brightiris",
+  "url": "https://brightiris-cinematic.netlify.app/",
+  "researchedAt": "2026-11-17T01:40:48.727Z",
+  "status": "inspected",
+  "errors": [
+    "networkidle timeout (page kept loading; continued)"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://brightiris-cinematic.netlify.app/",
+  "title": "BRIGHTIRIS — AI-native yard operations",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 29427,
+    "htmlClasses": "lenis is-ready is-type-ready",
+    "bodyBackground": "rgb(8, 20, 26)",
+    "htmlBackground": "rgb(8, 20, 26)",
+    "bodyColor": "rgb(233, 238, 240)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "Skip to content BRIGHTIRIS 00 Opening Request demo Menu 01Identity02The blind sp",
+      "fontFamily": "Satoshi, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24.8px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(233, 238, 240)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1425,
+        "h": 29427
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "BRIGHTIRIS — AI-native yard operations",
+      "fontFamily": "\"Clash Display\", Satoshi, system-ui, sans-serif",
+      "fontSize": "32px",
+      "fontWeight": "600",
+      "lineHeight": "33.28px",
+      "letterSpacing": "-1.12px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(233, 238, 240)",
+      "box": {
+        "x": -1,
+        "y": -1,
+        "w": 1,
+        "h": 1
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "BRIGHTIRIS",
+      "fontFamily": "\"Clash Display\", Satoshi, system-ui, sans-serif",
+      "fontSize": "165.6px",
+      "fontWeight": "600",
+      "lineHeight": "149.04px",
+      "letterSpacing": "-7.452px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(233, 238, 240)",
+      "box": {
+        "x": 203,
+        "y": 3930,
+        "w": 1019,
+        "h": 149
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "00 Opening",
+      "fontFamily": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, monospace",
+      "fontSize": "11.52px",
+      "fontWeight": "400",
+      "lineHeight": "17.856px",
+      "letterSpacing": "1.152px",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(159, 179, 185)",
+      "box": {
+        "x": 621,
+        "y": 27,
+        "w": 184,
+        "h": 35
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "BRIGHTIRIS",
+      "fontFamily": "\"Clash Display\", Satoshi, system-ui, sans-serif",
+      "fontSize": "17.92px",
+      "fontWeight": "400",
+      "lineHeight": "17.92px",
+      "letterSpacing": "-0.1792px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(233, 238, 240)",
+      "box": {
+        "x": 52,
+        "y": 22,
+        "w": 129,
+        "h": 44
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "137.6px",
+      "fontFamily": "\"Clash Display\", Satoshi, system-ui, sans-serif",
+      "fontWeight": "600",
+      "letterSpacing": "-2.752px",
+      "lineHeight": "123.84px",
+      "text": "The yard,The yard,seen.seen."
+    },
+    "loadedFonts": [
+      "Clash Display 200 700 normal",
+      "Satoshi 400 normal",
+      "Satoshi 500 normal",
+      "JetBrains Mono 400 normal",
+      "Instrument Serif 400 italic"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "fixed",
+      "height": 89,
+      "linkCount": 2
+    },
+    "counts": {
+      "sections": 12,
+      "images": 0,
+      "videos": 0,
+      "canvases": 5,
+      "svgs": 24,
+      "links": 29
+    },
+    "canvases": [
+      {
+        "w": 1425,
+        "h": 1170,
+        "position": "absolute"
+      },
+      {
+        "w": 1425,
+        "h": 1170,
+        "position": "absolute"
+      },
+      {
+        "w": 1425,
+        "h": 900,
+        "position": "absolute"
+      },
+      {
+        "w": 1425,
+        "h": 900,
+        "position": "absolute"
+      },
+      {
+        "w": 1425,
+        "h": 900,
+        "position": "absolute"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {},
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": true
+    },
+    "detected": {
+      "gsap": "3.15.0",
+      "scrollTriggerGlobal": true,
+      "lenisClassOnHtml": true,
+      "lenisGlobal": true,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 213
+      },
+      {
+        "ms": 100,
+        "y": 445
+      },
+      {
+        "ms": 250,
+        "y": 563
+      },
+      {
+        "ms": 500,
+        "y": 598
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 74,
+    "likelySmoothed": true,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "The yard,The yard,seen.seen.",
+          "fontSize": "137.6px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "Every trailer,Every trailer,known.known.",
+          "fontSize": "137.6px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "One livingOne livingsystem.system.",
+          "fontSize": "137.6px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 3,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 3169,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "BRIGHTIRIS",
+          "fontSize": "165.6px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "The yard,The yard,seen.seen.",
+          "fontSize": "137.6px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "Every trailer,Every trailer,known.known.",
+          "fontSize": "137.6px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 3,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 6336,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Every shipmentis tracked to thegate. Then theyard goes dark.",
+          "fontSize": "92.16px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 9506,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "From noiseto signal.",
+          "fontSize": "72px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 12677,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "From noiseto signal.",
+          "fontSize": "72px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "Trailers arrive, park, wait.",
+          "fontSize": "28.8px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "Every trailer, located.",
+          "fontSize": "28.8px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 15847,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Every hour, onelive picture.",
+          "fontSize": "106.56px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "Check-in without the booth line.",
+          "fontSize": "30.24px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "Every trailer located and sequenced.",
+          "fontSize": "30.24px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 19015,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Wherever you start, it scales.",
+          "fontSize": "57.6px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "Fix one problem in the yard.",
+          "fontSize": "28.8px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "Optimize a handful of yards.",
+          "fontSize": "28.8px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 22186,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "One datalayer, everysite.",
+          "fontSize": "62.4px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 25358,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "The yard, finally in focus.",
+          "fontSize": "144px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 28522,
+      "docHeight": 29427,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Questions,answered",
+          "fontSize": "57.6px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "ImplementationWhat hardware is required?",
+          "fontSize": "18.72px",
+          "family": "Clash Display"
+        },
+        {
+          "text": "OperationsCan we manage multiple sites from one view?",
+          "fontSize": "18.72px",
+          "family": "Clash Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 3170,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 2606,
+    "loadMs": 2630,
+    "lcpMs": 2772,
+    "cls": 0.001,
+    "requests": 52,
+    "byInitiator": {
+      "link": {
+        "count": 8,
+        "transferKB": 74
+      },
+      "script": {
+        "count": 40,
+        "transferKB": 183
+      },
+      "css": {
+        "count": 3,
+        "transferKB": 80
+      },
+      "other": {
+        "count": 1,
+        "transferKB": 1
+      }
+    }
+  },
+  "scripts": {
+    "total": 41,
+    "libraryHints": [
+      "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Flip.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Observer.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/CustomEase.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/DrawSVGPlugin.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrambleTextPlugin.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollToPlugin.min.js",
+      "https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js",
+      "https://brightiris-cinematic.netlify.app/js/lib/gsapSetup.js",
+      "https://brightiris-cinematic.netlify.app/js/lib/lenisSetup.js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "32px",
+    "largestFontSize": 192,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "32px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "32px"
+    }
+  }
+}

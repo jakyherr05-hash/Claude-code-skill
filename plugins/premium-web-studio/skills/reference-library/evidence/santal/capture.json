@@ -1,0 +1,423 @@
+{
+  "id": "santal",
+  "url": "https://santalarch.com/",
+  "researchedAt": "2026-11-17T01:56:42.670Z",
+  "status": "inspected",
+  "errors": [
+    "networkidle timeout (page kept loading; continued)"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://santalarch.com/",
+  "title": "Santalarch",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 41571,
+    "htmlClasses": "lenis",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(15, 15, 15)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "This site uses cookies.DeclineDeclineAcceptAcceptPhilosophyPhilosophyWorksWorksS",
+      "fontFamily": "Helvetica, sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "16px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(15, 15, 15)",
+      "box": {
+        "x": 0,
+        "y": 209,
+        "w": 1440,
+        "h": 41362
+      }
+    },
+    "h1": null,
+    "h2": {
+      "selector": "h2",
+      "text": "Bold",
+      "fontFamily": "Helvetica, sans-serif",
+      "fontSize": "98px",
+      "fontWeight": "400",
+      "lineHeight": "86.24px",
+      "letterSpacing": "-4.9px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(240, 240, 240)",
+      "box": {
+        "x": 180,
+        "y": 2270,
+        "w": 532,
+        "h": 86
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "This site uses cookies.",
+      "fontFamily": "Helvetica, sans-serif",
+      "fontSize": "10px",
+      "fontWeight": "500",
+      "lineHeight": "11.6px",
+      "letterSpacing": "-0.2px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(240, 240, 240)",
+      "box": {
+        "x": 192,
+        "y": 871,
+        "w": 100,
+        "h": 12
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "Helvetica, sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "16px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(240, 240, 240)",
+      "box": {
+        "x": 0,
+        "y": 209,
+        "w": 180,
+        "h": 39
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "33px",
+      "fontFamily": "Helvetica, sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "-0.99px",
+      "lineHeight": "35.64px",
+      "text": "Architectural"
+    },
+    "loadedFonts": [
+      "lil-gui normal normal",
+      "Helvetica 400 normal",
+      "Helvetica 500 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "sticky",
+      "height": 450,
+      "linkCount": 7
+    },
+    "counts": {
+      "sections": 9,
+      "images": 31,
+      "videos": 0,
+      "canvases": 4,
+      "svgs": 62,
+      "links": 21
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      },
+      {
+        "w": 0,
+        "h": 0,
+        "position": "absolute"
+      },
+      {
+        "w": 864,
+        "h": 566,
+        "position": "absolute"
+      },
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "webp": 31
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": false,
+      "h1Count": 0,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": true,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": "183",
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 352
+      },
+      {
+        "ms": 100,
+        "y": 366
+      },
+      {
+        "ms": 250,
+        "y": 387
+      },
+      {
+        "ms": 500,
+        "y": 390
+      },
+      {
+        "ms": 900,
+        "y": 390
+      },
+      {
+        "ms": 1500,
+        "y": 390
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 94,
+    "likelySmoothed": false,
+    "movedPx": 390
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 5,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 2937,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 5874,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 8811,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 2,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 11748,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 2,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 14685,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 2,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 17622,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Quiet",
+          "fontSize": "98px",
+          "family": "Helvetica"
+        }
+      ],
+      "media": {
+        "canvases": 2,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 20556,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 6,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "WEOur Approach",
+          "fontSize": "16px",
+          "family": "Helvetica"
+        }
+      ],
+      "media": {
+        "canvases": 2,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 23488,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 5,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Material Intelligence",
+          "fontSize": "50px",
+          "family": "Helvetica"
+        }
+      ],
+      "media": {
+        "canvases": 2,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 26433,
+      "docHeight": 41571,
+      "pinnedLargeFixedOrSticky": 5,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Detail as Discipline",
+          "fontSize": "50px",
+          "family": "Helvetica"
+        }
+      ],
+      "media": {
+        "canvases": 2,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 4519,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1496,
+    "loadMs": 6816,
+    "lcpMs": 15168,
+    "cls": 0,
+    "requests": 232,
+    "byInitiator": {
+      "script": {
+        "count": 5,
+        "transferKB": 196
+      },
+      "link": {
+        "count": 147,
+        "transferKB": 1460
+      },
+      "other": {
+        "count": 1,
+        "transferKB": 162
+      },
+      "img": {
+        "count": 49,
+        "transferKB": 1456
+      },
+      "fetch": {
+        "count": 22,
+        "transferKB": 13318
+      },
+      "css": {
+        "count": 8,
+        "transferKB": 56
+      }
+    }
+  },
+  "scripts": {
+    "total": 9,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": 60,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    }
+  }
+}

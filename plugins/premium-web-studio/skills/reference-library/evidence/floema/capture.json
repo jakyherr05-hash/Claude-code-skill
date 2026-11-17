@@ -1,0 +1,577 @@
+{
+  "id": "floema",
+  "url": "https://floema.com/",
+  "researchedAt": "2026-11-17T01:52:03.039Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://floema.com/",
+  "title": "Floema® — Espaços pensados para viver e durar uma vida.",
+  "page": {
+    "lang": "pt-PT",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 14168,
+    "htmlClasses": "lenis",
+    "bodyBackground": "rgb(242, 239, 234)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(36, 31, 33)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "ConsentDetails[#IABV2SETTINGS#]AboutThis website uses cookiesWe use cookies to p",
+      "fontFamily": "sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "16px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(36, 31, 33)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 14168
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Espaços pensados para viver e durar uma vida.",
+      "fontFamily": "Zimula",
+      "fontSize": "57.2px",
+      "fontWeight": "400",
+      "lineHeight": "60.06px",
+      "letterSpacing": "-2.288px",
+      "textTransform": "none",
+      "fontVariationSettings": "\"cnct\" 1000, \"wght\" 500",
+      "color": "rgb(36, 31, 33)",
+      "box": {
+        "x": 327,
+        "y": 371,
+        "w": 786,
+        "h": 120
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Vamos para lá do esperado com dedicação e perícia. Cada projeto é uma oportunida",
+      "fontFamily": "Zimula",
+      "fontSize": "51px",
+      "fontWeight": "400",
+      "lineHeight": "56.1px",
+      "letterSpacing": "-2.04px",
+      "textTransform": "none",
+      "fontVariationSettings": "\"cnct\" 1000, \"wght\" 500",
+      "color": "rgb(36, 31, 33)",
+      "box": {
+        "x": 32,
+        "y": 9311,
+        "w": 909,
+        "h": 224
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "We use cookies to personalise content and ads, to provide social media features ",
+      "fontFamily": "sans-serif",
+      "fontSize": "15px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "0.5px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(36, 31, 33)",
+      "box": {
+        "x": 293,
+        "y": 396,
+        "w": 855,
+        "h": 72
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "16px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(36, 31, 33)",
+      "box": {
+        "x": 32,
+        "y": 29,
+        "w": 117,
+        "h": 28
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "57.2px",
+      "fontFamily": "Zimula",
+      "fontWeight": "400",
+      "letterSpacing": "-2.288px",
+      "lineHeight": "60.06px",
+      "text": "Espaços pensados para viver e durar uma vida."
+    },
+    "loadedFonts": [
+      "Zimula normal normal"
+    ],
+    "nav": {
+      "tag": "nav",
+      "position": "fixed",
+      "height": 86,
+      "linkCount": 6
+    },
+    "counts": {
+      "sections": 7,
+      "images": 65,
+      "videos": 0,
+      "canvases": 3,
+      "svgs": 52,
+      "links": 64
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      },
+      {
+        "w": 1440,
+        "h": 1049,
+        "position": "static"
+      },
+      {
+        "w": 1440,
+        "h": 450,
+        "position": "static"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "other": 65
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": true,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": "181",
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 111
+      },
+      {
+        "ms": 100,
+        "y": 303
+      },
+      {
+        "ms": 250,
+        "y": 480
+      },
+      {
+        "ms": 500,
+        "y": 575
+      },
+      {
+        "ms": 900,
+        "y": 598
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 51,
+    "likelySmoothed": true,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 8,
+      "pinSpacersInView": 1,
+      "headings": [
+        {
+          "text": "Espaços pensados para viver e durar uma vida.",
+          "fontSize": "57.2px",
+          "family": "Zimula"
+        },
+        {
+          "text": "This website uses cookies",
+          "fontSize": "15px",
+          "family": "sans-serif"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 1473,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 9,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Sinalética, mobiliário e equipamentos para criar espaços urb",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Sinalética e equipamentos para o ar livre, potenciando o tur",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Construções e mobiliário à medida, moldados em plástico 100%",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 2947,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 9,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Sinalética e equipamentos para o ar livre, potenciando o tur",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Construções e mobiliário à medida, moldados em plástico 100%",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Renove o seu campo e reduza custos de manutenção com a nossa",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 4421,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 9,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Construções e mobiliário à medida, moldados em plástico 100%",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Renove o seu campo e reduza custos de manutenção com a nossa",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Soluções de sinalética personalizadas, desenvolvidas para to",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 5895,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 9,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Renove o seu campo e reduza custos de manutenção com a nossa",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Soluções de sinalética personalizadas, desenvolvidas para to",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Catálogo Golf",
+          "fontSize": "19.15px",
+          "family": "Zimula"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 7369,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 9,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Soluções de sinalética personalizadas, desenvolvidas para to",
+          "fontSize": "43.75px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Catálogo Details",
+          "fontSize": "19.15px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Sinalética, mobiliário e equipamentos para criar espaços urb",
+          "fontSize": "16px",
+          "family": "sans-serif"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 8843,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 9,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Vamos para lá do esperado com dedicação e perícia. Cada proj",
+          "fontSize": "51px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Floema® Est. 2007",
+          "fontSize": "23.15px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Catálogo Details",
+          "fontSize": "19.15px",
+          "family": "Zimula"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 10317,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Urban",
+          "fontSize": "57.2px",
+          "family": "Zimula"
+        },
+        {
+          "text": "(51)",
+          "fontSize": "57.2px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Nature",
+          "fontSize": "57.2px",
+          "family": "Zimula"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 11791,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "\"Acreditamos num mobiliário urbano com design, conforto e im",
+          "fontSize": "57.2px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Desenhamos",
+          "fontSize": "19.15px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Construímos",
+          "fontSize": "19.15px",
+          "family": "Zimula"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 13265,
+      "docHeight": 14168,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Sede",
+          "fontSize": "19.15px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Produção",
+          "fontSize": "19.15px",
+          "family": "Zimula"
+        },
+        {
+          "text": "Floema Espanha",
+          "fontSize": "19.15px",
+          "family": "Zimula"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 1474,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 2659,
+    "loadMs": 5044,
+    "lcpMs": 2032,
+    "cls": 0.012,
+    "requests": 134,
+    "byInitiator": {
+      "link": {
+        "count": 17,
+        "transferKB": 112
+      },
+      "other": {
+        "count": 19,
+        "transferKB": 933
+      },
+      "script": {
+        "count": 23,
+        "transferKB": 492
+      },
+      "img": {
+        "count": 59,
+        "transferKB": 1527
+      },
+      "css": {
+        "count": 1,
+        "transferKB": 141
+      },
+      "fetch": {
+        "count": 5,
+        "transferKB": 1
+      },
+      "xmlhttprequest": {
+        "count": 8,
+        "transferKB": 0
+      },
+      "iframe": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "beacon": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 43,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtm.js",
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [
+    "Hydration completed but contains mismatches."
+  ],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "32px",
+    "largestFontSize": 32,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "41.072px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "47.216px"
+    }
+  }
+}

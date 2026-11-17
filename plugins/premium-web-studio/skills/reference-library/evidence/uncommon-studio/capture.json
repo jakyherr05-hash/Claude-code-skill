@@ -1,0 +1,493 @@
+{
+  "id": "uncommon-studio",
+  "url": "https://uncommonstudio.com.au/",
+  "researchedAt": "2026-11-17T01:53:44.725Z",
+  "status": "inspected",
+  "errors": [
+    "networkidle timeout (page kept loading; continued)"
+  ],
+  "httpStatus": 200,
+  "finalUrl": "https://uncommondesign.group/",
+  "title": "Home - Uncommon",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 8938,
+    "htmlClasses": "js-has-global-canvas lenis js-smooth-scrollbar-enabled",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(17, 18, 20)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "Work with usMel12:54TeamTeamWorkWorkStudioStudioServicesServicesAwardsAwardsCont",
+      "fontFamily": "__neuemontreal_9c9897, __neuemontreal_Fallback_9c9897",
+      "fontSize": "12px",
+      "fontWeight": "400",
+      "lineHeight": "13.2px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(17, 18, 20)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 8938
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Love to the hidden",
+      "fontFamily": "__neuemontreal_9c9897, __neuemontreal_Fallback_9c9897",
+      "fontSize": "67.5px",
+      "fontWeight": "400",
+      "lineHeight": "70.875px",
+      "letterSpacing": "-0.9px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 30,
+        "y": 30,
+        "w": 825,
+        "h": 212
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Uncommon results.",
+      "fontFamily": "__neuemontreal_9c9897, __neuemontreal_Fallback_9c9897",
+      "fontSize": "67.5px",
+      "fontWeight": "400",
+      "lineHeight": "70.875px",
+      "letterSpacing": "-0.9px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(18, 18, 18)",
+      "box": {
+        "x": 618,
+        "y": 6910,
+        "w": 675,
+        "h": 74
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "TeamTeam",
+      "fontFamily": "__neuemontreal_9c9897, __neuemontreal_Fallback_9c9897",
+      "fontSize": "9px",
+      "fontWeight": "500",
+      "lineHeight": "9px",
+      "letterSpacing": "0.6px",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 1328,
+        "y": 445,
+        "w": 27,
+        "h": 10
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Work with us",
+      "fontFamily": "__neuemontreal_9c9897, __neuemontreal_Fallback_9c9897",
+      "fontSize": "12px",
+      "fontWeight": "400",
+      "lineHeight": "13.2px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(17, 18, 20)",
+      "box": {
+        "x": 30,
+        "y": 30,
+        "w": 85,
+        "h": 14
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "67.5px",
+      "fontFamily": "__neuemontreal_9c9897, __neuemontreal_Fallback_9c9897",
+      "fontWeight": "400",
+      "letterSpacing": "-0.9px",
+      "lineHeight": "70.875px",
+      "text": "Love to the hidden"
+    },
+    "loadedFonts": [
+      "__neuemontreal_9c9897 500 normal",
+      "__neuemontreal_9c9897 400 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "fixed",
+      "height": 14,
+      "linkCount": 2
+    },
+    "counts": {
+      "sections": 5,
+      "images": 49,
+      "videos": 1,
+      "canvases": 1,
+      "svgs": 25,
+      "links": 13
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      }
+    ],
+    "videos": [
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "src": "gressive_redirect/playback/1155458355/rendition/1440p/file.mp4%20%281440p%29.mp4"
+      }
+    ],
+    "imageFormats": {
+      "other": 42,
+      "svg": 7
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": false,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": true,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": "158",
+      "barba": false,
+      "swup": false,
+      "nextjs": true,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 198
+      },
+      {
+        "ms": 100,
+        "y": 356
+      },
+      {
+        "ms": 250,
+        "y": 501
+      },
+      {
+        "ms": 500,
+        "y": 580
+      },
+      {
+        "ms": 900,
+        "y": 598
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 59,
+    "likelySmoothed": true,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 8,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Love to the hidden",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        },
+        {
+          "text": "We design for impact. See for yourself.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 1
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 893,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 8,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "We design for impact. See for yourself.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 1
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 1786,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 9,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "We design for impact. See for yourself.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 1
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 2679,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 9,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "We design for impact. See for yourself.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 3572,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 8,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "We design for impact. See for yourself.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 4465,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 8,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "We design for impact. See for yourself.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 5358,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 8,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Design that delivers uncommonlygood results",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 6251,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Uncommon results.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        },
+        {
+          "text": "Hyper-collaboration.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        },
+        {
+          "text": "Design Sprints",
+          "fontSize": "24px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 7144,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Specialist minds.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        },
+        {
+          "text": "Diverse brilliance.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        },
+        {
+          "text": "Design with brains.",
+          "fontSize": "67.5px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 8037,
+      "docHeight": 8938,
+      "pinnedLargeFixedOrSticky": 7,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Book a 15 min call",
+          "fontSize": "45px",
+          "family": "__neuemontreal_9c9897"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 893,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 3019,
+    "loadMs": 5374,
+    "lcpMs": 3044,
+    "cls": 0.003,
+    "requests": 110,
+    "byInitiator": {
+      "link": {
+        "count": 13,
+        "transferKB": 169
+      },
+      "script": {
+        "count": 27,
+        "transferKB": 795
+      },
+      "img": {
+        "count": 34,
+        "transferKB": 3869
+      },
+      "video": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 21,
+        "transferKB": 5404
+      },
+      "xmlhttprequest": {
+        "count": 14,
+        "transferKB": 53
+      }
+    }
+  },
+  "scripts": {
+    "total": 29,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "31.2px",
+    "largestFontSize": 120,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "60px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "60px"
+    }
+  }
+}

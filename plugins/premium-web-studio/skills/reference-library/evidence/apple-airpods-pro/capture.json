@@ -1,0 +1,559 @@
+{
+  "id": "apple-airpods-pro",
+  "url": "https://www.apple.com/airpods-pro/",
+  "researchedAt": "2026-11-17T01:43:42.675Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://www.apple.com/airpods-pro/",
+  "title": "AirPods Pro 3 - Apple",
+  "page": {
+    "lang": "en-US",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 28936,
+    "htmlClasses": "js no-touch no-reduced-motion enhanced ipad inline-media inline-media-alpha desktop no-ar-quicklook no-small-breakpoint no-mq-portrait no-mq-small-shortest no-mq-small-shorter no-mq-small-short no-mq-",
+    "bodyBackground": "rgb(255, 255, 255)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(29, 29, 31)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "AppleStoreShopShop GiftsMaciPadiPhoneApple WatchApple Vision ProAirPodsHomeAcces",
+      "fontFamily": "\"SF Pro Text\", \"SF Pro Icons\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "17px",
+      "fontWeight": "400",
+      "lineHeight": "25px",
+      "letterSpacing": "-0.374px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(29, 29, 31)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 28936
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "AirPods Pro 3",
+      "fontFamily": "\"SF Pro Display\", \"SF Pro Icons\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "28px",
+      "fontWeight": "600",
+      "lineHeight": "32px",
+      "letterSpacing": "0.196px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(29, 29, 31)",
+      "box": {
+        "x": 90,
+        "y": 644,
+        "w": 719,
+        "h": 32
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Shop",
+      "fontFamily": "\"SF Pro Text\", \"SF Pro Icons\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "12px",
+      "fontWeight": "400",
+      "lineHeight": "16.0005px",
+      "letterSpacing": "-0.12px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(110, 110, 115)",
+      "box": {
+        "x": 230,
+        "y": 80,
+        "w": 176,
+        "h": 16
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Up to 2x more than AirPods Pro 2.1",
+      "fontFamily": "\"SF Pro Text\", \"SF Pro Icons\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "17px",
+      "fontWeight": "600",
+      "lineHeight": "21.0012px",
+      "letterSpacing": "-0.374px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(29, 29, 31)",
+      "box": {
+        "x": 90,
+        "y": 828,
+        "w": 275,
+        "h": 21
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Apple",
+      "fontFamily": "\"SF Pro Text\", \"SF Pro Icons\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontSize": "17px",
+      "fontWeight": "600",
+      "lineHeight": "21.0012px",
+      "letterSpacing": "-0.374px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgba(0, 0, 0, 0.8)",
+      "box": {
+        "x": 222,
+        "y": 0,
+        "w": 30,
+        "h": 44
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "64px",
+      "fontFamily": "\"SF Pro Display\", \"SF Pro Icons\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+      "fontWeight": "600",
+      "letterSpacing": "-0.576px",
+      "lineHeight": "68px",
+      "text": "The world’s best in‑ear Active Noise Cancellation."
+    },
+    "loadedFonts": [
+      "SF Pro Display 600 normal",
+      "SF Pro Text 400 normal",
+      "SF Pro Text 600 normal",
+      "SF Pro Icons 400 normal",
+      "SF Pro Icons 600 normal"
+    ],
+    "nav": {
+      "tag": "nav",
+      "position": "absolute",
+      "height": 44,
+      "linkCount": 234
+    },
+    "counts": {
+      "sections": 18,
+      "images": 102,
+      "videos": 16,
+      "canvases": 0,
+      "svgs": 132,
+      "links": 458
+    },
+    "canvases": [],
+    "videos": [
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "dia/us/airpods-pro/2025/7acffb13-4adb-40b1-9393-8f1c99bc6c90/anim/hero/large.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": false,
+        "src": ""
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": false,
+        "src": ""
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": false,
+        "src": ""
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": false,
+        "src": ""
+      }
+    ],
+    "imageFormats": {
+      "jpg": 8,
+      "other": 94
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 28936,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "The world’s best in‑ear Active Noise Cancellation.",
+          "fontSize": "64px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "28px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "21px",
+          "family": "SF Pro Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 1
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 3115,
+      "docHeight": 28936,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "The best thingyou’ve neverheard.",
+          "fontSize": "96px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "Intelligent noise control",
+          "fontSize": "28px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "21px",
+          "family": "SF Pro Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 1
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 6230,
+      "docHeight": 28936,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "The sound of science.",
+          "fontSize": "96px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "Audio performance",
+          "fontSize": "28px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "21px",
+          "family": "SF Pro Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 1
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 9345,
+      "docHeight": 28936,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "21px",
+          "family": "SF Pro Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 12460,
+      "docHeight": 28936,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "21px",
+          "family": "SF Pro Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 1
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 15575,
+      "docHeight": 28936,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "21px",
+          "family": "SF Pro Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 3
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 18690,
+      "docHeight": 28936,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "They’re workin’9 to 5.",
+          "fontSize": "96px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "All-day battery life",
+          "fontSize": "28px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "21px",
+          "family": "SF Pro Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 21920,
+      "docHeight": 29051,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Keep exploring AirPods.",
+          "fontSize": "56px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "21px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "AirPods Pro 3 AirPods Pro 3",
+          "fontSize": "19.89px",
+          "family": "SF Pro Text"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 25035,
+      "docHeight": 29051,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Our values lead the way.",
+          "fontSize": "56px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "Made with 40% recycled material by weight.",
+          "fontSize": "28px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "Manufactured with 40% renewable electricity.",
+          "fontSize": "28px",
+          "family": "SF Pro Display"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 28150,
+      "docHeight": 29051,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "AirPods Pro 3",
+          "fontSize": "21px",
+          "family": "SF Pro Display"
+        },
+        {
+          "text": "Shop and Learn Shop and Learn",
+          "fontSize": "12px",
+          "family": "SF Pro Text"
+        },
+        {
+          "text": "Shop and Learn",
+          "fontSize": "12px",
+          "family": "SF Pro Text"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 3115,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1560,
+    "loadMs": 2309,
+    "lcpMs": 1268,
+    "cls": 1.007,
+    "requests": 130,
+    "byInitiator": {
+      "link": {
+        "count": 6,
+        "transferKB": 143
+      },
+      "script": {
+        "count": 15,
+        "transferKB": 969
+      },
+      "img": {
+        "count": 77,
+        "transferKB": 7710
+      },
+      "css": {
+        "count": 7,
+        "transferKB": 601
+      },
+      "fetch": {
+        "count": 4,
+        "transferKB": 2374
+      },
+      "xmlhttprequest": {
+        "count": 4,
+        "transferKB": 3
+      },
+      "video": {
+        "count": 17,
+        "transferKB": 7319
+      }
+    }
+  },
+  "scripts": {
+    "total": 15,
+    "libraryHints": []
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "21px",
+    "largestFontSize": 28,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "24px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "24px"
+    }
+  }
+}

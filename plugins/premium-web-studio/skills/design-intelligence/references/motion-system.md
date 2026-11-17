@@ -51,6 +51,7 @@ For any page that tells a story with scroll (pinned chapters, image sequences, c
 - **Choose the cheapest medium that tells it:** CSS/GSAP transforms → video → image sequence (gsap-motion recipe 15) → WebGL. Go up a step only when the step below can't express the beat.
 - **Mobile is its own cut,** not a shrunk desktop: shorter pins, fewer frames, vertical crops, captions below rather than over the picture where contrast is fragile.
 - Verify the storyboard against the rendered filmstrip (`visual-critique.md` §F).
+- Study real ones first: `reference-library` entries with full-page filmstrips show these beats measured, e.g. `brightiris` (repeated chapter module, one tone shift per chapter), `apple-airpods-pro` (eyebrow → statement → product crop rhythm, 1.3 s LCP despite the length), `floema` (pinned numbered slideshow, ~1,470 px per slide), `terminal-industries` (cinematic opener, then utilitarian sections).
 
 ## Transitions
 Page transitions ≤ 1.2s total; keep the next page's content interactive as soon as it's visible; move focus to the new page's `h1`/main for screen readers.

@@ -39,8 +39,16 @@ Caveats that apply to all entries:
 2. Write `sites/<slug>.md` from the template, then open every screenshot before describing it.
 3. Run `python3 scripts/library.py build` to regenerate `index.json` and `INDEX.md`.
 
-## Known gaps as of 2026-11-15
+## Known gaps as of 2026-11-17
 - **Blocked:** awwwards (HTTP 502 to the automated browser), siteinspire (bot verification), gsap-resources (interstitial).
-- **Partially inspected:** behance (403, but desktop rendered), activetheory ("browser not supported" gate under headless Chromium; needs a GPU or headed capture), resn and obys (only the loader was captured), unseen (only the intro gate; needs a click on "Enter"), google-fonts (blank render).
+- **Partially inspected (2026-11-15 batch):** behance (403, but desktop rendered), activetheory ("browser not supported" gate under headless Chromium; needs a GPU or headed capture), resn and obys (only the loader was captured), unseen (only the intro gate; needs a click on "Enter"), google-fonts (blank render).
+- **Partially inspected (2026-11-17 batch):**
+  - cyera-ai-guardian: only the "Your browser is not supported" gate was captured (same failure as activetheory); needs a headed/GPU capture.
+  - minh-pham: stuck on the "START" gate; Lenis stopped; needs a click-through capture.
+  - creative-reference-library: stuck on the "Enter Library" state; Lenis stopped; needs a click-through capture.
+  - lusion (About page), immersive-garden, preymaker, auge-experience: the document did not scroll under wheel input (docHeight 900, scrollY 0), so filmstrip frames do not prove a scroll story and scroll claims are [?]; auge-experience also has a Cookiebot modal over the centre and a "rotate device" gate on tablet portrait. Needs a capture that drives their virtual scroller (e.g. keyboard, touch or repeated wheel events after the intro).
+  - floema: Cookiebot modal covers the centre of every frame.
+  - zirka-interceptor: each wheel step moved only ~69 px, so frames cover just the first 629 px of 35,640 px.
+  - santal: filmstrip reaches ~64% of the 41,571 px page.
 
 Re-capture these with a headed browser, a longer wait, or a click-through step when they matter for a project.

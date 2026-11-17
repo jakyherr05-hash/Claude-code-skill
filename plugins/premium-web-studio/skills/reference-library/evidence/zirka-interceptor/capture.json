@@ -1,0 +1,504 @@
+{
+  "id": "zirka-interceptor",
+  "url": "https://www.zrk.technology/",
+  "researchedAt": "2026-11-17T02:03:24.673Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://www.zrk.technology/",
+  "title": "Shahed interceptor with auto-guidance | Zirka",
+  "page": {
+    "lang": null,
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 35640,
+    "htmlClasses": "w-mod-js w-mod-ix lenis lenis-smooth",
+    "bodyBackground": "rgb(5, 5, 5)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(51, 51, 51)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "html.lenis { height: auto; } .lenis.lenis-smooth { scroll-behavior: auto; } .len",
+      "fontFamily": "\"Inter display\", Arial, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "20px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(51, 51, 51)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 35640
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Zirka is a Shahed interceptor with auto-guidance",
+      "fontFamily": "\"Inter display\", Arial, sans-serif",
+      "fontSize": "72px",
+      "fontWeight": "500",
+      "lineHeight": "63.36px",
+      "letterSpacing": "-3.6px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(221, 221, 221)",
+      "box": {
+        "x": 16,
+        "y": 631,
+        "w": 497,
+        "h": 190
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "All Ukrainian interception experience in one system",
+      "fontFamily": "\"Inter display\", Arial, sans-serif",
+      "fontSize": "47.952px",
+      "fontWeight": "500",
+      "lineHeight": "43.1568px",
+      "letterSpacing": "-1.91995px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(221, 221, 221)",
+      "box": {
+        "x": 16,
+        "y": 13912,
+        "w": 474,
+        "h": 129
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Launches",
+      "fontFamily": "\"Inter display\", Arial, sans-serif",
+      "fontSize": "47.952px",
+      "fontWeight": "500",
+      "lineHeight": "43.1568px",
+      "letterSpacing": "-1.91995px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgba(221, 221, 221, 0.3)",
+      "box": {
+        "x": 16,
+        "y": 11935,
+        "w": 228,
+        "h": 43
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "\"Inter display\", Arial, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "20px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(51, 51, 51)",
+      "box": {
+        "x": 20,
+        "y": 24,
+        "w": 81,
+        "h": 40
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "72px",
+      "fontFamily": "\"Inter display\", Arial, sans-serif",
+      "fontWeight": "500",
+      "letterSpacing": "-3.6px",
+      "lineHeight": "63.36px",
+      "text": "is"
+    },
+    "loadedFonts": [
+      "Inter display 500 normal",
+      "Geist mono 400 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "fixed",
+      "height": 96,
+      "linkCount": 10
+    },
+    "counts": {
+      "sections": 0,
+      "images": 133,
+      "videos": 5,
+      "canvases": 2,
+      "svgs": 5,
+      "links": 22
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      },
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      }
+    ],
+    "videos": [
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": false,
+        "src": "website-files.com/6a1999afa89c739b42fcf206/6a1999afa89c739b42fcf223_HERO_mp4.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "e-files.com/69f998fd504a7c84a1cd9307%2F6a1024328ea3826f43cefbde_SCROLL-1_mp4.mp4"
+      },
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "src": "D0%BB%D1%8C%D0%BD%D0%B8%D0%BC%20%D1%86%D1%96%D0%BB%D1%8F%D0%BC%20(1)_2_1_mp4.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": false,
+        "src": "e-files.com/6a1999afa89c739b42fcf206%2F6a1999afa89c739b42fcf23c_SCROLL_2_mp4.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "s://pub-758149a6f557428488e5e1bf30c43d26.r2.dev/zirka%20video%20horizontal-2.mp4"
+      }
+    ],
+    "imageFormats": {
+      "svg": 26,
+      "webp": 20,
+      "png": 87
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": "3.15.1",
+      "scrollTriggerGlobal": true,
+      "lenisClassOnHtml": true,
+      "lenisGlobal": true,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": true,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": "Webflow"
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 7
+      },
+      {
+        "ms": 100,
+        "y": 23
+      },
+      {
+        "ms": 250,
+        "y": 41
+      },
+      {
+        "ms": 500,
+        "y": 57
+      },
+      {
+        "ms": 900,
+        "y": 66
+      },
+      {
+        "ms": 1500,
+        "y": 69
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 33,
+    "likelySmoothed": true,
+    "movedPx": 69
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 69,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 139,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 209,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 279,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 349,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 419,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 489,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 559,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 629,
+      "docHeight": 35640,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Zirka is a Shahed interceptor with auto-guidance",
+          "fontSize": "72px",
+          "family": "Inter display"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 3
+      }
+    }
+  ],
+  "filmstripStepPx": 3860,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1261,
+    "loadMs": 7963,
+    "lcpMs": 564,
+    "cls": 0.162,
+    "requests": 250,
+    "byInitiator": {
+      "link": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "script": {
+        "count": 10,
+        "transferKB": 50
+      },
+      "img": {
+        "count": 226,
+        "transferKB": 0
+      },
+      "css": {
+        "count": 3,
+        "transferKB": 0
+      },
+      "video": {
+        "count": 5,
+        "transferKB": 0
+      },
+      "xmlhttprequest": {
+        "count": 5,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 10,
+    "libraryHints": [
+      "https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js",
+      "https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.23/bundled/lenis.min.js",
+      "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Observer.min.js",
+      "https://cdn.prod.website-files.com/6a6b45050da8002d7ece655c/js/webflow.schunk.36b8fb49256177c8.js",
+      "https://cdn.prod.website-files.com/6a6b45050da8002d7ece655c/js/webflow.schunk.c42549641b7d4501.js",
+      "https://cdn.prod.website-files.com/6a6b45050da8002d7ece655c/js/webflow.schunk.1398ace9ffbb200a.js",
+      "https://cdn.prod.website-files.com/6a6b45050da8002d7ece655c/js/webflow.schunk.c989649a111010a4.js",
+      "https://cdn.prod.website-files.com/6a6b45050da8002d7ece655c/js/webflow.aaaf57bc.26043c1ad2b45573.js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "40px",
+    "largestFontSize": 40,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "38.4px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "51.2px"
+    }
+  }
+}

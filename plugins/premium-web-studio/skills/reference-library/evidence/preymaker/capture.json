@@ -1,0 +1,553 @@
+{
+  "id": "preymaker",
+  "url": "https://preymaker.com/",
+  "researchedAt": "2026-11-17T01:59:46.136Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://preymaker.com/",
+  "title": "Preymaker",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "__className_f02b10 desktop loaded visible",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgb(0, 0, 0)",
+    "bodyColor": "rgb(241, 243, 245)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "(self.__next_s=self.__next_s||[]).push([0,{\"children\":\"\\n window.dataLayer = win",
+      "fontFamily": "NewGrotesk, \"NewGrotesk Fallback\"",
+      "fontSize": "10px",
+      "fontWeight": "400",
+      "lineHeight": "10px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(241, 243, 245)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Future-Facing Creators of Exceptional Visual Content",
+      "fontFamily": "NewGrotesk, \"NewGrotesk Fallback\"",
+      "fontSize": "40px",
+      "fontWeight": "600",
+      "lineHeight": "42px",
+      "letterSpacing": "-0.8px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(241, 243, 245)",
+      "box": {
+        "x": 722,
+        "y": 408,
+        "w": 588,
+        "h": 84
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "An award-winning creative collective specializing in visual effects, design, col",
+      "fontFamily": "NewGrotesk, \"NewGrotesk Fallback\"",
+      "fontSize": "40px",
+      "fontWeight": "600",
+      "lineHeight": "42px",
+      "letterSpacing": "-0.8px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(241, 243, 245)",
+      "box": {
+        "x": 12,
+        "y": 10155,
+        "w": 1416,
+        "h": 168
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Loading...",
+      "fontFamily": "NewGrotesk, \"NewGrotesk Fallback\"",
+      "fontSize": "12px",
+      "fontWeight": "600",
+      "lineHeight": "14px",
+      "letterSpacing": "-0.24px",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Preymaker",
+      "fontFamily": "NewGrotesk, \"NewGrotesk Fallback\"",
+      "fontSize": "10px",
+      "fontWeight": "400",
+      "lineHeight": "10px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(241, 243, 245)",
+      "box": {
+        "x": 12,
+        "y": 12,
+        "w": 127,
+        "h": 19
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "40px",
+      "fontFamily": "NewGrotesk, \"NewGrotesk Fallback\"",
+      "fontWeight": "600",
+      "letterSpacing": "-0.8px",
+      "lineHeight": "42px",
+      "text": "Future-Facing Creators of Exceptional Visual Content"
+    },
+    "loadedFonts": [
+      "NewGrotesk 400 normal",
+      "NewGrotesk 500 normal",
+      "NewGrotesk 600 normal",
+      "NewGrotesk 700 normal"
+    ],
+    "nav": {
+      "tag": "nav",
+      "position": "fixed",
+      "height": 42,
+      "linkCount": 1
+    },
+    "counts": {
+      "sections": 6,
+      "images": 45,
+      "videos": 19,
+      "canvases": 0,
+      "svgs": 6,
+      "links": 28
+    },
+    "canvases": [],
+    "videos": [
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "https://d2rb54pmpxhpry.cloudfront.net/wings-v8_1080p.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "front.net/work/lincoln-navigator2026-101047/lincoln-waterfalls-preview_1080p.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "https://d2rb54pmpxhpry.cloudfront.net/showreel/auto-reel-2026-preview-_1080p.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "b54pmpxhpry.cloudfront.net/showreel/preymaker_anthem_2_website_preview_1080p.mp4"
+      },
+      {
+        "autoplay": false,
+        "muted": true,
+        "loop": true,
+        "src": "et/work/ford---proving-ground-101032/ford_f1_proving_ground_30_preview_1080p.mp4"
+      }
+    ],
+    "imageFormats": {
+      "jpg": 18,
+      "webp": 5,
+      "svg": 18,
+      "png": 4
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": true,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Future-Facing Creators of Exceptional Visual Content",
+          "fontSize": "40px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Lincoln Navigator",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 2
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Future-Facing Creators of Exceptional Visual Content",
+          "fontSize": "40px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Lincoln Navigator",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Auto reel vol 2",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 3
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 2,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Lincoln Navigator",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Auto reel vol 2",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 3
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Auto reel vol 2",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Anthem reel vol 2",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 3
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Auto reel vol 2",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Anthem reel vol 2",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 3
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Anthem reel vol 2",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Ford",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 2
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Anthem reel vol 2",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Ford",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Kinder",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 3
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Ford",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Kinder",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 2
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Ford",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Kinder",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Toyota",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 3
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Kinder",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        },
+        {
+          "text": "Toyota",
+          "fontSize": "25px",
+          "family": "NewGrotesk"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 2
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 2209,
+    "loadMs": 3731,
+    "lcpMs": 3520,
+    "cls": 0.058,
+    "requests": 98,
+    "byInitiator": {
+      "link": {
+        "count": 31,
+        "transferKB": 179
+      },
+      "script": {
+        "count": 17,
+        "transferKB": 294
+      },
+      "css": {
+        "count": 1,
+        "transferKB": 1
+      },
+      "img": {
+        "count": 16,
+        "transferKB": 0
+      },
+      "video": {
+        "count": 27,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 6,
+        "transferKB": 66
+      }
+    }
+  },
+  "scripts": {
+    "total": 19,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "24px",
+    "largestFontSize": 25,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "47.2615px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "28.4444px"
+    }
+  }
+}

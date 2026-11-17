@@ -1,0 +1,415 @@
+{
+  "id": "immersive-garden",
+  "url": "https://immersive-g.com/",
+  "researchedAt": "2026-11-17T01:45:43.889Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://immersive-g.com/",
+  "title": "Immersive Garden",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "linux chrome chrome_140 no-touch",
+    "bodyBackground": "rgb(232, 232, 232)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(3, 3, 3)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "Innovative digital experiences studio Scroll downTranscend anything seen or felt",
+      "fontFamily": "sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(3, 3, 3)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Transcend anything seen or felt before by crafting unparalleled experiences for ",
+      "fontFamily": "PSTimes, serif",
+      "fontSize": "56px",
+      "fontWeight": "400",
+      "lineHeight": "61.6px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(3, 3, 3)",
+      "box": {
+        "x": 135,
+        "y": 720,
+        "w": 577,
+        "h": 246
+      }
+    },
+    "h2": null,
+    "p": {
+      "selector": "p",
+      "text": "Explore our collaboration with Louis Vuitton on VIA, showcasing the Maison's Web",
+      "fontFamily": "PSTimes, serif",
+      "fontSize": "36px",
+      "fontWeight": "400",
+      "lineHeight": "43.2px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(3, 3, 3)",
+      "box": {
+        "x": 965,
+        "y": 2875,
+        "w": 340,
+        "h": 259
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "Menu",
+      "fontFamily": "HelveticaNeueRegular, sans-serif",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "lineHeight": "15.4px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(3, 3, 3)",
+      "box": {
+        "x": 1295,
+        "y": 0,
+        "w": 145,
+        "h": 96
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "56px",
+      "fontFamily": "PSTimes, serif",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "61.6px",
+      "text": "Transcend anything seen or felt before by crafting unparalleled experiences for "
+    },
+    "loadedFonts": [
+      "PSTimes 400 normal",
+      "HelveticaNeueRegular 400 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "absolute",
+      "height": 0,
+      "linkCount": 1
+    },
+    "counts": {
+      "sections": 18,
+      "images": 39,
+      "videos": 0,
+      "canvases": 12,
+      "svgs": 2,
+      "links": 24
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "absolute"
+      },
+      {
+        "w": 22,
+        "h": 22,
+        "position": "absolute"
+      },
+      {
+        "w": 22,
+        "h": 22,
+        "position": "static"
+      },
+      {
+        "w": 22,
+        "h": 22,
+        "position": "absolute"
+      },
+      {
+        "w": 22,
+        "h": 22,
+        "position": "static"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "other": 39
+    },
+    "landmarks": {
+      "header": true,
+      "main": false,
+      "footer": false,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": "151",
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": true,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 901,
+    "loadMs": 931,
+    "lcpMs": 2796,
+    "cls": 0,
+    "requests": 122,
+    "byInitiator": {
+      "link": {
+        "count": 10,
+        "transferKB": 108
+      },
+      "other": {
+        "count": 10,
+        "transferKB": 683
+      },
+      "css": {
+        "count": 2,
+        "transferKB": 59
+      },
+      "script": {
+        "count": 3,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 64,
+        "transferKB": 14619
+      },
+      "iframe": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "xmlhttprequest": {
+        "count": 6,
+        "transferKB": 1090
+      },
+      "img": {
+        "count": 22,
+        "transferKB": 4656
+      },
+      "video": {
+        "count": 4,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 15,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtm.js",
+      "https://www.googletagmanager.com/gtag/js",
+      "https://immersive-g.com/assets/vue3-lottie.es.B1QeRuZw.js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "44px",
+    "largestFontSize": 28,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "44px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "44px"
+    }
+  }
+}

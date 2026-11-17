@@ -1,0 +1,468 @@
+{
+  "id": "scrollytelling-ai",
+  "url": "https://scrollytelling.ai/scrolling-websites/",
+  "researchedAt": "2026-11-17T01:55:18.450Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://scrollytelling.ai/scrolling-websites/",
+  "title": "Best Scrolling Websites (2026): 16 Examples by Scroll Effect",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 23326,
+    "htmlClasses": "",
+    "bodyBackground": "rgb(10, 10, 10)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(212, 212, 212)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "TemplatesWidgetsGuidesToolsCreate Your Story (function(){var b=document.getEleme",
+      "fontFamily": "Inter, system-ui, -apple-system, sans-serif",
+      "fontSize": "17px",
+      "fontWeight": "400",
+      "lineHeight": "28.9px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(212, 212, 212)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 23326
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "Best scrolling websites: 16 examples, sorted by scroll effect",
+      "fontFamily": "Inter, system-ui, -apple-system, sans-serif",
+      "fontSize": "44px",
+      "fontWeight": "700",
+      "lineHeight": "55px",
+      "letterSpacing": "-0.88px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 154,
+        "y": 216,
+        "w": 804,
+        "h": 110
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "Eight scroll effects at a glance",
+      "fontFamily": "Inter, system-ui, -apple-system, sans-serif",
+      "fontSize": "30.4px",
+      "fontWeight": "700",
+      "lineHeight": "38px",
+      "letterSpacing": "-0.304px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 154,
+        "y": 813,
+        "w": 804,
+        "h": 38
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "A scrolling website uses the scrollbar as its main control: video that plays as ",
+      "fontFamily": "Inter, system-ui, -apple-system, sans-serif",
+      "fontSize": "18.4px",
+      "fontWeight": "400",
+      "lineHeight": "31.28px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(163, 163, 163)",
+      "box": {
+        "x": 154,
+        "y": 340,
+        "w": 804,
+        "h": 125
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "Inter, system-ui, -apple-system, sans-serif",
+      "fontSize": "17.6px",
+      "fontWeight": "600",
+      "lineHeight": "29.92px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 154,
+        "y": 20,
+        "w": 161,
+        "h": 28
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "44px",
+      "fontFamily": "Inter, system-ui, -apple-system, sans-serif",
+      "fontWeight": "700",
+      "letterSpacing": "-0.88px",
+      "lineHeight": "55px",
+      "text": "Best scrolling websites: 16 examples, sorted by scroll effect"
+    },
+    "loadedFonts": [
+      "Inter 400 normal",
+      "Inter 500 normal",
+      "Inter 600 normal",
+      "Inter 700 normal"
+    ],
+    "nav": {
+      "tag": "nav",
+      "position": "sticky",
+      "height": 69,
+      "linkCount": 6
+    },
+    "counts": {
+      "sections": 0,
+      "images": 17,
+      "videos": 0,
+      "canvases": 0,
+      "svgs": 0,
+      "links": 97
+    },
+    "canvases": [],
+    "videos": [],
+    "imageFormats": {
+      "webp": 1,
+      "gif": 16
+    },
+    "landmarks": {
+      "header": true,
+      "main": false,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 600
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Best scrolling websites: 16 examples, sorted by scroll effec",
+          "fontSize": "44px",
+          "family": "Inter"
+        },
+        {
+          "text": "Eight scroll effects at a glance",
+          "fontSize": "30.4px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 2492,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "1. Lunar",
+          "fontSize": "20.8px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 4984,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Parallax layers",
+          "fontSize": "30.4px",
+          "family": "Inter"
+        },
+        {
+          "text": "4. SBS The Boat",
+          "fontSize": "20.8px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 7476,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "6. AVATR Vision",
+          "fontSize": "20.8px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 9968,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "8. Melvin Winkeler",
+          "fontSize": "20.8px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 12460,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Scroll-triggered reveals",
+          "fontSize": "30.4px",
+          "family": "Inter"
+        },
+        {
+          "text": "11. Adidas Annual Report 2024",
+          "fontSize": "20.8px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 14952,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "13. YES NOW",
+          "fontSize": "20.8px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 17444,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "15. BMW Group Report 2025",
+          "fontSize": "20.8px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 19936,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Scrolling website templates",
+          "fontSize": "30.4px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 22426,
+      "docHeight": 23326,
+      "pinnedLargeFixedOrSticky": 0,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Make a scrolling website from a sentence",
+          "fontSize": "30.4px",
+          "family": "Inter"
+        },
+        {
+          "text": "Are there free scrolling website templates?",
+          "fontSize": "16.96px",
+          "family": "Inter"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 2492,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 359,
+    "loadMs": 1329,
+    "lcpMs": 380,
+    "cls": 0,
+    "requests": 30,
+    "byInitiator": {
+      "script": {
+        "count": 8,
+        "transferKB": 3
+      },
+      "link": {
+        "count": 1,
+        "transferKB": 1
+      },
+      "img": {
+        "count": 18,
+        "transferKB": 0
+      },
+      "fetch": {
+        "count": 3,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 8,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js",
+      "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/18098527964/"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "33.6px",
+    "largestFontSize": 33.6,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "33.6px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "44px"
+    }
+  }
+}

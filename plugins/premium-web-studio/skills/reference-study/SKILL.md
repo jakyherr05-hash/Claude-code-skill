@@ -35,7 +35,7 @@ What capture.json measures:
 | `filmstrip[]` (`--filmstrip N`) | N frames `scroll-NN.jpg` spread over the whole page (wheel steps, 1.2 s apart so scroll animation plays), each with scrollY, large fixed/sticky layers in view, GSAP `.pin-spacer`s in view, the three largest visible headings (text, size, family) and visible canvases/videos. Headings unchanged while scrollY advances + a pinned layer = a pinned scene. Use it to map a reference's story beats, or your own build's |
 | `tablet` (`--tablet`) | `tablet-portrait-0.jpg` 768×1024 and `tablet-landscape-0.jpg` 1024×768 with overflow and h1 size |
 
-Known blind spots: bundled libraries without globals go undetected; loaders, intro gates and cookie walls can hide the real page; headless Chromium may be refused or shown a fallback (seen on activetheory.net); and wheel sampling misses inner scroll containers.
+Known blind spots: bundled libraries without globals go undetected; loaders, intro gates and cookie walls can hide the real page; headless Chromium may be refused or shown a fallback (seen on activetheory.net); and wheel sampling misses inner scroll containers. The `--filmstrip` frames only show a scroll story when the *document* scrolls: on 2026-11-17, 7 of 19 award/studio sites (WebGL virtual scrollers, START/Enter gates, "browser not supported" pages) did not move (`scrollY` stays 0 or `docHeight` = one viewport). Check that `scrollY` advances before describing beats, and mark those sites partially inspected.
 
 ## 3. Look, then measure deeper where needed
 - **Open every screenshot** before describing anything visual. For scroll-driven sites, read the filmstrip as a storyboard: beats, what is pinned, how words and pictures change together, and how long each beat holds.

@@ -1,0 +1,491 @@
+{
+  "id": "lusion",
+  "url": "https://v2.lusion.co/about/",
+  "researchedAt": "2026-11-17T01:44:24.991Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://v2.lusion.co/about/",
+  "title": "Lusion - About",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "js is-en is-desktop use-webgl is-ready wf-gtsectrafine-n4-active wf-gtsectrafinebold-n7-active wf-nbakademiemedium-n7-active wf-nbakademielight-n4-active wf-active at-about",
+    "bodyBackground": "rgb(16, 16, 16)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(232, 232, 232)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "About Lusion The place where all real-time magic begins Who we are Lusion is a r",
+      "fontFamily": "nb_akademie_light, \"Microsoft Yahei\", 微软雅黑, STXihei, 华文细黑, sans-serif",
+      "fontSize": "15px",
+      "fontWeight": "400",
+      "lineHeight": "17.25px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(232, 232, 232)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "About Lusion",
+      "fontFamily": "GT-Sectra-Fine, \"Microsoft Yahei\", 微软雅黑, STXihei, 华文细黑, serif",
+      "fontSize": "60px",
+      "fontWeight": "400",
+      "lineHeight": "60px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 550,
+        "y": 408,
+        "w": 341,
+        "h": 60
+      }
+    },
+    "h2": null,
+    "p": null,
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "nb_akademie_light, \"Microsoft Yahei\", 微软雅黑, STXihei, 华文细黑, sans-serif",
+      "fontSize": "12px",
+      "fontWeight": "400",
+      "lineHeight": "13.8px",
+      "letterSpacing": "1.2px",
+      "textTransform": "uppercase",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 238)",
+      "box": {
+        "x": 0,
+        "y": 60,
+        "w": 111,
+        "h": 14
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "15px",
+      "fontFamily": "nb_akademie_light, \"Microsoft Yahei\", 微软雅黑, STXihei, 华文细黑, sans-serif",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "17.25px",
+      "text": "About Lusion The place where all real-time magic begins"
+    },
+    "loadedFonts": [
+      "GT-Sectra-Fine-Bold 700 normal",
+      "GT-Sectra-Fine 400 normal",
+      "nb_akademie_medium 700 normal",
+      "nb_akademie_light 400 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "absolute",
+      "height": 34,
+      "linkCount": 6
+    },
+    "counts": {
+      "sections": 3,
+      "images": 0,
+      "videos": 0,
+      "canvases": 13,
+      "svgs": 11,
+      "links": 28
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "fixed"
+      },
+      {
+        "w": 960,
+        "h": 864,
+        "position": "static"
+      },
+      {
+        "w": 960,
+        "h": 864,
+        "position": "static"
+      },
+      {
+        "w": 960,
+        "h": 864,
+        "position": "static"
+      },
+      {
+        "w": 960,
+        "h": 864,
+        "position": "static"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {},
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": "128dev",
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "About Lusion",
+          "fontSize": "60px",
+          "family": "GT-Sectra-Fine"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "About Lusion",
+          "fontSize": "60px",
+          "family": "GT-Sectra-Fine"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "About Lusion",
+          "fontSize": "60px",
+          "family": "GT-Sectra-Fine"
+        },
+        {
+          "text": "Lusion is a real-time, development focussed, creative studio",
+          "fontSize": "24px",
+          "family": "GT-Sectra-Fine"
+        },
+        {
+          "text": "Who we are",
+          "fontSize": "9px",
+          "family": "nb_akademie_light"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Lusion is a real-time, development focussed, creative studio",
+          "fontSize": "24px",
+          "family": "GT-Sectra-Fine"
+        },
+        {
+          "text": "Who we are",
+          "fontSize": "9px",
+          "family": "nb_akademie_light"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Lusion is a real-time, development focussed, creative studio",
+          "fontSize": "24px",
+          "family": "GT-Sectra-Fine"
+        },
+        {
+          "text": "Who we are",
+          "fontSize": "9px",
+          "family": "nb_akademie_light"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Lusion is a real-time, development focussed, creative studio",
+          "fontSize": "24px",
+          "family": "GT-Sectra-Fine"
+        },
+        {
+          "text": "Who we are",
+          "fontSize": "9px",
+          "family": "nb_akademie_light"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Lusion is a real-time, development focussed, creative studio",
+          "fontSize": "24px",
+          "family": "GT-Sectra-Fine"
+        },
+        {
+          "text": "Who we are",
+          "fontSize": "9px",
+          "family": "nb_akademie_light"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Lusion is a real-time, development focussed, creative studio",
+          "fontSize": "24px",
+          "family": "GT-Sectra-Fine"
+        },
+        {
+          "text": "Who we are",
+          "fontSize": "9px",
+          "family": "nb_akademie_light"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Lusion is a real-time, development focussed, creative studio",
+          "fontSize": "24px",
+          "family": "GT-Sectra-Fine"
+        },
+        {
+          "text": "Who we are",
+          "fontSize": "9px",
+          "family": "nb_akademie_light"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Lusion is a real-time, development focussed, creative studio",
+          "fontSize": "24px",
+          "family": "GT-Sectra-Fine"
+        },
+        {
+          "text": "Who we are",
+          "fontSize": "9px",
+          "family": "nb_akademie_light"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 945,
+    "loadMs": 2371,
+    "lcpMs": 1036,
+    "cls": 0,
+    "requests": 37,
+    "byInitiator": {
+      "link": {
+        "count": 1,
+        "transferKB": 6
+      },
+      "script": {
+        "count": 5,
+        "transferKB": 268
+      },
+      "css": {
+        "count": 5,
+        "transferKB": 132
+      },
+      "xmlhttprequest": {
+        "count": 11,
+        "transferKB": 2021
+      },
+      "img": {
+        "count": 14,
+        "transferKB": 2017
+      },
+      "fetch": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 5,
+    "libraryHints": [
+      "https://v2.lusion.co/assets/js/three.r128.dev.js",
+      "https://www.google-analytics.com/analytics.js",
+      "https://www.googletagmanager.com/gtag/js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "37.5px",
+    "largestFontSize": 37.5,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "60px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "60px"
+    }
+  }
+}

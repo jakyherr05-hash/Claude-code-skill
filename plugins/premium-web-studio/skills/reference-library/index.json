@@ -43,6 +43,52 @@
     "file": "sites/adobe-fonts.md"
   },
   {
+    "name": "Apple AirPods Pro 3",
+    "url": "https://www.apple.com/airpods-pro/",
+    "slug": "apple-airpods-pro",
+    "category": "other",
+    "tags": [
+      "apple",
+      "product-page",
+      "sticky-local-nav",
+      "video-scrub",
+      "big-statement",
+      "sf-pro",
+      "minimal",
+      "light-theme",
+      "native-scroll",
+      "large-photography"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/apple-airpods-pro/",
+    "file": "sites/apple-airpods-pro.md"
+  },
+  {
+    "name": "AUGE Experience",
+    "url": "https://auge-xp.com/",
+    "slug": "auge-experience",
+    "category": "studio",
+    "tags": [
+      "awwwards-sotd-2026",
+      "nextjs",
+      "digital-experience-studio",
+      "collage-canvas",
+      "giant-wordmark",
+      "cream-black",
+      "cookiebot-modal",
+      "rotate-device-gate",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/auge-experience/",
+    "file": "sites/auge-experience.md"
+  },
+  {
     "name": "Awwwards",
     "url": "https://www.awwwards.com/",
     "slug": "awwwards",
@@ -103,6 +149,56 @@
     "file": "sites/behance.md"
   },
   {
+    "name": "BRIGHTIRIS (cinematic yard-ops concept)",
+    "url": "https://brightiris-cinematic.netlify.app/",
+    "slug": "brightiris",
+    "category": "other",
+    "tags": [
+      "gsap",
+      "scrolltrigger",
+      "lenis",
+      "splittext",
+      "pinned-storytelling",
+      "colour-block-chapters",
+      "display-grotesk",
+      "mono-labels",
+      "serif-accent",
+      "canvas",
+      "dark-to-colour",
+      "saas-product"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/brightiris/",
+    "file": "sites/brightiris.md"
+  },
+  {
+    "name": "Creative Reference Library (CRL 2026)",
+    "url": "https://crl-2026.webflow.io/",
+    "slug": "creative-reference-library",
+    "category": "other",
+    "tags": [
+      "awwwards-sotd-2026",
+      "webflow",
+      "lenis",
+      "three-js",
+      "giant-letterforms",
+      "enter-gate",
+      "neue-haas-grotesk",
+      "warm-grey",
+      "monochrome",
+      "library-index",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/creative-reference-library/",
+    "file": "sites/creative-reference-library.md"
+  },
+  {
     "name": "CSS Design Awards",
     "url": "https://www.cssdesignawards.com/",
     "slug": "cssdesignawards",
@@ -121,6 +217,68 @@
     "confidence": "medium",
     "evidence": "../evidence/cssdesignawards/",
     "file": "sites/cssdesignawards.md"
+  },
+  {
+    "name": "Cyera AI Guardian (\"Secure the Unknown\")",
+    "url": "https://secure-the-unknown.cyera.com/",
+    "slug": "cyera-ai-guardian",
+    "category": "other",
+    "tags": [
+      "awwwards-sotd-2026",
+      "active-theory",
+      "webgl",
+      "browser-gate",
+      "not-inspected",
+      "immersive-campaign"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/cyera-ai-guardian/",
+    "file": "sites/cyera-ai-guardian.md"
+  },
+  {
+    "name": "Dropbox Brand Guidelines",
+    "url": "https://brand.dropbox.com/",
+    "slug": "dropbox-brand",
+    "category": "other",
+    "tags": [
+      "webflow",
+      "brand-guidelines",
+      "tile-grid-navigation",
+      "colour-blocks",
+      "scroll-assembled-mosaic",
+      "variable-font",
+      "native-scroll",
+      "light-theme"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/dropbox-brand/",
+    "file": "sites/dropbox-brand.md"
+  },
+  {
+    "name": "Floema",
+    "url": "https://floema.com/",
+    "slug": "floema",
+    "category": "other",
+    "tags": [
+      "lenis",
+      "three-js",
+      "portuguese",
+      "outdoor-furniture",
+      "pinned-slides",
+      "full-bleed-photography",
+      "custom-serif",
+      "cookie-modal",
+      "partially-inspected"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/floema/",
+    "file": "sites/floema.md"
   },
   {
     "name": "Fontshare",
@@ -270,6 +428,30 @@
     "file": "sites/gsap.md"
   },
   {
+    "name": "Immersive Garden",
+    "url": "https://immersive-g.com/",
+    "slug": "immersive-garden",
+    "category": "studio",
+    "tags": [
+      "three-js",
+      "webgl",
+      "nuxt",
+      "agency",
+      "luxury",
+      "serif",
+      "light",
+      "relief-texture",
+      "loader-counter",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/immersive-garden/",
+    "file": "sites/immersive-garden.md"
+  },
+  {
     "name": "Instrument",
     "url": "https://www.instrument.com/",
     "slug": "instrument",
@@ -291,6 +473,30 @@
     "confidence": "high",
     "evidence": "../evidence/instrument/",
     "file": "sites/instrument.md"
+  },
+  {
+    "name": "Lando Norris",
+    "url": "https://landonorris.com/",
+    "slug": "lando-norris",
+    "category": "other",
+    "tags": [
+      "webflow",
+      "lenis",
+      "three-js",
+      "sports-personal-brand",
+      "collage",
+      "stencil-type",
+      "variable-font",
+      "acid-lime",
+      "dark-light-alternation",
+      "merch",
+      "cursor-interaction"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/lando-norris/",
+    "file": "sites/lando-norris.md"
   },
   {
     "name": "Lenis",
@@ -337,6 +543,50 @@
     "confidence": "medium",
     "evidence": "../evidence/locomotive/",
     "file": "sites/locomotive.md"
+  },
+  {
+    "name": "Lusion (About page)",
+    "url": "https://v2.lusion.co/about/",
+    "slug": "lusion",
+    "category": "studio",
+    "tags": [
+      "three-js",
+      "webgl",
+      "agency",
+      "real-time-3d",
+      "particles",
+      "serif",
+      "dark",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/lusion/",
+    "file": "sites/lusion.md"
+  },
+  {
+    "name": "Minh Pham (portfolio)",
+    "url": "https://minhpham.design/",
+    "slug": "minh-pham",
+    "category": "studio",
+    "tags": [
+      "three-js",
+      "lenis",
+      "portfolio",
+      "gate-start-button",
+      "uppercase-display",
+      "dark",
+      "mascot",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/minh-pham/",
+    "file": "sites/minh-pham.md"
   },
   {
     "name": "Motion (formerly Framer Motion)",
@@ -404,6 +654,51 @@
     "file": "sites/obys.md"
   },
   {
+    "name": "OceanX",
+    "url": "https://oceanx.org/",
+    "slug": "oceanx",
+    "category": "other",
+    "tags": [
+      "nextjs",
+      "nonprofit",
+      "ocean",
+      "full-bleed-photography",
+      "big-type",
+      "cookie-banner",
+      "globe-canvas",
+      "native-scroll",
+      "expedition-map"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/oceanx/",
+    "file": "sites/oceanx.md"
+  },
+  {
+    "name": "Preymaker",
+    "url": "https://preymaker.com/",
+    "slug": "preymaker",
+    "category": "studio",
+    "tags": [
+      "awwwards-sotd-2026",
+      "nextjs",
+      "vfx",
+      "fullscreen-video-panels",
+      "reel-showcase",
+      "new-grotesk",
+      "dark",
+      "cookie-bar",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/preymaker/",
+    "file": "sites/preymaker.md"
+  },
+  {
     "name": "React Three Fiber Docs",
     "url": "https://r3f.docs.pmnd.rs/",
     "slug": "r3f-docs",
@@ -447,6 +742,52 @@
     "file": "sites/resn.md"
   },
   {
+    "name": "Santal (Santalarch)",
+    "url": "https://santalarch.com/",
+    "slug": "santal",
+    "category": "studio",
+    "tags": [
+      "awwwards-sotd-2026",
+      "lenis",
+      "three-js",
+      "architecture",
+      "helvetica",
+      "giant-wordmark",
+      "hairline-grid",
+      "long-scroll",
+      "invert-color-toggle",
+      "monochrome",
+      "webgl-chapters"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/santal/",
+    "file": "sites/santal.md"
+  },
+  {
+    "name": "Scrollytelling.ai (scrolling-websites guide)",
+    "url": "https://scrollytelling.ai/scrolling-websites/",
+    "slug": "scrollytelling-ai",
+    "category": "other",
+    "tags": [
+      "reference-list",
+      "scroll-effects-taxonomy",
+      "article",
+      "dark-theme",
+      "inter",
+      "sticky-toc",
+      "gif-previews",
+      "no-js-library",
+      "research-pointer"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/scrollytelling-ai/",
+    "file": "sites/scrollytelling-ai.md"
+  },
+  {
     "name": "Siteinspire",
     "url": "https://www.siteinspire.com/",
     "slug": "siteinspire",
@@ -463,6 +804,52 @@
     "confidence": "low",
     "evidence": "../evidence/siteinspire/",
     "file": "sites/siteinspire.md"
+  },
+  {
+    "name": "Terminal Industries",
+    "url": "https://terminal-industries.com/",
+    "slug": "terminal-industries",
+    "category": "other",
+    "tags": [
+      "lenis",
+      "nuxt",
+      "pinned-storytelling",
+      "saas",
+      "logistics",
+      "photoreal-hero",
+      "particle-dissolve",
+      "grotesk",
+      "mono-labels",
+      "floating-pill-nav",
+      "roi-calculator"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/terminal-industries/",
+    "file": "sites/terminal-industries.md"
+  },
+  {
+    "name": "The FWA",
+    "url": "https://thefwa.com/",
+    "slug": "thefwa",
+    "category": "gallery",
+    "tags": [
+      "award-gallery",
+      "dense-grid",
+      "mono-labels",
+      "geist",
+      "light-theme",
+      "native-scroll",
+      "black-panels",
+      "yellow-accent",
+      "editorial-ui"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/thefwa/",
+    "file": "sites/thefwa.md"
   },
   {
     "name": "three.js",
@@ -507,6 +894,30 @@
     "file": "sites/typewolf.md"
   },
   {
+    "name": "Uncommon Studio",
+    "url": "https://uncommonstudio.com.au/",
+    "slug": "uncommon-studio",
+    "category": "studio",
+    "tags": [
+      "lenis",
+      "three-js",
+      "nextjs",
+      "global-canvas",
+      "design-studio",
+      "local-time-clock",
+      "big-type",
+      "video-hero",
+      "sticky-sections",
+      "light-dark-alternation",
+      "neue-montreal"
+    ],
+    "researched": "2026-11-17",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/uncommon-studio/",
+    "file": "sites/uncommon-studio.md"
+  },
+  {
     "name": "Unseen Studio",
     "url": "https://unseen.co/",
     "slug": "unseen",
@@ -527,5 +938,30 @@
     "confidence": "medium",
     "evidence": "../evidence/unseen/",
     "file": "sites/unseen.md"
+  },
+  {
+    "name": "Zirka (Shahed interceptor)",
+    "url": "https://www.zrk.technology/",
+    "slug": "zirka-interceptor",
+    "category": "other",
+    "tags": [
+      "awwwards-sotd-2026",
+      "webflow",
+      "gsap",
+      "scrolltrigger",
+      "lenis",
+      "defence-tech",
+      "hud-overlay",
+      "video-hero",
+      "dark",
+      "mono-labels",
+      "orange-accent",
+      "loader"
+    ],
+    "researched": "2026-11-17",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/zirka-interceptor/",
+    "file": "sites/zirka-interceptor.md"
   }
 ]

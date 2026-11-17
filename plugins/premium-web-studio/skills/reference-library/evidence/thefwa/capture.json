@@ -1,0 +1,487 @@
+{
+  "id": "thefwa",
+  "url": "https://thefwa.com/",
+  "researchedAt": "2026-11-17T01:55:56.847Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://thefwa.com/",
+  "title": "The FWA — Digital design awards since 2000",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 5038,
+    "htmlClasses": "",
+    "bodyBackground": "rgb(243, 244, 246)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(22, 22, 22)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "Winners Profile_log Editorials Artwork Live judging Framed Loom Submit // FWA_FR",
+      "fontFamily": "Geist, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(22, 22, 22)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 5038
+      }
+    },
+    "h1": null,
+    "h2": {
+      "selector": "h2",
+      "text": "Latest winners",
+      "fontFamily": "Geist, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "fontSize": "24px",
+      "fontWeight": "700",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(22, 22, 22)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 0,
+        "h": 0
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "Incredible Space is an interactive collection of procedural architectural worlds",
+      "fontFamily": "Geist, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "fontSize": "15px",
+      "fontWeight": "400",
+      "lineHeight": "23.25px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(55, 65, 81)",
+      "box": {
+        "x": 72,
+        "y": 871,
+        "w": 613,
+        "h": 70
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "Geist, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(255, 255, 255)",
+      "box": {
+        "x": 43,
+        "y": 14,
+        "w": 124,
+        "h": 38
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "28.8px",
+      "fontFamily": "Geist, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+      "fontWeight": "600",
+      "letterSpacing": "-0.864px",
+      "lineHeight": "36px",
+      "text": "Incredible Space ↗"
+    },
+    "loadedFonts": [
+      "Geist 400 normal",
+      "Geist 600 normal",
+      "Geist Mono 400 normal",
+      "Geist Mono 500 normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "sticky",
+      "height": 66,
+      "linkCount": 10
+    },
+    "counts": {
+      "sections": 5,
+      "images": 97,
+      "videos": 0,
+      "canvases": 1,
+      "svgs": 68,
+      "links": 212
+    },
+    "canvases": [
+      {
+        "w": 611,
+        "h": 30,
+        "position": "static"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "webp": 68,
+      "png": 6,
+      "jpg": 14,
+      "other": 8,
+      "svg": 1
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": true,
+      "h1Count": 0,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 5038,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Incredible Space ↗",
+          "fontSize": "28.8px",
+          "family": "Geist"
+        },
+        {
+          "text": "Route 66 - Centenniel ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Dreamcatcher",
+          "fontSize": "15px",
+          "family": "Geist"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 765,
+      "docHeight": 5038,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Incredible Space ↗",
+          "fontSize": "28.8px",
+          "family": "Geist"
+        },
+        {
+          "text": "DOMINIK FOJCIK — PORTFOLIO ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Orchestrated ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 1530,
+      "docHeight": 5038,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Orchestrated ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Animatronic Rehearsal ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Design Quiz ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 2295,
+      "docHeight": 5038,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Garuda 2026: The Locker Room ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Adrien Quéchon 2026 Website ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Oh là là Ride ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 3060,
+      "docHeight": 5038,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "The Aviator ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "No Mercy Michel ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Dream with AI ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 3825,
+      "docHeight": 5038,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Night Drive Racing Game ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Awards Racing ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Incredible Space",
+          "fontSize": "15px",
+          "family": "Geist"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 4138,
+      "docHeight": 5038,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Night Drive Racing Game ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Awards Racing ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Route 66 - Centenniel",
+          "fontSize": "15px",
+          "family": "Geist"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 4138,
+      "docHeight": 5038,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "Night Drive Racing Game ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Awards Racing ↗",
+          "fontSize": "16px",
+          "family": "Geist"
+        },
+        {
+          "text": "Route 66 - Centenniel",
+          "fontSize": "15px",
+          "family": "Geist"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 1528,
+    "loadMs": 2852,
+    "lcpMs": 2796,
+    "cls": 0.163,
+    "requests": 128,
+    "byInitiator": {
+      "link": {
+        "count": 2,
+        "transferKB": 18
+      },
+      "script": {
+        "count": 7,
+        "transferKB": 29
+      },
+      "css": {
+        "count": 1,
+        "transferKB": 1
+      },
+      "fetch": {
+        "count": 18,
+        "transferKB": 98
+      },
+      "img": {
+        "count": 99,
+        "transferKB": 4493
+      },
+      "xmlhttprequest": {
+        "count": 1,
+        "transferKB": 0
+      }
+    }
+  },
+  "scripts": {
+    "total": 7,
+    "libraryHints": []
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": 22,
+    "menuButton": true
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    }
+  }
+}
