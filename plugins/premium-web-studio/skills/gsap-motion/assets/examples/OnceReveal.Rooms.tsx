@@ -47,7 +47,7 @@ export function Rooms() {
               <p className="room__no mono" data-lit>{p.no}</p>
               <h3 className="room__name" data-lit>{p.name}</h3>
               <p className="room__meta mono" data-lit>{p.place} · {p.year} · {p.typeLabel}</p>
-              <p className="room__intent" data-lit>{p.intent}</p>
+              <p className="room__intent">{p.intent}</p>
               <p className="room__spec mono" data-lit>{p.spec}</p>
               <Link to={`/work/${p.slug}`} className="link-arrow" data-lit>{site.secondaryCta}<span aria-hidden="true"> →</span></Link>
             </div>

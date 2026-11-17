@@ -7,7 +7,7 @@ type Props = { step: 1 | 2 | 3; idPrefix: string; animated?: boolean };
 
 const BEAMS = [
   { id: 'altar', from: [655, 92], to: [[600, 318], [712, 318]], label: '12° · 40 lux', lx: 594, ly: 300, anchor: 'end' },
-  { id: 'threshold', from: [170, 120], to: [[108, 318], [190, 318]], label: '24° · 8 lux', lx: 112, ly: 300 },
+  { id: 'threshold', from: [170, 120], to: [[108, 318], [190, 318]], label: '24° · 8 lux', lx: 182, ly: 136 }, // beside the beam's source: inside its own cone it was crossed by the door outline (critique r2 #2)
   // label sits LEFT of its beam (right-anchored) so it never collides with the AMBULATORY label on small screens
   { id: 'niche', from: [470, 70], to: [[512, 200], [548, 200]], label: '8° · 25 lux', lx: 500, ly: 214, anchor: 'end' },
 ] as { id: string; from: readonly [number, number]; to: readonly (readonly [number, number])[]; label: string; lx: number; ly: number; anchor?: 'start' | 'end' }[];
@@ -106,7 +106,7 @@ export function MethodDrawing({ step, idPrefix, animated }: Props) {
       {/* room labels last so neither the dark flood nor the hatching paints over them */}
       <g className="method-drawing__labels mono" fill="var(--ink-muted)" fontSize="11">
         <text x="612" y="338">ALTAR</text><text x="110" y="338">THRESHOLD</text><text x="506" y="218">NICHE</text>
-        <text x="20" y="100">E. SLIT</text>
+        <text x="20" y="114">E. SLIT</text>
       </g>
     </svg>
   );
