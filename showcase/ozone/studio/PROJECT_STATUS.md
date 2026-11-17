@@ -2,7 +2,7 @@
 _Single source of truth. Update at every phase boundary._
 
 - Track: full (cinematic single-page scroll story, no existing brand assets)
-- Current phase: 3 · Creative direction
+- Current phase: 4 · Design specification
 - Last updated: 2026-11-17
 
 ## Phase log
@@ -11,7 +11,8 @@ _Single source of truth. Update at every phase boundary._
 | 1 Discovery | orchestrator | done (no questions; assumptions recorded) | PROJECT_BRIEF.md | 2026-11-17 |
 | 1b Facts | orchestrator via web-fetch (primary sources) | done: 14 verified claims + do-not-use list | FACTS_AND_SOURCES.md | 2026-11-17 |
 | 2 Research | reference-researcher | done: 14 ranked refs; 7 new captures (4 youth-prevention, 1 data story, 2 atmosphere) | REFERENCE_RESEARCH.md; library entries | 2026-11-17 |
-| 3 Creative direction | creative-director | in progress | | |
+| 3 Creative direction | creative-director | done: concept "The Layer" approved by orchestrator (10 beats, every claim F-cited; palette contrast-checked) | CREATIVE_DIRECTION.md | 2026-11-17 |
+| 4 Design spec | ui-ux-designer ∥ typography-spacing, then gsap-animator | in progress | | |
 
 ## Gates
 | Gate | Reviewer | Verdict | Evidence | Date |
