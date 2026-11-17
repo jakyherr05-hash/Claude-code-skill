@@ -1,0 +1,19 @@
+# Layout critique r1 (Phase 6, layout only) · creative-director · 2026-11-17
+Evidence: layout-r1b-{390,768,1024,1440}.png / -full.png; scrolled frames layout-r1b-1440-y{820,1540,2260,2900}.png, -390-y{900,1900}.png, -1024-y1400.png, -1024-contact.png.
+Rubric A–E, G. Verdict: **FIX FIRST** (1 blocker, 2 majors).
+
+## Findings (# · severity · bp · section · issue → outcome → owner)
+1. BLOCKER · 1024, 1440 · plate/contact · Sticky plate never releases: it rides over the contact mat and hides the email CTA (1440-y2900: covers "hei@halde.example"; 1024: plate bottom 505px vs CTA top 494px). Cause: sticky is bounded by `<main>`, not by grid rows 1–2. → Put the plate in a column wrapper spanning rows 1–2 only (sticky inside it), so it settles above the contact. Contact CTA must never be covered. → frontend-engineer
+2. MAJOR · 390, 768 · process · Steps keep 60svh / 50svh min-height with no plate beside them and no scrub below 1024. Result: 380–450px of dead paper after each 2-line step (390-y900, 768-full). The emptiness only works when the plate fills the other column. → Below 1024, steps take content height plus one generous rhythm gap (space-2xl/3xl token), and the hairline does the pacing. → ui-ux-designer (amend spec §4), then frontend-engineer
+3. MAJOR · 768 · hero · Reads as a stretched phone. h1 is 162px and fills only 372 of 718px; the lede/CTA hug the left while the plate centres on a different axis. Direction says "wordmark full width". → Fluid h1 so "Halde" spans ~90% of the content width at 768 (about 260–290px), and either left-align the plate to the text edge or offset it right so it shares an axis with the type. → typography-spacing (scale clamp), frontend-engineer (plate axis)
+4. MINOR · 1440 · hero · Plate stops at x1360, inside the frame. The hero reads as two balanced halves, which is the safe default. → Ruling: keep the bleed, but modestly. Extend the plate column to the viewport edge so the plate crosses it by ≤5% of its diameter, matching 1024, which already touches the edge. A heavier crop would fight the "true" end state. → frontend-engineer
+5. MINOR · 1440 · hero · Lede sets in 3 lines at 320px wide. Direction asks for a narrow 2-line statement. → Widen the lede measure to ~34ch at ≥1280 and keep `pretty`. Check that "yours." does not orphan. → typography-spacing
+6. MINOR · 390, 768 · hero · Plate is fully visible in the first viewport rather than peeking at the fold. → Ruling: ACCEPT the deviation. The whole object above the fold passes the five-second test better, and the hairline plus "HOW WE WORK" at the fold already invite scroll. ui-ux-designer to amend spec §4 (390/768 lines). I will align CREATIVE_DIRECTION "First viewport" at next revision. → ui-ux-designer (doc only)
+
+## Rulings on builder's candidate issues
+- 1440 no bleed: minor, fix per #4. 390 no peek: accepted, #6.
+- 1440 80svh gaps: ACCEPTED at ≥1024. Scrolled frames (1440-y1540, -y2260) show each viewport as step text on the left with the sticky plate on the right, which is the intended page. The gap reads as a pause, not a hole, but only because the plate is there. Not accepted below 1024 (#2). Re-judge with the scrub in Phase 7.
+
+## Holding well (ok)
+First viewport at all four widths: one dominant wordmark, one line, one glaze CTA. H1 is never cut, including at 1024x768 (CTA bottom 644 < 768). Squint order is clear: wordmark > plate > lede > CTA. Edges hang on x=124 (hero/numerals/rules), x=235 (step text) and x=838 (plate) at 1440. Serif/sans roles are clean, there is no faux italic and no lone heading words. 0 radius everywhere. No horizontal overflow (scrollWidth = innerWidth at all 4). Accent is rare apart from the static glazed pool (accepted, since the motion start state is unglazed). Default-site detector: 0 of 5.
+Note: the tone band at 1 viewport height in the -full.png captures is a capture artefact of the fixed grain overlay (`body::after`). Scrolled frames are uniform, so it is not a finding.

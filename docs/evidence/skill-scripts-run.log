@@ -1,4 +1,4 @@
-# tests/skill-scripts.sh on commit 0fe7c42 (2026-11-17), NODE_PATH incl. sharp 0.34 + demo/node_modules
+# tests/skill-scripts.sh on commit 7d51f1e (2026-11-17), NODE_PATH incl. sharp + demo/node_modules; needs ffmpeg and sharp (otherwise those steps SKIP)
 PASS  init-project: 13 docs, name substituted
 PASS  init-project: never overwrites existing docs
 PASS  init-project: no unreplaced placeholders
@@ -11,7 +11,7 @@ PASS  library.py stale: flags entries older than N days
 PASS  library.py build: deterministic and committed index is current
 PASS  capture-reference.mjs: measured h1 64px/-2px, native scroll, screenshots
 PASS  capture-reference.mjs --filmstrip/--tablet: whole page sampled, pinned scene detected, tablet shots
-PASS  ImageSequence.js (optimiser → helper): desktop 48×640w 0→24→47; mobile 24×320w 0→12→23; reduced 1 still unpinned; cleanup 0
+PASS  ImageSequence.js (optimiser → helper): desktop 48×640w 0→24→47; mobile 24×320w 0→12→23; reduced 1 still unpinned; missing frame skipped; unmount stops preload; cleanup 0
 PASS  providers.py check: runs, reports BLOCKED without keys
 PASS  providers.py image: missing credential → exit 3 BLOCKED, no file
 PASS  optimize-images.mjs: AVIF+WebP at 480/960, never upscales past 1200, manifest

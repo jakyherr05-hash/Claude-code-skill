@@ -40,7 +40,8 @@ Full detail, per-agent tables and transcripts: [AGENT-VALIDATION.md](AGENT-VALID
 | Handoffs | PASS (40/40 delegations returned HANDOFF) | AGENT-VALIDATION §3 |
 | Gate A enforced (FAIL ×3 → PASS on round 4) | PASS | `ten-phase-run/studio/PROJECT_STATUS.md` |
 | Gate B: round 1 tech FAIL; round 2 creative PASS, QA PASS (56/0, re-run by the tech-lead), **tech FAIL** (axe scan skipped) | enforced correctly | `ten-phase-run/gate-b-verdicts/` |
-| **Run reaches a full Gate B pass** | **PARTIAL – not completed.** The account's 5-hour usage limit stopped the run after round 2, then the 60-minute timeout ended it (exit 124). The tech-lead's round-3 item (add the axe scan) was never routed. **No later run has been made;** this remains incomplete. | `verdict-technical-r2.FROM-TRANSCRIPT.md` |
+| Run 1 reaches a full Gate B pass | PARTIAL: stopped by the account's 5-hour usage limit after round 2 (exit 124) | `verdict-technical-r2.FROM-TRANSCRIPT.md` |
+| **Run 2 (fresh project, same prompt, 2026-11-17) reaches a full Gate B pass** | **PASS.** All ten phases through the right specialists; Gate A PASS after conditions C1–C3; the new render-critique loop ran (layout r1/r2, motion r1/r2) and caught real defects; Gate B creative PASS, technical PASS with notes, QA PASS with notes (63/63 checks). Interrupted once by the usage limit in phase 9 and resumed in the same session (`--resume`), exit 0 | [evidence/ten-phase-run-2/](evidence/ten-phase-run-2/RUN-SUMMARY.md) |
 
 ### A.4 Scripts, templates, structure
 | Check | Result | Evidence |
@@ -62,8 +63,9 @@ Production build (static prerender + route-matched hydration), served by `vite p
 | Before the font and router changes | `486c933` | PASS 49/49, 0 flaky | [evidence/playwright-final.json](evidence/playwright-final.json) |
 | Finalization re-run 1 (fonts + router changed since) | `ea8d6e9` | **FAIL 45/49**: 4 visual baselines. The 390 px Hour intent grew 28 px with "was." alone on a third line (real regression, W24); 3 others glyph-only (mono 500 → 400 face, same size and layout) | `/tmp` log, summarised in [BUGS-FIXES.md](BUGS-FIXES.md) W24 |
 | Finalization re-run 2, after the W24 fix and regenerating the 4 changed baselines | `c38f050` + baselines | **PASS 49/49**, 0 flaky, 0 skipped | [evidence/playwright-finalization.json](evidence/playwright-finalization.json), [run log](evidence/playwright-finalization-run.log) |
+| **Final state after Gate B round 2** (axe at 3 widths, header-over-hero contrast guard, deterministic Lenis sync test, title assertions) | `7d51f1e` | **PASS 56/56**, 0 flaky, 0 skipped | [evidence/playwright-gate-b-r2.json](evidence/playwright-gate-b-r2.json) |
 
-Covered by the suite: routing, back/forward restore, anchor offsets, mobile menu focus trap and scroll lock, Flip filter, The Hour presets and keyboard, Lenis/ScrollTrigger sync, pinned Method sequence, route-change leak test (renderer and tween counts), reduced motion, 6-width responsive matrix, axe (WCAG 2.2 AA, 0 serious/critical) on home and detail, keyboard order, fonts/images blocked, no-WebGL fallback, hero text contrast at 8 viewports, 12 visual baselines (0.1 % tolerance).
+Covered by the suite: routing, back/forward restore, anchor offsets, mobile menu focus trap and scroll lock, Flip filter, The Hour presets and keyboard, Lenis/ScrollTrigger sync, pinned Method sequence, route-change leak test (renderer and tween counts), reduced motion, 6-width responsive matrix, axe (WCAG 2.2 AA, 0 serious/critical) on home and detail at 1440/768/390, header-link contrast over the project heroes at 1024/1440/1920, per-page titles, keyboard order, fonts/images blocked, no-WebGL fallback, hero text contrast at 8 viewports, 12 visual baselines (0.1 % tolerance).
 
 ### B.2 Hero contrast (axe cannot read pixels under a WebGL canvas)
 Worst pixel under each line's glyph rectangles, measured from screenshots: kicker and sub ≥ 4.5:1 and H1 ≥ 3:1 at 360, 390, 430, 768, 1024×768, 1366×768, 1440 and 1920: **PASS**. Landscape H1 ≥ 11.5:1, mobile ≥ 13.2:1 (W14, W20).
@@ -93,7 +95,7 @@ Served from a nested sub-path at 1440×900 and 390×844: 0 failed requests, 0 co
 |---|---|
 | Gate A (tech-lead) | CHANGES REQUIRED → fixes A1–A3 applied |
 | Gate B round 1: creative-director, tech-lead, qa-engineer | FAIL / CHANGES REQUIRED / CONDITIONAL → fix wave (W4–W19), all re-tested by the suite |
-| **Gate B round 2 on the finished demo** | **NOT DONE.** `demo/studio/PROJECT_STATUS.md` still records it as pending. The fixes are verified by automated tests, not by a second independent review. |
+| **Gate B round 2 on the finished demo** (2026-11-17, three independent reviewers) | Creative: PASS (0 blockers, 2 majors) → both majors fixed and **closed by the reviewer** (detail-hero crops incl. wide renders for Capela/Museu; The Hour exposure). QA: FAIL on one intermittent test → root cause found (frame starvation on a shared host), test made deterministic; final suite 56/56. Technical: code correct; FAIL on stale evidence counts and an in-progress tree → evidence regenerated at the final commit, docs reconciled, tree clean and templates in sync. Details: [BUGS-FIXES.md](BUGS-FIXES.md) W34–W41, S12–S14 |
 
 ---
 
@@ -107,10 +109,10 @@ Served from a nested sub-path at 1440×900 and 390×844: 0 failed requests, 0 co
 | Real phones, real GPUs, real-user INP | NOT TESTED | TBT is the lab proxy |
 | AI image/video generation | BLOCKED | needs a free Hugging Face token or a local GPU; demo assets are shader-rendered instead ([evidence/ai-generation-attempt.txt](evidence/ai-generation-attempt.txt)) |
 | 21st.dev MCP | BLOCKED | needs an API key |
-| Ten-phase run to a full Gate B pass | PARTIAL | stopped by the account usage limit (A.3) |
-| Demo Gate B round 2 | NOT DONE | B.6 |
+| Ten-phase run to a full Gate B pass | PASS (run 2) | A.3 |
+| Demo Gate B round 2 | DONE: majors closed, evidence reconciled | B.6 |
 | Mono labels at weight 500 now render with the 400 face | ACCEPTED trade-off | keeps fonts under budget; creative sign-off not obtained |
-| Mobile TBT headroom (WebGL off) | MARGINAL | 198.5 ms median vs 200 ms budget on this host (B.3) |
+| Mobile TBT headroom (WebGL off) | MARGINAL / host-dependent | 198.5 ms median on 2026-11-16; on 2026-11-17 the host benchmarked ~16 % slower and both the original and the current build measured ~274–288 ms (interleaved A/B: no regression from the Gate B fixes). Needs a quiet, fixed host or a real phone to settle ([evidence/lighthouse-gate-b-r2.txt](evidence/lighthouse-gate-b-r2.txt)) |
 | Italic intent at 360–390 px now three lines (was two) | ACCEPTED | wider static italic; no single-word last line (W24) |
 | Agent-team mode, Cowork, claude.ai upload | NOT TESTED | AGENT-VALIDATION §6 |
 
@@ -125,7 +127,7 @@ Served from a nested sub-path at 1440×900 and 390×844: 0 failed requests, 0 co
 | Blind re-critique r2 after fixes (same prompt, rubric and widths) | PASS (conditional): none of r1's 4 majors reported again; 2 new majors in older, untouched code | [critique-r2.md](evidence/design-critique/critique-r2.md) |
 | r2 majors fixed (Method drawing label size and placement) | PASS by measurement (11.6 px at 1024; no text overlaps 390–1920, both motion modes). No r3 critique was run | [BUGS-FIXES](BUGS-FIXES.md) W32, W33 |
 | Before/after screenshots at identical widths and scroll positions | 8 comparisons | [evidence/design-critique/](evidence/design-critique/README.md) |
-| Full demo suite on the final state | PASS 49/49, 0 flaky | [evidence/playwright-design-upgrade.json](evidence/playwright-design-upgrade.json) |
+| Full demo suite on the design-upgrade state (`0fe7c42`) | PASS 49/49, 0 flaky (superseded by B.1's 56/56 at `7d51f1e`) | [evidence/playwright-design-upgrade.json](evidence/playwright-design-upgrade.json) |
 | The plugin produces better *new* websites | **NOT TESTED**: the loop improved one existing site; no new site was built with and without the upgrade | — |
 
 ### D.2 Plugin and tooling (code-quality changes, not visual results by themselves)

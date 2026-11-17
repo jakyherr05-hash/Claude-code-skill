@@ -59,6 +59,8 @@ Earlier single-agent test: the main session delegated to `typography-spacing`, w
 
 **Outcome: PARTIAL.** Every phase executed through the right specialists, with **40 delegations, all 40 returning a HANDOFF block**. Parallelism followed the ownership rules, and both gates enforced quality through real FAIL→fix loops (Gate A three times, Gate B twice). The run **stopped before completion**: the account hit its 5-hour usage limit ("resets 9:10am UTC") after the Gate B round-2 verdicts, so the orchestrator never routed the final tech-lead item. The run then hit my 60-minute timeout (exit 124). The mini-site therefore did **not** reach a full Gate B pass in this run.
 
+**Run 2 (2026-11-17, fresh project "Halde", same prompt): PASS.** All ten phases ran through the right specialists, including the new render → critique → refine loop (layout critique r1/r2, motion critique r1/r2, which caught a pinned plate covering the contact button and a pie-chart glaze). Gate A passed after three conditions; Gate B: creative PASS, technical PASS with notes, QA PASS with notes (63/63 checks, axe 0 violations, LCP 772 ms throttled mobile). The account usage limit interrupted phase 9 once; the run was resumed in the same session with `claude -p --resume` and finished with exit 0. Evidence: [evidence/ten-phase-run-2/](evidence/ten-phase-run-2/RUN-SUMMARY.md) (studio docs, critiques, Gate B verdict, site files).
+
 Observations for users (not skill defects):
 - With a narrow `--allowedTools` such as `Bash(node:*)`, the tech-lead's compound commands (`cd … && node …`) were denied, and it reproduced partly with Read/Glob. Grant the commands reviewers need, or run interactively.
 - Long full-production runs are token-heavy (40 delegations for a one-page site). Use the Sprint or Spot tracks for small jobs, as the skill instructs.
@@ -69,7 +71,7 @@ Observations for users (not skill defects):
 |---|---|---|
 | `tests/skill-scripts.sh`: **executes** all 10 skill scripts plus the tested `ImageSequence.js` helper and the repo tooling, with assertions (init-project, contrast, type-scale math, library search/stale/build determinism, live capture of a served page incl. `--filmstrip`/`--tablet` and unchanged defaults, providers check + BLOCKED path, AVIF/WebP optimisation incl. no-upscale + magic bytes, image sequence via the optimiser, H.264/VP9/AV1 encode via ffprobe, lighthouse usage, install/uninstall, template drift, validator) | **23/23 PASS** (was 21/21 before the design-first checks were added) | [evidence/skill-scripts-run.log](evidence/skill-scripts-run.log) |
 | `tests/validate.py`: 173 structural checks (frontmatter fields, name/dir match, description length, tool names, models, every path referenced in a SKILL.md exists, script syntax, template drift, index freshness, secrets scan, `claude plugin validate`) | 173/173 PASS (necessary, **not** sufficient on its own) | — |
-| Templates = tested code | 23 files byte-identical to the demo exercised by the 49-test suite (`sync-templates.sh --check`) | PASS |
+| Templates = tested code | 23 files byte-identical to the demo exercised by the 56-test suite (`sync-templates.sh --check`) | PASS |
 | `lighthouse.sh`, `scroll-probe.mjs` used for real | Run by performance-engineer on the demo | PASS (PERFORMANCE_REPORT) |
 | `capture-reference.mjs` on live sites | 25 sites captured; 3 blocked sites correctly marked `blocked` | PASS |
 

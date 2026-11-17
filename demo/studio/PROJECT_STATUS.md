@@ -2,7 +2,7 @@
 _Single source of truth. Update at every phase boundary._
 
 - Track: spot | sprint | full
-- Current phase: 10 · Final approval — fix wave done and re-tested; Gate B round 2 review still pending
+- Current phase: 10 · Final approval — Gate B round 2 done (2026-11-17); majors fixed and closed by the reviewer
 - Last updated: 2026-11-16
 
 ## Phase log
@@ -17,7 +17,9 @@ _Single source of truth. Update at every phase boundary._
 | B · Technical (round 1) | tech-lead | CHANGES REQUIRED: B1 loseContext stall, B2 probe context, B4 LCP, B5 focus frame; QA D-1 verified fixed @0a69e55 | scroll-motion 8/8 @HEAD; long-task probes; Lighthouse mobile JSON | 2026-11-15 |
 | B · Creative (round 1) | creative-director | FAIL: blocker = mobile hero contrast (shaft behind text); majors = poster/shader intro, manifesto underline, hour stills, detail H1 fold, Method mobile labels | gate-b-cd captures (1440/390/no-WebGL/reduced), measured contrast | 2026-11-15 |
 | B · QA (round 1) | qa-engineer | CONDITIONAL: 37/39 (reduced-motion wheel D-1, flaky sync test D-3); D-2 labels; visual 12/12; axe clean | QA_REPORT.md, results.json | 2026-11-15 |
-| B · round 2 | all three | pending re-review after fix wave | — | — |
+| B · Creative (round 2) | creative-director | PASS (0 blockers, 2 majors) → majors fixed (W34 detail crops + wide renders, W36 Hour exposure) → closure re-check: both CLOSED | docs/BUGS-FIXES.md W34–W41; reviewer captures | 2026-11-17 |
+| B · QA (round 2) | qa-engineer | FAIL on one intermittent test → root cause + deterministic test (S14) → suite 56/56 | docs/evidence/playwright-gate-b-r2.json | 2026-11-17 |
+| B · Technical (round 2) | tech-lead | code correct; FAIL on stale evidence counts + in-progress tree → evidence regenerated at the final commit, docs reconciled, templates in sync | docs/VALIDATION-REPORT.md B.6 | 2026-11-17 |
 ## Open tasks
 | Task | Owner | Blocked by |
 |---|---|---|
@@ -26,7 +28,7 @@ _Single source of truth. Update at every phase boundary._
 | ~~Portrait poster + preloads; Hour stills in strip and fallback~~ DONE | frontend-engineer | — |
 | ~~Lighthouse re-measure~~ DONE (docs/VALIDATION-REPORT.md B.3); font budget fixed (W23) | performance-engineer | — |
 | Detail→Home long tasks (161–754 ms in hero getContext, SwiftShader) — real-GPU trace | webgl-specialist | a real GPU |
-| Gate B round 2 | creative-director, tech-lead, qa-engineer | all of the above |
+| ~~Gate B round 2~~ DONE | creative-director, tech-lead, qa-engineer | — |
 
 ## Handoffs received (latest first, ≤10 lines each)
 
