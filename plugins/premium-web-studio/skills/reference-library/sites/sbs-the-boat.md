@@ -3,10 +3,10 @@ name: SBS: The Boat
 url: https://www.sbs.com.au/theboat/
 slug: sbs-the-boat
 category: other
-tags: [documentary, scrollytelling, graphic-novel, canvas, gate, click-to-start, audio, partially-inspected, scroll-unverified]
-researched: 2026-11-17
+tags: [documentary, scrollytelling, graphic-novel, canvas, gate, click-to-start, audio, sound-toggle, ink-illustration, text-over-art, virtual-scroll, partially-inspected]
+researched: 2026-11-18
 status: partially-inspected
-confidence: low
+confidence: medium
 evidence: ../evidence/sbs-the-boat/
 ---
 
@@ -20,6 +20,12 @@ A famed interactive graphic-novel documentary. The capture only reached the entr
 ## Design characteristics
 - Black ground, white rain particles moving diagonally, tiny footer links (Terms, Privacy, Complaints) and an acknowledgement of country in a dark strip [O].
 - Gate copy is lettered in a handwritten face (Stone Informal / Plantin Infant listed in loaded fonts) [M fonts; O].
+
+## Click-through (2026-11-18, evidence/sbs-the-boat/click/c0-c8.jpg, custom Playwright script: click centre, then 8 wheel steps of 500 px)
+- Click on the gate starts the story: a blank white frame with a black ink-edged chapter tab at the right edge (numbers 1 to 6) [O c1], then a monochrome watercolour storm scene with rain streaks, a small black boat silhouette and centred white serif narration lines laid directly over the art [O c4, c6]. Wheel input advanced the story (frames differ) although docHeight stayed 900, scrollY 0: a virtual scroller [M scrollY, O frames].
+- Bottom-left controls "SOUND (checked) / AUTO SCROLL / FULL SCREEN" appear after the click; sound starts checked, i.e. the gate click is the consent [O c4]. 8 audio/video elements exist after the click and AudioContext is available [M].
+- Later frames show tilted ink-painting panels sweeping across the view with caption text running under them [O c8]; text partly collides with the panel edge and with the control row at the bottom [O c6, c8]: a legibility lesson.
+- Mobile story layout, chapter jumps, reduced-motion handling [?].
 
 ## Responsive (390px observation)
 - Not separately observed beyond no horizontal overflow [M].

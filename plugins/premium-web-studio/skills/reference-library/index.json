@@ -282,6 +282,29 @@
     "file": "sites/dropbox-brand.md"
   },
   {
+    "name": "Das Falter Inferno",
+    "url": "http://falter-inferno.at/",
+    "slug": "falter-inferno",
+    "category": "other",
+    "tags": [
+      "illustrated-descent",
+      "monochrome",
+      "dark",
+      "drag-navigation",
+      "loader",
+      "atmosphere",
+      "grain",
+      "virtual-scroll",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-18",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/falter-inferno/",
+    "file": "sites/falter-inferno.md"
+  },
+  {
     "name": "Floema",
     "url": "https://floema.com/",
     "slug": "floema",
@@ -628,6 +651,29 @@
     "file": "sites/lusion.md"
   },
   {
+    "name": "Mars Rejects",
+    "url": "https://www.marsrejects.com/",
+    "slug": "mars-rejects",
+    "category": "other",
+    "tags": [
+      "graphic-novel",
+      "halftone",
+      "ink-illustration",
+      "red-black-cream",
+      "extended-grotesk",
+      "framer",
+      "comic-poster",
+      "character-cast",
+      "native-scroll",
+      "dark-to-light"
+    ],
+    "researched": "2026-11-18",
+    "status": "inspected",
+    "confidence": "medium",
+    "evidence": "../evidence/mars-rejects/",
+    "file": "sites/mars-rejects.md"
+  },
+  {
     "name": "Minh Pham (portfolio)",
     "url": "https://minhpham.design/",
     "slug": "minh-pham",
@@ -735,6 +781,32 @@
     "confidence": "medium",
     "evidence": "../evidence/oceanx/",
     "file": "sites/oceanx.md"
+  },
+  {
+    "name": "Ponpon Mania",
+    "url": "https://ponpon-mania.com/",
+    "slug": "ponpon-mania",
+    "category": "other",
+    "tags": [
+      "interactive-comic",
+      "illustration",
+      "flat-colour",
+      "thick-outline",
+      "recurring-character",
+      "nuxt",
+      "webgl",
+      "chapter-select",
+      "panel-navigation",
+      "loader-hand-off",
+      "sound",
+      "partially-inspected",
+      "scroll-unverified"
+    ],
+    "researched": "2026-11-18",
+    "status": "partially-inspected",
+    "confidence": "low",
+    "evidence": "../evidence/ponpon-mania/",
+    "file": "sites/ponpon-mania.md"
   },
   {
     "name": "Preymaker",
@@ -885,12 +957,15 @@
       "gate",
       "click-to-start",
       "audio",
-      "partially-inspected",
-      "scroll-unverified"
+      "sound-toggle",
+      "ink-illustration",
+      "text-over-art",
+      "virtual-scroll",
+      "partially-inspected"
     ],
-    "researched": "2026-11-17",
+    "researched": "2026-11-18",
     "status": "partially-inspected",
-    "confidence": "low",
+    "confidence": "medium",
     "evidence": "../evidence/sbs-the-boat/",
     "file": "sites/sbs-the-boat.md"
   },
