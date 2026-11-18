@@ -1,0 +1,4 @@
+/* Track beat heights per rig: ANIMATION_SPECIFICATION §2 label table, in units (1 unit = 1vh, 1svh at rig S). CSS is the single source of the scroll length. */
+html[data-rig="L"],html[data-rig="M"]{--budget:1210;--b-s1:50;--b-t12:100;--b-s2:70;--b-t23:90;--b-s3:90;--b-t34:110;--b-s4:130;--b-t45:150;--b-s5:70;--b-t56:110;--b-s6:90;--b-t67:150;}
+html[data-rig="P"]{--budget:1090;--b-s1:45;--b-t12:90;--b-s2:65;--b-t23:80;--b-s3:80;--b-t34:100;--b-s4:115;--b-t45:135;--b-s5:65;--b-t56:100;--b-s6:80;--b-t67:135;}
+html[data-rig="S"]{--budget:1010;--b-s1:40;--b-t12:80;--b-s2:60;--b-t23:70;--b-s3:80;--b-t34:90;--b-s4:120;--b-t45:120;--b-s5:60;--b-t56:90;--b-s6:80;--b-t67:120;}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OZONE T6b prototype (placeholder art, not the product)</title>
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="./fonts/bricolage-grotesque-latin-wdth-normal.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="./fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2">
+</head>
+<body>
+<main>
+  <div class="story" id="story">
+    <div class="stage" id="stage">
+      <div class="page-layer" id="page-layer" aria-hidden="true"></div>
+      <div class="worldwrap" id="worldwrap" aria-hidden="true"></div>
+      <div class="copy" id="copy">
+        <h2 class="h h4" id="h-s4"><span class="l1">THE DAMAGE ISN’T ALWAYS VISIBLE.</span> <span class="l2">BUT THE RISKS ARE REAL.</span></h2>
+        <p class="cap cap-m6" id="cap-m6">Smoking damages the lungs.<small>CDC, 2024</small></p>
+        <p class="cap cap-m4" id="cap-m4">Smoking is a major cause of heart and blood-vessel disease.<small>CDC, 2024</small></p>
+        <p class="cap cap-m35" id="cap-m35">Smoking harms nearly every organ of the body.<br>Smoking can cause cancer almost anywhere in the body.<small>CDC, 2024</small></p>
+        <h2 class="h h5" id="h-s5"><span class="l1 hero">YOUR FUTURE IS BIGGER THAN A CIGARETTE.</span> <span class="l2">BE STRONG ENOUGH TO SAY NO.</span></h2>
+        <h2 class="h h6" id="h-s6"><span class="l1 d1">OZONE</span> <span class="l2">WE CHECK IDs. NO EXCEPTIONS.</span></h2>
+        <p class="cap cap-s6" id="cap-s6">We verify identification, follow applicable tobacco laws, and do not sell cigarettes to anyone under 21.</p>
+        <div class="h h7" id="h-s7"><h2><span class="l1 d1">DON’T START.</span> <span class="l2 d2">PROTECT YOUR FUTURE.</span></h2><p class="id7"><b>OZONE</b> WE CHECK IDs. WE FOLLOW THE LAW. WE PROTECT OUR COMMUNITY.</p></div>
+      </div>
+    </div>
+    <div class="track" id="track">
+      <div class="beat" id="beat-s1"></div><div class="beat" id="beat-t12"></div><div class="beat" id="beat-s2"></div>
+      <div class="beat" id="beat-t23"></div><div class="beat" id="beat-s3"></div><div class="beat" id="beat-t34"></div>
+      <div class="beat" id="beat-s4"></div><div class="beat" id="beat-t45"></div><div class="beat" id="beat-s5"></div>
+      <div class="beat" id="beat-t56"></div><div class="beat" id="beat-s6"></div><div class="beat" id="beat-t67"></div>
+    </div>
+  </div>
+  <section id="scene-7">
+    <h2><span class="l1 d1">DON’T START.</span> <span class="l2 d2">PROTECT YOUR FUTURE.</span></h2>
+    <p class="id7"><b>OZONE</b> WE CHECK IDs. WE FOLLOW THE LAW. WE PROTECT OUR COMMUNITY.</p>
+  </section>
+  <section id="sources"><p>Back matter placeholder (prototype only).</p></section>
+</main>
+<aside id="proto-badge" role="note">PROTOTYPE · placeholder art · audio is a load stand-in, not the score</aside>
+<aside id="audio-prompt" hidden>
+  <p>Audio load stand-in (not music). Needed so the T6b run has audio running.</p>
+  <button id="enter" type="button">ENTER WITH SOUND</button>
+  <button id="continue" type="button">CONTINUE WITHOUT SOUND</button>
+</aside>
+<button id="sound" type="button" aria-pressed="false" hidden>SOUND OFF</button>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

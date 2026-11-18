@@ -1,0 +1,24 @@
+{
+  "name": "ozone-t6b-proto",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "OZONE T6b performance prototype (t45, t67) on PLACEHOLDER art. Not the product; not a performance result.",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4174 --strictPort",
+    "fidelity": "node fidelity-measure.mjs",
+    "shots": "node shots.mjs"
+  },
+  "dependencies": {
+    "gsap": "3.15.1"
+  },
+  "devDependencies": {
+    "@fontsource-variable/atkinson-hyperlegible-next": "5.3.0",
+    "@fontsource-variable/bricolage-grotesque": "5.3.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.8"
+  }
+}
