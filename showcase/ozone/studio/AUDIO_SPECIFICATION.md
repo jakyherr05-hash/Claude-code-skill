@@ -172,7 +172,7 @@ Audio reads labels and the playhead, never raw scroll, so rigs M and P (A-2) nee
 - `barZero` = bloom start + 0.4 s (its peak).
 - `setCue(1, +1)`, or the restored scene (TD10).
 - **Duration (G-11).** The hand-off lasts **1.65 s**, or **1.95 s** when the prompt shows (+0.3 s for the prompt un-ink, which comes first and is silent).
-- At the hand-off's first frame after any un-ink, the bloom and a master fade 0 → 1 over 1.5 s start together, so the fade ends inside the hand-off.
+- At the hand-off's first frame after any un-ink, the bloom and a master fade 0 → 1 over 1.5 s start together, so on a first visit the fade ends inside the 1.65 s hand-off (on the 0.3 s returning hand-off, G-20, it continues after scroll unlocks, which A-3 allows).
 - Scroll is already unlocked (A-3), and the toggle is visible from that same frame.
 - **The loader never plays a sound.**
 - After S7 the context stays running in silence (no sources, negligible CPU), so the toggle stays truthful.
