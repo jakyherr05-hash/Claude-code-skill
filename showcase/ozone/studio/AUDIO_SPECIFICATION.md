@@ -197,14 +197,14 @@ Flags (not renamed; see §8): `sfx:footstep` breaks the `sfx:tNM:` pattern · `c
 11. Every §6 objective check passes on every render. The bass line stays audible on a phone speaker (2f₀).
 
 ## 8 · Open questions and label flags
-1. **API.** `setCue` alone cannot drive x. I propose `setPlayhead(units, dir)` from the same throttled `onUpdate` (TECH §6) → tech-lead.
-2. **Mute ramp.** 0.4 s here and in TECH §6; DESIGN §3.2 says 300 ms. This spec uses 0.4 s → ui-ux to align.
-3. **`sfx:footstep`** breaks the `sfx:tNM:<id>` pattern. I kept it as one id whose variant is chosen from the playhead → confirm.
-4. **No `cue:s1`.** The hand-off calls `setCue(1,+1)`, and reversing across `cue:s2` returns to s1. Fine unless the master should own it.
+1. **API.** `setCue` alone cannot drive x. I propose `setPlayhead(units, dir)` from the same throttled `onUpdate` (TECH §6) → tech-lead. **Resolved: AU-1 (added to TECH §6).**
+2. **Mute ramp.** 0.4 s here and in TECH §6; DESIGN §3.2 says 300 ms. This spec uses 0.4 s → ui-ux to align. **Resolved: AU-2 (0.4 s everywhere).**
+3. **`sfx:footstep`** breaks the `sfx:tNM:<id>` pattern. I kept it as one id whose variant is chosen from the playhead → confirm. **Resolved: AU-5 (kept).**
+4. **No `cue:s1`.** The hand-off calls `setCue(1,+1)`, and reversing across `cue:s2` returns to s1. Fine unless the master should own it. **Resolved: AU-5.**
 5. **Headline ink reveals** have no labels and deliberately get no sound, so type stays silent. If sound is wanted, add `sfx:tNM:ink-l1`. The only "page" sound is `sfx:t67:paper-settle`; there is no page turn.
-6. **`loader:bloom`** is a new id outside the A-4 master labels and is used only when D1 autoplay succeeds. If it is dropped, the loader is silent and the score starts at the hand-off.
-7. **The near-silence is keyed to `sfx:t45:eraser-rub`.** A dedicated `cue:t45:erase` at 36 % would be cleaner. Either way it is skipped on a fling, which is correct.
-8. **Pluck timing.** 16th-note quantising lags each light by ≤ 208 ms → creative-director accepts, or the lights follow the audio.
+6. **`loader:bloom`** is a new id outside the A-4 master labels and is used only when D1 autoplay succeeds. If it is dropped, the loader is silent and the score starts at the hand-off. **Resolved: AU-4 (kept, internal event).**
+7. **The near-silence is keyed to `sfx:t45:eraser-rub`.** A dedicated `cue:t45:erase` at 36 % would be cleaner. Either way it is skipped on a fling, which is correct. **Resolved: AU-5 (stays on eraser-rub).**
+8. **Pluck timing.** 16th-note quantising lags each light by ≤ 208 ms → creative-director accepts, or the lights follow the audio. **Resolved: AU-3 (not quantised; §5 updated).**
 9. **Devices.** iOS Safari and Android Chrome are NOT TESTED.
 
 ## 9 · The musical idea in plain words
