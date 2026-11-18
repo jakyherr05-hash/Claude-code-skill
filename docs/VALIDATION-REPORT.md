@@ -127,7 +127,7 @@ Served from a nested sub-path at 1440×900 and 390×844: 0 failed requests, 0 co
 | Blind re-critique r2 after fixes (same prompt, rubric and widths) | PASS (conditional): none of r1's 4 majors reported again; 2 new majors in older, untouched code | [critique-r2.md](evidence/design-critique/critique-r2.md) |
 | r2 majors fixed (Method drawing label size and placement) | PASS by measurement (11.6 px at 1024; no text overlaps 390–1920, both motion modes). No r3 critique was run | [BUGS-FIXES](BUGS-FIXES.md) W32, W33 |
 | Before/after screenshots at identical widths and scroll positions | 8 comparisons | [evidence/design-critique/](evidence/design-critique/README.md) |
-| Full demo suite on the design-upgrade state (`0fe7c42`) | PASS 49/49, 0 flaky (superseded by B.1's 56/56 at `7d51f1e`) | [evidence/playwright-design-upgrade.json](evidence/playwright-design-upgrade.json) |
+| Full demo suite on the design-upgrade state (`0fe7c42`) | PASS 49/49, 0 flaky (superseded by B.1's 56/56 at `9288da7`) | [evidence/playwright-design-upgrade.json](evidence/playwright-design-upgrade.json) |
 | The plugin produces better *new* websites | **NOT TESTED**: the loop improved one existing site; no new site was built with and without the upgrade | — |
 
 ### D.2 Plugin and tooling (code-quality changes, not visual results by themselves)

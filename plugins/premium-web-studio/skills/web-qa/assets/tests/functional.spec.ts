@@ -51,6 +51,26 @@ test.describe('rendering & navigation', () => {
     c.assertClean();
   });
 
+  test('meta lines never start or end with a visible "·" separator (W39/W42)', async ({ page }) => {
+    // Separators are generated per item and clipped at each line start; a line END can never carry one.
+    // Measured, not screenshotted: a 4 px dot is below the visual-diff tolerance.
+    const check = () => page.evaluate(() => [...document.querySelectorAll('.room__meta, .detail__meta')].map((m) => {
+      const clipLeft = m.getBoundingClientRect().left + parseFloat(getComputedStyle(m).clipPath.match(/inset\(0px 0px 0px ([\d.]+)px\)/)?.[1] ?? 'NaN');
+      const items = [...m.children].map((s) => ({ top: Math.round(s.getBoundingClientRect().top), dotLeft: s.getBoundingClientRect().left }));
+      const rowStarts = items.filter((it, k) => k === 0 || it.top !== items[k - 1].top);
+      return { visibleLeadingDots: rowStarts.filter((it) => it.dotLeft >= clipLeft - 0.5).length, clipOk: !Number.isNaN(clipLeft) };
+    }));
+    for (const w of [360, 390, 1024, 1440]) {
+      await page.setViewportSize({ width: w, height: 900 });
+      for (const path of ['/', '/work/casa-sombra']) {
+        await open(page, path);
+        const r = await check();
+        expect(r.length, `${path} has meta lines`).toBeGreaterThan(0);
+        expect(r.every((x) => x.clipOk && x.visibleLeadingDots === 0), `${w}px ${path}: ${JSON.stringify(r)}`).toBe(true);
+      }
+    }
+  });
+
   test('deep link to a project and unknown route work (SPA fallback)', async ({ page }) => {
     await open(page, '/work/hotel-alva');
     await expect(page.locator('main h1')).toHaveAccessibleName('Hotel Alva');
