@@ -165,8 +165,8 @@ Specs: `tests/proto/t45.spec.ts` and `tests/proto/t67.spec.ts`, sharing `tests/p
 ### 3.1 Placeholder-fidelity gate (precondition, otherwise the whole run is BLOCKED)
 
 The protocol first checks that the prototype is representative, from the DOM at the t45 span (and t67 for its own run). The reference is `showcase/ozone/proto/fidelity.json` (frontend-engineer, signed off by creative-director), which holds **target** values taken from the budgets and CD §2 (G-17), not measurements of real art: fill area per halftone region, filtered layer ids, mask id, node counts. The real art is drawn in T7/T8, after T6b. PASS requires all of:
-- halftone fill area (sum of the bounding boxes of elements filled by the halftone pattern, in CSS px² at the viewport) ≥ 0.9 × the target and ≤ 1.3 ×;
-- exactly the same 3 layers carry a `filter` (computed style `filter !== 'none'` or `filter` attribute) as in `fidelity.json`;
+- halftone fill area (sum of the bounding boxes of elements filled by the halftone pattern, each box clipped to the viewport, overlaps counted twice, in CSS px²) ≥ 0.9 × the per-scene, per-rig target and ≤ 1.3 × (G-22); `red-all` built at its real extent (≈ 1.0–2.2 viewport widths, ≈ 600 nodes incl. red dots);
+- no element in the stage carries a `filter` (computed style `filter !== 'none'` or `filter` attribute), matching `fidelity.json` `filteredLayers: []` (G-22);
 - the eraser `<mask>` exists on the same element and covers the same bounding box ±10 %;
 - rendered nodes per frame in the span at the sampled frames between 0.9× and 1.0× of `fidelity.json` `nodes.perFrame` (4,500; 3,240 at 390), counted as in Q-BLD-9 (rendered `<use>` targets included) (N15);
 - `will-change` and the promoted-layer list recorded (from `Layerize`/`UpdateLayer` trace events), for the report.

@@ -133,7 +133,7 @@ The loader never plays a bed. Everything outside `#loader` is `inert` during the
 ## 7. SVG art system (TD9)
 - **Prerendered, not hydrated.** `entry-server.tsx` imports `S1…S7`, `Page7` and the defs **statically**; `renderToString` emits all the art into the HTML. The client never re-renders or hydrates the art: it is static markup outside React's hydration roots, with **no art JS chunks**. `main.tsx` hydrates only the interactive shell (loader, toggle, counter, prompt), each in its own root. GSAP only looks up nodes by `data-layer`. Art path data ships once (in the HTML), not twice. (This replaces the earlier lazy-chunk plan; `React.lazy` and `renderToString` Suspense fallbacks would drop the art from the no-JS HTML.)
 - **Static frames** are windows onto the one world: `<svg viewBox="…hold…"><use href="#sN-world"/></svg>`, so static mode adds no duplicated art DOM. The world SVG stays in the DOM and is hidden only as in §4 (N9).
-- `src/art/defs/`: one `<svg width=0 height=0>` of shared `<defs>` mounted once: halftone patterns (pitch 6 px desktop, 4 px at 390 via CSS var on the pattern), ink-edge filter (single `feTurbulence`+`feDisplacementMap`, ≤ 3 layers, baked to paths where heavy), shadow-plane gradients, palette colours as CSS vars.
+- `src/art/defs/`: one `<svg width=0 height=0>` of shared `<defs>` mounted once: halftone patterns (pitch 6 px desktop, 4 px at 390 via CSS var on the pattern), no live SVG filters: the ink-edge wobble is baked into the paths (CD sign-off G-22; any filter in the story triggers a T6b re-run), shadow-plane gradients, palette colours as CSS vars.
 - `src/art/rig/`: `Protagonist.tsx` renders `<symbol>` parts and 4 walk frames; `rig.config.ts` proportions; `poses.ts` pose table. GSAP swaps poses by `data-pose` visibility and part transforms, never by React state. Scenes use `<use href="#rig-…">`.
 - **t67 panels:** low-detail `sN-panel` groups defined in `<defs>` (≤ 300 nodes each), exempt from `mount`, so a `<use>` of them always renders. `mount` uses only `display` sets and only on aria-hidden art. `content-visibility` is not used (it does not apply to SVG children).
 - Targeting: `data-layer="s3-balloons"` (id from `layers.ts`) and `data-depth`. No class names used by GSAP, no inline style set by React on these nodes. `will-change:transform` only on the camera group and the 3 heaviest layers (SVG-child layer promotion is not reliable; the HTML-wrapped-`<svg>`-layer cut-line is held for T6b).
@@ -187,8 +187,8 @@ Owner: frontend-engineer (written before T6b starts); **creative-director signs 
 
 | Field | Target | Derivation |
 |---|---|---|
-| `halftoneFillArea` per scene (CSS px², bounding boxes of elements filled by a halftone pattern, at the hold viewport) | ≤ **35 % of the viewport**: 1440×900 → 453,600 px²; 390×844 → 115,206 px² (35 % of 329,160). Applied to S1–S7 each; S7 (paper) 0 | CD §2: halftone only in terminators, skin/cloth mid-tones and sky gradation; never in text-safe zones; shadow masses (about 50 % of each figure) double as text-safe zones. The ceiling is 35 % of the frame, below the ~50 % shadow share, so the fill is a cap the art may not exceed. CD adjusts the percentage at sign-off |
-| `filteredLayers` | exactly **3** layer ids (ink-edge filter, one `feTurbulence`+`feDisplacementMap`), chosen by FE from `layers.ts` before T6b and written into the file; the same 3 in the placeholder | §7 and ANIMATION §9: ink-edge filter static on ≤ 3 layers |
+| `halftoneFillArea` per scene and rig (CSS px², sum of the bounding boxes of halftone-filled elements, **each clipped to the viewport**, overlaps counted twice) | **Point targets per CD sign-off (G-22, DECISIONS "Creative sign-off: fidelity targets")**: L 1440×900 / S 390×844 — S1 30/30 %, S2 30/25 %, S3 35/35 %, S4 35/35 % (of which red dots in `red-all` 4/7 %), S5 30/40 %, S6 25/20 %, S7 0; t45 frames ≤ 35/40 %, t67 frames ≤ 30/35 % (caps). Rig M uses L, rig P uses S. Placeholder 0.9–1.3×; real art in T8 ≤ 1.1× | CD sign-off; patterns never shown below a 3 CSS px dot pitch (switch to flat tint) |
+| `filteredLayers` | **`[]` (0)** (G-22): the ink-edge wobble is baked into paths; a live filter inside the scaling camera re-renders every frame. A report-only filter variant may be measured but never triggers a cut | CD §1, G-22 |
 | `maskId` | `eraser-mask`, on the `red-all` group, covering its bounding box (target box recorded in the file) | ANIMATION t45: one SVG `<mask>` over the single `red-all` group |
 | `nodes.perFrame` | ≤ **4,500** (≤ **3,240** at 390), including `<use>` targets | 90 % of the §8 caps (5,000 / 3,600), leaving 10 % headroom for the T8 drift rule |
 | `nodes.redAll` | ≤ **600** | §8 own budget (G-4) |
@@ -203,6 +203,6 @@ HANDOFF
 - summary: Applied N1/G-13, N2, N3/G-12, N4/G-14, N8, N9, N13/G-15, N14/G-11, G-16, G-17 (new §10.1 fidelity target), G-19 ownership rows, F18.
 - files_changed: /home/user/Claude-code-skill/showcase/ozone/studio/TECHNICAL_ARCHITECTURE.md
 - verification: consistency by reading: PASS. Build, typecheck, browser, story-ready and fidelity values: NOT TESTED (targets, no code).
-- open_issues -> owner: fidelity.json 35 % halftone ceiling and 3 filtered layer ids -> creative-director sign-off, FE fills ids from layers.ts.
+- open_issues -> owner: fidelity.json values signed off by creative-director (G-22); FE writes the file before T6b.
 - decisions_needed: none.
 - next_suggested: T6b.

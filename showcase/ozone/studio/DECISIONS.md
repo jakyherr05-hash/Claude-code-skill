@@ -77,3 +77,57 @@ The client replied "Approve" to the Gate A decision list (GATE_A_REVIEW_R2.md, c
 - G-8 supersedes TD12's literal "1.78 × vh-curve" wording.
 - G-20 G-11's single hand-off duration (1.65 s) applies to first visits. Returning visitors (`ozone-seen`) keep the compressed 0.3 s hand-off inside their ≤ 1 s short loader, the one named exception (ANIMATION §7); their story-ready target stays ≤ 3.0 s. Story-ready = hand-off end = `performance.mark('story-ready')`.
 - G-21 The loader's "Read the story as text" link becomes visible at 8 s by a pure-CSS delayed animation (`animation: reveal 0s 8s forwards` under `html.js-loading`), so it appears even when the module bundle hangs (Q-LOAD-4b); JS may show it earlier on a stall, an error or keyboard focus. Fast 3G is report-only, gated only by the 10 s cap (no 3G target is set).
+
+## Creative sign-off: fidelity targets (T6b)
+_creative-director · 2026-11-18 · rules on TECHNICAL_ARCHITECTURE §10.1 for `showcase/ozone/proto/fidelity.json`. Verdict: **changed.** Halftone is now set per scene and per rig, and filtered layers go to 0. The mask and node targets are approved with conditions. FE writes the file. The owners of TECH §7/§10.1, TEST_PLAN §3.1 and ANIMATION §9 align their wording._
+
+**Halftone fill area.** A single 35 % misreads CD §2. The figures' ~50 % shadow share is flat black, and frame coverage is driven by framing and text-safe zones, not by that ratio. These are **point targets**: the placeholder is built to them (0.9–1.3×, TEST_PLAN §3.1), and the real art in T8 may not go over 1.1×.
+- **Unit.** The sum of the bounding boxes of the pattern-filled elements, each clipped to the viewport, as a percentage of the viewport. Overlaps are counted twice, on purpose, because stacked patterns cost twice.
+- **Other rigs.** Rig M uses the L column and rig P uses the S column.
+- **Unprototyped scenes.** S1–S3 are not prototyped, so their targets stay at or below the prototyped maxima for each rig (35 % L, 40 % S). That way t45 covers them.
+
+| Frame | L 1440×900 (px²) | S 390×844 (px²) | Why |
+|---|---|---|---|
+| S1 | 30 % · 388,800 | 30 % · 98,748 | The lamp cone is the largest element; the sky above the roofline is text-safe |
+| S2 | 30 % · 388,800 | 25 % · 82,290 | The bulb-pool terminator plus four figures; at 390 only one peer remains |
+| S3 | 35 % · 453,600 | 35 % · 115,206 | The close-up has the largest area of skin tone (35 % density) in the story |
+| S4 | 35 % · 453,600 | 35 % · 115,206 | Not more area than S3 but the most stacking: beam-edge strips, organ mid-tones, jacket, and red-dot hatching over the organs. The red-dot halftone inside `red-all`, under the eraser mask, counts toward the total: 4 % · 51,840 (L) and 7 % · 23,041 (S) |
+| S5 | 30 % · 388,800 | 40 % · 131,664 | Differs by rig. At L the avenue is a band under a sky that stays flat except for a thin horizon glow band (horizon ≈ 72 %, I-1; the sky above is text-safe negative space). At S the road fills the lower 60 %, which makes it the heaviest frame in the story |
+| S6 | 25 % · 324,000 | 20 % · 65,832 | The shelves are flat black (text-safe); halftone covers only the employee, the edge of the pendant pool and the window spill |
+| S7 | 0 | 0 | Approved: the panels are flat-tinted (rule 2) |
+| t45, any sampled frame | ≤ 35 % | ≤ 40 % | A cap with no floor: never heavier than the heavier of its two holds |
+| t67, any sampled frame | ≤ 30 % | ≤ 35 % | A cap with no floor (the street exterior); 0 once the hand-over to flat tint is done |
+
+Rules that make the numbers representative, for both the prototype and T8:
+1. **Real pattern definitions.** The placeholder uses the production halftone `<pattern>` defs: round dots, a 45° `patternTransform`, the three densities (15/35/60 %), in world units, with each scene's pitch giving 6 px (L) or 4 px (S) on screen at its hold. Flat fills or simplified patterns do not count toward the area.
+2. **3 px floor.** No pattern is ever shown at an on-screen pitch below 3 CSS px, because it moirés. Where a zoom would push a pattern below that, the layer hands over to its flat tint or its LOD drawing first, by the method in ANIMATION §9. This happens to the S4 art during the t45 pull-back and to the street frame as it shrinks into panel 7 in t67, and it is why S7 = 0. The prototype must perform the same hand-overs.
+3. **Mounted neighbours.** Scenes mounted within ±1 carry placeholder halftone at their own targets, even when they are off-screen.
+4. **What to cut first** if T6b fails on halftone (cut-line 2):
+   - First the S5 horizon band and far-plane facades, then the terminator bands on background planes.
+   - Never the skin tone (an identity rule, identical in every scene), the S4 beam and organs, or the S4 red-dot hatching.
+   - Reduce density by one step (60 → 35 → 15) before removing any region.
+
+**Filtered layers: 0, not 3** (`filteredLayers: []`).
+- CD §2 bakes the ink-edge wobble into the paths, CD §1 rules out live filters, and the loader blooms are circles, so no live filter is needed anywhere.
+- A filter inside the scaling camera group would re-render every frame for no visible gain.
+- The cut-lines bake filters only fifth, after the mask and the halftone. Carrying 3 filters would therefore make a failing prototype cut detail we keep.
+- Any filter in the story world in T8 triggers a re-run. If FE wants to know the filter headroom, measure it in a separate, report-only variant that cannot trigger a cut.
+- TEST_PLAN §3.1's "exactly the same 3 layers" becomes "exactly the listed layers (none)".
+
+**Eraser mask: approved.** `eraser-mask` on `red-all`; the box is the bounding box of `red-all`. Conditions:
+- The placeholder `red-all` spans the real extent of the roughs in the world: the alley wall at world x ≈ 1.0–2.2 viewport widths, with the S2 wall shadows and balloon scribbles, the S3 tallies and cigarette outline, and the S4 hatching. The roughs then enter the frame during the pull-back, as they will in the real art.
+- It is built to its budget of about 600 nodes (about 200 for S2, 150 for S3 and 250 for S4, including the red-dot pattern elements). This puts the costliest combination, mask × pattern × camera scale, into the test.
+
+**Nodes: approved as written.** Per frame 4,500 / 3,240, including `<use>` targets; `red-all` 600; each `sN-panel` 300, 1,800 in total, flat-tinted with no patterns; document 20,000.
+- The placeholder is built to at least 0.9× of these, not below.
+- Own-art allocation for the prototyped scenes, excluding the rig and `red-all`: S4 1,200 / 900 · S5 2,000 / 1,400 · S6 1,000 / 800. With the rig (≈ 200 / 140), the S5 hold (S4 + S5 + S6 mounted) lands at 4,400 / 3,240.
+- **Conflict to resolve before the run (FE + QA).** TEST_PLAN §3.1 checks "±10 % of 2,500 (1,800 at 390) per scene". With three scenes mounted, that exceeds the 5,000 / 3,600 caps. The per-frame target and the allocation above govern.
+- **Assumption for QA to confirm.** The bounding-box measure clips to the viewport. If it does not, FE restates the px² values on QA's basis before the run.
+
+## 2026-11-18 · Rulings after the Gate A conditions diff check (tech lead: conditions met; N15–N19)
+- N15 The T6b fidelity node gate is per frame: rendered nodes 0.9–1.0× of `nodes.perFrame` (4,500; 3,240 at 390). The per-scene 2,500 / 1,800 in ANIMATION §9 is a design guideline, not a gate.
+- N16 `html[data-mode="story"] #scene-7 { margin-top:-100lvh }` (scoped; no overlap of S6/S7 in static/no-JS, Q-A11Y-7).
+- N17 New flag `html.js-loader` (story mode and static-by-reduced-motion or height; not `?view=text`). The loader, its prompt and the G-21 text-link reveal key on it; under reduced motion the link is visible from the start with no animation.
+- N18 TECH §8 and AUDIO §4 cite G-20 for the returning-visitor 0.3 s hand-off.
+- N19 G-21's CSS reveal is written into TECH §4.
+- G-22 Creative sign-off accepted as written (section above): per-scene, per-rig halftone point targets; `filteredLayers: []` (no live filters; wobble baked); eraser mask on `red-all` at real extent ~600 nodes; node targets approved; 3 CSS px minimum dot pitch (switch to flat tint below it, gsap-animator implements in t45/t67 and the prototype). TECH §7/§10.1 and TEST_PLAN §3.1 aligned.
