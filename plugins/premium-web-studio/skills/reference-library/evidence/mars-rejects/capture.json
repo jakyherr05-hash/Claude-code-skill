@@ -1,0 +1,529 @@
+{
+  "id": "mars-rejects",
+  "url": "https://www.marsrejects.com",
+  "researchedAt": "2026-11-18T01:29:26.871Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://www.marsrejects.com/",
+  "title": "Mars Rejects",
+  "page": {
+    "lang": "en",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 16339,
+    "htmlClasses": "",
+    "bodyBackground": "rgb(2, 17, 32)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(0, 0, 0)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "MARSREJECTSA unique collection of 10,000 characters brought to life as NFTs. Cre",
+      "fontFamily": "sans-serif",
+      "fontSize": "12px",
+      "fontWeight": "400",
+      "lineHeight": "normal",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(0, 0, 0)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      }
+    },
+    "h1": null,
+    "h2": {
+      "selector": "h2",
+      "text": "THE",
+      "fontFamily": "\"Druk Wide Super\", serif",
+      "fontSize": "88px",
+      "fontWeight": "400",
+      "lineHeight": "70.4px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(247, 74, 83)",
+      "box": {
+        "x": 307,
+        "y": 2027,
+        "w": 825,
+        "h": 70
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "MARS",
+      "fontFamily": "\"Druk Wide Super\", serif",
+      "fontSize": "140px",
+      "fontWeight": "400",
+      "lineHeight": "112px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(247, 74, 83)",
+      "box": {
+        "x": 246,
+        "y": 204,
+        "w": 948,
+        "h": 101
+      }
+    },
+    "navLink": null,
+    "largestVisibleText": {
+      "fontSize": "140px",
+      "fontFamily": "\"Druk Wide Super\", serif",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "112px",
+      "text": "MARS"
+    },
+    "loadedFonts": [
+      "Inter Tight 500 normal",
+      "Inter Tight 600 normal",
+      "Druk Wide Super normal normal",
+      "Tight Spot BB Italic normal normal",
+      "Tight Spot BB Bold Italic normal normal",
+      "Druk Wide Medium normal normal",
+      "Druk Medium normal normal",
+      "CrimeFighter BB Bold normal normal",
+      "Inter 500 normal"
+    ],
+    "nav": null,
+    "counts": {
+      "sections": 4,
+      "images": 106,
+      "videos": 1,
+      "canvases": 0,
+      "svgs": 87,
+      "links": 18
+    },
+    "canvases": [],
+    "videos": [
+      {
+        "autoplay": true,
+        "muted": true,
+        "loop": true,
+        "src": "sets/J70yOM7yS9Y2DBP2f2Lp4JoVIUA~6__qW8mgNQECUo0k2wPjFR6euRMhsQ9P61YF1LQBaTc.mp4"
+      }
+    ],
+    "imageFormats": {
+      "png": 105,
+      "jpg": 1
+    },
+    "landmarks": {
+      "header": false,
+      "main": false,
+      "footer": false,
+      "h1Count": 0,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": false,
+      "threeRevision": null,
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": true,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": "Framer de9b242"
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 600
+      },
+      {
+        "ms": 250,
+        "y": 600
+      },
+      {
+        "ms": 500,
+        "y": 600
+      },
+      {
+        "ms": 900,
+        "y": 600
+      },
+      {
+        "ms": 1500,
+        "y": 600
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": 100,
+    "likelySmoothed": false,
+    "movedPx": 600
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "15px",
+          "family": "Inter Tight"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 1
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 1404,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "THE",
+          "fontSize": "88px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "BEGINNING",
+          "fontSize": "88px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "OF THE END",
+          "fontSize": "88px",
+          "family": "Druk Wide Super"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 2808,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "20px",
+          "family": "Inter Tight"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 4212,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "20px",
+          "family": "Inter Tight"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 5616,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "20px",
+          "family": "Inter Tight"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 7020,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 4,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "20px",
+          "family": "Inter Tight"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 8424,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "JOIN THEREJECTS",
+          "fontSize": "88px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "20px",
+          "family": "Inter Tight"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 9828,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "about the art",
+          "fontSize": "24px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "benefits for holders",
+          "fontSize": "24px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "20px",
+          "family": "Inter Tight"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 11232,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "BE PART OF THE JOURNEY",
+          "fontSize": "88px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "20px",
+          "family": "Inter Tight"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 12636,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "MEET THESQUAD",
+          "fontSize": "88px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "team",
+          "fontSize": "24px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "faqs",
+          "fontSize": "24px",
+          "family": "Druk Wide Super"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 10,
+      "frame": "scroll-10.jpg",
+      "scrollY": 14040,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "THEFACTS",
+          "fontSize": "88px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "20px",
+          "family": "Inter Tight"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    },
+    {
+      "step": 11,
+      "frame": "scroll-11.jpg",
+      "scrollY": 15439,
+      "docHeight": 16339,
+      "pinnedLargeFixedOrSticky": 3,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "faqs",
+          "fontSize": "24px",
+          "family": "Druk Wide Super"
+        },
+        {
+          "text": "A unique collection of 10,000 characters brought to life as ",
+          "fontSize": "20px",
+          "family": "Inter Tight"
+        },
+        {
+          "text": "subscribe for updates",
+          "fontSize": "12px",
+          "family": "Druk Wide Medium"
+        }
+      ],
+      "media": {
+        "canvases": 0,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 1404,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 744,
+    "loadMs": 744,
+    "lcpMs": 1476,
+    "cls": 0,
+    "requests": 73,
+    "byInitiator": {
+      "link": {
+        "count": 6,
+        "transferKB": 270
+      },
+      "other": {
+        "count": 8,
+        "transferKB": 312
+      },
+      "script": {
+        "count": 4,
+        "transferKB": 29
+      },
+      "beacon": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "iframe": {
+        "count": 1,
+        "transferKB": 0
+      },
+      "css": {
+        "count": 2,
+        "transferKB": 44
+      },
+      "img": {
+        "count": 50,
+        "transferKB": 2786
+      },
+      "video": {
+        "count": 1,
+        "transferKB": 197
+      }
+    }
+  },
+  "scripts": {
+    "total": 19,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtm.js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": null,
+    "largestFontSize": 20,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": null
+    }
+  }
+}

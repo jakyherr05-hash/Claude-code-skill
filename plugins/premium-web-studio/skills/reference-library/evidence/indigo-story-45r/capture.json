@@ -1,0 +1,503 @@
+{
+  "id": "indigo-story-45r",
+  "url": "https://45rpm.jp/indigostory",
+  "researchedAt": "2026-11-18T01:30:17.906Z",
+  "status": "inspected",
+  "errors": [],
+  "httpStatus": 200,
+  "finalUrl": "https://45rpm.jp/ja/",
+  "title": "45rpm studio co., ltd.",
+  "page": {
+    "lang": "ja",
+    "viewport": {
+      "w": 1440,
+      "h": 900
+    },
+    "docHeight": 900,
+    "htmlClasses": "js-focus-visible has-scroll-init has-scroll-smooth",
+    "bodyBackground": "rgba(0, 0, 0, 0)",
+    "htmlBackground": "rgba(0, 0, 0, 0)",
+    "bodyColor": "rgb(28, 41, 64)",
+    "bodyFont": {
+      "selector": "body",
+      "text": "気持ちの良い服を、 喜んで着ていただきたい。 45rpmの服作り the 45r Clothes making see more 2026.11.13藍職人いろ",
+      "fontFamily": "\"A1 Gothic R\"",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(28, 41, 64)",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 42631
+      }
+    },
+    "h1": {
+      "selector": "h1",
+      "text": "45rpmの服作り the 45r Clothes making",
+      "fontFamily": "\"A1 Gothic R\"",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(28, 41, 64)",
+      "box": {
+        "x": 0,
+        "y": 311,
+        "w": 1440,
+        "h": 278
+      }
+    },
+    "h2": {
+      "selector": "h2",
+      "text": "ないものづくりへの挑戦。",
+      "fontFamily": "\"A1 Mincho\"",
+      "fontSize": "60px",
+      "fontWeight": "400",
+      "lineHeight": "78px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(28, 41, 64)",
+      "box": {
+        "x": 160,
+        "y": 2018,
+        "w": 1120,
+        "h": 78
+      }
+    },
+    "p": {
+      "selector": "p",
+      "text": "気持ちの良い服を、",
+      "fontFamily": "\"A1 Mincho\"",
+      "fontSize": "28px",
+      "fontWeight": "400",
+      "lineHeight": "56px",
+      "letterSpacing": "-0.56px",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(28, 41, 64)",
+      "box": {
+        "x": 555,
+        "y": 394,
+        "w": 329,
+        "h": 56
+      }
+    },
+    "navLink": {
+      "selector": "nav a, header a",
+      "text": "",
+      "fontFamily": "\"A1 Gothic R\"",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "textTransform": "none",
+      "fontVariationSettings": "normal",
+      "color": "rgb(28, 41, 64)",
+      "box": {
+        "x": 80,
+        "y": 48,
+        "w": 175,
+        "h": 33
+      }
+    },
+    "largestVisibleText": {
+      "fontSize": "16px",
+      "fontFamily": "\"A1 Gothic R\"",
+      "fontWeight": "400",
+      "letterSpacing": "normal",
+      "lineHeight": "24px",
+      "text": "気持ちの良い服を、\n\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t喜んで着ていただきたい。"
+    },
+    "loadedFonts": [
+      "A1 Mincho bold normal",
+      "A1 Gothic R bold normal"
+    ],
+    "nav": {
+      "tag": "header",
+      "position": "fixed",
+      "height": 81,
+      "linkCount": 9
+    },
+    "counts": {
+      "sections": 0,
+      "images": 172,
+      "videos": 0,
+      "canvases": 1,
+      "svgs": 6,
+      "links": 74
+    },
+    "canvases": [
+      {
+        "w": 1440,
+        "h": 900,
+        "position": "static"
+      }
+    ],
+    "videos": [],
+    "imageFormats": {
+      "jpg": 55,
+      "png": 100,
+      "other": 17
+    },
+    "landmarks": {
+      "header": true,
+      "main": true,
+      "footer": false,
+      "h1Count": 1,
+      "skipLink": false
+    },
+    "detected": {
+      "gsap": null,
+      "scrollTriggerGlobal": false,
+      "lenisClassOnHtml": false,
+      "lenisGlobal": false,
+      "locomotiveScroll": true,
+      "threeRevision": "138",
+      "barba": false,
+      "swup": false,
+      "nextjs": false,
+      "nuxt": false,
+      "framer": false,
+      "webflow": false,
+      "astro": false,
+      "wordpress": false,
+      "generatorMeta": null
+    }
+  },
+  "scroll": {
+    "wheelDelta": 600,
+    "start": 0,
+    "samples": [
+      {
+        "ms": 16,
+        "y": 0
+      },
+      {
+        "ms": 100,
+        "y": 0
+      },
+      {
+        "ms": 250,
+        "y": 0
+      },
+      {
+        "ms": 500,
+        "y": 0
+      },
+      {
+        "ms": 900,
+        "y": 0
+      },
+      {
+        "ms": 1500,
+        "y": 0
+      }
+    ],
+    "interpretation_basis": "native scroll reaches target within ~1 frame; smoothed scroll (Lenis/Locomotive/custom) interpolates over hundreds of ms",
+    "reachedAt100msPct": null,
+    "likelySmoothed": null,
+    "movedPx": 0
+  },
+  "filmstrip": [
+    {
+      "step": 0,
+      "frame": "scroll-00.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 1,
+      "frame": "scroll-01.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 2,
+      "frame": "scroll-02.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 3,
+      "frame": "scroll-03.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 4,
+      "frame": "scroll-04.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 5,
+      "frame": "scroll-05.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 6,
+      "frame": "scroll-06.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 7,
+      "frame": "scroll-07.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 8,
+      "frame": "scroll-08.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 9,
+      "frame": "scroll-09.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 10,
+      "frame": "scroll-10.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    },
+    {
+      "step": 11,
+      "frame": "scroll-11.jpg",
+      "scrollY": 0,
+      "docHeight": 900,
+      "pinnedLargeFixedOrSticky": 1,
+      "pinSpacersInView": 0,
+      "headings": [
+        {
+          "text": "45rpmの服作り the 45r Clothes making",
+          "fontSize": "16px",
+          "family": "A1 Gothic R"
+        }
+      ],
+      "media": {
+        "canvases": 1,
+        "videos": 0
+      }
+    }
+  ],
+  "filmstripStepPx": 765,
+  "performance": {
+    "note": "single lab run from a cloud container; transferSize is 0 for cross-origin resources without Timing-Allow-Origin, so totals are lower bounds",
+    "domContentLoadedMs": 871,
+    "loadMs": 8364,
+    "lcpMs": 8616,
+    "cls": 0,
+    "requests": 155,
+    "byInitiator": {
+      "link": {
+        "count": 2,
+        "transferKB": 0
+      },
+      "script": {
+        "count": 28,
+        "transferKB": 267
+      },
+      "css": {
+        "count": 6,
+        "transferKB": 36
+      },
+      "img": {
+        "count": 109,
+        "transferKB": 16920
+      },
+      "fetch": {
+        "count": 4,
+        "transferKB": 0
+      },
+      "video": {
+        "count": 1,
+        "transferKB": 293
+      },
+      "xmlhttprequest": {
+        "count": 5,
+        "transferKB": 1
+      }
+    }
+  },
+  "scripts": {
+    "total": 28,
+    "libraryHints": [
+      "https://www.googletagmanager.com/gtag/js",
+      "https://45rpm.jp/assets/locomotive-scroll.controller.41d6471e.js"
+    ]
+  },
+  "consoleErrors": [],
+  "mobile": {
+    "horizontalOverflow": false,
+    "scrollWidth": 390,
+    "h1FontSize": "16px",
+    "largestFontSize": 40,
+    "menuButton": false
+  },
+  "tablet": {
+    "tablet-portrait": {
+      "horizontalOverflow": false,
+      "h1FontSize": "16px"
+    },
+    "tablet-landscape": {
+      "horizontalOverflow": false,
+      "h1FontSize": "16px"
+    }
+  }
+}
