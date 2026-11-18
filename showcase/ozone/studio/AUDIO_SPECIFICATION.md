@@ -108,19 +108,28 @@ Live voices are built from OscillatorNode, BiquadFilter and Gain. Humanisation u
 | s7 | `cue:s7` (t67 50 %) | 1135 / 950 | time-driven | open |
 Audio reads labels and the playhead, never raw scroll, so rigs M and P (A-2) need no audio change.
 
-- **Look-ahead scheduler ("two clocks").** A Worker timer ticks every 25 ms (immune to main-thread scroll jank). Each tick schedules every event due before `currentTime` + look-ahead (120 ms desktop, 200 ms mobile) with sample-accurate `start(t)` / `setValueAtTime`. Grid: `barZero` is set when s1 starts, and bar k falls at `barZero` + k·3.333 s. The score is data (bars × voices × events), not timers.
+- **Look-ahead scheduler ("two clocks").**
+  - **Timing.** A file-based Worker (`new Worker(new URL('./clockWorker.ts', import.meta.url), {type:'module'})`, CSP `worker-src 'self'`) posts a tick every 25 ms. The Worker only keeps time, so its ticks are not clamped like background timers.
+  - **Scheduling runs on the main thread.** On each tick it schedules every event due before `currentTime` + look-ahead (**120 ms desktop, 200 ms mobile**) with sample-accurate `start(t)` / `setValueAtTime`.
+  - **Effect of jank.** Once scheduled, an event plays on time. But a main-thread task longer than the look-ahead (scroll work, parsing, GC) delays the scheduling of the notes behind it.
+  - **Late events.** A late event ≤ 50 ms late starts at once. A later rendered one-shot is skipped. A later sustained note starts at once with its attack. Every late event is counted in the QA log.
+  - **Grid.** `barZero` is set at the hand-off (below), and bar k falls at `barZero` + k·3.333 s. The score is data (bars × voices × events), not timers.
+- **Direction comes from `master.ts` (finding 22).**
+  - GSAP fires `tl.call` in both directions, so `master.ts` derives `dir` from the playhead delta and passes it everywhere: `sfx(id, {direction: dir})`, `setPlayhead(units, dir)` (AU-1, one call per frame).
+  - For cues `master.ts` also computes the target itself: `setCue(N, +1)` when `cue:sN` is crossed forward, `setCue(N−1, −1)` when it is crossed backward.
+  - The director never infers direction and plays nothing for `direction: −1`.
 - **Quantised cue changes.**
   - `setCue(N, dir)` sets `pending`, and the latest call wins. It applies at the first bar line ≥ now + look-ahead + 150 ms.
-  - At that bar the incoming voices start on their own attacks. Outgoing sustained voices (pad, strings, choir, brass, sub) ramp to 0 over **1.5 s**. Rendered voices (piano, pluck, mallet) ring out and are never cut. The outgoing pulse simply stops (its last note was beat 4).
+  - At that bar the incoming voices start on their own attacks. Outgoing sustained voices (pad, strings, choir, brass, sub) ramp to 0 over **1.5 s**, thinned to their centre oscillator (§6). Rendered voices (piano, pluck, mallet) ring out and are never cut, except by the voice stealer. The outgoing pulse simply stops (its last note was beat 4).
   - Air retunes (τ 0.8 s) and the ear filter glides (τ 1.0 s), so the texture stays continuous. The bar grid, reverb tails, air and ear-filter state never reset: **no restarts**.
 - **Where a cue resumes.**
   - First forward entry: bar 1.
   - Any later entry: the cue's own bar cursor, at its next 4-bar group (5, 9, 13, then extensions). Returning to a scene continues its music.
   - Exceptions: s5 and s7 always start at bar 1 on forward entry, because the uplift and the cadence are the payoff (the clock still does not reset).
   - A reverse entry with no cursor (after a deep link) starts at bar 9.
-- **Intensity.** x = (playhead − span start)/(span length), clamped to 0–1. Continuous parameters use `setTargetAtTime` (τ 0.3 s for filters, 0.6 s for levels). Discrete ones (pulse subdivision, a layer in or out, grain step) change on the next beat, with ±0.03 hysteresis at each threshold.
+- **Intensity.** x = (playhead − span start)/(span length) from `setPlayhead`, clamped to 0–1. Continuous parameters use `setTargetAtTime` (τ 0.3 s for filters, 0.6 s for levels). Discrete ones (pulse subdivision, a layer in or out, grain step) change on the next beat, with ±0.03 hysteresis at each threshold.
 - **Reverse.**
-  - Crossing `cue:sN` backward calls `setCue(N−1, −1)`: the earlier cue returns at its resume point on the next bar, with the 1.5 s crossfade.
+  - `cue:sN` crossed backward arrives as `setCue(N−1, −1)` from `master.ts`. The earlier cue returns at its resume point on the next bar, with the 1.5 s crossfade.
   - x runs backward, so density unwinds the way it built (the S2 pulse thins again).
   - Backward across t45 50 %: the ear filter closes immediately, and s4 resumes, minor and muffled, on the next bar. The near-silence is not replayed in reverse.
   - **All SFX are silent in reverse**; only the bed plays (ANIMATION §5, CD §7).
@@ -130,19 +139,41 @@ Audio reads labels and the playhead, never raw scroll, so rigs M and P (A-2) nee
   - A jump of ≥ 2 cues (anchor, "Skip to the message", fling) lands on the next bar with a 0.8 s crossfade, marked by one soft piano landing chord (the cue's first chord, velocity 0.4).
   - A single frame that crosses > 60 units skips its SFX and keeps only the latest cue (ANIMATION §5).
   - Ear-filter state is a function of the playhead (open iff playhead ≥ t45 50 %), so it stays correct even when its label is skipped.
-- **Tab hidden / visible.**
-  - Hidden: master fades over 0.4 s → all sources stop and the queue clears → `suspend()`.
-  - Visible with intent on: `resume()`. On `running` the grid re-anchors (`barZero` = now + 0.1 s), the current cue re-enters at its resume point, and the master fades in over 1.0 s. Cursors, motif history and ear-filter state are kept.
-- **Mute / unmute.**
-  - Mute: master linear ramp to 0 over **0.4 s**, then stop sources and `suspend()`. The toggle shows OFF at once (DESIGN §3.2).
-  - Unmute: `resume()` inside the click → re-anchor → the current cue re-enters on the next bar at its resume point → master 0 → 1 over 1.0 s. The piece does not restart.
-- **Autoplay (D1) and the honest fallback.**
-  - `prepare()` creates the context, which starts suspended.
-  - Unless `ozone-sound` is `off`, init calls `resume()`. If the context reaches `running` within 300 ms, the loader plays a bed: air tuned D/A at −42 dBFS plus `loader:bloom` swells (proposed, §8).
-  - Otherwise the state is `blocked` and the loader stays silent. ENTER WITH SOUND resumes the context inside its click; CONTINUE WITHOUT SOUND never does.
-  - At the hand-off: `setCue(1,+1)`, `barZero` = now + 0.1 s, master 0 → 1 over 1.5 s **while scroll is already unlocked** (A-3).
-  - After S7 the context stays running in silence (no nodes, negligible CPU), so the toggle never lies.
-- **Static comic / reduced motion.** An IntersectionObserver (60 %) calls `setCue` per panel with a 1.5 s crossfade. x is fixed at 0.5, the ear filter is open iff the panel ≥ 5, and there are no SFX.
+  - **Reload and hash restoration (TD10, `history.scrollRestoration='manual'`).** After the hand-off, `master.ts` seeks to the stored scene or hash, sends no `sfx()` calls during the seek, and sends one `setCue(target, +1)` in place of `setCue(1, +1)`. The score's first bar is then the restored scene's cue: no s1 bar is heard first.
+- **Toggle truth (TD10, finding 18).**
+  - The toggle reads **ON iff `ozone-sound` = `on` AND `ctx.state === 'running'` AND master gain > 0**. Any other state reads OFF at once (`statechange`).
+  - The toggle writes the preference only on a click; so do ENTER, CONTINUE and Escape (TD5).
+- **Mute / unmute (toggle; AU-2).**
+  - **Mute:** the preference becomes `off` and the toggle reads OFF at once. Then a master linear ramp to 0 over **0.4 s**, stop all sources, `suspend()`.
+  - **Unmute, inside the toggle click:** unlock (below) → on `running`, re-anchor the grid → the current cue re-enters on the next bar at its resume point → master 0 → 1 over **0.4 s**. The piece does not restart.
+- **Unlock (TD10, finding 19).**
+  - The unlock is `resume()` plus a 1-frame silent buffer started synchronously in the same handler. It happens **only inside the ENTER WITH SOUND and toggle click handlers**: never on `pointerdown`, `touchstart`, scroll or keys.
+  - The one AudioContext is created by `src/audio/unlock.ts`, which is tiny and in the initial bundle, so the click can unlock it before the engine is imported. `AudioDirector.prepare()` adopts that context; production never has a second one.
+  - D1's init probe (one plain `resume()` at boot, cases b and c below) is not an unlock and is never repeated.
+- **Lifecycle listeners.** Registered in `cleanup.ts`: `visibilitychange`, `pagehide`, `pageshow`, AudioContext `statechange`.
+  - **Hidden / `pagehide`:** master to 0 (0.4 s on hide, at once on `pagehide`) → stop sources → clear the queue → `suspend()`.
+  - **Visible / `pageshow` (incl. bfcache), preference on:** one best-effort `resume()`. If it is not `running` within 1 s the toggle stays OFF, with no prompt, and the next toggle click unlocks. On `running`: re-anchor (`barZero` = now + 0.1 s), the current cue re-enters at its resume point, and the master rises 0 → 1 over 1.0 s. **This 1.0 s rise is the visibility fade, not a toggle ramp.** Cursors, motif history and ear-filter state are kept.
+  - **`statechange`:** `interrupted` (Safari) counts as suspended. A return to `running` re-anchors as on visible.
+- **Sound start: the four cases (G-1, G-3).**
+
+| Case | Condition | What audio does | Toggle |
+|---|---|---|---|
+| a · first visit, autoplay blocked | no `ozone-sound`; the init `resume()` is not `running` within 300 ms | The loader is silent and the prompt shows. **ENTER WITH SOUND** unlocks in its click and writes `on`, then the hand-off start. **CONTINUE WITHOUT SOUND** or **Escape** sets master gain to 0, calls `suspend()` and writes `off` (G-3), so a `resume()` that resolves late can neither sound nor read ON | OFF until the truth rule holds |
+| b · first visit, autoplay allowed | the init `resume()` reaches `running` | The loader is silent (master gain 0, no sources) and there is no prompt. Hand-off start | appears at the hand-off, visible, focusable and ON, on the first audible frame |
+| c · returning, `ozone-sound=on` | — | as (b) if the init `resume()` runs, else as (a) | as (b) / (a) |
+| d · returning, `ozone-sound=off` | — | No context, no probe, no prompt. `audio-engine`, `audio-ir` and `audio-buffers` are not loaded and are left out of the loader count (TD3). On the **first toggle ON** (`aria-busy`): `unlock.ts` creates and resumes the context inside the click, then the audio items load. The score enters at the current cue on the next bar once engine and IR are ready; buffer voices join when rendered | OFF, then ON by the truth rule |
+
+**Hand-off start (cases a–c).**
+- `loader:bloom` (§5) plays as the score's opening gesture (AU-4, moved here by G-1).
+- `barZero` = bloom start + 0.4 s (its peak).
+- `setCue(1, +1)`, or the restored scene (TD10).
+- Master 0 → 1 over 1.5 s while scroll is already unlocked (A-3), with the toggle visible from that same frame.
+- **The loader never plays a sound.**
+- After S7 the context stays running in silence (no sources, negligible CPU), so the toggle stays truthful.
+
+- **Static comic / reduced motion (TD10, finding 26).**
+  - An IntersectionObserver with `rootMargin: '-45% 0px -45% 0px', threshold: 0` treats a panel as current while it crosses the viewport's central 10 % band, so even panels taller than the viewport fire.
+  - On a change it calls `setCue(panel, dir)`, with a 1.5 s crossfade. x is fixed at 0.5, the ear filter is open iff the panel ≥ 5, and there are no SFX.
 
 ## 5 · SFX: every label → sound
 Classes: **accent** (short; obeys the global rule of ≤ 1 accent per 400 ms, and a later accent is dropped, not delayed) · **featured** (wins over the global rule; the earlier accent fades in 50 ms) · **series** (members after the first are exempt from the global rule) · **swell** (exempt from it) · **footstep** (has its own channel). All SFX are forward-only and silent in reverse. Levels are peak dBFS, post-master.
@@ -159,31 +190,67 @@ Classes: **accent** (short; obeys the global rule of ≤ 1 accent per 400 ms, an
 | `sfx:t45:eraser-rub` | t45 36 % | rubber on paper: 5 strokes of 180 ms (40 ms gaps), noise → LPF 1.4 kHz → BP Q 1.5 moving 600 Hz (pull) ↔ 900 Hz (push) · grit: sparse impulses 60/s → HPF 5 kHz at −18 dB · stereo spread 0 → 1 over 1.1 s as the eraser front grows from the palm · **starts the near-silence** on the next beat | featured · 3 s | −20 |
 | `sfx:t45:crumbs` | t45 45 % | 12 crumbs, one per grey speck: 3–6 ms clicks, BP 4–7 kHz random, spread over 600 ms with falling density, pans random ±0.7, −6…−14 dB within the group | accent · 2 s | −34 |
 | `cue:t45:lowpass-open` | t45 50 % (headphones `set`) | music ear filter 1.6 → 20 kHz over 0.9 s, width 0.6 → 1.0, low shelf −2 → +2 dB; immediate | — · reverse closes it over 1.2 s | — |
-| `sfx:t45:pluck1..5` | t45 68 / 74 / 80 / 86 / 92 % | the streetlights arrive: plucked-string voice on **C5 D5 F5 G5 C6** (F-major pentatonic, rising toward the horizon), fired on the label, not quantised (decision AU-3: the light is scroll-bound and cannot wait up to 208 ms) · each one farther away: −1 dB, +2 dB hall send · pans +0.10 / +0.15 / +0.20 / +0.22 / +0.25 (toward the vanishing point) | series · 120 ms; ≤ 2 queued, extras dropped | −20 → −24 |
+| `sfx:t45:pluck1..5` | t45 68 / 74 / 80 / 86 / 92 % | the streetlights arrive: plucked-string voice on **C5 D5 F5 G5 C6** (F-major pentatonic, rising toward the horizon), fired on the label, not quantised (decision AU-3: the light is scroll-bound and cannot wait up to 208 ms) · each one farther away: −1 dB, +2 dB hall send · pans +0.10 / +0.15 / +0.20 / +0.22 / +0.25 (toward the vanishing point) | series · 120 ms; extras inside the cooldown dropped | −20 → −24 |
 | `sfx:t56:card-tap` | t56 90 % | the card meets the counter: 2 ms noise click → BP 1.1 kHz Q 4 (plastic) + 320 Hz sine knock, 25 ms decay, −10 dB (wood) · room IR −14 · music ducks −3 dB for 600 ms. Nothing electronic | featured · 2 s | −24 |
 | `sfx:t67:rule-pen1..6` | t67 44 / 50 / 56 / 62 / 68 / 74 % | ruled pen stroke: noise → BP 4.5 kHz Q 1.8 gliding to 5 kHz · A 10 / sustain 160 / R 60 ms · pan = panel centre x × 0.6, reading order · each −0.5 dB | series · 120 ms | −30 |
 | `sfx:t67:paper-settle` | t67 98 % | one page settling: noise → LPF 900 Hz, A 15 / D 350 ms · flutter AM 22 Hz decaying over 200 ms · 120 Hz sine thump at −18 dB | accent · 3 s | −24 |
 | `cue:s2` … `cue:s7` | t12…t67 at 50 % | music cue changes, §4 | quantised to the bar | — |
 
-Flags (not renamed; see §8): `sfx:footstep` breaks the `sfx:tNM:` pattern · `cue:s1` does not exist · headline ink reveals and any "page turn" have no labels and get no sound · `loader:bloom` is proposed. **Loader bloom** (only if autoplay runs): pink noise → BP 400 Hz Q 1.2, attack 120 ms, release 400 ms, −40 dBFS, ≤ 4 per load, 300 ms cooldown.
+Label notes (AU-4, AU-5, G-1; nothing renamed):
+- `sfx:footstep` keeps its single id.
+- There is no `cue:s1`.
+- Headline ink reveals and any "page turn" have no labels and no sound.
 
-## 6 · Mobile constraints and offline-render plan
+**`loader:bloom`** is an internal AudioDirector event. It fires at the hand-off as the score's opening gesture, and the loader itself never sounds. Recipe: pink noise → BP 400 Hz Q 1.2, plus resonant BPs on D4/A4 (Q 8, −6 dB) so the ink settles into the key · attack 400 ms, release 1200 ms · peak −32 dBFS · once per page load, at the first audible start (any G-1 case, including the first toggle ON in case d).
+
+## 6 · Mobile constraints, budgets and offline-render plan
 - **Profile.** The mobile profile applies when `(pointer:coarse)`, `hardwareConcurrency ≤ 4` or `html[data-art=lite]`.
-  - **Caps:** desktop ≤ 40 sounding notes / ≤ 140 source nodes; mobile ≤ 24 / ≤ 70. On mobile: 2 grains (not 4), 2 murmur talkers, 2 saws per string note, no pad chorus, one ConvolverNode (hall).
-  - **Voice stealing:** released notes first (oldest), then the lowest velocity of the same instrument. Never the motif voice.
-- **Sample rate is never forced.** Everything uses `ctx.sampleRate` (44.1 or 48 kHz): rendered buffers and IRs are generated at that rate, and filter frequencies are clamped to 0.45·sr. `latencyHint` is `interactive` on desktop and `balanced` on mobile.
-- **Rendered buffers.** About 17 MB mono Float32 on desktop. On mobile, shorter renders (piano 2.5 s, pluck 1.8 s, mallet 1.5 s) keep it ≤ 12 MB. Rendering stays ≤ 400 ms, chunked in idle callbacks, and this step is the loader's "score buffers" progress weight.
-- **iOS unlock.** `resume()` plus a 1-frame silent buffer, both inside the same `pointerup`/`click`. Treat `statechange` to `interrupted` as suspended (toggle OFF, per DESIGN). Re-check state on `pageshow`. Set `navigator.audioSession.type = 'ambient'` where supported, so the silent switch is respected; never `playback`.
-- **CPU target.** ≤ 25 % of one core at the densest bars (S5 b6–7, S7 b7–8). Chromium lab: `AudioContext.renderCapacity` where available. Real devices are **NOT TESTED** (brief).
-- **Offline renders.**
-  - The graph builder takes a `BaseAudioContext`, so the same code renders in `OfflineAudioContext(2, len, 48000)`.
-  - A dev-only `?audio-qa` page, driven by Playwright Chromium, writes 24-bit WAV + JSON metrics to `showcase/ozone/qa/audio/`.
+- **Caps** (mirrored in TECH §8):
+  - **Source nodes** (OscillatorNode + AudioBufferSourceNode, LFOs and SFX included): ≤ 140 desktop / ≤ 70 mobile.
+  - **Sounding notes:** ≤ 48 / ≤ 36. This is the voice stealer's threshold.
+- **Mobile reductions.** 2 saws per string note · 2 oscillators per pad note · 1 saw per choir note, with one shared vibrato LFO · brass without its square · 1 pluck copy · ≤ 8 ringing piano notes · 2 grains · 2 murmur talkers · no pad chorus · one ConvolverNode (hall).
+- **Crossfade tails.** At the start of an outgoing crossfade each outgoing live note keeps only its centre oscillator: the detuned partners fade over 80 ms and stop, and per-note LFOs stop.
+- **Voice stealing.** Released notes first (oldest), then the lowest velocity of the same instrument; rendered tails are cut with a 120 ms release. The motif voice is never stolen.
+- **Worst-case source nodes per cue (finding 21).**
+  - These are counted from §2–§3 with the reductions and tail rule above. They are design counts, checked by the render node log (below).
+  - "Into this cue" = the incoming cue's first bar plus the outgoing tail during the 1.5 s crossfade (0.8 s for jumps).
+
+| Cue | Peak bars | Peak desktop / mobile | Into this cue: incoming + tail = total, desktop · mobile |
+|---|---|---|---|
+| s1 | b2–3 | 46 / 31 | hand-off: 31 + bloom 1 = 32 · 22 + 1 = 23 |
+| s2 | b9–16 (x > 0.66) | 59 / 40 | 38 + 18 = 56 · 26 + 16 = 42 |
+| s3 | b1–4 | 27 / 20 | 24 + 27 = 51 · 17 + 21 = 38 |
+| s4 | b9–16 + warning accent | 54 / 38 | 43 + 7 = 50 · 30 + 7 = 37 |
+| s5 | b6–7 | 93 / 59 | after the near-silence 63 + 2 = 65 · 39 + 2 = 41; **fling skipping it 63 + 19 = 82 · 39 + 15 = 54** |
+| s6 | b4–5 | 41 / 30 | 30 + 35 = 65 · 23 + 29 = 52 |
+| s7 | b7–8 | 95 / 61 | 56 + 27 = 83 · 33 + 17 = 50 |
+| jumps | s5 b6 → s7 · s2 dense → s5 | — | 56 + 35 = 91 · 33 + 29 = 62 · 63 + 27 = 90 · 39 + 21 = 60 |
+
+- **Sample rate is never forced.**
+  - Everything follows `ctx.sampleRate` (44.1 or 48 kHz). Piano and mallet buffers are rendered at `ctx.sampleRate / 2`; the rest at the full rate.
+  - Filter frequencies are clamped to 0.45·sr.
+  - `latencyHint` is `interactive` on desktop and `balanced` on mobile.
+- **Budgets (TD10, the same rows as TECH §8).**
+  - **Buffer memory ≤ 17 MB desktop / ≤ 12 MB mobile** (Float32 at 48 kHz). Desktop ≈ 14.4 MB: piano 13 × 3.5 s at half rate 4.4 MB, pluck 10 × 2.5 s 4.8 MB, mallet 9 × 2 s at half rate 1.7 MB, noise 2.1 MB, IRs 1.4 MB. Mobile ≈ 11.2 MB: piano 2.5 s without the unison doubling 3.1 MB, pluck 1.8 s 3.5 MB, mallet 1.5 s 1.3 MB, noise 2.1 MB, hall IR 1.2 MB.
+  - **Render time ≤ 400 ms** from Worker start to the last buffer, in the lab, mobile profile, 4× CPU throttle. Desktop work is ≈ 17.5 M multiply-adds for the piano. T6b reports whether CDP throttling reaches the Worker thread; if it does not, it says so and adds a scaled estimate.
+  - **No long task from audio.** No `longtask` or LoAF entry is attributable to audio scripts. Main-thread copy and graph-build chunks are each ≤ 16 ms.
+  - **`AudioContext.renderCapacity` ≤ 25 %** (Chromium, where available) at the densest bars (S5 b6–7, S7 b7–8) and during the S4→S5 and S6→S7 crossfades.
+  - **Node caps** as above.
+- **iOS and activation (TD10, finding 19).**
+  - The unlock happens only in the ENTER and toggle click handlers (§4). Nothing unlocks on `pointerdown` or touch.
+  - The lifecycle listeners `visibilitychange`, `pagehide`, `pageshow` and `statechange` are registered in `cleanup.ts`.
+  - `navigator.audioSession.type = 'ambient'` is set where supported; never `playback`.
+  - **Known limit, NOT TESTED:** with the hardware silent switch on, iOS mutes Web Audio while the context still reports `running`, so the toggle can read ON while nothing is heard. No API reports the switch. Real iOS and Android devices are NOT TESTED (brief).
+- **Offline renders** (finding 15: evidence goes under `showcase/ozone/reports/audio/`).
+  - The graph builder takes a `BaseAudioContext`. A dev-only `?audio-qa` page renders the same code in `OfflineAudioContext(2, len, 48000)`; it is not shipped, so production keeps one AudioContext.
+  - Playwright Chromium writes 24-bit WAV, JSON metrics and a per-render node-count log to `showcase/ozone/reports/audio/`.
   - (1) Each cue alone: 16 bars + 5 s tail (s7: 12 + 8 s) at x = 0, 0.5 and 1.
   - (2) Forward run-throughs with a scripted playhead at 8 units/s (≈ 151 s) and 20 units/s, firing every label, SFX included.
   - (3) A reverse run-through at 15 units/s.
   - (4) A fast-scroll script: 0 → 455 → 1135 → 300 within 4 s, plus "Skip to the message".
   - (5) Each SFX alone and over its scene bed, plus the t45 chain as one file.
   - (6) Mute, unmute, hidden and visible simulated with the same ramps and re-anchoring (suspend cannot be rendered offline).
+  - (7) **At the mobile profile:** S4→S5 both normally and as a fling that skips the near-silence, S6→S7, and the s5 → s7 jump. The node log must stay ≤ 70.
 - **Objective checks.** The script fails on any of:
   - NaN or Inf
   - sample peak > −1.0 dBFS or true peak (4× oversampled) > −0.5 dBTP
@@ -193,16 +260,25 @@ Flags (not renamed; see §8): `sfx:footstep` breaks the `sfx:tNM:` pattern · `c
   - a click: |Δsample| > 0.25 while local RMS < −40 dBFS
   - unplanned silence > 1.5 s (outside the near-silence and the post-S7 rest)
   - a spectral line ≥ 18 dB above its ±⅓-octave neighbourhood for > 2 s that is not a note of the current chord (catches beeps, stuck oscillators and hum)
-  - concurrent node count above the caps
+  - source nodes above the profile cap
   - two renders with the same seed that are not bit-identical
   - L/R correlation ≤ 0 in any 3 s window (mono and phone safety)
+- **Live checks** (Playwright, evidence under `showcase/ozone/reports/audio/`):
+  - each G-1 case a–d, including that the toggle is visible and ON on the first audible frame of case b;
+  - **blocked → CONTINUE → after 2 s the toggle is still OFF and `state !== 'running'`** (finding 18);
+  - Escape behaves like CONTINUE;
+  - the mute and unmute ramps are each 0.4 s (± 1 render quantum);
+  - Worker render time against its budget;
+  - no long task from audio;
+  - `renderCapacity` against its budget;
+  - exactly one AudioContext (an instrumented constructor count).
 
 ## 7 · Acceptance criteria (listening to the renders, on headphones and a phone speaker)
 1. It sounds composed and cinematic: voice-led chords, phrased melody, real dynamics. No bar sounds like a test tone, UI sound or bare drone, and no two identical 4-bar groups play back to back.
 2. The motif is recognisable within S1's first 3 bars, then heard bent (F♮, cut short) in S2, stopping on E in S3, absent in S4, completed in F in S5, in the bass in S6, and full and harmonised in S7.
 3. The run-through is one piece: no restart, every cue change lands on a bar line, and no change has a gap or a > 3 dB loudness bump that the score doesn't call for.
 4. S1–S4 sound "outside the headphones" yet clear. At lowpass-open the bandwidth, width and low end open within about 1 s, and S5 is plainly fuller.
-5. T4: the eraser is alone, then at least 1 bar of near-silence on the slow render, the held A carries into the S5 uplift, and the plucks sit in time and in key.
+5. T4: the eraser is alone, then at least 1 bar of near-silence on the slow render, the held A carries into the S5 uplift, and the plucks land with the lights and in key.
 6. S4 is grave, not horror: no stinger, nothing heartbeat-like, and the warning accent is one soft swell. The S2 pulse quickens only by subdivision, and the murmur has no words, vowels or laughter.
 7. S6 is steady and grounded; the room tone is felt more than heard; the card tap is one physical tap; nothing beeps.
 8. SFX never stack (≤ 1 accent per 400 ms), sit under the music except the featured eraser and card tap, and are absent from the reverse render.
@@ -211,15 +287,22 @@ Flags (not renamed; see §8): `sfx:footstep` breaks the `sfx:tNM:` pattern · `c
 11. Every §6 objective check passes on every render. The bass line stays audible on a phone speaker (2f₀).
 
 ## 8 · Open questions and label flags
-1. **API.** `setCue` alone cannot drive x. I propose `setPlayhead(units, dir)` from the same throttled `onUpdate` (TECH §6) → tech-lead. **Resolved: AU-1 (added to TECH §6).**
-2. **Mute ramp.** 0.4 s here and in TECH §6; DESIGN §3.2 says 300 ms. This spec uses 0.4 s → ui-ux to align. **Resolved: AU-2 (0.4 s everywhere).**
-3. **`sfx:footstep`** breaks the `sfx:tNM:<id>` pattern. I kept it as one id whose variant is chosen from the playhead → confirm. **Resolved: AU-5 (kept).**
-4. **No `cue:s1`.** The hand-off calls `setCue(1,+1)`, and reversing across `cue:s2` returns to s1. Fine unless the master should own it. **Resolved: AU-5.**
-5. **Headline ink reveals** have no labels and deliberately get no sound, so type stays silent. If sound is wanted, add `sfx:tNM:ink-l1`. The only "page" sound is `sfx:t67:paper-settle`; there is no page turn.
-6. **`loader:bloom`** is a new id outside the A-4 master labels and is used only when D1 autoplay succeeds. If it is dropped, the loader is silent and the score starts at the hand-off. **Resolved: AU-4 (kept, internal event).**
-7. **The near-silence is keyed to `sfx:t45:eraser-rub`.** A dedicated `cue:t45:erase` at 36 % would be cleaner. Either way it is skipped on a fling, which is correct. **Resolved: AU-5 (stays on eraser-rub).**
-8. **Pluck timing.** 16th-note quantising lags each light by ≤ 208 ms → creative-director accepts, or the lights follow the audio. **Resolved: AU-3 (not quantised; §5 updated).**
-9. **Devices.** iOS Safari and Android Chrome are NOT TESTED.
+**Resolved; the text above already applies these:**
+- AU-1 `setPlayhead`.
+- AU-2 0.4 s toggle ramps.
+- AU-3 plucks fire on their label.
+- AU-4 with G-1: `loader:bloom` at the hand-off, never in the loader.
+- AU-5: `sfx:footstep` keeps one id, there is no `cue:s1`, and the near-silence stays on `sfx:t45:eraser-rub`.
+- TD3 loader items.
+- TD10: render Worker, one AudioContext, unlock, toggle truth, static observer, restoration.
+- Gate A findings 3, 4, 13, 15, 17–22 and 26.
+
+**Still open:**
+1. G-1 and G-3 are orchestrator defaults pending client confirmation: no prompt when autoplay is allowed, and a persistent "without sound".
+2. Headline ink reveals and any "page turn" get no sound by design (no labels exist). `sfx:tNM:ink-l1` is added only if the creative director asks.
+3. Whether CDP CPU throttling reaches Worker threads, which affects how the ≤ 400 ms render budget is measured (T6b reports it).
+4. iOS Safari and Android Chrome are NOT TESTED, including the iOS silent-switch limit (§6).
+5. Final approval of the music rests with the client (Gate A client decision 14).
 
 ## 9 · The musical idea in plain words
 One unbroken piece walks home with the teen. A gentle four-note tune, step–stride–step–arrive, is theirs from the first bar. As the pressure builds, the music narrows: the tune's last note goes sour, then breaks off, then disappears, and the sound itself gets duller, as if heard through the headphones hanging around their neck. When they say no, an eraser rubs the red away into near-silence. Only one note is left hanging. They put the headphones on, the sound opens to full width, and that same note becomes the first chord of a brighter key, where the tune finally finishes. It stays steady past OZONE's counter, then comes home to the key it started in, sung in full by everything at once, and settles into silence.
