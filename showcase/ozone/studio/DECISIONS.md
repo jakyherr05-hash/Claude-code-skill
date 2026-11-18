@@ -56,3 +56,4 @@
 - G-6 Autoplay "allowed" (G-1 case b) = `AudioContext.state === 'running'` after the `audio-engine` loader item. Case b needs no gesture because the context is already running; TD10's "unlock only in click handlers" governs every path where a gesture is needed (ENTER, toggle).
 - G-7 Returning visitor with autoplay blocked: the compact prompt appears at the normal prompt moment, or by 600 ms into the short loader (ui-ux proposal, accepted).
 - P-rig pin length is 1090 (labels rounded to 5), not 1089.
+- G-8 Height clamp uses fitted coefficients (`--t-h1: min(vw-curve, 13.1vh)` etc., TYPOGRAPHY §5), not the literal `1.78 × vh-curve`: 1.78 = 640/360, so the literal form trims nothing at 640×360 and the S1 block overlaps the toggle reserve by 34 px. With the fitted clamp S1 clears it by 77 px (measured in Chromium with the real font). Desktop sizes at ≥ 1024×576 are unchanged.
