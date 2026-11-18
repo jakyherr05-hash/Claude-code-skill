@@ -10,7 +10,8 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 | T3 | Research delta (graphic-novel / illustrated scroll stories) | DONE: 3 new captures + The Boat past its gate; no reachable proof of one-stage camera transitions (accepted as engineering risk, prototyped + filmstrip-measured in T9) | REFERENCE_RESEARCH.md, library 55 entries |
 | T4 | Creative direction (art, character, 7 scenes, loader, 6 transitions, audio) | DONE: concept "Your Ink"; client decisions pending at Gate A (gender read open; Scene 6 adult customer; M7 off; placeholder wordmark) | CREATIVE_DIRECTION.md |
 | T5 | Specs (design, type/spacing, animation ownership, audio score) | DONE: all 6 specs; AUDIO covers every `sfx:`/`cue:` label (checked by grep); decisions AU-1..AU-5 | AUDIO_SPECIFICATION.md, DECISIONS.md |
-| T6 | Architecture + Gate A → **client review (stop)** | IN PROGRESS: architecture aligned with A-1 and AU-1..AU-5; tech-lead Gate A review running | — |
+| T6 | Architecture + Gate A → **client review (stop)** | IN PROGRESS: Gate A r1 = FAIL (3 blockers, 12 majors, 15 minors, all documents; GATE_A_REVIEW_R1.md). Decisions TD1–TD12 + client defaults G-1..G-3 recorded (`ccb6f6b`); 6 owners fixing their files; then narrow re-gate | GATE_A_REVIEW_R1.md |
+| T6b | t45/t67 prototype on placeholder art (added by TD8) | NOT STARTED (after client approval) | — |
 | T7–T12 | Rig, scenes, transitions+loader, audio, QA/perf, Gate B | NOT STARTED (gated by T6) | — |
 
 ## Carried over from the vaping brief (kept, still valid)
@@ -25,6 +26,7 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 
 - 2026-11-18 · Decisions A-1..A-4 recorded; TECHNICAL_ARCHITECTURE track height corrected to budget + 100svh (A-1).
 - 2026-11-18 · Audio agent hit the usage limit, resumed after reset, delivered AUDIO_SPECIFICATION (211 lines). All 21 animation labels present. Open questions settled as AU-1..AU-5.
+- 2026-11-18 · Gate A r1 FAIL. Main conflicts: story DOM/track, rig selectors, sound start under autoplay (WCAG 1.4.2), loader progress, storage keys, LCP element. Fix pass started on 6 files (TECH, ANIMATION, DESIGN, AUDIO, TYPOGRAPHY/SPACING, new TEST_PLAN).
 
 ## Open failures / blockers
 - California legal sources unreadable from this environment (BLOCKED).
