@@ -121,9 +121,9 @@
 .room__intent { text-wrap: pretty; }
 /* "place · year · type" never breaks inside an item and never leaves a "·" at either end of a line: each separator
    belongs to the item it introduces and sits in a strip that the negative margin + overflow clip at every line start */
-.room__meta, .detail__meta { display: flex; flex-wrap: wrap; margin-left: -1.2em; clip-path: inset(0 0 0 1.2em); }
-.room__meta > span, .detail__meta > span { white-space: nowrap; position: relative; padding-left: 1.2em; }
-.room__meta > span::before, .detail__meta > span::before { content: '·' / ''; position: absolute; left: 0.45em; } /* '/ ""': visual only, not announced */
+.room__meta, .detail__meta { display: flex; flex-wrap: wrap; margin-left: -3ch; clip-path: inset(0 0 0 3ch); }
+.room__meta > span, .detail__meta > span { white-space: nowrap; position: relative; padding-left: 3ch; }
+.room__meta > span::before, .detail__meta > span::before { content: '·' / ''; position: absolute; left: 0; width: 3ch; text-align: center; } /* 3ch = a literal ' · ' in the mono face; '/ ""' = visual only, not announced */
 .room__spec { color: var(--accent-warm); }
 .room__intent { max-width: 34ch; }
 @media (min-width: 64rem) {

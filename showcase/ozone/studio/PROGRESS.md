@@ -6,7 +6,7 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 |---|---|---|---|
 | T0 | Demo: detail-head baselines, full suite, tech-lead narrow re-gate | IN PROGRESS | see below |
 | T1 | Docs reset (brief, facts, progress, superseded concept) | IN PROGRESS | this commit |
-| T2 | California sources retry | PENDING | — |
+| T2 | California sources retry | DONE → still BLOCKED (CDPH 503, leginfo 403, OAG silent) | FACTS_AND_SOURCES.md |
 | T3 | Research delta (graphic-novel / illustrated scroll stories) | PENDING | — |
 | T4 | Creative direction (art, character, 7 scenes, loader, 6 transitions, audio) | PENDING | — |
 | T5 | Specs (design, type/spacing, animation ownership, audio score) | PENDING | — |

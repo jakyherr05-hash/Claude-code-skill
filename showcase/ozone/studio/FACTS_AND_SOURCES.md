@@ -27,6 +27,7 @@ Obsolete and never used: pre-September-2024 guidance to check ID for customers u
 - CDPH California Tobacco Control Branch, STAKE Act and Tobacco 21 pages: HTTP 503 on 2026-11-18 (two attempts).
 - leginfo.legislature.ca.gov (B&P Code §22952, §22956; Penal Code §308): HTTP 403 to automated access.
 - Read: CDTFA retailer licensing pages say "the California Department of Public Health (CDPH) administers the STAKE Act", and list lung-cancer signage requirements taking effect Jan 1, 2027 (SB 1124). Context only.
+- Retry 2026-11-18 (T2): CDPH CTCB/STAKE/Tobacco21 HTTP 503 again; leginfo §22956 and Penal Code §308 HTTP 403; https://oag.ca.gov/tobacco and /tobacco/faq readable (HTTP 200, no date) but state no minimum age, ID rule or signage wording (only: "Attorney General Bonta is committed to protecting children by preventing tobacco and nicotine addiction."); tobaccofreeca.com now 301-redirects to a non-government site (not followed).
 - **Consequence:** the page makes no California-specific legal statement until a CA source is read. It may link to the CDPH Tobacco Control Branch home page as a resource. Retry in T2.
 
 ## Customer-facing OZONE copy (client-supplied; OZONE's own statements, not legal quotations)
