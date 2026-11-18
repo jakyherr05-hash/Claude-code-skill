@@ -38,7 +38,7 @@ One named studio role per path (finding 30). Roles: frontend-engineer (FE), gsap
 | `tests/**`, `playwright.config.ts`, `scripts/check-prerender.mjs`, `scripts/bundle-report.mjs`, `reports/**` (evidence: `showcase/ozone/reports/<area>/`, audio under `reports/audio/`) | QA | T11+ |
 | `tests/proto/t45.spec.ts`, `tests/proto/t67.spec.ts` (T6b protocol, with PE) | QA | T6b |
 | `showcase/ozone/proto/**` (T6b prototype code and placeholder art) (G-19) | GA | T6b |
-| `showcase/ozone/proto/fidelity.json` (T6b target values, §10; creative-director signs off) (G-17, G-19) | FE | T6b |
+| `showcase/ozone/proto/fidelity.json` (T6b target values, §10.1; creative-director signs off) (G-17, G-19) | FE | T6b |
 | `reports/typography/` (one-off typography record inside QA's tree, accepted) (G-19) | TS | T6 |
 | `studio/**` docs | author named in each file header | |
 
@@ -169,7 +169,20 @@ Lab results are not field results: there is no RUM, so real-user CWV are NOT TES
 - `playwright.config.ts` adapted from `demo/playwright.config.ts`: production build via `vite preview`, `PW_PORT` (4173) and `PW_OUT` (`dist`), 1 worker, a width matrix (320, 360, 375, 390, 414, 430, 768, 1024, 1280, 1440, 1920) plus `reduced-motion` and `no-js` projects; SwiftShader args removed (no WebGL). A `?art=lite|full` override exists for QA and the chosen tier is logged.
 - **Test plan:** see [TEST_PLAN.md](TEST_PLAN.md) (QA owns it): each criterion maps to a spec file, command, evidence path and PASS/FAIL/NOT TESTED rule. Evidence lives under `showcase/ozone/reports/<area>/`, with audio under `showcase/ozone/reports/audio/`. Lighthouse runs ×3 (plan §4).
 
-## 10. T6b fidelity target: `showcase/ozone/proto/fidelity.json` (G-17)
+## 10. Risks and mitigations
+| Risk | Mitigation |
+|---|---|
+| Continuous camera over a large SVG may drop frames on mid-range phones (unproven) | **T6b (TD8)**: t45 then t67 prototype on placeholder art matching the real fill area, filters and mask, measured with QA's protocol (DPR 3 at 390×844; DPR 1 and 2 at 1440×900; real wheel/touch; CDP trace with paint/raster/LoAF; audio running) → performance verdict + cut-lines, after client approval of Gate A and before T7; T8 depends on T6b passing. Cut-lines: lower halftone density, bake filters, cull layers, fewer nodes, HTML-wrapped-`<svg>` depth planes. Real-device performance NOT TESTED without client devices |
+| t67 panel-page assembly is the most complex timeline | second T6b prototype; panels are low-detail `sN-panel` `<defs>` groups; fall back to paper-rise + static panels if the filmstrip fails critique |
+| One master timeline is a single point of failure | try/catch init → static mode; head-script watchdog; claims-overlap assertion; per-scene sub-timeline unit tests |
+| Prerendered art too heavy for the HTML (size, long parse) | budgets in §8 (≤ 250 KB gz, ≤ 20,000 nodes, per-frame caps); art is never hydrated |
+| Fonts late shifting wraps and labels | metric-matched fallbacks (TYPOGRAPHY), `refresh()` after fonts, track heights from CSS |
+| Autoplay policies differ (Safari/iOS) | G-1 four-case table; Chromium policies emulated; iOS/Android NOT TESTED |
+| Audio render cost on mobile | Worker render, ≤ 16 ms main-thread chunks, §8 audio rows |
+| Initial JS budget | GSAP core + ScrollTrigger + CustomEase only; no art chunks; bundle report gate |
+| TypeScript 7 / Vite 8 toolchain drift | exact pins matching the demo's passing build; `playwright-core` override |
+
+### 10.1 T6b fidelity target: `showcase/ozone/proto/fidelity.json` (G-17)
 Owner: frontend-engineer (written before T6b starts); **creative-director signs off** the values. The file holds **TARGET** values, not measurements of real art (the real art does not exist until T8). The prototype's placeholder art is checked against it (TEST_PLAN §3.1: halftone area 0.9×–1.3× target, identical filtered layers, same mask element ±10 % box). In T8, FE measures the real art against the same file; **more than 10 % over any target triggers a T6b re-run.**
 
 | Field | Target | Derivation |
@@ -184,25 +197,12 @@ Owner: frontend-engineer (written before T6b starts); **creative-director signs 
 
 **Software-raster rule (N7b).** This environment has no GPU (`/dev/dri` absent; SwiftShader), so raster cost cannot be judged. In software raster, **frame time, LoAF and long-task criteria gate the verdict; raster p95 is reported only**; the verdict is labelled **"lab, software raster"**; real phone GPU stays NOT TESTED. **Worker scaled-estimate rule (G-17):** the Worker render budget is judged on `max(measured, unthrottled × 4)` and labelled "estimated", with a calibration loop run in both the Worker and the main thread on every run.
 
-## 11. Risks and mitigations
-| Risk | Mitigation |
-|---|---|
-| Continuous camera over a large SVG may drop frames on mid-range phones (unproven) | **T6b (TD8)**: t45 then t67 prototype on placeholder art matching the real fill area, filters and mask, measured with QA's protocol (DPR 3 at 390×844; DPR 1 and 2 at 1440×900; real wheel/touch; CDP trace with paint/raster/LoAF; audio running) → performance verdict + cut-lines, after client approval of Gate A and before T7; T8 depends on T6b passing. Cut-lines: lower halftone density, bake filters, cull layers, fewer nodes, HTML-wrapped-`<svg>` depth planes. Real-device performance NOT TESTED without client devices |
-| t67 panel-page assembly is the most complex timeline | second T6b prototype; panels are low-detail `sN-panel` `<defs>` groups; fall back to paper-rise + static panels if the filmstrip fails critique |
-| One master timeline is a single point of failure | try/catch init → static mode; head-script watchdog; claims-overlap assertion; per-scene sub-timeline unit tests |
-| Prerendered art too heavy for the HTML (size, long parse) | budgets in §8 (≤ 250 KB gz, ≤ 20,000 nodes, per-frame caps); art is never hydrated |
-| Fonts late shifting wraps and labels | metric-matched fallbacks (TYPOGRAPHY), `refresh()` after fonts, track heights from CSS |
-| Autoplay policies differ (Safari/iOS) | G-1 four-case table; Chromium policies emulated; iOS/Android NOT TESTED |
-| Audio render cost on mobile | Worker render, ≤ 16 ms main-thread chunks, §8 audio rows |
-| Initial JS budget | GSAP core + ScrollTrigger + CustomEase only; no art chunks; bundle report gate |
-| TypeScript 7 / Vite 8 toolchain drift | exact pins matching the demo's passing build; `playwright-core` override |
-
 HANDOFF
 - agent: frontend-engineer
-- phase: T6 Gate A round-1 fix pass (document only, no application code)
-- summary: Rewrote TECHNICAL_ARCHITECTURE.md to apply TD1–TD12 and G-1..G-3 to the sections this file owns: story DOM and single ScrollTrigger, rig.ts plus head script and watchdog, four-case sound table, count-based loader, storage keys, prerender-without-hydration, audio and story-ready budgets, ownership map with one role per path, dependency fixes, TEST_PLAN pointer. Stale TODOs removed.
+- phase: T6 Gate A round-2 conditions (document only)
+- summary: Applied N1/G-13, N2, N3/G-12, N4/G-14, N8, N9, N13/G-15, N14/G-11, G-16, G-17 (new §10.1 fidelity target), G-19 ownership rows, F18.
 - files_changed: /home/user/Claude-code-skill/showcase/ozone/studio/TECHNICAL_ARCHITECTURE.md
-- verification: `npm view lighthouse@13.6.0 name version license` returned lighthouse 13.6.0 Apache-2.0: PASS. Other dependency pins unchanged from the round-1 review's verified list. Build, typecheck, browser run: NOT TESTED (no code exists). Story-ready target and initial-JS estimate: unmeasured proposals.
-- open_issues → owner: story-ready target and audio budgets to confirm after T6b → performance-engineer; P-rig label table and `red-all` node budget → gsap-animator; cross-file names listed in the report → ui-ux-designer, audio-code owner (frontend-engineer), qa-engineer.
-- decisions_needed: client confirmation of G-1..G-3 and the production URL for canonical/OG; real-device testing (client).
-- next_suggested: narrow Gate A re-check by tech-lead, client approval, then T6b prototype before T7.
+- verification: consistency by reading: PASS. Build, typecheck, browser, story-ready and fidelity values: NOT TESTED (targets, no code).
+- open_issues -> owner: fidelity.json 35 % halftone ceiling and 3 filtered layer ids -> creative-director sign-off, FE fills ids from layers.ts.
+- decisions_needed: none.
+- next_suggested: T6b.

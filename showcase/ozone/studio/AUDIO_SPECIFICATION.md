@@ -141,38 +141,46 @@ Audio reads labels and the playhead, never raw scroll, so rigs M and P (A-2) nee
   - Ear-filter state is a function of the playhead (open iff playhead ≥ t45 50 %), so it stays correct even when its label is skipped.
   - **Reload and hash restoration (TD10, `history.scrollRestoration='manual'`).** After the hand-off, `master.ts` seeks to the stored scene or hash, sends no `sfx()` calls during the seek, and sends one `setCue(target, +1)` in place of `setCue(1, +1)`. The score's first bar is then the restored scene's cue: no s1 bar is heard first.
 - **Toggle truth (TD10, finding 18).**
-  - The toggle reads **ON iff `ozone-sound` = `on` AND `ctx.state === 'running'` AND master gain > 0**. Any other state reads OFF at once (`statechange`).
-  - The toggle writes the preference only on a click; so do ENTER, CONTINUE and Escape (TD5).
+  - **Effective preference (G-13, N1):** `pref = localStorage['ozone-sound'] ?? 'on'`. No stored key means the brief's default ON.
+  - The toggle reads **ON iff `pref === 'on'` AND `ctx.state === 'running'` AND master gain > 0**. Any other state reads OFF at once (`statechange`).
+  - The key is written only by a click on the toggle, ENTER, CONTINUE or Escape (TD5). Case b writes nothing.
 - **Mute / unmute (toggle; AU-2).**
   - **Mute:** the preference becomes `off` and the toggle reads OFF at once. Then a master linear ramp to 0 over **0.4 s**, stop all sources, `suspend()`.
   - **Unmute, inside the toggle click:** unlock (below) → on `running`, re-anchor the grid → the current cue re-enters on the next bar at its resume point → master 0 → 1 over **0.4 s**. The piece does not restart.
 - **Unlock (TD10, finding 19).**
   - The unlock is `resume()` plus a 1-frame silent buffer started synchronously in the same handler. It happens **only inside the ENTER WITH SOUND and toggle click handlers**: never on `pointerdown`, `touchstart`, scroll or keys.
-  - The one AudioContext is created by `src/audio/unlock.ts`, which is tiny and in the initial bundle, so the click can unlock it before the engine is imported. `AudioDirector.prepare()` adopts that context; production never has a second one.
-  - D1's init probe (one plain `resume()` at boot, cases b and c below) is not an unlock and is never repeated.
+  - `src/audio/unlock.ts` (tiny, in the initial bundle) owns the one AudioContext (N2) and exports two functions:
+    - `getContext()`: get-or-create the singleton, without resuming it.
+    - `unlock()`: get-or-create, then `resume()` and the 1-frame silent buffer, all synchronously; called only from the click handlers above.
+  - D1's boot probe (cases b and c) is `getContext().resume()` once at boot. It is not an unlock and is never repeated.
+  - `AudioDirector.prepare()` also calls `getContext()`, so it gets the same object. Production never has a second context.
 - **Lifecycle listeners.** Registered in `cleanup.ts`: `visibilitychange`, `pagehide`, `pageshow`, AudioContext `statechange`.
   - **Hidden / `pagehide`:** master to 0 (0.4 s on hide, at once on `pagehide`) → stop sources → clear the queue → `suspend()`.
-  - **Visible / `pageshow` (incl. bfcache), preference on:** one best-effort `resume()`. If it is not `running` within 1 s the toggle stays OFF, with no prompt, and the next toggle click unlocks. On `running`: re-anchor (`barZero` = now + 0.1 s), the current cue re-enters at its resume point, and the master rises 0 → 1 over 1.0 s. **This 1.0 s rise is the visibility fade, not a toggle ramp.** Cursors, motif history and ear-filter state are kept.
+  - **Visible / `pageshow` (incl. bfcache), when `pref === 'on'` (G-13; this includes case b, where no key is stored):** one best-effort `resume()`. If it is not `running` within 1 s the toggle stays OFF, with no prompt, and the next toggle click unlocks. On `running`: re-anchor (`barZero` = now + 0.1 s), the current cue re-enters at its resume point, and the master rises 0 → 1 over 1.0 s. **This 1.0 s rise is the visibility fade, not a toggle ramp.** Cursors, motif history and ear-filter state are kept.
   - **`statechange`:** `interrupted` (Safari) counts as suspended. A return to `running` re-anchors as on visible.
 - **Sound start: the four cases (G-1, G-3).**
 
 | Case | Condition | What audio does | Toggle |
 |---|---|---|---|
-| a · first visit, autoplay blocked | no `ozone-sound`; the init `resume()` is not `running` within 300 ms | The loader is silent and the prompt shows. **ENTER WITH SOUND** unlocks in its click and writes `on`, then the hand-off start. **CONTINUE WITHOUT SOUND** or **Escape** sets master gain to 0, calls `suspend()` and writes `off` (G-3), so a `resume()` that resolves late can neither sound nor read ON | OFF until the truth rule holds |
-| b · first visit, autoplay allowed | the init `resume()` reaches `running` | The loader is silent (master gain 0, no sources) and there is no prompt. Hand-off start | appears at the hand-off, visible, focusable and ON, on the first audible frame |
-| c · returning, `ozone-sound=on` | — | as (b) if the init `resume()` runs, else as (a) | as (b) / (a) |
-| d · returning, `ozone-sound=off` | — | No context, no probe, no prompt. `audio-engine`, `audio-ir` and `audio-buffers` are not loaded and are left out of the loader count (TD3). On the **first toggle ON** (`aria-busy`): `unlock.ts` creates and resumes the context inside the click, then the audio items load. The score enters at the current cue on the next bar once engine and IR are ready; buffer voices join when rendered | OFF, then ON by the truth rule |
+| a · first visit, autoplay blocked | no `ozone-sound` key (`pref` = `on`); the boot `resume()` is not `running` within 300 ms | The loader is silent and the prompt shows. **ENTER WITH SOUND** unlocks in its click and writes `on`, then the hand-off start. **CONTINUE WITHOUT SOUND** or **Escape** sets master gain to 0, calls `suspend()` and writes `off` (G-3), so a `resume()` that resolves late can neither sound nor read ON | OFF until the truth rule holds |
+| b · first visit, autoplay allowed | no key (`pref` = `on`); the boot `resume()` reaches `running` | The loader is silent (master gain 0, no sources) and there is no prompt. **No key is written** (G-13). Hand-off start | appears at the hand-off, visible, focusable and ON, on the first audible frame |
+| c · returning, `ozone-sound=on` | — | as (b) if the boot `resume()` runs, else as (a) | as (b) / (a) |
+| d · returning, `ozone-sound=off` | — | No context, no probe, no prompt. `audio-engine`, `audio-ir` and `audio-buffers` are not loaded and are left out of the loader count (TD3). On the **first toggle ON** (`aria-busy`): `unlock()` creates and resumes the context inside the click, then the audio items load. The score enters at the current cue on the next bar once engine and IR are ready; buffer voices join when rendered | OFF, then ON by the truth rule |
 
 **Hand-off start (cases a–c).**
 - `loader:bloom` (§5) plays as the score's opening gesture (AU-4, moved here by G-1).
 - `barZero` = bloom start + 0.4 s (its peak).
 - `setCue(1, +1)`, or the restored scene (TD10).
-- Master 0 → 1 over 1.5 s while scroll is already unlocked (A-3), with the toggle visible from that same frame.
+- **Duration (G-11).** The hand-off lasts **1.65 s**, or **1.95 s** when the prompt shows (+0.3 s for the prompt un-ink, which comes first and is silent).
+- At the hand-off's first frame after any un-ink, the bloom and a master fade 0 → 1 over 1.5 s start together, so the fade ends inside the hand-off.
+- Scroll is already unlocked (A-3), and the toggle is visible from that same frame.
 - **The loader never plays a sound.**
 - After S7 the context stays running in silence (no sources, negligible CPU), so the toggle stays truthful.
 
 - **Static comic / reduced motion (TD10, finding 26).**
-  - An IntersectionObserver with `rootMargin: '-45% 0px -45% 0px', threshold: 0` treats a panel as current while it crosses the viewport's central 10 % band, so even panels taller than the viewport fire.
+  - An IntersectionObserver with `rootMargin: '-45% 0px -45% 0px', threshold: 0` reports the panels touching the viewport's central 10 % band, so even panels taller than the viewport fire.
+  - That band (57–90 px) is wider than the gutter, so two panels can touch it at once (N11). **The panel covering the centre line (`innerHeight / 2`) wins.**
+  - Ties (an edge exactly on the line) go to the panel further in the scroll direction. If the line sits in a gutter, the current panel stays.
   - On a change it calls `setCue(panel, dir)`, with a 1.5 s crossfade. x is fixed at 0.5, the ear filter is open iff the panel ≥ 5, and there are no SFX.
 
 ## 5 · SFX: every label → sound
@@ -232,7 +240,11 @@ Label notes (AU-4, AU-5, G-1; nothing renamed):
   - `latencyHint` is `interactive` on desktop and `balanced` on mobile.
 - **Budgets (TD10, the same rows as TECH §8).**
   - **Buffer memory ≤ 17 MB desktop / ≤ 12 MB mobile** (Float32 at 48 kHz). Desktop ≈ 14.4 MB: piano 13 × 3.5 s at half rate 4.4 MB, pluck 10 × 2.5 s 4.8 MB, mallet 9 × 2 s at half rate 1.7 MB, noise 2.1 MB, IRs 1.4 MB. Mobile ≈ 11.2 MB: piano 2.5 s without the unison doubling 3.1 MB, pluck 1.8 s 3.5 MB, mallet 1.5 s 1.3 MB, noise 2.1 MB, hall IR 1.2 MB.
-  - **Render time ≤ 400 ms** from Worker start to the last buffer, in the lab, mobile profile, 4× CPU throttle. Desktop work is ≈ 17.5 M multiply-adds for the piano. T6b reports whether CDP throttling reaches the Worker thread; if it does not, it says so and adds a scaled estimate.
+  - **Render time ≤ 400 ms** from Worker start to the last buffer, in the lab, mobile profile. Desktop work is ≈ 17.5 M multiply-adds for the piano.
+  - **Throttling and the Worker (G-17).** The tech lead measured, under CDP `Emulation.setCPUThrottlingRate` 4 in Chromium 153: main thread ×4 (≈ 48 → 195 ms), dedicated Worker ×1 (≈ 47 → 48 ms). The Worker is not throttled.
+  - The budget is therefore judged on **`max(measured, measured_unthrottled × 4)`, labelled "estimated"**.
+  - Each run also runs a calibration loop (the same busy loop) in the Worker and on the main thread, and records their ratio next to the result.
+  - The main-thread copy and graph-build chunks are still measured throttled, ≤ 16 ms each.
   - **No long task from audio.** No `longtask` or LoAF entry is attributable to audio scripts. Main-thread copy and graph-build chunks are each ≤ 16 ms.
   - **`AudioContext.renderCapacity` ≤ 25 %** (Chromium, where available) at the densest bars (S5 b6–7, S7 b7–8) and during the S4→S5 and S6→S7 crossfades.
   - **Node caps** as above.
@@ -295,12 +307,13 @@ Label notes (AU-4, AU-5, G-1; nothing renamed):
 - AU-5: `sfx:footstep` keeps one id, there is no `cue:s1`, and the near-silence stays on `sfx:t45:eraser-rub`.
 - TD3 loader items.
 - TD10: render Worker, one AudioContext, unlock, toggle truth, static observer, restoration.
+- Gate A round 2: G-13 effective `pref` (N1), `getContext()` / `unlock()` (N2), centre-line winner (N11), hand-off 1.65 s (G-11), Worker ×4 estimate (G-17).
 - Gate A findings 3, 4, 13, 15, 17–22 and 26.
 
 **Still open:**
 1. G-1 and G-3 are orchestrator defaults pending client confirmation: no prompt when autoplay is allowed, and a persistent "without sound".
 2. Headline ink reveals and any "page turn" get no sound by design (no labels exist). `sfx:tNM:ink-l1` is added only if the creative director asks.
-3. Whether CDP CPU throttling reaches Worker threads, which affects how the ≤ 400 ms render budget is measured (T6b reports it).
+3. Settled by G-17: the Worker is measured unthrottled and judged on the ×4 estimate (§6). Sending the throttle command to the Worker's own CDP target was NOT TESTED (tech lead) and is not relied on.
 4. iOS Safari and Android Chrome are NOT TESTED, including the iOS silent-switch limit (§6).
 5. Final approval of the music rests with the client (Gate A client decision 14).
 
