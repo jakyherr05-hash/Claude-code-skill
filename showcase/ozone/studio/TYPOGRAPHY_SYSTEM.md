@@ -112,8 +112,8 @@ Why not the literal "1.78 × vh-curve" (the vw-curve evaluated at 1.78 × the he
 | **320×568** | 44 / 24 | 3 + 2 | 70 | 183 | 252 | 489 | +237 | 32 % |
 | **390×844** | 46.8 / 25.5 | 3 + 2 | 74 | 194 | 268 | 761 | +493 | 23 % |
 | **1440×900** | 88 / 48 | 3 + 2 | 119 | 366 | 485 | 769 | +284 | 41 % |
-| 844×390 with clamp (extra) | 51.1 / 27.9 | 2 + 1 | 86 | 135 | 222 | 300 | +78 | 35 % |
-| 720×450, 1440×900 at 200 % (extra) | 59.0 / 32.2 | 2 + 2 | 74 | 191 | 265 | 352 | +87 | 42 % |
+| 844×390 with clamp (extra) | 51.1 / 27.9 | 2 + 1 | 86 | 135 | 222 | 293 | +71 | 35 % |
+| 720×450, 1440×900 at 200 % (extra) | 59.0 / 32.2 | 2 + 2 | 74 | 191 | 265 | 366 | +101 | 42 % |
 
 Arithmetic for the headline case: 640×360, `--margin` 20 + 44 + `--space-xs` 10.2 = 74 px top; L1 2 × 47.2 × 0.92 = 86.8; gap 0.4 × 25.7 = 10.3; L2 1 × 25.7 × 1.08 = 27.8; total 125 px; 74 + 125 = 199 px, inside the 360 px box and 77 px above the reserve line (360 − (44 + 20 + 20.2) = 276). The 390×844, 320×568 and 1440×900 rows match DESIGN §2.1's estimates (194 / 183 / 366 px), so the clamp does not move them.
 If S1 ever gains a caption: a 2-line caption box is about 81 px plus `--space-l` (≈ 27 px), so 199 + 108 = 307 px would cross the 276 px reserve at 640×360. It would have to go sequential (the DESIGN rule for short landscape), not stacked under the headline. The fit above does not cover that case.
@@ -213,7 +213,7 @@ Text over art is governed by CD §2 "worst pixel" rules; the table above is the 
   --step-3:clamp(1.944rem,1.7407rem + 1.0167vw,2.9607rem);
   --t-label:clamp(0.875rem,0.8625rem + 0.0625vw,0.9375rem);
 
-  /* display, mobile/tablet curve (320→1023); overridden ≥ 64rem. Each is min(vw-curve, k·vh): the height clamp, TD12. The h2/d2 terms (7.15vh, 7.7vh) are not re-declared at ≥ 64rem: their vw curves stay under them at every 16:9 size. */
+  /* display, mobile/tablet curve (320→1023); overridden ≥ 64rem. Each is min(vw-curve, k·vh): the height clamp, TD12. h2 and d2 are single-curve tokens, so their `min()` applies at every width. */
   --t-h1:min(clamp(2.75rem,1.9545rem + 3.9773vw,4.5rem),13.1vh);
   --t-hero:min(clamp(3.25rem,2rem + 6.25vw,6rem),18.5vh);
   --t-d1:min(clamp(3rem,1.8636rem + 5.6818vw,5.5rem),15.3vh);

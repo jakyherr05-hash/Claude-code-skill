@@ -42,9 +42,9 @@ Landscape phones use the 768 grid with the 4:3 rig. Ranges are `min-width` queri
 
 ## 3 · Safe areas and viewport units
 - Edge UI (counter top, sound toggle bottom-left, skip) and every text-safe zone use `padding-inline: max(var(--margin), env(safe-area-inset-left))` / `-right`; bottom-anchored items add `env(safe-area-inset-bottom)`, top-anchored add `env(safe-area-inset-top)`. Requires `<meta name="viewport" content="viewport-fit=cover">` (frontend).
-- Scene pin heights use **`svh`** (the CD scroll budget is already in svh at 390) so the mobile URL-bar collapse does not resize pins; stage height for camera rigs uses `dvh` only for the no-pin reduced-motion comic. Fallback `vh` first in the cascade.
+- Copy box = `100svh`, anchored top (TD1); display type is height-clamped so the S1 block fits it at 640×360 (TYPOGRAPHY_SYSTEM §5, TD12). Scene pin heights use **`svh`** (the CD scroll budget is already in svh at 390) so the mobile URL-bar collapse does not resize pins; stage height for camera rigs uses `dvh` only for the no-pin reduced-motion comic. Fallback `vh` first in the cascade.
 - Touch targets ≥ 44 × 44 px for sound toggle, skip, counter links, ENTER/CONTINUE; small visual elements get an invisible padded hit area, kept clear of text-safe zones (CD §8).
-- Landscape phone notch: left/right insets apply, so the zone shrinks, not the type.
+- Static mode (`max-height:359px`) applies below 360 px of height, so 400 % zoom never needs a pinned fit. Landscape phone notch: left/right insets apply, so the zone shrinks, not the type.
 
 ## 4 · Caption box (narration box)
 - Ground `#F1EBDD`, text `#101014`, **2 px `#101014` border, straight corners, never tilted**.
