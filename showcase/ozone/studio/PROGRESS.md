@@ -10,7 +10,7 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 | T3 | Research delta (graphic-novel / illustrated scroll stories) | DONE: 3 new captures + The Boat past its gate; no reachable proof of one-stage camera transitions (accepted as engineering risk, prototyped + filmstrip-measured in T9) | REFERENCE_RESEARCH.md, library 55 entries |
 | T4 | Creative direction (art, character, 7 scenes, loader, 6 transitions, audio) | DONE: concept "Your Ink"; client decisions pending at Gate A (gender read open; Scene 6 adult customer; M7 off; placeholder wordmark) | CREATIVE_DIRECTION.md |
 | T5 | Specs (design, type/spacing, animation ownership, audio score) | DONE: all 6 specs; AUDIO covers every `sfx:`/`cue:` label (checked by grep); decisions AU-1..AU-5 | AUDIO_SPECIFICATION.md, DECISIONS.md |
-| T6 | Architecture + Gate A → **client review (stop)** | IN PROGRESS: r1 FAIL → all 6 fix passes applied (TECH, ANIMATION, DESIGN, AUDIO, TYPOGRAPHY/SPACING, new TEST_PLAN); rulings G-4..G-10; narrow re-gate running | GATE_A_REVIEW_R1.md, TEST_PLAN.md |
+| T6 | Architecture + Gate A → **client review (stop)** | Gate A r2 = **PASS with conditions** (22/30 closed, 8 partial, 14 new: 5 major, 9 minor; all document edits; conditions close before T6b, checked against the diff). **Awaiting client approval** of the defaults and decisions | GATE_A_REVIEW_R1.md, GATE_A_REVIEW_R2.md |
 | T6b | t45/t67 prototype on placeholder art (added by TD8) | NOT STARTED (after client approval) | — |
 | T7–T12 | Rig, scenes, transitions+loader, audio, QA/perf, Gate B | NOT STARTED (gated by T6) | — |
 
@@ -28,6 +28,7 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 - 2026-11-18 · Audio agent hit the usage limit, resumed after reset, delivered AUDIO_SPECIFICATION (211 lines). All 21 animation labels present. Open questions settled as AU-1..AU-5.
 - 2026-11-18 · Gate A r1 FAIL. Main conflicts: story DOM/track, rig selectors, sound start under autoplay (WCAG 1.4.2), loader progress, storage keys, LCP element. Fix pass started on 6 files (TECH, ANIMATION, DESIGN, AUDIO, TYPOGRAPHY/SPACING, new TEST_PLAN).
 - 2026-11-18 · Gate A r1 fix pass complete. Cross-file names reconciled by orchestrator (P budget 1090, red-all ≤ 600, `story-ready` mark, audio caps, loader items). S1 headline fit measured in Chromium at 640×360/320×568/390×844/1440×900 (reports/typography/).
+- 2026-11-18 · Gate A r2 PASS with conditions. Tech lead measured that CDP CPU throttling does not reach Workers (main ×4, Worker ×1) and that this container has no GPU (software raster only). Presented to the client.
 
 ## Open failures / blockers
 - California legal sources unreadable from this environment (BLOCKED).
