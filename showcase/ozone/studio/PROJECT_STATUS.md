@@ -1,4 +1,5 @@
-# Project Status — OZONE — Clear Air (youth vaping prevention)
+# Project Status — OZONE — "Your Ink" (cigarettes only)
+_Superseded as the live tracker by PROGRESS.md (2026-11-18); kept for the template's phase table._
 _Single source of truth. Update at every phase boundary._
 
 - Track: full (cigarettes-only interactive graphic novel; brief replaced 2026-11-18)

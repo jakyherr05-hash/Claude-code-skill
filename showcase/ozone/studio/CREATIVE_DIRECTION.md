@@ -65,9 +65,9 @@ Focus ring: on dark, a 3 px yellow ring with a 2 px black offset (≥ 9.8:1 agai
 
 **Type personality** (typography-spacing fixes the fonts and sizes).
 - **Display.** Heavy grotesk caps with ink character (ink traps or slightly irregular counters), lettered like a graphic-novel title, never a comic font. Leading 0.9–0.95, tracking 0 to +1 %. Line 2 ≈ 0.5× line 1 in a lighter weight. S5 line 1 is the largest type in the story; S7's DON’T START line is second.
-- **Captions.** A highly legible sans at 18–20 px, inside narration boxes; source tags in small mono.
-- **UI** (`03 / 07` counter, sound toggle, skip): mono, caps, +8 % tracking.
-- **Candidates to verify (OFL).** Display: Bricolage Grotesque (its ink traps suit the concept) or Archivo. Captions: Atkinson Hyperlegible Next or Instrument Sans. UI: JetBrains Mono.
+- **Captions.** A highly legible sans at 18–20 px, inside narration boxes; source tags in small caption type (mono dropped, D4).
+- **UI** (`03 / 07` counter, sound toggle, skip): ~~mono~~ caption face (D4), caps, +8 % tracking.
+- **Candidates to verify (OFL).** Display: Bricolage Grotesque (its ink traps suit the concept) or Archivo. Captions: Atkinson Hyperlegible Next or Instrument Sans. UI: ~~JetBrains Mono~~ (dropped, D4).
 - **Set copy exactly as supplied.** Never `text-transform: uppercase`, which would print "IDS". Use ’ in ISN’T and DON’T. Balance breaks so no word is alone on a last line.
 
 ## 3 · Protagonist: character sheet
@@ -136,7 +136,7 @@ Line 2 colour: Y = yellow, R = red, O = off-white, B = black.
 | 3 Colour | 1100–1600 ms | Dusk burgundy washes up from the horizon; the bulb lights yellow; the cone fills in halftone | merged |
 | 4 OZONE identity | 1600–2200 ms | The wordmark inks in letter by letter on the sky, holds, then settles into its UI corner | already in place |
 | 5 Illustrated movement | 2200–2900 ms | The teen inks in under the lamp (contour, then fills, then halftone), breathes once, looks down the street | merged |
-| 6 Real progress | throughout | The curb line's length equals real work done (fonts, S1–S2 SVG, score buffers rendered) and never runs ahead. A small mono % sits beside it (`role=progressbar`). If loading isn't finished at 2.9 s, the scene idles while the line keeps telling the truth. After 8 s a text-story link appears (wording set by ui-ux). | same |
+| 6 Real progress | throughout | The curb line's length equals real work done (fonts, S1–S2 SVG, score buffers rendered) and never runs ahead. A small % sits beside it (caption face, D4; progress is count-based, TD3) (`role=progressbar`). If loading isn't finished at 2.9 s, the scene idles while the line keeps telling the truth. After 8 s a text-story link appears (wording set by ui-ux). | same |
 | 7 Enter | 2900–3300 ms | At 100 %, the prompt inks in on the lower third: **SOUND IS PART OF THE EXPERIENCE** · **ENTER WITH SOUND →** (yellow button, default focus) · **CONTINUE WITHOUT SOUND** (off-white text button). Targets ≥ 44 px. | compact prompt by 600 ms |
 
 - **Hand-off.** On either choice: the prompt un-inks (300 ms) → the curb line stays as S1's curb → the camera eases a 4 % push → S1 line 1, then line 2, ink in (700 ms) → if sound was chosen, the score fades in over 1.5 s → scroll unlocks. Nothing is swapped. The toggle (SOUND ON / SOUND OFF as text plus icon, bottom-left) always shows the real AudioContext state.
@@ -156,7 +156,7 @@ Line 2 colour: Y = yellow, R = red, O = off-white, B = black.
 | 5→6 "The corner" | High wide avenue → across OZONE's counter, card in the employee's hands | The teen walks past OZONE's window and its light pool slides over them; the window (small in S5) becomes the frame we pass through; the mullion and sign sweep the lens as a physical wipe | Cranes down and right to street level (0.45 → 1.0), then pushes through the glass (1.0 → 1.3). The detailed interior replaces the distant window behind the mullion (level-of-detail swap). | Walks in side view through the window light, exits right by 55 %; reappears as the S6 cameo | 0–40 % descent and walk-by / 40–70 % glass passes the lens / 70–100 % the customer releases the card, the employee lifts it to read | "OZONE" inks in on the sign band, then the pendant light reaches it; the caption appears in the hold | Back out through the glass and up |
 | 6→7 "The finished page" (**signature 2**) | Counter → paper page of seven panels with the final copy | The camera's own frame. It pulls out through the window onto the street (teen walking toward the vanishing point, OZONE's window behind) and that framing shrinks to become panel 7. Paper `#F1EBDD` rises out of the gutters. Panels 1–6 ink in, in reading order: SVG `<use>` windows onto the same world at each hold framing (low-detail), not new drawings. | 1.3 → 1.0 outside, then down to page scale; 2 px borders draw | Moves forward inside panel 7 | 0–40 % back out to the street / 40–80 % the frame becomes a panel, paper rises, panels ink in / 80–100 % final copy inks in black on the margin, then a rest | S6 copy shrinks into panel 6 as art (its HTML retires below 40 % scale); the pin releases into free scroll | Paper sinks into the gutters, panels un-ink, camera pushes back in |
 
-**Scroll budget.** Totals: desktop 1210vh; 390: 1010svh. Each scene is an HTML section with its heading, so keyboard and anchor jumps land on a hold. The `0n / 07` counter and "Skip to the end" keep control with the visitor.
+**Scroll budget.** Totals: desktop 1210vh; 390: 1010svh. Each scene is an HTML section with its heading, so keyboard and anchor jumps land on a hold. The `0n / 07` counter and "Skip to the message" (DESIGN wording) keep control with the visitor.
 
 | | S1 | T1 | S2 | T2 | S3 | T3 | S4 | T4 | S5 | T5 | S6 | T6 | S7 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -166,7 +166,7 @@ Line 2 colour: Y = yellow, R = red, O = off-white, B = black.
 ## 7 · Audio direction (the composer writes the score spec)
 | Scene | Feeling | Music | SFX accents |
 |---|---|---|---|
-| Loader | — | Silent until the choice (no autoplay); the score enters at the hand-off | — |
+| Loader | — | ~~Silent until the choice (no autoplay)~~ Superseded by D1 and G-1: the loader itself stays silent; the score enters at the hand-off | — |
 | 1 | Open, curious | Sparse felt keys, warm pad, distant city hum; **motif** stated simply | Faint lamp hum; footsteps from T1 (contact frames) |
 | 2 | Closing in | A low pulse enters and quickens slightly; a murmur made from filtered noise (no words, no laughter) | Soft paper flick per balloon |
 | 3 | Narrowing, tense | Thins to one high held tone plus sub; the motif stops on its 3rd note | Car approach swell; quiet pencil scratch per tally |
