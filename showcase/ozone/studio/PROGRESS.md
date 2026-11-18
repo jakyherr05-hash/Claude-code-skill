@@ -8,8 +8,8 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 | T1 | Docs reset (brief, facts, progress, superseded concept) | DONE | `08441c1` |
 | T2 | California sources retry | DONE → still BLOCKED (CDPH 503, leginfo 403, OAG silent) | FACTS_AND_SOURCES.md |
 | T3 | Research delta (graphic-novel / illustrated scroll stories) | DONE: 3 new captures + The Boat past its gate; no reachable proof of one-stage camera transitions (accepted as engineering risk, prototyped + filmstrip-measured in T9) | REFERENCE_RESEARCH.md, library 55 entries |
-| T4 | Creative direction (art, character, 7 scenes, loader, 6 transitions, audio) | IN PROGRESS | — |
-| T5 | Specs (design, type/spacing, animation ownership, audio score) | PENDING | — |
+| T4 | Creative direction (art, character, 7 scenes, loader, 6 transitions, audio) | DONE: concept "Your Ink"; client decisions pending at Gate A (gender read open; Scene 6 adult customer; M7 off; placeholder wordmark) | CREATIVE_DIRECTION.md |
+| T5 | Specs (design, type/spacing, animation ownership, audio score) | IN PROGRESS | — |
 | T6 | Architecture + Gate A → **client review (stop)** | PENDING | — |
 | T7–T12 | Rig, scenes, transitions+loader, audio, QA/perf, Gate B | NOT STARTED (gated by T6) | — |
 
