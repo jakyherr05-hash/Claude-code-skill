@@ -49,3 +49,10 @@
 - G-1 Sound start, four cases. (a) First visit, autoplay blocked: loader → prompt (ENTER WITH SOUND / CONTINUE WITHOUT SOUND) → hand-off. (b) First visit, autoplay allowed: the loader stays silent and shows no prompt; at the hand-off the score fades in and the sound toggle (visible, focusable, showing ON) appears at the same moment, so a stop control exists from the first audible frame (WCAG 1.4.2). (c) Returning, `ozone-sound=on`: as (b) if the context runs, else as (a). (d) Returning, `ozone-sound=off`: no audio attempt, no prompt, toggle OFF. The loader never plays a bed; AU-4's `loader:bloom` moves to the hand-off as the score's opening gesture. Removes DESIGN's "only inside the ENTER click handler" sentence and D-2's "a gesture is still required" claim.
 - G-2 LCP: the S1 headline keeps its ink reveal (creative intent). LCP is measured honestly on whatever element Chromium reports (expected: loader text) against ≤ 2.5 s, and a separate **story-ready** metric (hand-off time) is reported with a target set by performance in TECH §8. ANIMATION §3's "S1 h1 is the LCP element" claim is removed.
 - G-3 An explicit CONTINUE WITHOUT SOUND persists (`ozone-sound=off`, TD5) and suppresses the prompt on later visits (D-2).
+
+## 2026-11-18 · Orchestrator rulings during the Gate A r1 fix pass
+- G-4 `red-all` (the S2–S4 red roughs group) node budget ≤ 600, counted outside the per-frame total. The two owners each pointed at the other; settled here.
+- G-5 A-3 clarified: scroll unlocks when the hand-off's visual sequence ends (camera + S1 ink), not at its start; the 1.5 s score fade runs alongside and never delays it.
+- G-6 Autoplay "allowed" (G-1 case b) = `AudioContext.state === 'running'` after the `audio-engine` loader item. Case b needs no gesture because the context is already running; TD10's "unlock only in click handlers" governs every path where a gesture is needed (ENTER, toggle).
+- G-7 Returning visitor with autoplay blocked: the compact prompt appears at the normal prompt moment, or by 600 ms into the short loader (ui-ux proposal, accepted).
+- P-rig pin length is 1090 (labels rounded to 5), not 1089.

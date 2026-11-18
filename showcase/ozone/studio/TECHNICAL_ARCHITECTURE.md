@@ -56,7 +56,7 @@ Rule: FE (T8) defines layer names in `layers.ts`; GA only targets names from tha
   <section id="sources">…</section>
 </main>
 ```
-`--budget` is CSS-only and keyed to `html[data-rig]` (L/M: 1210vh; P: published by ANIMATION; S: 1010vh at 390). **One ScrollTrigger**: `trigger: '.story'`, `start:'top top'`, `end:()=>'+='+track.offsetHeight`, `scrub` per TD4. CSS is the single source of the length. Test per rig: `st.end − st.start === track.offsetHeight`. No nested pins. Headlines and captions travel with their art plane because they are inside `.stage`. Anchors (SkipToEnd, scene links) are an instant JS `scrollTo` to the beat's offset (no smooth scroll); a hash present at load is resolved the same way after the hand-off (§4, scroll restoration).
+`--budget` is CSS-only and keyed to `html[data-rig]` (L/M: 1210vh; P: 1090vh (desktop × 0.9, labels rounded to 5, ANIMATION §2); S: 1010vh). **One ScrollTrigger**: `trigger: '.story'`, `start:'top top'`, `end:()=>'+='+track.offsetHeight`, `scrub` per TD4. CSS is the single source of the length. Test per rig: `st.end − st.start === track.offsetHeight`. No nested pins. Headlines and captions travel with their art plane because they are inside `.stage`. Anchors (SkipToEnd, scene links) are an instant JS `scrollTo` to the beat's offset (no smooth scroll); a hash present at load is resolved the same way after the hand-off (§4, scroll restoration).
 **Master timeline.** `master.ts` builds one paused `gsap.timeline({ defaults:{ease:'none'} })` per rig with labels from ANIMATION's tables (units from one table in `master.ts`; P uses ANIMATION's published label table, labels rounded to 5). Sub-timelines are `add()`ed at labels. The trigger is created at the loader hand-off. **Scrub (TD4):** `0.5` on fine pointers, `true` on `(pointer:coarse)`; ANIMATION §1 is the source.
 **Property ownership.**
 | Property class | CSS | React | GSAP |
@@ -149,7 +149,7 @@ The loader never plays a bed. Everything outside `#loader` is `inert` during the
 | Prerendered HTML | ≤ 250 KB gz | `bundle-report.mjs` gzips `dist/index.html` |
 | SVG nodes, document | ≤ 20,000 | DOM count test |
 | SVG nodes rendered in any frame | ≤ 5,000 (≤ 3,600 at 390) | DOM count at the 7 holds and 5 mid-transition playheads, counting only nodes without `display:none` ancestors |
-| `sN-panel` nodes | ≤ 300 each; `red-all` has its own exempt budget set in ANIMATION | DOM count |
+| `sN-panel` nodes | ≤ 300 each; `red-all` ≤ 600 nodes, its own budget outside the per-frame total (G-4) | DOM count |
 | Audio buffer memory | ≤ 17 MB desktop / ≤ 12 MB mobile profile | `AudioDirector` reports total buffer bytes to `?audio-qa` |
 | Audio buffer render | ≤ 400 ms (lab, mobile profile), in the Worker | `performance.measure` around the Worker job |
 | Long tasks from audio | none (no task > 50 ms attributed to audio, incl. any ≤ 16 ms main-thread chunks) | `longtask`/LoAF observer during render and S4→S5, S6→S7 cue changes |

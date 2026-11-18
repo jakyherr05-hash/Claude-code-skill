@@ -504,7 +504,7 @@ Same paper after S7; `<section id="sources" aria-labelledby>` in `<main>`, credi
 | Headline | 5-of-12 (S5 9) | 5–6-of-12 (S5 8) | 4–6-of-8 | 3-of-4 (S5 4) |
 | Captions | right/left columns, stacked, leaders | sequential slot where the headline is wide (S4) | full-width rows at the bottom | two-at-a-time or sequential, stacked under the headline |
 | Below the fold | nothing (pinned) | nothing | nothing | nothing; S7 page flows into the back matter |
-| Pin length (`--budget`, keyed on `[data-rig]`) | 1210 vh | 1210 vh | **desktop × 0.9** (≈ 1089 svh) | **0.8×** (1010 svh) |
+| Pin length (`--budget`, keyed on `[data-rig]`) | 1210 vh | 1210 vh | **desktop × 0.9** (1090, labels rounded to 5) | **0.8×** (1010 svh) |
 | Nav | top bar, bottom-left toggle | same | same | top bar compressed (counter hides ≤ 359), toggle bottom-left |
 
 ### 9.2 Touch equivalents

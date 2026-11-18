@@ -1,16 +1,15 @@
 # Typography System — OZONE — "Your Ink"
-_Owner: typography-spacing · T5 · 2026-11-18 · Replaces the 2026-11-17 "Clear Air" system (git history). Spacing lives in SPACING_SYSTEM.md._
+_Owner: typography-spacing · T5 · 2026-11-18 · Replaces the 2026-11-17 system (git history). Revised for Gate A round 1 (TD6, TD12, G-2, D2, D4). Spacing lives in SPACING_SYSTEM.md._
 
 ## 1 · Decisions in one screen
 | Role | Family | Axes used | Where |
 |---|---|---|---|
 | Display (headlines, wordmark, S7 lines) | **Bricolage Grotesque Variable** | `wght` 500–800, `wdth` 75–100 (`opsz` is fixed at its default, 96, in the shipped file, which is the display cut) | Line 1 = wdth 75 / wght 800 (condensed, heavy). Line 2 = wdth 100 / wght 500 (expanded, light). |
 | Text (captions, UI, loader, back matter, source tags) | **Atkinson Hyperlegible Next Variable** | `wght` 400–700 | Captions 400, light-on-dark 450, UI labels 600, buttons 700 |
-| Mono | **Dropped.** | – | See decision D1. |
 
 Why this pairing: Bricolage's ink traps and slightly irregular counters give the "inked, lettered by hand" read the concept needs, and its `wdth` axis gives a condensed poster cut (long words like SOMEWHERE and EXCEPTIONS fit 320 px) and an expanded cut for the quieter line 2, so one family covers "condensed/expanded". Archivo has a wider wdth range (62–125) but no ink character and its wdth file is 90 KB. Atkinson Hyperlegible Next was designed for distinguishable letterforms (I/l/1, 0/O), which suits "IDs", ages and a teen audience on small screens.
 
-**D1 · No mono.** Atkinson Hyperlegible Next ships `tnum` (verified in the font's GSUB), so `03 / 07`, `%` and dates align without a mono. JetBrains Mono costs 40.4 KB (would take first load to 152.6 KB, over budget) and its `calt` ligatures are a character-reveal risk. UI labels are Atkinson 600, caps, +8 % tracking, tabular. Reversible: if the client wants a mono voice for UI, load `@fontsource-variable/jetbrains-mono@5.3.0` `wght` latin lazily after ENTER (40 KB, `font-feature-settings: "calt" 0`), not in first load.
+**Numerals and UI labels (D4).** Atkinson Hyperlegible Next ships `tnum` (verified in the font's GSUB), so `03 / 07`, `%` and dates align in the text face; there is no third family. UI labels are Atkinson 600, caps, +8 % tracking, tabular. First-load fonts stay at 112 KB.
 
 ## 2 · Licence and source (verified 2026-11-18)
 Self-hosted from Fontsource; copy the files out of `node_modules` into `public/fonts/` (hashed names by the bundler are fine). Include each package's `LICENSE` in the credits.
@@ -19,7 +18,6 @@ Self-hosted from Fontsource; copy the files out of `node_modules` into `public/f
 |---|---|---|
 | `@fontsource-variable/bricolage-grotesque` | `license = 'OFL-1.1'` · `version = '5.3.0'` | The Bricolage Grotesque Project Authors (Copyright 2022), OFL-1.1 text in package |
 | `@fontsource-variable/atkinson-hyperlegible-next` | `license = 'OFL-1.1'` · `version = '5.3.0'` | Braille Institute / Applied Design Works, OFL-1.1 |
-| `@fontsource-variable/jetbrains-mono` (evaluated, not used) | `license = 'OFL-1.1'` · `version = '5.3.0'` | JetBrains, OFL-1.1 |
 | `@fontsource-variable/archivo` (evaluated, not used) | `license = 'OFL-1.1'` · `version = '5.3.0'` | Omnibus-Type, OFL-1.1 |
 
 Install exact: `npm i -E @fontsource-variable/bricolage-grotesque@5.3.0 @fontsource-variable/atkinson-hyperlegible-next@5.3.0`. OFL-1.1 permits commercial use, embedding and self-hosting. No files are modified (no subsetting of our own), so no Reserved Font Name issue. Cost: 0.
@@ -42,7 +40,7 @@ Preloads (the only two):
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/bricolage-grotesque-latin-wdth-normal.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2">
 ```
-`font-display: swap` on both. The loader's real-progress meter should include `document.fonts.load()` for `800 1em Bricolage Grotesque Variable` and `400 1em Atkinson Hyperlegible Next Variable`, so the story never shows a swap (the loader holds S1 invisible until they resolve; with `swap` plus the fallbacks below nothing shifts if they are late).
+`font-display: swap` on both. The loader's real-progress meter should include `document.fonts.load()` for `800 1em Bricolage Grotesque Variable` and `400 1em Atkinson Hyperlegible Next Variable`, so the story never shows a swap. They are the loader items `font-display` and `font-text` (TD3); the story is revealed at the hand-off, after they have resolved. This is for swap-free text, not for LCP (G-2: the S1 headline is not claimed as the LCP element). If a font is late, `swap` plus the fallbacks below means nothing shifts.
 
 ### Metric-matched fallbacks (measured, not guessed)
 Measured in Chromium against Arial (Liberation Sans on this machine is metric-identical): the width of the real headline strings at the real weights/widths vs Arial Bold, and of caption text vs Arial Regular.
@@ -57,7 +55,7 @@ The display fallback is a large correction because Arial Bold has no condensed c
 - Do not rely on the `font-weight` shorthand alone for width: set `font-stretch: 75%` (line 1) and `100%` (line 2) explicitly. `font-stretch` maps to `wdth` in both browsers' variable handling.
 - `font-optical-sizing: auto` on body (inert for Bricolage-wdth, which has no opsz; harmless).
 - No custom axes. No `font-variation-settings` needed, so the cascade stays predictable under GSAP.
-- Ligatures: neither face has `liga`/`dlig` (GSUB features: ccmp, dnom, frac, locl, numr, pnum, tnum). Even so set `font-variant-ligatures: none` and `font-kerning: normal` globally. SplitText: split by chars/words/lines on the real text; kerning pairs are lost across char spans, so for line 1 animate **by line mask or by word**, and use chars only for short strings (OZONE, DON’T START.). If chars are used, set `font-kerning: none` on the split element in both states so there is no jump when the split reverts.
+- Ligatures: neither face has `liga`/`dlig` (GSUB features: ccmp, dnom, frac, locl, numr, pnum, tnum). Even so set `font-variant-ligatures: none` and `font-kerning: normal` globally. There is no SplitText and no per-character spans (D2): headline reveals are stroke/mask ink reveals (clip-path or opacity on the whole line element, TD6: never `visibility:hidden`, `display:none` or autoAlpha), so kerning is never broken and the text stays in the accessibility tree.
 - `hanging-punctuation: first` is set but is Safari-only; no quotes open any line, so no fallback is needed.
 - Numerals: `font-variant-numeric: tabular-nums` on counter, loader %, source tags.
 
@@ -91,6 +89,37 @@ A single linear clamp cannot satisfy both the full-width mobile layout and the 5
 | `--t-d2` | 26 | 28 | 36 | 42 | 52 | 63 (cap 72) | S7 "PROTECT YOUR FUTURE." |
 | `--t-0` caption/body | 18 | 18.1 | 18.6 | 18.9 | 19.4 | 20 | Caption boxes, back matter, loader prompt |
 | `--t-label` | 14 | 14 | 14.2 | 14.4 | 14.8 | 15 | UI labels, source tags |
+
+### Height clamp (TD12, closes I-3; finding 14)
+Every display token is `min(vw-curve, height term)`. The height term is `k × 1vh`:
+
+| Token | k (vh) | Reads as `1.78 ×` | Binds when (16:9 and wider) |
+|---|---|---|---|
+| `--t-h1` | 13.1 | 1.78 × 7.36vh | below about 1024×576 (e.g. 640×360, 844×390, 720×450) |
+| `--t-h2` | 7.15 | 1.78 × 4.02vh | same |
+| `--t-hero` | 18.5 | 1.78 × 10.4vh | same; never at 1440×810 or 1920×1080 (documented sizes unchanged) |
+| `--t-d1` | 15.3 | 1.78 × 8.6vh | same |
+| `--t-d2` | 7.7 | 1.78 × 4.33vh | same |
+
+Why not the literal "1.78 × vh-curve" (the vw-curve evaluated at 1.78 × the height): 1.78 is exactly 640 ÷ 360, so at 640×360 the literal form equals the vw-curve and trims nothing, and the S1 block stays 236 px tall with its bottom at y 310, below the bottom-left reserve line (y 276). The `k` values are therefore fitted to the height budget instead (same `min()` shape, steeper coefficient). Floors hold: every term is at or above its role minimum at height 360 (h1 47.2 ≥ 44, h2 25.7 ≥ 24, hero 66.6 ≥ 52, d1 55 ≥ 48, d2 27.7 ≥ 26), and below 360 px of height static mode applies (`max-height:359px`, unchanged), so no token ever drops under its floor.
+
+**S1 fit, measured** (Chromium, real Bricolage files, `text-wrap: balance`, zone per SPACING §2, S1 spans 3 of 4 at 640 and 390, 4 at 320, 5 of 8 at 844, 5 of 12 at 1440). Copy box = 100svh, anchored top. Block top = `--margin` + 44 px top bar + `--space-xs`. Bottom reserve line = H − (44 + `--pad-b` + `--space-m`) (DESIGN §3.1: the toggle sits bottom-left, and cols 1–5 overlap it). S1 has no caption in DESIGN §S1 (the headline pair only), so the block is the two headline lines.
+
+| Viewport | h1 / h2 px | Lines (L1 + L2) | Block top | Block height | Block bottom | Reserve line | Slack | Share of H |
+|---|---|---|---|---|---|---|---|---|
+| 640×360 (1280×720 at 200 %) vw only | 56.7 / 30.9 | 3 + 2 | 74 | 236 | 310 | 276 | **−34 (overlaps toggle)** | 66 % |
+| **640×360 with clamp** | 47.2 / 25.7 | 2 + 1 | 74 | 125 | **199** | 276 | **+77** | 35 % |
+| **320×568** | 44 / 24 | 3 + 2 | 70 | 183 | 252 | 489 | +237 | 32 % |
+| **390×844** | 46.8 / 25.5 | 3 + 2 | 74 | 194 | 268 | 761 | +493 | 23 % |
+| **1440×900** | 88 / 48 | 3 + 2 | 119 | 366 | 485 | 769 | +284 | 41 % |
+| 844×390 with clamp (extra) | 51.1 / 27.9 | 2 + 1 | 86 | 135 | 222 | 300 | +78 | 35 % |
+| 720×450, 1440×900 at 200 % (extra) | 59.0 / 32.2 | 2 + 2 | 74 | 191 | 265 | 352 | +87 | 42 % |
+
+Arithmetic for the headline case: 640×360, `--margin` 20 + 44 + `--space-xs` 10.2 = 74 px top; L1 2 × 47.2 × 0.92 = 86.8; gap 0.4 × 25.7 = 10.3; L2 1 × 25.7 × 1.08 = 27.8; total 125 px; 74 + 125 = 199 px, inside the 360 px box and 77 px above the reserve line (360 − (44 + 20 + 20.2) = 276). The 390×844, 320×568 and 1440×900 rows match DESIGN §2.1's estimates (194 / 183 / 366 px), so the clamp does not move them.
+If S1 ever gains a caption: a 2-line caption box is about 81 px plus `--space-l` (≈ 27 px), so 199 + 108 = 307 px would cross the 276 px reserve at 640×360. It would have to go sequential (the DESIGN rule for short landscape), not stacked under the headline. The fit above does not cover that case.
+Not measured: S5 (hero), S6 and S7 blocks at short heights. They scale with the same `min()`, but only S1 was fitted. QA to measure all seven at 640×360 and 844×390.
+
+**At 400 % zoom** (1280×720 at 400 % = 320×180; also 1440×900 at 400 % = 360×225): height is below 360, so static mode applies (`max-height:359px`, `html[data-mode=static]`). Type uses the 320 px vw-curve at its floors (44 / 24 px); the static comic lays out as a normal scrolling document, so nothing is pinned and no headline has to fit a viewport. This also holds at 300 % (427×240). Reflow at 320 CSS px is preserved.
 
 Ratios at 1440: hero : h1 : h2 = 150 : 88 : 48. The dramatic changes are hero vs h2 (3.1×) and S5 vs everything else; the display size caps at 192 px at 1920, since the camera shows more bleed rather than larger type.
 
@@ -184,21 +213,21 @@ Text over art is governed by CD §2 "worst pixel" rules; the table above is the 
   --step-3:clamp(1.944rem,1.7407rem + 1.0167vw,2.9607rem);
   --t-label:clamp(0.875rem,0.8625rem + 0.0625vw,0.9375rem);
 
-  /* display, mobile/tablet curve (320→1023); overridden ≥ 64rem */
-  --t-h1:clamp(2.75rem,1.9545rem + 3.9773vw,4.5rem);
-  --t-hero:clamp(3.25rem,2rem + 6.25vw,6rem);
-  --t-d1:clamp(3rem,1.8636rem + 5.6818vw,5.5rem);
-  --t-h2:clamp(1.5rem,1.0714rem + 2.1429vw,3.75rem);
-  --t-d2:clamp(1.625rem,1.1607rem + 2.3214vw,4.5rem);
+  /* display, mobile/tablet curve (320→1023); overridden ≥ 64rem. Each is min(vw-curve, k·vh): the height clamp, TD12. The h2/d2 terms (7.15vh, 7.7vh) are not re-declared at ≥ 64rem: their vw curves stay under them at every 16:9 size. */
+  --t-h1:min(clamp(2.75rem,1.9545rem + 3.9773vw,4.5rem),13.1vh);
+  --t-hero:min(clamp(3.25rem,2rem + 6.25vw,6rem),18.5vh);
+  --t-d1:min(clamp(3rem,1.8636rem + 5.6818vw,5.5rem),15.3vh);
+  --t-h2:min(clamp(1.5rem,1.0714rem + 2.1429vw,3.75rem),7.15vh);
+  --t-d2:min(clamp(1.625rem,1.1607rem + 2.3214vw,4.5rem),7.7vh);
 
   --lh-display:.92;--lh-l2:1.08;--lh-text:1.4;--lh-long:1.55;
   --ls-display:.005em;--ls-label:.08em;--ls-button:.06em;
   --measure-caption:34ch;--measure-long:62ch;
 }
 @media (min-width:64rem){:root{
-  --t-h1:clamp(4.5rem,2.0385rem + 3.8462vw,6.75rem);
-  --t-hero:clamp(6rem,-2.3077rem + 12.9808vw,12rem);
-  --t-d1:clamp(5.5rem,0.5769rem + 7.6923vw,9.375rem);
+  --t-h1:min(clamp(4.5rem,2.0385rem + 3.8462vw,6.75rem),13.1vh);
+  --t-hero:min(clamp(6rem,-2.3077rem + 12.9808vw,12rem),18.5vh);
+  --t-d1:min(clamp(5.5rem,0.5769rem + 7.6923vw,9.375rem),15.3vh);
 }}
 
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -212,6 +241,7 @@ body{font:400 var(--t-0)/var(--lh-text) var(--font-text);font-optical-sizing:aut
 The `.l1/.l2` rules in the draft are the tested specimen rules.
 
 ## 9 · Open issues
+- Height-clamp fit for S5, S6, S7 at 640×360 and 844×390: owner QA (only S1 measured).
 - Column spans for S2/S4 headline zones (§5) vs CD: owner ui-ux / creative-director.
 - The → glyph must be SVG: owner frontend.
 - Fallback overrides were measured against Arial/Liberation; macOS Helvetica/“Arial” path not verified: NOT TESTED.
