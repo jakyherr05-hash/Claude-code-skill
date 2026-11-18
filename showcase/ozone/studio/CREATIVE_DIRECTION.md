@@ -1,3 +1,5 @@
+> **SUPERSEDED (2026-11-18).** This concept ("The Layer") was written for the earlier vaping brief and is not used. The client replaced the brief with a cigarettes-only interactive graphic novel (see PROJECT_BRIEF.md). It is kept only so the research trail is readable; T4 rewrites this file.
+
 # Creative Direction — OZONE — Clear Air (youth vaping prevention)
 _Owner: creative-director · Status: draft (for approval) · Date: 2026-11-17_
 

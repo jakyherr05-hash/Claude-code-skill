@@ -1,18 +1,18 @@
 # Project Status — OZONE — Clear Air (youth vaping prevention)
 _Single source of truth. Update at every phase boundary._
 
-- Track: full (cinematic single-page scroll story, no existing brand assets)
-- Current phase: 4 · Design specification
+- Track: full (cigarettes-only interactive graphic novel; brief replaced 2026-11-18)
+- Current phase: T1 docs reset → T2–T5 (see PROGRESS.md; implementation gated by Gate A + client review)
 - Last updated: 2026-11-17
 
 ## Phase log
 | Phase | Owner(s) | Status | Exit evidence | Date |
 |---|---|---|---|---|
 | 1 Discovery | orchestrator | done (no questions; assumptions recorded) | PROJECT_BRIEF.md | 2026-11-17 |
-| 1b Facts | orchestrator via web-fetch (primary sources) | done: 14 verified claims + do-not-use list | FACTS_AND_SOURCES.md | 2026-11-17 |
+| 1b Facts | orchestrator via web-fetch (primary sources) | redone for cigarettes: M1–M7, L1–L3 verified; California BLOCKED | FACTS_AND_SOURCES.md | 2026-11-18 |
 | 2 Research | reference-researcher | done: 14 ranked refs; 7 new captures (4 youth-prevention, 1 data story, 2 atmosphere) | REFERENCE_RESEARCH.md; library entries | 2026-11-17 |
-| 3 Creative direction | creative-director | done: concept "The Layer" approved by orchestrator (10 beats, every claim F-cited; palette contrast-checked) | CREATIVE_DIRECTION.md | 2026-11-17 |
-| 4 Design spec | ui-ux-designer ∥ typography-spacing, then gsap-animator | in progress | | |
+| 3 Creative direction | creative-director | SUPERSEDED: "The Layer" was for the vaping brief; redo as T4 | CREATIVE_DIRECTION.md (banner) | 2026-11-18 |
+| 4 Design spec | ui-ux-designer ∥ typography-spacing, then gsap-animator | not started (agents interrupted by usage limit before writing; now T5) | | |
 
 ## Gates
 | Gate | Reviewer | Verdict | Evidence | Date |

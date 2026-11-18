@@ -1,26 +1,41 @@
-# Facts and sources — OZONE · Clear Air
-_Every number or health claim on the page must come from this file. Verified at the source on 2026-11-17 (quotes verbatim)._
+# Facts and sources — OZONE (cigarettes)
+_Every medical or legal sentence on the page must come from this file. Verified at the source on 2026-11-18; passages quoted verbatim. Supersedes the earlier vaping-brief facts (see git history)._
 
-| # | Use on the page | Verbatim source | Page (last updated) |
+## Medical (CDC / FDA)
+| ID | Approved page wording | Supporting passage (verbatim) | Source (date shown on page) |
 |---|---|---|---|
-| F1 | 1.44 million U.S. middle and high school students vaped in 2025 (5.2 %) | "5.2% of middle and high school students (1.44 million) reported current use of e-cigarettes" | FDA, Results from the Annual National Youth Tobacco Survey (NYTS), 2025 data, content current 06/23/2026 — https://www.fda.gov/tobacco-products/youth-and-tobacco/results-annual-national-youth-tobacco-survey-nyts |
-| F2 | Nearly 9 in 10 of them use flavoured products | "More than 8 out of 10 (89.4%) current e-cigarette users used flavored e-cigarettes, with fruit flavors being the most popular, followed by candy, desserts, or other sweets; mint; and menthol" | same FDA page, 2025 data |
-| F3 | More than 1 in 4 vape every day | "More than 1 in 4 (27.5%) of current youth e-cigarette users used an e-cigarette product daily" | same FDA page, 2025 data |
-| F4 | The brain keeps building until about 25 | "Nicotine can harm brain development which continues until about age 25." | CDC, Health Effects of Vaping (Jan 31, 2025) — https://www.cdc.gov/tobacco/e-cigarettes/health-effects.html |
-| F5 | Attention, learning, mood, impulse control | "Using nicotine during adolescence can harm the parts of the brain that control attention, learning, mood, and impulse control" | same CDC page |
-| F6 | Addiction can start fast | "Youth can start showing signs of nicotine addiction quickly, sometimes before the start of regular or daily use." | same CDC page |
-| F7 | Stress / mental health | "Nicotine addiction can harm mental health and be a source of stress." · "Youth vaping and cigarette use are associated with mental health symptoms such as depression." | same CDC page |
-| F8 | More likely to smoke later | "Youth who vape may also be more likely to smoke cigarettes in the future." | same CDC page |
-| F9 | What's in the cloud | "Heavy metals such as nickel, tin, and lead" · "Tiny particles that can be inhaled deep into the lungs" · "Cancer-causing chemicals" | same CDC page |
-| F10 | Designed to hide in a backpack | "Some e-cigarettes look like USB flash drives, pens, smartphones, highlighters, toys, and other types of products." | CDC, About E-Cigarettes (Oct 24, 2024) — https://www.cdc.gov/tobacco/e-cigarettes/about.html |
-| F11 | 21+ is federal law | "Not allowing products to be sold to anyone younger than 21" | FDA, Youth and Tobacco (08/29/2024) — https://www.fda.gov/tobacco-products/public-health-education/youth-and-tobacco |
-| F12 | Free help, any age | "You can also call 1-800-QUIT-NOW and visit Teen.smokefree.gov for more help." | CDC, Protecting Youth (May 15, 2024) — https://www.cdc.gov/tobacco/e-cigarettes/protecting-youth.html |
-| F13 | Teens can text for help | "Sign up with the form below or text QUIT to 47848." (SmokefreeTXT for Teens, ages 13–17) | https://teen.smokefree.gov/become-smokefree/smokefreeteen-signup |
-| F14 | Vaping-specific help | "Are you addicted to vaping?" (quit resources) | https://smokefree.gov |
+| M1 | Nicotine is addictive. | "Tobacco products are addictive because they contain nicotine." · "Some tobacco products, like cigarettes, are designed to deliver nicotine to the brain within seconds" | FDA, *Nicotine Is Why Tobacco Products Are Addictive* (content current as of 08/17/2026) — https://www.fda.gov/tobacco-products/health-effects-tobacco-use/nicotine-why-tobacco-products-are-addictive |
+| M2 | Teens can get hooked faster. | FDA: "Because their brains are still developing, young people have a higher risk of becoming addicted" · CDC: "There is evidence that youth may be sensitive to nicotine and that teens can feel dependent on nicotine sooner than adults." | FDA page above; CDC, *Youth and Tobacco Use* (Oct 17, 2024) — https://www.cdc.gov/tobacco/php/data-statistics/youth-data-tobacco/index.html |
+| M3 | Smoking harms nearly every organ of the body. | "Cigarette smoking harms nearly every organ of the body." | CDC, *Cigarette Smoking* (Sep 17, 2024) — https://www.cdc.gov/tobacco/about/index.html |
+| M4 | Smoking is a major cause of heart and blood-vessel disease. | "Smoking is a major cause of cardiovascular disease (CVD)" | CDC, *Health Effects of Cigarettes: Cardiovascular Disease* (Sep 17, 2024) — https://www.cdc.gov/tobacco/about/cigarettes-and-cardiovascular-disease.html |
+| M5 | Smoking can cause cancer almost anywhere in the body. | "Smoking can cause cancer almost anywhere in your body." | CDC, *Health Effects of Cigarettes: Cancer* (Sep 17, 2024) — https://www.cdc.gov/tobacco/about/cigarettes-and-cancer.html |
+| M6 | Smoking damages the lungs. | "Cigarette smoking is a common cause of COPD." | CDC, *Health Effects of Cigarettes: COPD* (May 15, 2024) — https://www.cdc.gov/tobacco/about/cigarettes-and-copd.html |
+| M7 *(optional)* | Most adults who smoke started as teens. | "Nearly 9 out of 10 adults who smoke cigarettes daily first try smoking by age 18." | CDC, *Youth and Tobacco Use* (Oct 17, 2024) |
 
-## Do NOT use (not verified at an official source on 2026-11-17)
-- "One pod = a pack of cigarettes" or any pod-vs-pack nicotine comparison.
-- "This is Quitting" keyword/short code (no longer shown on truthinitiative.org/thisisquitting).
-- The Tobacco 21 effective date (FDA page 404); say "federal law" without a date.
-- Any "vaping is safer than smoking" framing (CDC's aerosol comparison does not support it).
-- 2024 figures labelled as "latest" (CDC pages still show 2024; FDA has 2025).
+Not used (available only if the client asks for statistics): "one in every four deaths from CVD", "At least 69 of these chemicals can cause cancer", "8 out of 10 COPD-related deaths".
+
+## Federal law (FDA)
+| ID | Approved wording | Supporting passage (verbatim) | Source |
+|---|---|---|---|
+| L1 | Federal law prohibits selling tobacco products to anyone under 21. | "raising the federal minimum age for sale of tobacco products from 18 to 21 years" · "This legislation (known as "Tobacco 21" or "T21") became effective immediately" (signed Dec. 20, 2019) · "The federal minimum age of sale applies to all retail establishments and persons with no exceptions." | FDA, *Tobacco 21* (content current as of 08/07/2025) — https://www.fda.gov/tobacco-products/retail-sales-tobacco-products/tobacco-21 |
+| L2 | *(context for the ID-check scene, not a page claim)* Retailers must check photo ID of anyone under 30. | "beginning Sept. 30, 2024, retailers must use a photo ID to verify the age of anyone under the age of 30" | same FDA page (August 2024 final rule) |
+| L3 | *(context)* Retailers must comply with federal law. | "If you sell tobacco products, you must comply with all applicable federal laws and regulations for retailers." | FDA, *Retail Sales of Tobacco Products* (02/27/2026) — https://www.fda.gov/tobacco-products/compliance-enforcement-training/retail-sales-tobacco-products |
+
+Obsolete and never used: pre-September-2024 guidance to check ID for customers under 27.
+
+## California — BLOCKED (not verified)
+- CDPH California Tobacco Control Branch, STAKE Act and Tobacco 21 pages: HTTP 503 on 2026-11-18 (two attempts).
+- leginfo.legislature.ca.gov (B&P Code §22952, §22956; Penal Code §308): HTTP 403 to automated access.
+- Read: CDTFA retailer licensing pages say "the California Department of Public Health (CDPH) administers the STAKE Act", and list lung-cancer signage requirements taking effect Jan 1, 2027 (SB 1124). Context only.
+- **Consequence:** the page makes no California-specific legal statement until a CA source is read. It may link to the CDPH Tobacco Control Branch home page as a resource. Retry in T2.
+
+## Customer-facing OZONE copy (client-supplied; OZONE's own statements, not legal quotations)
+- **OZONE — WE CHECK IDs. NO EXCEPTIONS.**
+- We verify identification, follow applicable tobacco laws, and do not sell cigarettes to anyone under 21.
+- Final page: DON'T START. PROTECT YOUR FUTURE. · OZONE · WE CHECK IDs. WE FOLLOW THE LAW. WE PROTECT OUR COMMUNITY.
+- Scene headlines as written in the client brief (scenes 1–7).
+
+## Do not
+- Vaping, e-cigarettes or vape devices in any form.
+- Invented statistics, timelines, percentages, store procedures, certifications, scanner equipment, or claims about other retailers.
+- California claims while BLOCKED.
