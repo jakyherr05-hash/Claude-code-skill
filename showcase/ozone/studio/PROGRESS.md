@@ -4,7 +4,7 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 ## Status by task
 | ID | Task | Status | Evidence / commit |
 |---|---|---|---|
-| T0 | Demo: detail-head baselines, full suite, tech-lead narrow re-gate | IN PROGRESS | see below |
+| T0 | Demo: detail-head baselines, full suite, tech-lead narrow re-gate | DONE: 57/57 at `cf4ebca`; technical re-gate PASS; recorded in `db7d366` | docs/evidence/playwright-gate-b-r2.json |
 | T1 | Docs reset (brief, facts, progress, superseded concept) | DONE | `08441c1` |
 | T2 | California sources retry | DONE → still BLOCKED (CDPH 503, leginfo 403, OAG silent) | FACTS_AND_SOURCES.md |
 | T3 | Research delta (graphic-novel / illustrated scroll stories) | DONE: 3 new captures + The Boat past its gate; no reachable proof of one-stage camera transitions (accepted as engineering risk, prototyped + filmstrip-measured in T9) | REFERENCE_RESEARCH.md, library 55 entries |
