@@ -9,8 +9,8 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 | T2 | California sources retry | DONE → still BLOCKED (CDPH 503, leginfo 403, OAG silent) | FACTS_AND_SOURCES.md |
 | T3 | Research delta (graphic-novel / illustrated scroll stories) | DONE: 3 new captures + The Boat past its gate; no reachable proof of one-stage camera transitions (accepted as engineering risk, prototyped + filmstrip-measured in T9) | REFERENCE_RESEARCH.md, library 55 entries |
 | T4 | Creative direction (art, character, 7 scenes, loader, 6 transitions, audio) | DONE: concept "Your Ink"; client decisions pending at Gate A (gender read open; Scene 6 adult customer; M7 off; placeholder wordmark) | CREATIVE_DIRECTION.md |
-| T5 | Specs (design, type/spacing, animation ownership, audio score) | IN PROGRESS: DESIGN, TYPOGRAPHY, SPACING, ANIMATION done (`11ab80e`); AUDIO_SPECIFICATION being written | — |
-| T6 | Architecture + Gate A → **client review (stop)** | IN PROGRESS: draft `595574a`; A-1 track-height fix applied; audio alignment + Gate A pending | — |
+| T5 | Specs (design, type/spacing, animation ownership, audio score) | DONE: all 6 specs; AUDIO covers every `sfx:`/`cue:` label (checked by grep); decisions AU-1..AU-5 | AUDIO_SPECIFICATION.md, DECISIONS.md |
+| T6 | Architecture + Gate A → **client review (stop)** | IN PROGRESS: architecture aligned with A-1 and AU-1..AU-5; tech-lead Gate A review running | — |
 | T7–T12 | Rig, scenes, transitions+loader, audio, QA/perf, Gate B | NOT STARTED (gated by T6) | — |
 
 ## Carried over from the vaping brief (kept, still valid)
@@ -24,6 +24,7 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 - 2026-11-18 · T0: W42 separators were off-centre (more space before each "·" than after) and narrower than a literal " · " → fixed with 3ch gaps centred in the mono face. `detail-head` now matches the original baselines (no update needed); full suite re-run pending.
 
 - 2026-11-18 · Decisions A-1..A-4 recorded; TECHNICAL_ARCHITECTURE track height corrected to budget + 100svh (A-1).
+- 2026-11-18 · Audio agent hit the usage limit, resumed after reset, delivered AUDIO_SPECIFICATION (211 lines). All 21 animation labels present. Open questions settled as AU-1..AU-5.
 
 ## Open failures / blockers
 - California legal sources unreadable from this environment (BLOCKED).

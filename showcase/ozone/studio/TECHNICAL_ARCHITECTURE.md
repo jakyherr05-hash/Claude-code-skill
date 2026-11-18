@@ -73,14 +73,14 @@ class AssetLoader { constructor(items:Item[]); onProgress(cb:(p:Progress)=>void)
 - Reduced motion: static mark + plain `role="progressbar"` bar with the same progress values; same prompt.
 - `start()` is idempotent; `dispose()` aborts timers and unsubscribes.
 
-## 6. AudioDirector contract (internals per AUDIO_SPECIFICATION.md, TODO link)
+## 6. AudioDirector contract (internals per [AUDIO_SPECIFICATION.md](AUDIO_SPECIFICATION.md))
 - Singleton (`AudioDirector.get()`), one `AudioContext` and one graph, created lazily on `prepare()` (before gesture: context created, state expected `suspended`; no sound).
 - State machine: `idle → starting → running | blocked`; `running ⇄ muted` (gain 0, then `suspend()` after 0.4 s fade) and `running ⇄ suspended` (tab hidden). `blocked` means `resume()` did not reach `running` (autoplay policy): the loader prompt then offers ENTER WITH SOUND (`resume()` called in the click handler). Public `getState()`, `subscribe(cb)` for `useSyncExternalStore`.
 - Preference: `localStorage['ozone-sound']` = `on|off`. Explicit `off` is never overridden by load, scroll, visibility or any code path (only the user's toggle/choice writes it). No value = default on, attempt start, fall back to prompt. Storage failures are caught and treated as session-only.
 - Toggle (`SoundToggle`) reads only `getState()`: shows ON only when `state==='running'` and master gain > 0; otherwise OFF. Buttons: `aria-pressed`, text + icon.
 - Visibility: hidden → fade + suspend; visible → resume only if preference is not `off` and user had chosen on.
-- API: `setCue(sceneIndex:number, direction:1|-1)` (called from a scroll listener by `master.ts` `onUpdate`, throttled; quantised to bar lines by the director), `sfx(id:SfxId, {direction})` with per-id latch (once per boundary crossing per direction) and cooldown (ms table in audio module), `setEnabled(bool)`, `unlock()`, `dispose()` (stop scheduler, close context, remove listeners via `cleanup.ts`).
-- Audio never gates anything: story and loader work with context absent/blocked. No audio before the user's choice on first visit unless the browser allows autoplay and the preference is not off (TODO: confirm with AUDIO_SPECIFICATION; CREATIVE_DIRECTION §9 says "no audio before the choice").
+- API: `setCue(sceneIndex:number, direction:1|-1)` (fired by the `cue:sN` labels; `setCue(1,+1)` is called once at the loader hand-off since there is no `cue:s1` label; quantised to bar lines by the director), `setPlayhead(units:number, direction:1|-1)` (called from `master.ts` `onUpdate`, throttled to one call per animation frame; drives within-scene intensity and resume points, decision AU-1), `sfx(id:SfxId, {direction})` with per-id latch (once per boundary crossing per direction) and cooldown (ms table in audio module), `setEnabled(bool)`, `unlock()`, `dispose()` (stop scheduler, close context, remove listeners via `cleanup.ts`).
+- Audio never gates anything: story and loader work with context absent/blocked. No audio before the user's choice on first visit unless the browser allows autoplay and the preference is not off (D1: autoplay is attempted at init; this overrides CREATIVE_DIRECTION §9's "no audio before the choice". If it succeeds, the internal loader event `loader:bloom` plays, AU-4.) Scheduling runs on a Worker-driven look-ahead clock per AUDIO_SPECIFICATION §4.
 - iOS/Android real-device behaviour: NOT TESTED unless client tests.
 
 ## 7. SVG art system
