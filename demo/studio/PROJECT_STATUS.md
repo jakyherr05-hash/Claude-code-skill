@@ -22,6 +22,7 @@ _Single source of truth. Update at every phase boundary._
 | B · Technical (round 2) | tech-lead | code correct; FAIL on stale evidence counts + in-progress tree → evidence regenerated at the final commit, docs reconciled, templates in sync | docs/VALIDATION-REPORT.md B.6 | 2026-11-17 |
 | B · QA closure (round 2) | qa-engineer | **PASS**: rewritten Lenis test not weaker, 5/5; evidence covers all 56 tests | scratchpad closure-qa.md (summarised here) | 2026-11-17 |
 | B · Technical closure (round 2) | tech-lead | both round-2 required fixes CLOSED; new FAIL: Hour preset test load-sensitive + 3 stale doc statements → fixed (S15, README, BUGS-FIXES); narrow re-gate pending | docs/BUGS-FIXES.md S15 | 2026-11-17 |
+| B · Technical re-gate (round 2) | tech-lead | **PASS** once its two doc lines were fixed (verified by grep): Hour preset test 3/3 quiet + 3/3 under load, own full suite 56/56, templates in sync, validate 173/173; later evidence run 57/57 at `cf4ebca` (adds the separator regression test) | docs/evidence/playwright-gate-b-r2.json | 2026-11-18 |
 ## Open tasks
 | Task | Owner | Blocked by |
 |---|---|---|

@@ -22,7 +22,7 @@ Then describe your project, e.g. *"Build a launch page for our €6k carbon e-bi
 | `…/skills/reference-study/` | Playwright capture tool that measures a live site (fonts, stack, scroll smoothing, timings) |
 | `…/skills/reference-library/` | **50+ researched sites** (current count in its `INDEX.md`) with [M]/[O]/[I]/[?]-labelled reports, evidence screenshots and a search CLI |
 | `…/skills/web-qa/` | Playwright suite template, Lighthouse runner, scroll-jank probe, QA report template |
-| `demo/` | **Penumbra**, a fictional lighting atelier site built by the agents, with its `studio/` docs and a 56-test Playwright suite |
+| `demo/` | **Penumbra**, a fictional lighting atelier site built by the agents, with its `studio/` docs and a 57-test Playwright suite |
 | `docs/` | Install, usage, orchestration, tool registry, **validation report** (with known limitations), agent validation, bugs/fixes, release readiness, evidence |
 | `tests/validate.py` | 173 structural checks: manifests, frontmatter, references, scripts, template drift, secrets |
 | `eval-workspaces/` | skill-creator evaluation runs (with vs. without skill), graded, plus review viewers |

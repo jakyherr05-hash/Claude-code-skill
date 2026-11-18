@@ -36,7 +36,7 @@ Reviewer variance is real: the two rounds found partly different things. The cla
 | [08-390-contact-email-target.jpg](08-390-contact-email-target.jpg) | E-mail link 18 px → 44 px tall |
 
 ## Tests on the final state
-Full demo suite **49/49**, 0 flaky ([../playwright-design-upgrade.json](../playwright-design-upgrade.json)). (Later state after Gate B round 2: 56/56, [../playwright-gate-b-r2.json](../playwright-gate-b-r2.json).) Eight visual baselines were regenerated after each diff was inspected: contact (+14 px, e-mail target), method-static (closing line-height, balanced titles, drawing labels), the-hour (3 + 3 presets), and schedule (1 px sub-pixel shift, no visible change). One earlier run under heavy host load failed The Hour preset test once; it passed 3/3 in isolation and in two later full runs.
+Full demo suite **49/49**, 0 flaky ([../playwright-design-upgrade.json](../playwright-design-upgrade.json)). (Later state after Gate B round 2: 57/57 at `cf4ebca`, [../playwright-gate-b-r2.json](../playwright-gate-b-r2.json).) Eight visual baselines were regenerated after each diff was inspected: contact (+14 px, e-mail target), method-static (closing line-height, balanced titles, drawing labels), the-hour (3 + 3 presets), and schedule (1 px sub-pixel shift, no visible change). One earlier run under heavy host load failed The Hour preset test once; it passed 3/3 in isolation and in two later full runs.
 
 ## Not established by this evidence
 - That the plugin produces better *new* websites. This loop improved one existing site; no new site was built with and without the upgrade.

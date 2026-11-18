@@ -71,7 +71,7 @@ Observations for users (not skill defects):
 |---|---|---|
 | `tests/skill-scripts.sh`: **executes** all 10 skill scripts plus the tested `ImageSequence.js` helper and the repo tooling, with assertions (init-project, contrast, type-scale math, library search/stale/build determinism, live capture of a served page incl. `--filmstrip`/`--tablet` and unchanged defaults, providers check + BLOCKED path, AVIF/WebP optimisation incl. no-upscale + magic bytes, image sequence via the optimiser, H.264/VP9/AV1 encode via ffprobe, lighthouse usage, install/uninstall, template drift, validator) | **23/23 PASS** (was 21/21 before the design-first checks were added) | [evidence/skill-scripts-run.log](evidence/skill-scripts-run.log) |
 | `tests/validate.py`: 173 structural checks (frontmatter fields, name/dir match, description length, tool names, models, every path referenced in a SKILL.md exists, script syntax, template drift, index freshness, secrets scan, `claude plugin validate`) | 173/173 PASS (necessary, **not** sufficient on its own) | — |
-| Templates = tested code | 23 files byte-identical to the demo exercised by the 56-test suite (`sync-templates.sh --check`) | PASS |
+| Templates = tested code | 23 files byte-identical to the demo exercised by the 57-test suite (`sync-templates.sh --check`) | PASS |
 | `lighthouse.sh`, `scroll-probe.mjs` used for real | Run by performance-engineer on the demo | PASS (PERFORMANCE_REPORT) |
 | `capture-reference.mjs` on live sites | 25 sites captured; 3 blocked sites correctly marked `blocked` | PASS |
 

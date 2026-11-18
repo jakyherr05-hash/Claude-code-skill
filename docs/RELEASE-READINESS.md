@@ -7,7 +7,7 @@ Evidence for every line is in [VALIDATION-REPORT.md](VALIDATION-REPORT.md) and [
 | Deliverable | Verdict | Why |
 |---|---|---|
 | **Claude Code plugin** (12 agents, 10 skills, scripts, templates) | **Ready for a preview release** to Linux/Chromium users. **Not production-ready** | Install (local and from GitHub), discovery, delegation to all 12 agents, model selection, BLOCKED handling, scripts (23/23) and structural checks (173/173) PASS in real sessions. A full ten-phase run on a fresh project reached a Gate B pass with all three reviewers. Windows/macOS and claude.ai upload are NOT TESTED |
-| **Demo website** | **Ready as a demonstration** (hosted preview). **Not production-ready** | Suite (56/56), accessibility (axe at 1440/768/390), contrast, LCP, CLS and font budget pass on Chromium with software WebGL. Gate B round 2 done; its majors are fixed and closed by the reviewer. Real GPUs, other browsers and real devices are NOT TESTED. Detail→Home long tasks are open |
+| **Demo website** | **Ready as a demonstration** (hosted preview). **Not production-ready** | Suite (57/57), accessibility (axe at 1440/768/390), contrast, LCP, CLS and font budget pass on Chromium with software WebGL. Gate B round 2 done; its majors are fixed and closed by the reviewer. Real GPUs, other browsers and real devices are NOT TESTED. Detail→Home long tasks are open |
 
 "Production-ready" is not claimed for either deliverable: the remaining items below cannot be verified in this environment.
 

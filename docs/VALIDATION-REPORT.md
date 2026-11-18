@@ -63,7 +63,7 @@ Production build (static prerender + route-matched hydration), served by `vite p
 | Before the font and router changes | `486c933` | PASS 49/49, 0 flaky | [evidence/playwright-final.json](evidence/playwright-final.json) |
 | Finalization re-run 1 (fonts + router changed since) | `ea8d6e9` | **FAIL 45/49**: 4 visual baselines. The 390 px Hour intent grew 28 px with "was." alone on a third line (real regression, W24); 3 others glyph-only (mono 500 → 400 face, same size and layout) | `/tmp` log, summarised in [BUGS-FIXES.md](BUGS-FIXES.md) W24 |
 | Finalization re-run 2, after the W24 fix and regenerating the 4 changed baselines | `c38f050` + baselines | **PASS 49/49**, 0 flaky, 0 skipped | [evidence/playwright-finalization.json](evidence/playwright-finalization.json), [run log](evidence/playwright-finalization-run.log) |
-| **Final state after Gate B round 2** (axe at 3 widths, header-over-hero contrast guard, deterministic Lenis and Hour tests, title assertions, centred meta separators) | `9288da7` | **PASS 56/56**, 0 flaky, 0 skipped | [evidence/playwright-gate-b-r2.json](evidence/playwright-gate-b-r2.json) |
+| **Final state after Gate B round 2** (axe at 3 widths, header-over-hero contrast guard, deterministic Lenis and Hour tests, title assertions, centred meta separators, separator regression test) | `cf4ebca` | **PASS 57/57**, 0 flaky, 0 skipped | [evidence/playwright-gate-b-r2.json](evidence/playwright-gate-b-r2.json) |
 
 Covered by the suite: routing, back/forward restore, anchor offsets, mobile menu focus trap and scroll lock, Flip filter, The Hour presets and keyboard, Lenis/ScrollTrigger sync, pinned Method sequence, route-change leak test (renderer and tween counts), reduced motion, 6-width responsive matrix, axe (WCAG 2.2 AA, 0 serious/critical) on home and detail at 1440/768/390, header-link contrast over the project heroes at 1024/1440/1920, per-page titles, keyboard order, fonts/images blocked, no-WebGL fallback, hero text contrast at 8 viewports, 12 visual baselines (0.1 % tolerance).
 
@@ -95,7 +95,7 @@ Served from a nested sub-path at 1440×900 and 390×844: 0 failed requests, 0 co
 |---|---|
 | Gate A (tech-lead) | CHANGES REQUIRED → fixes A1–A3 applied |
 | Gate B round 1: creative-director, tech-lead, qa-engineer | FAIL / CHANGES REQUIRED / CONDITIONAL → fix wave (W4–W19), all re-tested by the suite |
-| **Gate B round 2 on the finished demo** (2026-11-17, three independent reviewers) | Creative: PASS (0 blockers, 2 majors) → both majors fixed and **closed by the reviewer** (detail-hero crops incl. wide renders for Capela/Museu; The Hour exposure). QA: FAIL on one intermittent test → root cause found (frame starvation on a shared host), test made deterministic; final suite 56/56. Technical: code correct; FAIL on stale evidence counts and an in-progress tree → evidence regenerated at the final commit, docs reconciled, tree clean and templates in sync. Details: [BUGS-FIXES.md](BUGS-FIXES.md) W34–W41, S12–S14 |
+| **Gate B round 2 on the finished demo** (2026-11-17, three independent reviewers) | Creative: PASS (0 blockers, 2 majors) → both majors fixed and **closed by the reviewer** (detail-hero crops incl. wide renders for Capela/Museu; The Hour exposure). QA: FAIL on one intermittent test → root cause found (frame starvation on a shared host), test made deterministic; final suite 57/57 at `cf4ebca`; technical narrow re-gate PASS (Hour test 3/3 quiet + 3/3 under load, docs corrected). Technical: code correct; FAIL on stale evidence counts and an in-progress tree → evidence regenerated at the final commit, docs reconciled, tree clean and templates in sync. Details: [BUGS-FIXES.md](BUGS-FIXES.md) W34–W41, S12–S14 |
 
 ---
 
@@ -127,7 +127,7 @@ Served from a nested sub-path at 1440×900 and 390×844: 0 failed requests, 0 co
 | Blind re-critique r2 after fixes (same prompt, rubric and widths) | PASS (conditional): none of r1's 4 majors reported again; 2 new majors in older, untouched code | [critique-r2.md](evidence/design-critique/critique-r2.md) |
 | r2 majors fixed (Method drawing label size and placement) | PASS by measurement (11.6 px at 1024; no text overlaps 390–1920, both motion modes). No r3 critique was run | [BUGS-FIXES](BUGS-FIXES.md) W32, W33 |
 | Before/after screenshots at identical widths and scroll positions | 8 comparisons | [evidence/design-critique/](evidence/design-critique/README.md) |
-| Full demo suite on the design-upgrade state (`0fe7c42`) | PASS 49/49, 0 flaky (superseded by B.1's 56/56 at `9288da7`) | [evidence/playwright-design-upgrade.json](evidence/playwright-design-upgrade.json) |
+| Full demo suite on the design-upgrade state (`0fe7c42`) | PASS 49/49, 0 flaky (superseded by B.1's 57/57 at `cf4ebca`) | [evidence/playwright-design-upgrade.json](evidence/playwright-design-upgrade.json) |
 | The plugin produces better *new* websites | **NOT TESTED**: the loop improved one existing site; no new site was built with and without the upgrade | — |
 
 ### D.2 Plugin and tooling (code-quality changes, not visual results by themselves)
