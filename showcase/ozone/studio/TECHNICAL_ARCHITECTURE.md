@@ -1,134 +1,190 @@
 # Technical Architecture: OZONE (cigarette-prevention graphic novel, "Your Ink")
-_Owner: frontend-engineer · Status: DRAFT for Gate A (tech-lead approval + client approval pending) · 2026-11-18_
-_Binding inputs: approved plan §3, CREATIVE_DIRECTION §5/§6/§8, TYPOGRAPHY_SYSTEM, SPACING_SYSTEM. Links: [DESIGN_SPECIFICATION](DESIGN_SPECIFICATION.md) (TODO: still a template, align when filled) · [AUDIO_SPECIFICATION](AUDIO_SPECIFICATION.md) (TODO: file does not exist yet) · [ANIMATION_SPECIFICATION](ANIMATION_SPECIFICATION.md) (TODO: template)._
+_Owner: frontend-engineer · Status: Gate A round-1 fix pass (tech-lead re-check and client approval pending) · 2026-11-18_
+_Binding inputs: approved plan §3, CREATIVE_DIRECTION §5/§6/§8, TYPOGRAPHY_SYSTEM, SPACING_SYSTEM, DECISIONS.md (TD1–TD12, G-1..G-3). Links: [DESIGN_SPECIFICATION](DESIGN_SPECIFICATION.md) · [ANIMATION_SPECIFICATION](ANIMATION_SPECIFICATION.md) · [AUDIO_SPECIFICATION](AUDIO_SPECIFICATION.md) · [TEST_PLAN](TEST_PLAN.md)._
 
 ## 1. Stack and dependencies
-Vite + React 19 + TypeScript (strict) + plain CSS tokens, single route `/`, static prerender (pattern of `demo/scripts/build.mjs`: client build, SSR build of `entry-server.tsx`, inject HTML + font preloads, hydrate only if `data-prerendered` matches). Native scroll. Not Next.js: one route, no CMS, no server.
+Vite + React 19 + TypeScript (strict) + plain CSS tokens, single route `/`, static prerender (pattern of `demo/scripts/build.mjs`: client build, SSR build of `entry-server.tsx`, inject HTML + font preloads). Native scroll. Not Next.js: one route, no CMS, no server. **The art is prerendered and not hydrated (TD9, §7).**
 Versions checked with `npm view` on 2026-11-18; `demo/package.json` pins the same.
 
-| Package | Exact version | Licence | Why |
-|---|---|---|---|
-| react, react-dom | 19.3.1 | MIT | UI shell; renders static SVG/HTML once (prerender via `react-dom/server`) |
-| gsap | 3.15.1 | GSAP Standard "no charge" | master timeline, ScrollTrigger, matchMedia, CustomEase. Free for this commercial use; no Club plugins |
-| @gsap/react | 2.1.2 | GSAP Standard "no charge" | `useGSAP` scoped cleanup |
-| @fontsource-variable/bricolage-grotesque | 5.3.0 | OFL-1.1 | display; only the latin `wdth` file (78,156 B) is copied to `public/fonts/` |
-| @fontsource-variable/atkinson-hyperlegible-next | 5.3.0 | OFL-1.1 | UI/body; latin `wght` file (33,996 B) |
-| Dev: vite 8.3.8 (MIT), @vitejs/plugin-react 6.3.0 (MIT), typescript 7.0.2 (Apache-2.0), @types/react 19.3.0, @types/react-dom 19.3.0, @types/node 22.19.1 (MIT) | | | build + types |
-| Dev: @playwright/test 1.63.0 (Apache-2.0; latest 1.65.1, keep the demo's tested pin), @axe-core/playwright 4.14.0 (MPL-2.0, test-only, not shipped) | | | QA |
+| Package | Exact version | Licence | Kind | Why |
+|---|---|---|---|---|
+| react, react-dom | 19.3.1 | MIT | dependency | UI shell; prerender via `react-dom/server`; the client hydrates only the small interactive shell (loader, toggle, counter), never the art |
+| gsap | 3.15.1 | GSAP Standard "no charge" | dependency | master timeline, ScrollTrigger, matchMedia, CustomEase. Free for this commercial use; no Club plugins |
+| @gsap/react | 2.1.2 | GSAP Standard "no charge" | dependency | `useGSAP` scoped cleanup |
+| @fontsource-variable/bricolage-grotesque | 5.3.0 | OFL-1.1 | **devDependency** (TD11) | display; only the latin `wdth` file (78,156 B) is copied to `public/fonts/` |
+| @fontsource-variable/atkinson-hyperlegible-next | 5.3.0 | OFL-1.1 | **devDependency** (TD11) | UI/body; latin `wght` file (33,996 B) copied |
+| vite 8.3.8 (MIT), @vitejs/plugin-react 6.3.0 (MIT), typescript 7.0.2 (Apache-2.0), @types/react 19.3.0, @types/react-dom 19.3.0, @types/node 22.19.1 (MIT) | | | devDependency | build + types |
+| @playwright/test 1.63.0 (Apache-2.0; latest 1.65.1, keep the demo's tested pin), @axe-core/playwright 4.14.0 (MPL-2.0, test-only, not shipped) | | | devDependency | QA |
+| lighthouse 13.6.0 (Apache-2.0, verified `npm view` 2026-11-18) | | | devDependency (TD11) | Lighthouse medians pinned instead of `npx lighthouse` |
 
-Registered GSAP plugins: ScrollTrigger, CustomEase only (copy `registry.ts`, delete SplitText/Flip imports: type reveals are stroke-mask inks, not split text; revisit if S7 needs it).
-**Not added:** Lenis (native scroll), Three.js/R3F/WebGL/Canvas, Tone.js/Howler (Web Audio API directly, all audio synthesised in code), React Router (one route), state libraries, CSS-in-JS, Tailwind, icon packs, analytics/trackers, JetBrains Mono (TYPOGRAPHY D1), SplitText/Flip/Draggable/Observer/MorphSVG, any CDN or third-party request at runtime.
-Reuse by copy (tested): `gsap-motion/assets/{registry.ts,tokens.ts,useReducedMotion.ts}` into `src/motion/`. `lit.ts` is NOT copied (SplitText-based). Build script adapted from `demo/scripts/build.mjs` into `scripts/build.mjs`.
+`package.json` also carries `"overrides": { "playwright-core": "1.63.0" }` (TD11), so the axe peer (`playwright-core >= 1.0.0`) cannot install a second copy.
+Registered GSAP plugins: ScrollTrigger and CustomEase only. No SplitText, no Flip (type reveals are stroke-mask inks).
+**Not added:** Lenis (native scroll), Three.js/R3F/WebGL/Canvas, Tone.js/Howler (Web Audio API directly, all audio synthesised in code), React Router, state libraries, CSS-in-JS, Tailwind, icon packs, analytics/trackers, JetBrains Mono (TYPOGRAPHY D1), SplitText/Flip/Draggable/Observer/MorphSVG, any CDN or third-party request at runtime.
+**Motion helpers are rewritten, not copied (TD11).** `src/motion/tokens.ts` and `src/motion/registry.ts` are written from ANIMATION_SPECIFICATION §1 (no demo values such as `ease.enter:'dimmer'`, `dur.xs`, `scrub:0.8`; no SplitText/Flip imports). `useReducedMotion.ts` may be copied from `gsap-motion/assets/` unchanged; `lit.ts` is not used. Build script adapted from `demo/scripts/build.mjs` into `scripts/build.mjs`.
 
 ## 2. Directory map and file ownership (`showcase/ozone/`)
-| Path | Owner |
-|---|---|
-| `index.html`, `src/main.tsx`, `src/entry-server.tsx`, `src/App.tsx`, `src/components/**` (Skip link, SoundToggle, SceneCounter, SkipToEnd, Sources, Footer), `src/sections/**` (SceneSection x7: semantic text, one h1, landmarks), `src/styles/**` except `tokens.css`, `vite.config.ts`, `tsconfig*.json`, `scripts/build.mjs`, `public/` (robots, favicon, fonts copy) | frontend |
-| `src/styles/tokens.css` (type, spacing, palette, font-face) | typography |
-| `src/motion/{registry,tokens,useReducedMotion}.ts`, `src/motion/master.ts` (builds master timeline), `src/motion/camera.ts`, `character.ts`, `scenes/s1.ts…s7.ts`, `transitions/t12.ts…t67.ts`, `loaderTimeline.ts`, `cleanup.ts` | gsap-animator |
-| `src/loader/AssetLoader.ts` (contract §5), `src/loader/LoadingSequence.tsx` (DOM/markup: frontend; its timeline: gsap-animator) | frontend (AssetLoader), gsap-animator (choreography) |
-| `src/audio/**` (`AudioDirector.ts`, graph, score, SFX, cue map, `useAudio.ts`) | audio |
-| `src/art/defs/**` (halftone, ink filter, shadow planes, palette `<defs>`), `src/art/rig/**` (Protagonist.tsx, pose table, rig config), `src/art/scenes/S1…S7.tsx` + `Page7.tsx`, `data-layer` names registry `src/art/layers.ts` | art/SVG rig |
-| `tests/**`, `playwright.config.ts`, `scripts/check-prerender.mjs`, `scripts/bundle-report.mjs`, `reports/**` | qa |
-| `studio/**` docs | author named in each file header |
-Rule: the art agent defines layer names in `layers.ts`; gsap-animator only targets names from that file (typed `LayerId`); frontend never edits either.
+One named studio role per path (finding 30). Roles: frontend-engineer (FE), gsap-animator (GA), typography-spacing (TS), qa-engineer (QA), performance-engineer (PE), ui-ux-designer (UX), creative-director (CD). The SVG art and the audio code are FE's, as the plan states; T8 (art) and T10 (audio) touch disjoint paths.
 
-## 3. Motion architecture
-**Stage.** One `<main>` with a tall track (`--track-h` = story budget + one stage height, i.e. `calc(var(--budget) + 100svh)` with `--budget` 1210vh desktop / 1010vh at 390 from ANIMATION_SPECIFICATION; the sticky stage lives inside the track, so without the extra 100svh the last 100vh of the timeline would never be reached — decision A-1); one `position:sticky; top:0; height:100svh` stage inside it. Stage holds one camera group `<g data-cam>` containing all scene art; scene HTML sections (headings, captions) sit over it in normal flow with height = their hold + transition length so keyboard/anchor jumps land on a hold. No nested pins, ever.
-**Master timeline.** `master.ts` builds one paused `gsap.timeline({ defaults:{ease:'none'} })` per matchMedia branch with labels `s1 t12 s2 t23 s3 t34 s4 t45 s5 t56 s6 t67 s7` positioned from the scroll budget (vh to timeline units, single table in `master.ts`). Sub-timelines are `add()`ed at labels. One `ScrollTrigger.create({ trigger: track, start:'top top', end:'bottom bottom', scrub: true, animation: master })` (scrub true, native scroll is the smoother; add numeric scrub only if filmstrip says so). Loader hand-off is a separate timeline that finishes before the trigger is created.
+| Path | Owner | Task |
+|---|---|---|
+| `package.json`, `package-lock.json`, `index.html`, `public/` (robots, favicon, `_headers`, `fonts/` copy), `vite.config.ts`, `tsconfig*.json`, `scripts/build.mjs`, `scripts/head-script.mjs` (builds the head script and its sha256) | FE | T7 |
+| `src/main.tsx`, `src/entry-server.tsx`, `src/App.tsx`, `src/components/**` (SkipLink, SoundToggle, SceneCounter, SkipToEnd, Sources, Footer), `src/sections/**` (story DOM, `#scene-7`, Sources), `src/stores/sceneIndex.ts` (scene-index store), `src/loader/AssetLoader.ts`, `src/loader/LoadingSequence.tsx` (markup and behaviour) | FE | T7 |
+| `src/styles/**` except `tokens.css` | FE | T7 |
+| `src/styles/tokens.css` (type, spacing, palette, font-face) | TS | T7 |
+| `src/motion/rig.ts` (media-query strings, TD2), `src/motion/head-boot.ts` (source of the head script) | FE | T7 |
+| `src/motion/{registry,tokens,useReducedMotion}.ts`, `master.ts`, `camera.ts`, `character.ts`, `idle.ts`, `mount.ts`, `scenes/s1.ts…s7.ts`, `transitions/t12.ts…t67.ts`, `bridge/**` (bridge panels), `loaderTimeline.ts` (loader choreography, called from `LoadingSequence.tsx`), `cleanup.ts` | GA | T9 |
+| `src/art/defs/**`, `src/art/rig/**`, `src/art/scenes/S1…S7.tsx`, `Page7.tsx`, `src/art/panels/**` (`sN-panel` groups), `src/art/layers.ts` (`LayerId` registry) | FE | T8 |
+| `src/audio/**` (AudioDirector, graph, score, SFX, cue map, `useAudio.ts`, buffer-render Worker, `?audio-qa` page) | FE | T10 |
+| `tests/**`, `playwright.config.ts`, `scripts/check-prerender.mjs`, `scripts/bundle-report.mjs`, `reports/**` (evidence: `showcase/ozone/reports/<area>/`, audio under `reports/audio/`) | QA | T11+ |
+| `tests/proto/t45.spec.ts`, `tests/proto/t67.spec.ts` (T6b protocol, with PE) | QA | T6b |
+| `studio/**` docs | author named in each file header | |
+
+Rule: FE (T8) defines layer names in `layers.ts`; GA only targets names from that file (typed `LayerId`) and does not edit it; GA owns `src/motion/**` and FE (T7) does not edit it except `rig.ts` and `head-boot.ts`. `master.ts` derives playhead direction and computes N−1 for reverse cues itself (finding 22): `tl.call(audio.sfx, …)` is wrapped so the direction comes from the playhead delta, not from the call.
+
+## 3. Story DOM and motion architecture
+**Story DOM (TD1, supersedes A-1's wording; A-1's budget arithmetic stands).**
+```
+<main>
+  <div class="story">
+    <div class="stage">          position:sticky; top:0; height:100lvh
+      <svg class="world">…</svg> the one world; art bleeds below the text-safe box
+      <div class="copy">         100svh text-safe box anchored top; six copy layers (S1–S6 headline + caption)
+    </div>
+    <div class="track">          12 beats #beat-s1 … #beat-t67, heights sum to --budget
+  </div>
+  <section id="scene-7">…</section>   after .story: the pin has released
+  <section id="sources">…</section>
+</main>
+```
+`--budget` is CSS-only and keyed to `html[data-rig]` (L/M: 1210vh; P: published by ANIMATION; S: 1010vh at 390). **One ScrollTrigger**: `trigger: '.story'`, `start:'top top'`, `end:()=>'+='+track.offsetHeight`, `scrub` per TD4. CSS is the single source of the length. Test per rig: `st.end − st.start === track.offsetHeight`. No nested pins. Headlines and captions travel with their art plane because they are inside `.stage`. Anchors (SkipToEnd, scene links) are an instant JS `scrollTo` to the beat's offset (no smooth scroll); a hash present at load is resolved the same way after the hand-off (§4, scroll restoration).
+**Master timeline.** `master.ts` builds one paused `gsap.timeline({ defaults:{ease:'none'} })` per rig with labels from ANIMATION's tables (units from one table in `master.ts`; P uses ANIMATION's published label table, labels rounded to 5). Sub-timelines are `add()`ed at labels. The trigger is created at the loader hand-off. **Scrub (TD4):** `0.5` on fine pointers, `true` on `(pointer:coarse)`; ANIMATION §1 is the source.
 **Property ownership.**
 | Property class | CSS | React | GSAP |
 |---|---|---|---|
 | Layout, colour, type, static fills/strokes, focus, hover (non-GSAP elements) | yes | renders once | never |
-| Stage-layer `transform`, `opacity`, `stroke-dashoffset`, `clip-path`/mask attrs, `<use>` href/pose swaps, SVG attributes (`x`, `d` where permitted) | never transition these (no CSS `transition`/`animation` on stage layers) | never (no animated value in state/props) | yes, only through `gsap.context` scoped to the stage |
+| Stage-layer `transform`, `opacity`, `stroke-dashoffset`, `clip-path`/mask attrs, `<use>` href/pose swaps, SVG attributes | never transition these | never (art is not React-rendered on the client) | yes, only through `gsap.context` scoped to the stage |
 | Controls (toggle state text, counter) | style | text from external store via `useSyncExternalStore` (audio state, scene index) | none |
-GSAP targets layers by `[data-layer="…"]`/`[data-rig="…"]`, set at render and never changed by React (no class toggles on animated nodes; React keys stable; art components are `memo` with no props that change).
+GSAP targets `[data-layer="…"]`/`[data-rig="…"]` set in the prerendered markup and never changed by React (no class toggles on animated nodes). **Headlines and captions animate `opacity` or `clip-path` only: never autoAlpha, `visibility:hidden`, `display:none` or removal (TD6).** `mount` uses only `display` sets and only on aria-hidden art.
 **Timeline ownership (one owner per element per time range).**
 | Owner | Elements | Range |
 |---|---|---|
-| `camera` | `[data-cam]` x/y/scale/rotation | whole master (single owner for the whole range) |
+| `camera` | `[data-cam]` x/y/scale/rotation | whole master |
 | `character` | `[data-rig]` position + pose swaps | whole master, except hidden spans |
-| `sN` (scene env/type) | that scene's `data-layer` ids with prefix `sN-` and its headline masks | `sN` hold, plus the scene's own in/out segments inside neighbouring transitions only for layers not claimed by `tNM` |
-| `tNM` (x6) | only layers crossing the boundary, listed per transition in ANIMATION_SPECIFICATION: t12 walk/curb/sky; t23 balloons/glare; t34 beam + chest mask; t45 eraser front (signature 1); t56 window wipe; t67 page assembly (signature 2) | `tNM` label span |
-| `loader` | curb line, wordmark, prompt, progress bar | before master exists; hands curb line to `s1` |
-Enforcement: `master.ts` registers every tween target in a `claims` map (element id, start, end, owner) in dev/test builds; overlapping claims by different owners throw, and a Playwright test asserts `window.__claims` has zero overlaps.
-**Responsive.** `gsap.matchMedia()` with conditions `(max-width:600px)`, `(min-width:601px) and (max-width:1024px)`, `(min-width:1025px)`, all `and (prefers-reduced-motion:no-preference)`, plus `(prefers-reduced-motion:reduce)`. Each builds its own master + trigger inside the callback (auto-revert on change). Camera rig (16:9, 4:3, 3:4, 9:19.5) picks by aspect ratio via the same condition set with `(orientation)`/aspect media queries. Reduced-motion branch builds no scrub: static comic panels, only a ≤ 200 ms fade.
-**Refresh.** `ScrollTrigger.config({ ignoreMobileResize:true })`; `ScrollTrigger.refresh()` after `document.fonts.ready` (all text is already measured in sections, so fonts only move line wraps), after the art chunk for the next scene lands, and on `orientationchange` (debounced 150 ms). Track height uses `svh`/CSS vars, not JS-measured, so URL-bar changes do not move labels.
-**Cleanup.** `useGSAP(fn,{scope:stageRef,revertOnUpdate:false})` plus the matchMedia context revert every tween/trigger. `cleanup.ts` is the single listener registry (`on(target,type,fn,opts)` returns off; `disposeAll()`): visibilitychange, pointerdown, keydown, resize, orientationchange. `AssetLoader.dispose()` and `AudioDirector.dispose()` call into it. Test: ScrollTrigger count, `gsap.globalTimeline.getChildren().length` and the registry's listener count are equal before and after unmount/remount and across reload.
+| `sN` | that scene's `sN-` layers and headline masks | `sN` hold, plus in/out segments inside neighbouring transitions for layers not claimed by `tNM` |
+| `tNM` (x6) | only layers crossing the boundary, per ANIMATION_SPECIFICATION | `tNM` label span |
+| `loader` | curb line, wordmark, prompt, progress bar | before the master exists; hands the curb line to `s1` |
+Enforcement: `master.ts` registers every tween target in a `claims` map in dev/test builds; overlapping claims by different owners throw; a Playwright test asserts `window.__claims` has zero overlaps.
+**Rig selection (TD2).** One `src/motion/rig.ts` exports the media-query strings for rigs **L, M, P, S** and for **static** (`(prefers-reduced-motion:reduce)`, `(max-height:359px)`, `?view=text` / `sessionStorage['ozone-view']`). Everything that picks a rig imports from it:
+- the head script (§4) evaluates the strings with `matchMedia` and writes `html[data-mode="story|static"][data-rig="L|M|P|S"]` before first paint;
+- CSS `--budget` and the story layout key on `[data-rig]`/`[data-mode]` (the build inlines the same strings into the CSS `@media` blocks, or CSS reads only the attributes);
+- `gsap.matchMedia` is created with the same strings.
+Width-based motion branches (the old 600/1024 px conditions) are removed; the grid stays width-based for layout only. The rig rebuilds only when the bucket changes (matchMedia semantics), through one 150 ms debounce; DESIGN's 120 px height-change rule is dropped. L/M/P/S camera rigs and budgets cannot disagree because there is one source.
+**Refresh.** `ScrollTrigger.config({ ignoreMobileResize:true })`; `ScrollTrigger.refresh()` after `document.fonts.ready` and on `orientationchange` (150 ms debounce). The art is prerendered, so there are no per-scene art chunks to refresh after. Track height comes from CSS (`svh`/vh units), not JS measurement.
+**Cleanup.** `useGSAP(fn,{scope:stageRef,revertOnUpdate:false})` plus the matchMedia context revert every tween/trigger. `cleanup.ts` is the single listener registry (`on(target,type,fn,opts)` returns off; `disposeAll()`) for visibilitychange, **pageshow, pagehide, AudioContext `statechange`**, keydown, resize, orientationchange. `AssetLoader.dispose()` and `AudioDirector.dispose()` call into it. Test: ScrollTrigger count, `gsap.globalTimeline.getChildren().length` and the registry's listener count are equal before and after unmount/remount and across reload.
 
-## 4. No-JS and GSAP-failure mode
-The prerendered HTML is the final comic: every scene's h1/h2 headline, copy, art (inline SVG, static pose), OZONE copy and Sources as ordinary stacked sections with paper gutters (`html:not(.js-story)` styles). Loader markup is hidden unless JS starts (`html.js-loading` set by an inline `<script>` in `<head>`, no-JS never sees it). `.js-story` is added by `main.tsx` only after `registerGSAP()`, master build and ScrollTrigger creation succeed inside try/catch; on any error we log once, leave the class off, remove `js-loading`, and the document stays readable. Content is visible by default: no CSS hides content; GSAP sets initial states. Same stacked layout is used by the reduced-motion branch (CSS `@media (prefers-reduced-motion:reduce)` plus the JS check), so `.js-story` is not added there either (story is complete without scrub). "Skip intro" is first in tab order; a text-story link appears after 8 s of loading.
+## 4. Modes, head script, watchdog, no-JS and failure behaviour
+**One pre-paint head script (TD2, TD7).** A small inline `<script>` in `<head>`, authorised by CSP `script-src 'self' 'sha256-<hash>'` (hash computed at build by `scripts/head-script.mjs` from `src/motion/head-boot.ts` and written into `_headers` and a `<meta http-equiv>` fallback if the host ignores headers). It:
+1. evaluates `rig.ts`'s strings and sets `html[data-mode]` (`story` or `static`) and `html[data-rig]`;
+2. adds `js-loading` only when `data-mode="story"`;
+3. arms the **watchdog (TD7)**: after about **12 s** (longer than the loader's 10 s hard timeout) it sets `data-mode="static"` and removes `js-loading`, unless `main.tsx` has signalled boot (`window.__ozoneBoot = true` or a `ozone:boot` event); an `onerror` on the module `<script>` does the same immediately.
+Story-layout CSS keys on `data-mode="story"` from first paint, so the loader never runs over a stacked static layout and nothing swaps at the hand-off (no layout shift). An init error in `main.tsx` (registry, master build, ScrollTrigger creation inside try/catch) logs once and reverts to `data-mode="static"` and removes `js-loading`.
+**No-JS and static mode.** With no JS the head script never runs: `data-mode` is absent, no CSS keyed to `story` applies, and `js-loading` is never set, so the prerendered HTML is the final comic: every scene's headline, copy, art (static frames), OZONE copy and Sources as ordinary stacked sections. Static mode (reduced motion, `max-height:359px`, `?view=text`) uses the same stacked layout with only a ≤ 200 ms fade and no scrub. Content is visible by default: no CSS hides content; GSAP sets initial states in JS. "Skip intro" is first in tab order; a text-story link appears after 8 s of loading. The static-mode sound-cue observer uses `rootMargin:'-45% 0px -45% 0px', threshold:0` (TD10; a 60 % threshold never fires on tall panels).
+**Scroll restoration (TD10).** `history.scrollRestoration='manual'`. After the hand-off the app jumps to the stored scene or the URL hash (instant `scrollTo` to the beat) with SFX suppressed (ANIMATION's 60-unit rule).
 
-## 5. AssetLoader contract
+## 5. AssetLoader contract (TD3)
 ```ts
 type Item = { id:string; critical:boolean; timeoutMs:number; retries:number; load:()=>Promise<unknown> };
 type Progress = { completed:number; total:number; ratio:number; items:Record<string,'pending'|'ok'|'skipped'|'failed'> };
 class AssetLoader { constructor(items:Item[]); onProgress(cb:(p:Progress)=>void):()=>void;
   start():Promise<{ ok:boolean; skipped:string[] }>; dispose():void }
 ```
-- `ratio = completed/total` where completed counts settled items (ok or skipped); never pre-advanced, never eased ahead (the curb line may lag, never lead). Unit test asserts the equality.
-- Items: font Bricolage (`document.fonts.load('800 1em "Bricolage Grotesque Variable"')`, critical, 4000 ms, 1 retry); font Atkinson (same, 4000 ms); `art-s1s2` (dynamic `import()`, critical, 6000 ms, 1 retry); `audio-engine` (dynamic import + `AudioDirector.prepare()`, non-critical, 3000 ms, 0 retry); `audio-ir` (reverb IR rendered in code, non-critical, 3000 ms). Each item races its timeout; on failure it retries once (critical only); on second failure critical fonts fall back to metric-matched locals (marks `skipped`, continues) and non-critical is `skipped`. Remaining art chunks (s3..s7) load after ENTER in idle, with `ScrollTrigger.refresh()` after each.
-- Hard global timeout 10 s: story opens regardless, prompt shown, `skipped` recorded; never stuck.
-- Returning visitor: `sessionStorage['ozone-seen']='1'` set at ENTER; if present, `LoadingSequence` runs the compact ≤ 1 s version (assets still really loaded; progress honest, usually cached).
-- Reduced motion: static mark + plain `role="progressbar"` bar with the same progress values; same prompt.
+- **Count-based progress. No weights.** `ratio = completed/total`, `completed` counts settled items (ok or skipped); never pre-advanced or eased ahead (the curb line may lag, never lead). Unit test asserts the equality.
+- **Items (six):** `font-display` (`document.fonts.load('800 1em "Bricolage Grotesque Variable"')`, critical, 4000 ms, 1 retry); `font-text` (Atkinson 400, critical, 4000 ms, 1 retry); `art-s1s2` (the S1 and S2 art decoded and ready, critical, 6000 ms, 1 retry); `audio-engine` (dynamic import + `AudioDirector.prepare()`, non-critical, 3000 ms, 0 retry); `audio-ir` (reverb IR rendered in code, non-critical, 3000 ms); `audio-buffers` (Worker-rendered score buffers, non-critical, timeout per AUDIO §6). **S3–S7 are not loader items**: the art is one prerendered document, there are no later art chunks.
+- With `localStorage['ozone-sound']='off'` the three audio items are excluded from the total and load on the first toggle ON (the toggle shows `aria-busy` until ready).
+- Each item races its timeout; critical items retry once; on second failure critical fonts fall back to metric-matched locals (`skipped`, continue). If `audio-buffers` times out it is `skipped`, rendering continues in the Worker, and its voices join when ready.
+- **Critical art failure after its retry:** the story continues on the prerendered DOM if the master builds; otherwise `data-mode="static"` with the DESIGN §5.2 message.
+- Hard global timeout 10 s: story opens regardless, `skipped` recorded; never stuck (the head-script watchdog at ~12 s is the backstop, §4).
+- Returning visitor: `sessionStorage['ozone-seen']='1'` set at the hand-off; if present, the compact ≤ 1 s loader runs (assets still really loaded; progress honest).
+- Reduced motion: static mark + plain `role="progressbar"` bar with the same values.
 - `start()` is idempotent; `dispose()` aborts timers and unsubscribes.
 
 ## 6. AudioDirector contract (internals per [AUDIO_SPECIFICATION.md](AUDIO_SPECIFICATION.md))
-- Singleton (`AudioDirector.get()`), one `AudioContext` and one graph, created lazily on `prepare()` (before gesture: context created, state expected `suspended`; no sound).
-- State machine: `idle → starting → running | blocked`; `running ⇄ muted` (gain 0, then `suspend()` after 0.4 s fade) and `running ⇄ suspended` (tab hidden). `blocked` means `resume()` did not reach `running` (autoplay policy): the loader prompt then offers ENTER WITH SOUND (`resume()` called in the click handler). Public `getState()`, `subscribe(cb)` for `useSyncExternalStore`.
-- Preference: `localStorage['ozone-sound']` = `on|off`. Explicit `off` is never overridden by load, scroll, visibility or any code path (only the user's toggle/choice writes it). No value = default on, attempt start, fall back to prompt. Storage failures are caught and treated as session-only.
-- Toggle (`SoundToggle`) reads only `getState()`: shows ON only when `state==='running'` and master gain > 0; otherwise OFF. Buttons: `aria-pressed`, text + icon.
-- Visibility: hidden → fade + suspend; visible → resume only if preference is not `off` and user had chosen on.
-- API: `setCue(sceneIndex:number, direction:1|-1)` (fired by the `cue:sN` labels; `setCue(1,+1)` is called once at the loader hand-off since there is no `cue:s1` label; quantised to bar lines by the director), `setPlayhead(units:number, direction:1|-1)` (called from `master.ts` `onUpdate`, throttled to one call per animation frame; drives within-scene intensity and resume points, decision AU-1), `sfx(id:SfxId, {direction})` with per-id latch (once per boundary crossing per direction) and cooldown (ms table in audio module), `setEnabled(bool)`, `unlock()`, `dispose()` (stop scheduler, close context, remove listeners via `cleanup.ts`).
-- Audio never gates anything: story and loader work with context absent/blocked. No audio before the user's choice on first visit unless the browser allows autoplay and the preference is not off (D1: autoplay is attempted at init; this overrides CREATIVE_DIRECTION §9's "no audio before the choice". If it succeeds, the internal loader event `loader:bloom` plays, AU-4.) Scheduling runs on a Worker-driven look-ahead clock per AUDIO_SPECIFICATION §4.
-- iOS/Android real-device behaviour: NOT TESTED unless client tests.
+- Singleton (`AudioDirector.get()`), one `AudioContext` and one graph in production, created lazily on `prepare()` (state expected `suspended` before a gesture; no sound). Buffers are rendered in a file-based Worker (`new Worker(new URL('./render.worker.ts', import.meta.url))`, not a blob; CSP `worker-src 'self'`) using recurrence oscillators; any main-thread remainder runs in chunks ≤ 16 ms. Scheduling still runs on the main thread: a main-thread task longer than the look-ahead (120/200 ms) delays notes.
+- State machine: `idle → starting → running | blocked`; `running ⇄ muted` (gain 0, then `suspend()` after the 0.4 s fade) and `running ⇄ suspended` (tab hidden). `blocked` = `resume()` did not reach `running`. Public `getState()`, `subscribe(cb)` for `useSyncExternalStore`.
+- **Sound preference (TD5):** `localStorage['ozone-sound']` = `on|off`, persistent, **written only by ENTER, CONTINUE, Escape or the toggle**. Explicit `off` is never overridden by load, scroll, visibility or any other path. Storage failures are caught and treated as session-only. No `ozone.v1` object. Other keys: `sessionStorage['ozone-seen']` (short loader), `sessionStorage['ozone-view']` (text-view choice).
+- **Sound start, four cases (G-1, orchestrator default pending client confirmation; mirrors DESIGN §5.3):**
 
-## 7. SVG art system
-- `src/art/defs/`: one `<svg width=0 height=0>` of shared `<defs>` mounted once: halftone patterns (pitch 6 px desktop, 4 px at 390 via CSS var on the pattern `patternTransform`), ink-edge filter (single `feTurbulence`+`feDisplacementMap`, used on ≤ 3 layers, baked to paths where heavy), shadow-plane gradients, palette colours as CSS vars.
-- `src/art/rig/`: `Protagonist.tsx` renders `<symbol>` parts (head, hair, hoodie, arms, legs, backpack, headphones, 4 walk frames). `rig.config.ts` holds proportions in one object. `poses.ts` is the pose table (front, side, three-quarter, walk 1-4, stand, react, stride, window-pass) mapping each pose to part transforms; GSAP swaps pose by setting `data-pose` frames visible/hidden and tweening part transforms, never by React state. Scenes use `<use href="#rig-…">`, no redraws.
-- `src/art/scenes/S1..S7.tsx`: each default-exported, loaded with `React.lazy`/dynamic import (S1+S2 in the loader item; S3..S7 idle after ENTER; S7 `Page7` last). Prerender includes all of them statically (SSR renders them eagerly) so no-JS is complete; on the client the lazy chunk hydrates identically (the prerendered DOM is kept; chunk only attaches data-layer refs, no re-render of art).
-- Targeting: each animatable group carries `data-layer="s3-balloons"` (id from `layers.ts`) and `data-depth` (parallax multiplier for camera tweens). No class names used by GSAP, no inline style set by React on these nodes.
-- Node budget: ≤ 2,500 live SVG nodes per scene (target 1,800 at 390), counted by a test (`document.querySelectorAll('svg *')` per scene region, stage nodes off-screen scenes removed from layout with `content-visibility:auto` and `display:none` via GSAP `autoAlpha` only while outside ±1 scene of the playhead). Layers use `will-change:transform` only on camera group and the 3 heaviest layers.
+| Case | Condition | Behaviour |
+|---|---|---|
+| (a) First visit, autoplay blocked | no preference, context stays `suspended` | loader → prompt (ENTER WITH SOUND / CONTINUE WITHOUT SOUND) → hand-off. ENTER calls `unlock()` inside its click handler and writes `on`; CONTINUE writes `off` (G-3), gain 0, `suspend()` |
+| (b) First visit, autoplay allowed | no preference, context reaches `running` | loader stays silent and shows no prompt; **at the hand-off** the score fades in and the **sound toggle (visible, focusable, showing ON) appears at the same moment**, so a stop control exists from the first audible frame (WCAG 1.4.2). `loader:bloom` plays here as the score's opening gesture (AU-4 moved from the loader) |
+| (c) Returning, `on` | `ozone-sound=on` | as (b) if the context runs, else as (a) |
+| (d) Returning, `off` | `ozone-sound=off` | no audio attempt, no prompt, toggle OFF; the audio items load on the first toggle ON |
+
+The loader never plays a bed. Everything outside `#loader` is `inert` during the loader (including skip link and toggle) because no audio is audible then. Unlock (`resume()`/`unlock()`) is called only inside the ENTER and toggle click handlers; touch `pointerdown` is not an activation event and is not used.
+- **Toggle truth (TD10):** `SoundToggle` shows ON only when preference is on AND `state==='running'` AND master gain > 0; otherwise OFF. CONTINUE and Escape set gain 0 and call `suspend()`. A late-resolving `resume()` therefore cannot flip the toggle to ON. Test: blocked → CONTINUE → still OFF after 2 s. Buttons: `aria-pressed`, text + icon. The iOS silent switch can mute audio while the toggle reads ON: known limit, NOT TESTED.
+- Visibility: hidden → fade + suspend; visible → resume only if preference is `on` and the user had chosen on.
+- API: `setCue(sceneIndex, direction:1|-1)` (fired by `cue:sN` labels; `setCue(1,+1)` once at the loader hand-off since there is no `cue:s1` label; AU-5), `setPlayhead(units, direction)` (from `master.ts` `onUpdate`, one call per animation frame; AU-1), `sfx(id:SfxId, {direction})` with per-id latch and cooldown, `setEnabled(bool)`, `unlock()`, `dispose()`. `master.ts` supplies `direction` (derived from the playhead delta) and N−1 for reverse cues.
+- Audio never gates anything: the story and loader work with the context absent or blocked. iOS/Android real-device behaviour: NOT TESTED unless the client tests.
+
+## 7. SVG art system (TD9)
+- **Prerendered, not hydrated.** `entry-server.tsx` imports `S1…S7`, `Page7` and the defs **statically**; `renderToString` emits all the art into the HTML. The client never re-renders or hydrates the art: it is static markup outside React's hydration roots, with **no art JS chunks**. `main.tsx` hydrates only the interactive shell (loader, toggle, counter, prompt), each in its own root. GSAP only looks up nodes by `data-layer`. Art path data ships once (in the HTML), not twice. (This replaces the earlier lazy-chunk plan; `React.lazy` and `renderToString` Suspense fallbacks would drop the art from the no-JS HTML.)
+- **Static frames** are windows onto the one world: `<svg viewBox="…hold…"><use href="#sN-world"/></svg>`, so static mode adds no duplicated art DOM.
+- `src/art/defs/`: one `<svg width=0 height=0>` of shared `<defs>` mounted once: halftone patterns (pitch 6 px desktop, 4 px at 390 via CSS var on the pattern), ink-edge filter (single `feTurbulence`+`feDisplacementMap`, ≤ 3 layers, baked to paths where heavy), shadow-plane gradients, palette colours as CSS vars.
+- `src/art/rig/`: `Protagonist.tsx` renders `<symbol>` parts and 4 walk frames; `rig.config.ts` proportions; `poses.ts` pose table. GSAP swaps poses by `data-pose` visibility and part transforms, never by React state. Scenes use `<use href="#rig-…">`.
+- **t67 panels:** low-detail `sN-panel` groups defined in `<defs>` (≤ 300 nodes each), exempt from `mount`, so a `<use>` of them always renders. `mount` uses only `display` sets and only on aria-hidden art. `content-visibility` is not used (it does not apply to SVG children).
+- Targeting: `data-layer="s3-balloons"` (id from `layers.ts`) and `data-depth`. No class names used by GSAP, no inline style set by React on these nodes. `will-change:transform` only on the camera group and the 3 heaviest layers (SVG-child layer promotion is not reliable; the HTML-wrapped-`<svg>`-layer cut-line is held for T6b).
+- Node budgets are in §8 (document, per frame, per scene), counted by tests.
 
 ## 8. Performance budgets and measurement
 | Metric | Budget | Method |
 |---|---|---|
-| LCP (lab, mobile emulation 390, 4x CPU throttle, Fast 4G) | ≤ 2.5 s | Playwright + `PerformanceObserver('largest-contentful-paint')`; Lighthouse median of 5; LCP = S1 h1 text (HTML, not JS) |
-| CLS | ≤ 0.05 | `layout-shift` observer through full scroll + font swap |
+| **LCP** (lab, mobile emulation 390, 4x CPU throttle, Fast 4G) | ≤ 2.5 s, on **whatever element Chromium reports** (expected: loader text). No claim that the S1 h1 is the LCP element (G-2) | Playwright `PerformanceObserver('largest-contentful-paint')` records the element; Lighthouse median of 3 (matches plan §4) |
+| **Story-ready** (G-2; time from navigation start to the hand-off completing, first visit, same lab profile) | **≤ 5.0 s median, hard cap 10 s (the loader timeout); returning visit ≤ 2.0 s** (proposal, performance-engineer to confirm after T6b) | `performance.mark('story-ready')` at the hand-off, read by Playwright; 3 runs, median |
+| CLS | ≤ 0.05 | `layout-shift` observer through the loader, hand-off, full scroll and font swap |
 | TBT | ≤ 200 ms | Lighthouse (lab) |
-| INP | ≤ 200 ms (lab only) | Event Timing observer in Playwright over click/keypress on ENTER, toggle, skip |
-| Initial JS (gz) | ≤ 180 KB | `scripts/bundle-report.mjs` gzips `dist/assets/*.js` loaded on first paint (react+gsap+ScrollTrigger ≈ 120 KB estimated; unverified until built) |
+| INP | ≤ 200 ms (lab only) | Event Timing observer over ENTER, CONTINUE, toggle, skip |
+| Initial JS (gz) | ≤ 180 KB, where "initial JS" = **all JS requested before the hand-off** (including the audio engine and Worker) | `scripts/bundle-report.mjs` on the network log up to `story-ready` (react+gsap+ScrollTrigger ≈ 120 KB estimated; unverified until built) |
 | First-load fonts | 112,152 B (budget 150 KB) | file sizes in `dist` |
-| SVG nodes per scene | ≤ 2,500 | DOM count test |
-| Scroll smoothness | no frame > 50 ms during scripted slow/fast scroll at 4x CPU throttle | rAF/`longtask` probe + filmstrip |
-Lab results are not field results: there is no RUM, so real-user CWV are NOT TESTED; reports say "lab".
+| Prerendered HTML | ≤ 250 KB gz | `bundle-report.mjs` gzips `dist/index.html` |
+| SVG nodes, document | ≤ 20,000 | DOM count test |
+| SVG nodes rendered in any frame | ≤ 5,000 (≤ 3,600 at 390) | DOM count at the 7 holds and 5 mid-transition playheads, counting only nodes without `display:none` ancestors |
+| `sN-panel` nodes | ≤ 300 each; `red-all` has its own exempt budget set in ANIMATION | DOM count |
+| Audio buffer memory | ≤ 17 MB desktop / ≤ 12 MB mobile profile | `AudioDirector` reports total buffer bytes to `?audio-qa` |
+| Audio buffer render | ≤ 400 ms (lab, mobile profile), in the Worker | `performance.measure` around the Worker job |
+| Long tasks from audio | none (no task > 50 ms attributed to audio, incl. any ≤ 16 ms main-thread chunks) | `longtask`/LoAF observer during render and S4→S5, S6→S7 cue changes |
+| `AudioContext.renderCapacity` | ≤ 25 % average during the story | `renderCapacity` events where supported, else NOT TESTED |
+| Audio node caps | per AUDIO §6 (≤ 24 sources / ≤ 70 nodes at the mobile profile, incl. outgoing cue tail) | `?audio-qa` node counter |
+| Scroll smoothness | no frame > 50 ms during scripted slow/fast scroll at 4x CPU throttle | rAF/LoAF probe + filmstrip; T6b protocol (DPR 3 at 390×844, DPR 1 and 2 at 1440×900, real wheel/touch input, CDP trace with paint/raster/LoAF, audio running) |
+Lab results are not field results: there is no RUM, so real-user CWV are NOT TESTED; reports say "lab". Story-ready target rationale: the designed first-visit loader has a floor of about 3.3 s; roughly 300 to 400 KB of first-load transfer (JS, two fonts, art, audio code) adds about 1.5 s on the Fast 4G profile and the Worker render adds ≤ 0.4 s, so 5 s leaves headroom without tolerating a stalled loader. This is a proposal until measured.
 
-## 9. SEO, prerender, hosting, scripts
-- Head: `<title>`, description, canonical (TODO: production URL not supplied; omitted until given), OG/Twitter text tags (no image until an original share image is made), `lang="en"`, theme-color `#101014`, `color-scheme`. No California claims; copy only from FACTS_AND_SOURCES.md.
-- `check-prerender.mjs` greps `dist/index.html` for all 7 headlines (both lines), the OZONE ID line, "Sources", exactly one `<h1>`, and that no `vap`/`e-cig` strings exist.
-- Headers (static host config is the client's/host's; supply `_headers` example): `Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'` (inline SVG style attrs; no third parties), `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`, long-cache immutable for `/assets/*` and `/fonts/*`. NOT TESTED against a real host.
+## 9. SEO, prerender, hosting, scripts, tests
+- Head: `<title>`, description, canonical (production URL not supplied; omitted until given), OG/Twitter text tags (no image until an original share image exists), `lang="en"`, theme-color `#101014`, `color-scheme`. No California claims; copy only from FACTS_AND_SOURCES.md.
+- `check-prerender.mjs` greps `dist/index.html` for all 7 headlines (both lines), the OZONE ID line, "Sources", exactly one `<h1>`, and that no `vap`/`e-cig` strings exist; it also greps the JS chunks and asserts no CDPH link while California is BLOCKED. The `<h3>Resource</h3>` is omitted when no resource link ships.
+- **Headers** (`public/_headers` example; static host config is the client's/host's): `Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-<head-script-hash>'; style-src 'self' 'unsafe-inline'; worker-src 'self'; img-src 'self' data:; font-src 'self'` (TD7: `'unsafe-inline'` for styles is kept because SVG/GSAP write inline styles and there are no third parties; scripts only `'self'` plus the head script's hash), `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`, long-cache immutable for `/assets/*` and `/fonts/*`. NOT TESTED against a real host.
 - Scripts: `dev`, `typecheck` (`tsc --noEmit` + node config), `lint`, `build` (`tsc --noEmit && node scripts/build.mjs dist && node scripts/check-prerender.mjs`), `preview`, `report` (bundle/fonts), `test` (Playwright), `test:update-snapshots`.
-- `playwright.config.ts` adapted from `demo/playwright.config.ts`: production build via `vite preview`, `PW_PORT` (default 4173) and `PW_OUT` (default `dist`) env, 1 worker, projects for the width matrix (320, 360, 375, 390, 414, 430, 768, 1024, 1280, 1440, 1920) plus a `reduced-motion` project (`reducedMotion:'reduce'`) and a `no-js` project (`javaScriptEnabled:false`); remove the SwiftShader launch args (no WebGL).
-- Test plan = plan §4 (overflow, contrast, 44 px targets, zoom 200/400, axe at 390/768/1440, keyboard, loading failures, scroll/reverse/resize, claims overlap, listener counts, transition filmstrips, audio instrumentation).
+- `playwright.config.ts` adapted from `demo/playwright.config.ts`: production build via `vite preview`, `PW_PORT` (4173) and `PW_OUT` (`dist`), 1 worker, a width matrix (320, 360, 375, 390, 414, 430, 768, 1024, 1280, 1440, 1920) plus `reduced-motion` and `no-js` projects; SwiftShader args removed (no WebGL). A `?art=lite|full` override exists for QA and the chosen tier is logged.
+- **Test plan:** see [TEST_PLAN.md](TEST_PLAN.md) (QA owns it): each criterion maps to a spec file, command, evidence path and PASS/FAIL/NOT TESTED rule. Evidence lives under `showcase/ozone/reports/<area>/`, with audio under `showcase/ozone/reports/audio/`. Lighthouse runs ×3 (plan §4).
 
 ## 10. Risks and mitigations
 | Risk | Mitigation |
 |---|---|
-| Continuous camera over a 1,800-2,500-node SVG may drop frames on mid-range phones (unproven; no reference proof of this pattern) | Prototype t45 first (heaviest: eraser front + widest framing) with placeholder art at real node counts; filmstrip + long-frame probe at 390, 4x CPU throttle; budget cut-lines decided before more scenes are built: lower halftone density, bake filters, cull off-screen layers, reduce nodes. Real-device performance NOT TESTED without client devices. |
-| t67 panel-page assembly (frame shrinks into panel 7, six `<use>` windows ink in) is the most complex single timeline | Build t67 as the second prototype; panels use `<use>` of already-mounted scene groups (no duplicated DOM); fall back to a simpler paper-rise + static panels if the filmstrip fails creative critique. |
-| One master timeline is a single point of failure (one bug breaks all seven scenes) | try/catch init with graceful no-JS mode; claims-overlap assertion; per-scene sub-timeline unit tests built alone. |
-| Prerender vs lazy art mismatch causes hydration warnings/layout shift | art rendered statically in SSR, lazy chunk only attaches refs; zero-console-error test; CLS test. |
-| Fonts late shifting line wraps and label positions | metric-matched fallbacks (TYPOGRAPHY), `refresh()` after fonts, track heights from CSS not text. |
-| Autoplay policies differ (Safari/iOS) | state machine + explicit prompt; Chromium policies emulated; iOS/Android NOT TESTED. |
-| Initial JS budget | GSAP core + ScrollTrigger only, dynamic-import audio and scenes 3-7; bundle report gate in CI. |
-| TypeScript 7 / Vite 8 toolchain drift | exact pins matching the demo's passing build. |
+| Continuous camera over a large SVG may drop frames on mid-range phones (unproven) | **T6b (TD8)**: t45 then t67 prototype on placeholder art matching the real fill area, filters and mask, measured with QA's protocol (DPR 3 at 390×844; DPR 1 and 2 at 1440×900; real wheel/touch; CDP trace with paint/raster/LoAF; audio running) → performance verdict + cut-lines, after client approval of Gate A and before T7; T8 depends on T6b passing. Cut-lines: lower halftone density, bake filters, cull layers, fewer nodes, HTML-wrapped-`<svg>` depth planes. Real-device performance NOT TESTED without client devices |
+| t67 panel-page assembly is the most complex timeline | second T6b prototype; panels are low-detail `sN-panel` `<defs>` groups; fall back to paper-rise + static panels if the filmstrip fails critique |
+| One master timeline is a single point of failure | try/catch init → static mode; head-script watchdog; claims-overlap assertion; per-scene sub-timeline unit tests |
+| Prerendered art too heavy for the HTML (size, long parse) | budgets in §8 (≤ 250 KB gz, ≤ 20,000 nodes, per-frame caps); art is never hydrated |
+| Fonts late shifting wraps and labels | metric-matched fallbacks (TYPOGRAPHY), `refresh()` after fonts, track heights from CSS |
+| Autoplay policies differ (Safari/iOS) | G-1 four-case table; Chromium policies emulated; iOS/Android NOT TESTED |
+| Audio render cost on mobile | Worker render, ≤ 16 ms main-thread chunks, §8 audio rows |
+| Initial JS budget | GSAP core + ScrollTrigger + CustomEase only; no art chunks; bundle report gate |
+| TypeScript 7 / Vite 8 toolchain drift | exact pins matching the demo's passing build; `playwright-core` override |
 
 HANDOFF
 - agent: frontend-engineer
-- phase: T6 draft (Gate A document, no application code)
-- summary: Wrote TECHNICAL_ARCHITECTURE.md covering all ten required sections: stack with checked versions and licences, not-added list, ownership map, property and timeline ownership, master timeline and matchMedia, no-JS mode, AssetLoader and AudioDirector contracts, SVG art system, budgets, SEO/hosting/scripts, risks.
+- phase: T6 Gate A round-1 fix pass (document only, no application code)
+- summary: Rewrote TECHNICAL_ARCHITECTURE.md to apply TD1–TD12 and G-1..G-3 to the sections this file owns: story DOM and single ScrollTrigger, rig.ts plus head script and watchdog, four-case sound table, count-based loader, storage keys, prerender-without-hydration, audio and story-ready budgets, ownership map with one role per path, dependency fixes, TEST_PLAN pointer. Stale TODOs removed.
 - files_changed: /home/user/Claude-code-skill/showcase/ozone/studio/TECHNICAL_ARCHITECTURE.md
-- verification: Versions and licences via npm view: PASS (gsap 3.15.1 and @gsap/react 2.1.2 use the GSAP "no charge" licence; react/react-dom 19.3.1 MIT; vite 8.3.8; plugin-react 6.3.0; typescript 7.0.2; playwright 1.65.1 latest vs 1.63.0 pinned; axe 4.14.0 MPL-2.0; both fonts 5.3.0 OFL-1.1). Build, typecheck, browser run: NOT TESTED (no code yet). Initial JS size estimate: unverified.
-- open_issues: DESIGN_SPECIFICATION, ANIMATION_SPECIFICATION are templates and AUDIO_SPECIFICATION does not exist, so TODO links remain → ui-ux, gsap-animator, audio. Doc is about 125 lines of dense content (a few lines are long). CSP uses 'unsafe-inline' for styles → tech-lead to review. The tooling (dev server) for filmstrips is not set up → qa.
-- decisions_needed: (1) Audio before choice: plan allows autoplay attempt on load, CREATIVE_DIRECTION §9 says no audio before the choice; tech-lead/audio to settle (I wrote the TODO). (2) Production URL for canonical and OG. (3) Whether to drop SplitText from the registry copy (I propose yes). (4) Keep Playwright 1.63.0 or move to 1.65.1.
-- next_suggested: Gate A review by tech-lead; then prototype transition t45 and t67 with placeholder art at real node counts and filmstrip-measure before building remaining scenes.
+- verification: `npm view lighthouse@13.6.0 name version license` returned lighthouse 13.6.0 Apache-2.0: PASS. Other dependency pins unchanged from the round-1 review's verified list. Build, typecheck, browser run: NOT TESTED (no code exists). Story-ready target and initial-JS estimate: unmeasured proposals.
+- open_issues → owner: story-ready target and audio budgets to confirm after T6b → performance-engineer; P-rig label table and `red-all` node budget → gsap-animator; cross-file names listed in the report → ui-ux-designer, audio-code owner (frontend-engineer), qa-engineer.
+- decisions_needed: client confirmation of G-1..G-3 and the production URL for canonical/OG; real-device testing (client).
+- next_suggested: narrow Gate A re-check by tech-lead, client approval, then T6b prototype before T7.

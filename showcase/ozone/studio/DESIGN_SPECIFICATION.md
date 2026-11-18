@@ -22,7 +22,7 @@ loader (stages 1–7, is Scene 1)  →  S1 → T1 → S2 → T2 → S3 → T3 �
 
 | Part | Job (single) | Scroll |
 |---|---|---|
-| Loader | Honest progress, then the sound choice. Ends *on* Scene 1. | locked until hand-off |
+| Loader | Honest progress, then (only when the browser blocks audio) the sound choice. Ends *on* Scene 1. | locked until hand-off |
 | S1 Every story starts somewhere | Invite: meet the teen and the choice. | pinned, 50 vh / 40 svh |
 | S2 The pressure | Name the pressure; permit "no". | pinned |
 | S3 One cigarette | Nicotine is addictive; teens hook faster (M1, M2). | pinned |
@@ -31,16 +31,16 @@ loader (stages 1–7, is Scene 1)  →  S1 → T1 → S2 → T2 → S3 → T3 �
 | S6 OZONE checks IDs | OZONE's commitment, as a person doing a job. | pinned |
 | S7 The finished page | Final message, the walk as one page. | **free scroll** |
 | Back matter | Sources M1–M6, L1, one resource link, credits. | free scroll |
-| T1–T6 | Reversible camera transitions (CD §6). Budget per CD scroll table (1210 vh desktop, 1010 svh at 390). | scrubbed |
+| T1–T6 | Reversible camera transitions (CD §6). Beat `t67` is T6 (it ends where S7 begins). Budget `--budget` keyed on `[data-rig]` (CD scroll table: 1210 vh desktop, P = desktop × 0.9, 1010 svh at 390; TD2). | scrubbed |
 
 ### 1.1 The three modes (one DOM)
 | Mode | When | What the visitor gets |
 |---|---|---|
 | **Story** | JS on, `prefers-reduced-motion: no-preference`, stage height ≥ 360 px | Loader, sticky stage, one scroll track, scrubbed camera. |
-| **Static comic** (document flow) | No JS (default CSS), `prefers-reduced-motion: reduce`, "Read the story as text" chosen (`?view=text`, kept in `sessionStorage`), or viewport height < 360 CSS px (a 400 % zoom on a laptop, a 320-high landscape phone) | Stacked panels with paper gutters; every headline, caption and alt present from first paint. See §1.3. |
+| **Static comic** (document flow) | No JS (default CSS), `prefers-reduced-motion: reduce`, "Read the story as text" chosen (`?view=text`, kept in `sessionStorage['ozone-view']`), `max-height:359px` (a 400 % zoom on a laptop, a 320-high landscape phone), or the boot watchdog firing (below) | Stacked panels with paper gutters; every headline, caption and alt present from first paint. See §1.3. |
 | **Print** | `@media print` | Static comic on white, no UI, sources included. |
 
-Mode is chosen by a head script before first paint (`html[data-mode="story|static"]`). The mode can change live (preference change, resize across the 360 px height line): scroll position is preserved by scene id plus local progress (§9.4).
+Mode and rig are chosen by one CSP-hashed head script before first paint, which writes `html[data-mode="story|static"]` and `html[data-rig="L|M|P|S"]` (and `js-loading` while the loader runs). The media-query strings come only from `src/motion/rig.ts`; CSS `--budget` keys on `[data-rig]`, and `gsap.matchMedia` uses the same strings (TD2). **Watchdog (TD7):** a ~12 s timer in the head script, plus `onerror` on the module script, reverts to `data-mode="static"` and removes `js-loading` unless `main.tsx` has signalled boot, so a failed bundle never leaves a stuck loader. The mode can change live (preference change, resize across the `max-height:359px` line): scroll position is preserved by scene id plus local progress (§9.4).
 
 ### 1.2 Story-mode DOM and layers
 ```
@@ -48,18 +48,22 @@ Mode is chosen by a head script before first paint (`html[data-mode="story|stati
 <div id="loader" role="dialog" …>                                   ← only while loading (§5)
 <header>  wordmark · counter · sound toggle · (skip is above)     ← fixed UI layer
 <main id="main">
-  <div class="stage" aria-hidden for art only>                      ← position:sticky, 100svh, art + text layers
-     <svg class="world">…</svg>  (aria-hidden)
-     seven <section id="scene-n"> copy layers (real HTML, stacked, pointer-events none)
+  <div class="story">                                               ← the single ScrollTrigger trigger (TD1)
+    <div class="stage">                                             ← position:sticky, height:100lvh
+       <svg class="world">…</svg>  (aria-hidden)
+       a 100svh text-safe box anchored top, holding six <section id="scene-1…6"> copy layers
+       (real HTML, stacked, pointer-events none)
+    </div>
+    <div class="track">  12 beats #beat-s1, #beat-t1, … #beat-s6, #beat-t67, heights summing to --budget  </div>
   </div>
-  <div class="track">  13 spacer beats (S1,T1,S2 … S6,T6) sized by the CD scroll budget; ids #beat-s1 … #beat-t6 </div>
   <section id="scene-7">  S7 in document flow (the paper page)  </section>
   <section id="sources"> back matter </section>
 </main>
 <footer> credits, facts-checked line </footer>
 <div id="announcer" role="status" aria-live="polite" class="sr-only">
 ```
-- Scene copy layers (`<section id="scene-1…6" aria-labelledby>`) sit in the stage. Their `#scene-n` ids are the **anchor targets**: a hash jump (`#scene-3`) scrolls the track to the *start of that scene's hold* (the end of the previous transition, when line 2 is already inked) and moves focus to that scene's heading (`tabindex="-1"`).
+- One ScrollTrigger: trigger `.story`, `start:'top top'`, `end:()=>'+='+track.offsetHeight`; CSS (`--budget`) is the single source of the length. The stage is `100lvh` so the pin does not resize with the URL bar, and all copy lives in the `100svh` text-safe box so it is never under browser chrome (TD1).
+- Scene copy layers (`<section id="scene-1…6" aria-labelledby>`) sit in the stage. Their `#scene-n` ids are the **anchor targets**: a hash jump (`#scene-3`) is an **instant JS `scrollTo`** to the *start of that scene's beat hold* (the end of the previous transition, when line 2 is already inked), and moves focus to that scene's heading (`tabindex="-1"`). A hash present at load is handled the same way after hand-off, with SFX suppressed (TD10).
 - **Inactive scene copy is kept in the accessibility tree** (opacity 0 via mask, `pointer-events:none`, no focusables). Screen readers can traverse the whole story; sighted users see only the scene in view. Known limit: moving a screen-reader cursor to a hidden scene does not scroll the page. The loader and the top of the page therefore announce the "Read the story as text" alternative (§5.5).
 - **S7 hand-off contract.** `#scene-7` is normal document flow. At the end of T6 the pinned stage's last frame is pixel-identical to the top of `#scene-7` at that breakpoint; the pin releases and the real paper page takes over without a jump. At ≤1024×768 and ≤768 wide the S7 page is taller than the viewport; T6's end rest shows the top ≥ 60 % of the page (panels and the start of the copy) and free scroll reveals the rest.
 - **Art slots.** Each scene has `<div class="art-slot" role="img" aria-label="…">` directly after the heading. In story mode it is empty (the world SVG is `aria-hidden`); in static mode it holds the static SVG frame. One alt string per slot, so both modes say the same thing (§10.5).
@@ -74,7 +78,7 @@ The reduced-motion story is "a printed comic" (CD §8), and it is also the no-JS
 - **Bridge panels** (T1–T6): a slim strip, aspect 3∶1 at ≥1024 and 2∶1 at ≤768, with the transition's continuous element crossing the gutter (walking teen, balloons, beam, eraser, window, page). T4 and T5 carry alt text (§10.5); T1, T2, T3 and T6 are `aria-hidden` decoration. The T6 bridge is omitted (S7 is the page itself).
 - **S4 shows the settled beam with its red roughs; S5 shows the erased, widened state.** S5's `--t-hero` line is the largest type on the page, as in the story.
 - **Motion.** None except a ≤ 200 ms opacity fade as a panel enters (skipped under `prefers-reduced-motion`). No camera, walk, idle, draw-on or parallax.
-- **Sound** is still offered (loader prompt and toggle). The score follows the panel in view (IntersectionObserver, 60 % threshold, 1.5 s crossfade), no scroll SFX.
+- **Sound** is still offered (the §5.3 cases and the toggle). The score follows the panel in view (IntersectionObserver with `rootMargin:'-45% 0px -45% 0px'`, `threshold:0`, so a panel taller than the viewport still fires; 1.5 s crossfade), no scroll SFX.
 - **UI in static mode.** Wordmark and sound toggle remain (fixed). The counter and the skip link remain. A first-row link in `<main>`, shown only when the mode came from `?view=text` and the user has not asked for reduced motion: "Switch to the animated story". Anchors `#scene-n` are plain in-flow anchors.
 - **No-JS** differs only in: no loader, no toggle, no counter (all JS-rendered), skip link and sources work as plain anchors.
 
@@ -82,7 +86,7 @@ The reduced-motion story is "a printed comic" (CD §8), and it is also the no-JS
 
 ## 2 · Reading contract: breakpoints and rigs
 
-Layout follows the **camera rig**, chosen by aspect ratio `a = w/h` (CD §8), with a height guard. The HTML grid is SS §2 (4 / 8 / 12 columns).
+Layout follows the **camera rig**, chosen by aspect ratio `a = w/h` (CD §8), with a height guard. The table states the intent; the exact media-query strings live in `src/motion/rig.ts` (rigs L/M/P/S and static) and nothing else may restate them. Width-based motion branches do not exist; the 4 / 8 / 12-column HTML grid (SS §2) stays width-based for layout only (TD2).
 
 | Rig | When | Reference sizes | Grid | Role |
 |---|---|---|---|---|
@@ -93,7 +97,7 @@ Layout follows the **camera rig**, chosen by aspect ratio `a = w/h` (CD §8), wi
 
 **Mandatory fold checks** (every scene's first viewport): 1440×900, **1024×768**, 768×1024, **390×844 and 390×664**, 320×568, 844×390. 390×664 is the true in-browser worst case on current iPhones and is checked as often as 844.
 
-**Display type must be clamped by height as well as width** on M/L rigs with short viewports (request to typography-spacing: drive `--t-h1`, `--t-hero`, `--t-d1` with `min(vw-curve, 1.78 × vh-curve)` or equivalent so that 844×390 does not inherit a 844-wide size). Until then the 844×390 rule is: headline zone grows to ≤ 52 % of height and captions go sequential.
+**Display type is clamped by height as well as width** by TYPOGRAPHY (TD12): `min(vw-curve, 1.78 × vh-curve)`, so 844×390 does not inherit an 844-wide size and 1280×720 at 200 % zoom (640×360) keeps the S1 block inside the `100svh` copy box under the top bar. The static threshold stays `max-height:359px`. The §2.1 budgets below are the width-limited values; the clamp only makes them smaller.
 
 **Vertical slack is absorbed by the camera, never by shrinking type below its role minimum.** If a headline block is taller than its zone, the art tilts (more sky above or ground below, which the world already has, CD §8) rather than the type scaling. The art's focal zone top = headline block bottom + `--space-l`.
 
@@ -121,7 +125,7 @@ These are **text-safe-zone reservations for the illustrators and the camera rig*
 | **Wordmark** "OZONE" | top-left | display face, role `wordmark` ≈ `--t-label` × 2.2 | Typographic **placeholder**, one swappable component. Not a link, not focusable (decision D-3). Logotype contrast exemption applies, but it is placed over flat dark anyway. Hidden (opacity) during S6, T6 and S7 because the scene's own OZONE lock-up is on screen; returns as back matter scrolls in. |
 | **Chapter counter** `03 / 07` | top-right cluster | `--t-label`, tabular | Justified: 1210 vh of pinned scroll has no other orientation. Non-interactive, `aria-hidden="true"` (the headings carry the outline). Shows the scene whose hold is nearest; during a transition it switches to the incoming scene at 50 %. Hidden at < 360 px and during the loader. |
 | **Skip link** "Skip to the message" | top-right cluster, left of the counter | pill | Always visible (a quiet persistent control, not hidden-until-focus) so pointer users with 1210 vh ahead can use it. Same element is the first focusable in DOM. §3.3. |
-| **Sound toggle** | bottom-left | pill ≥ 44 px high, ≥ 44 px wide at every size (`--target`) | §3.2. |
+| **Sound toggle** | bottom-left | pill ≥ 44 px high, ≥ 44 px wide at every size (`--target`) | §3.2. Hidden and `inert` during the loader; becomes visible and operable at the hand-off in every sound case (§5.3). |
 | **Scroll cue** "SCROLL" + a short SVG chevron | bottom-centre (S rig: bottom-centre above the toggle row) | `--t-label` | Appears after hand-off, fades on the first scroll > 2 % of S1's hold, never returns. `aria-hidden`. Not shown in static mode. |
 
 - **Alignment.** All UI items align to the grid frame, not the viewport edge: left items at `--pad-l`, right items at `--pad-r`, and at ≥ 1920 the same 1680 px container as the text (SS §2). Top items offset `--pad-t`, bottom `--pad-b` (safe-area aware; requires `viewport-fit=cover`).
@@ -133,10 +137,10 @@ These are **text-safe-zone reservations for the illustrators and the camera rig*
 ### 3.2 Sound toggle (the always-visible control)
 - **Markup:** `<button type="button" id="sound" aria-pressed="false">` containing the text node **SOUND**, a decorative speaker icon (SVG, `aria-hidden`), and a state chip `<span aria-hidden="true">ON|OFF</span>`.
 - **Accessible name:** "SOUND" (from content), constant. State is conveyed **only** by `aria-pressed`. This avoids the double-announce ("Sound off, pressed") bug and satisfies label-in-name; the chip is a visual duplicate of `aria-pressed` for sighted users, and the icon changes shape (waves vs. waves with a slash) so the state is never colour alone.
-- **`aria-pressed="true"` means REAL playback**, all of: user intent is on **and** `AudioContext.state === "running"` **and** the master gain is above 0 (not mid fade-out). It is false while: off by choice, `suspended`/`interrupted` (iOS interruptions, autoplay block, tab hidden), failed to start, or still resuming. A `statechange` listener and `visibilitychange` keep it honest; it is never set from the click alone.
-- **Click on:** `aria-busy="true"` → `ctx.resume()` → on `running`: pressed true, chip ON, 0.4 s gain ramp up (AU-2), announce "Sound on." On rejection or `suspended` after 1 s: stays false, announce "Sound could not start. The story works without it. Press Sound to try again."
-- **Click off:** pressed false at once, 0.4 s ramp down, then `ctx.suspend()` (AU-2), announce "Sound off." Intent is remembered per visit.
-- **Device or tab interruption:** chip flips to OFF, pressed false, announce "Sound paused. Press Sound to resume." Returning to the tab auto-resumes only if intent was on and the browser allows it; otherwise it stays OFF.
+- **`aria-pressed="true"` means REAL playback** (TD10): the sound **preference is on AND** `AudioContext.state === "running"` **AND** the master gain is above 0 (not mid fade-out; CONTINUE and Escape set gain 0 and `suspend()`). It is false while: off by choice, `suspended`/`interrupted` (iOS interruptions, autoplay block, tab hidden), failed to start, or still resuming. A `statechange` listener and `visibilitychange` keep it honest; it is never set from the click alone.
+- **Click on:** writes `localStorage['ozone-sound']='on'`; `aria-busy="true"` → `ctx.resume()` inside this click handler (the toggle and ENTER are the only gesture-unlock points) → if the audio items were excluded from loading (`ozone-sound=off` on arrival, §5.1) they load now and `aria-busy` stays until they finish → on `running`: pressed true, chip ON, 0.4 s gain ramp up (AU-2), announce "Sound on." On rejection or `suspended` after 1 s: stays false, announce "Sound could not start. The story works without it. Press Sound to try again."
+- **Click off:** writes `localStorage['ozone-sound']='off'`; pressed false at once, 0.4 s ramp down, then `ctx.suspend()` (AU-2), announce "Sound off." The preference is persistent (TD5): `localStorage['ozone-sound']` is written only by ENTER, CONTINUE, Escape or this toggle (§5.4).
+- **Device or tab interruption:** chip flips to OFF, pressed false, announce "Sound paused. Press Sound to resume." The stored preference is not changed. Returning to the tab auto-resumes only if the preference is on and the browser allows it; otherwise it stays OFF until pressed.
 - **Unsupported Web Audio:** the control is replaced by non-interactive text "SOUND UNAVAILABLE" (status text, not a button).
 - **Visual:** solid `#101014` pill with a 1.5 px `#F1EBDD` border (so it reads over any art), label `--t-label` 600, chip: ON = `#101014` on `#F5D547` (13.10); OFF = `#F1EBDD` on transparent with a 1 px border. On paper ground (`data-ground="paper"`, S7 onward and the whole static mode) it flips to a paper pill: `#F1EBDD` fill, 2 px `#101014` border, black text, chip ON = black fill / paper text, OFF = outlined. The flip happens at 55 % of T6 over 120 ms (QA measures the midpoint; the pill is opaque on both grounds, so the flip cannot produce a low-contrast frame).
 - **Size.** Min 44 × 44 CSS px; at 390 the pill is about 112 × 48 (icon + SOUND + chip); at 320 about 104 × 48. Never icon-only.
@@ -144,7 +148,7 @@ These are **text-safe-zone reservations for the illustrators and the camera rig*
 - **WCAG 1.4.2:** this is the page-level mechanism to stop audio, reachable from the first focus stop after the skip link.
 
 ### 3.3 Skip link
-- Text "Skip to the message". Target `#scene-7` (S7's heading, the final message). Focus lands on the S7 `h2` (`tabindex="-1"`); the stage fast-forwards (scrub resolves), the score crossfades to the S7 mix, and the counter shows `07 / 07`.
+- Text "Skip to the message" (this exact string everywhere). Target `#scene-7` (S7's heading, the final message). Focus lands on the S7 `h2` (`tabindex="-1"`); an instant JS `scrollTo` moves past the track (scrub resolves), the score crossfades to the S7 mix, and the counter shows `07 / 07`.
 - In static mode it is an ordinary anchor to the S7 panel.
 - Once S7 is reached the link is removed from the tab order (`inert`) and fades out, unless it currently has focus (then it fades on blur).
 - Visual: pill, `--t-label` 600, `#101014` fill, 1.5 px off-white border (paper ground variant as the toggle). Target ≥ 44 px.
@@ -163,12 +167,12 @@ Justified (see 3.1), kept minimal: text only, no ticks, no scene names, never a 
 
 ## 4 · Navigation and focus model
 
-- **Pattern:** native scroll is the navigation. Keyboard: Space / Shift+Space / PageUp / PageDown / Home / End / arrows all scroll natively. There is no hamburger, no menu, no focus trap outside the sound dialog.
+- **Pattern:** native scroll is the navigation. Keyboard: Space / Shift+Space / PageUp / PageDown / Home / End / arrows all scroll natively. There is no hamburger, no menu, no focus trap outside the loader dialog.
 - **Current-section indication:** the `03 / 07` counter (sighted) and the heading outline (assistive tech). `aria-current` is not used (the counter is not a nav).
-- **Focus order (story mode):** 1 skip link → 2 sound toggle → 3 back-matter links (S7 onward, in DOM order) → 4 footer. Tab from the toggle jumps past the whole track to the first Sources link: by design, because nothing in the pinned scenes is interactive. Focus rings are never obscured (scroll-padding in 3.1).
+- **Focus order (story mode, after hand-off):** 1 skip link → 2 sound toggle → 3 back-matter links (S7 onward, in DOM order) → 4 footer. Tab from the toggle jumps past the whole track to the first Sources link: by design, because nothing in the pinned scenes is interactive. Focus rings are never obscured (scroll-padding in 3.1).
 - **While the loader is open:** everything outside `#loader` is `inert` (including the skip link and toggle). Focus order inside the loader is §5.
-- **Scrolling is locked** (`overflow:hidden` on `html`) only from the first loader frame until hand-off completes (≈ 2.2 s after the choice); a 4 s safety timeout always unlocks it. Keyboard scroll keys are inert in that window; this is the only scroll lock on the page.
-- **Hash links:** `#scene-n` and `#sources` work in all modes (focus management as in 1.2). Browser Back after a skip returns to the previous scroll position (no `pushState` for scroll position).
+- **Scrolling is locked** (`overflow:hidden` on `html`) only from the first loader frame until hand-off completes (≈ 2.2 s after the choice, or after the loader finishes when no choice is asked, §5.3); a 4 s safety timeout after that point always unlocks it. Keyboard scroll keys are inert in that window; this is the only scroll lock on the page.
+- **Hash links:** `#scene-n` and `#sources` work in all modes (focus management as in 1.2). `history.scrollRestoration='manual'`; a stored scene or hash is resumed after hand-off with SFX suppressed (TD10). Browser Back after a skip returns to the previous scroll position (no `pushState` for scroll position).
 
 ---
 
@@ -176,11 +180,13 @@ Justified (see 3.1), kept minimal: text only, no ticks, no scene names, never a 
 
 The loader **is** Scene 1 (CD §5). Stages 1–7 keep their timings. This section adds UI, honesty and focus.
 
-### 5.1 Honest progress
+### 5.1 Honest progress (count-based, TD3)
 - The indicator is the **curb line**, drawn left to right; its length equals real completed work, never ahead of it, never moving backward. A numeric `%` (integer, tabular, `--t-label`) sits at the line's tip (at 320 it sits above the line's right end).
-- **Weights (initial; recorded in code):** fonts (`document.fonts.load` of both faces) 15 %, S1 and S2 SVG art decoded 45 %, score buffers rendered 30 %, remaining art preloads 10 %. If the visitor's stored choice is "no sound", the audio weight is dropped and the rest rescales. A failed audio render counts as done (the page continues silent and says so, §5.4).
-- **Semantics:** `<div role="progressbar" aria-label="Loading the story" aria-valuemin="0" aria-valuemax="100" aria-valuenow>`. Value updates at most every 250 ms. A **polite status** (`#announcer`) says "Loading the story." once, "Half loaded." at 50 %, and "The story is ready. Choose how to enter." at 100 % (three announcements total, not a stream).
-- **Timing honesty:** if the cinematic stages (≈ 2.9 s) finish before 100 %, the scene idles (one breath loop) and the line keeps telling the truth. If the stages are slower than the real load, they do not wait: the prompt appears when both are done.
+- **Items, no weights:** `font-display` (800), `font-text` (400), `art-s1s2`, `audio-engine`, `audio-ir`, `audio-buffers`. Progress = completed items ÷ total items. S3–S7 are not loader items (they load after hand-off).
+- **`ozone-sound=off` on arrival:** the three `audio-*` items are excluded from the total (the total is 3) and load on the first toggle ON, which shows `aria-busy` until they finish (§3.2).
+- **Audio failures never block:** if `audio-buffers` times out it is marked skipped, rendering continues, and its voices join when ready; a failed `audio-engine` or `audio-ir` is marked skipped and the page continues silent (the toggle reports it, §3.2).
+- **Semantics:** `<div role="progressbar" aria-label="Loading the story" aria-valuemin="0" aria-valuemax="100" aria-valuenow>`. Value updates at most every 250 ms. A **polite status** (`#announcer`) says "Loading the story." once, "Half loaded." at 50 %, and at 100 % either "The story is ready. Choose how to enter." (the prompt will show, §5.3 case a) or "The story is ready." (no prompt) (three announcements total, not a stream).
+- **Timing honesty:** if the cinematic stages (≈ 2.9 s) finish before 100 %, the scene idles (one breath loop) and the line keeps telling the truth. If the stages are slower than the real load, they do not wait: the prompt (or, with no prompt, the hand-off) happens when both are done.
 
 ### 5.2 Controls during loading
 | Control | When visible | Behaviour |
@@ -188,9 +194,22 @@ The loader **is** Scene 1 (CD §5). Stages 1–7 keep their timings. This sectio
 | **SKIP INTRO** (text button, bottom-left, ≥ 44 px) | from 600 ms | Jumps the *cinematic* to its settled S1 frame. It does **not** fake progress; the curb line and % stay real. Same as pressing Escape before the prompt. |
 | **Read the story as text** (link, bottom-right at ≥ 768, stacked above the % at ≤ 390) | visible at 8 s, or immediately on keyboard focus, or when a stall/error is detected; always in the accessibility tree from the first frame | Loads the static comic (`?view=text`), no audio decisions needed. |
 | **Stall message** | no progress for 6 s | "Still loading. You can read the story as text now." plus the link promoted to the primary position. |
-| **Error message** | any asset failure | "Part of the story didn’t load." Primary: Read the story as text. Secondary: **Try again** (re-runs only the failed tasks). |
+| **Error message** | a `font-*` or `art-s1s2` failure (audio items never raise this; they are skipped, §5.1) | "Part of the story didn’t load." Primary: Read the story as text. Secondary: **Try again** (re-runs only the failed tasks). |
+| **Critical-art failure path** | `art-s1s2` still failing after its one automatic retry | If the master timeline builds, the story continues on the prerendered DOM (TD9) and the hand-off proceeds without the message. Otherwise the page switches to static mode (`data-mode="static"`) and shows the message above with the text view as the primary action. |
 
-### 5.3 The sound prompt (stage 7)
+### 5.3 Sound start: four cases (G-1) and the prompt (stage 7)
+The loader never plays a bed. Whether the browser allows audio is learned from the engine: after `audio-engine` completes, `AudioContext.state === "running"` means autoplay is allowed. Which case applies:
+
+| Case | Visitor | What happens |
+|---|---|---|
+| **a** | First visit, autoplay blocked | Loader → **prompt** (below) → hand-off. ENTER unlocks audio inside its click handler; CONTINUE does not. |
+| **b** | First visit, autoplay allowed | The loader stays silent and shows **no prompt**. At the hand-off the score fades in (1.5 s) and the **sound toggle appears at that same moment, visible, focusable, showing ON** (`aria-pressed="true"` because the preference is on, the context is running and the gain is rising above 0), so a stop control exists from the first audible frame (WCAG 1.4.2). No key is written (no choice was made). |
+| **c** | Returning, `ozone-sound=on` | As **b** if the context runs; otherwise as **a** with the compact prompt (§5.4). |
+| **d** | Returning, `ozone-sound=off` | No audio attempt (the audio items are excluded, §5.1), no prompt, toggle visible showing OFF. The announcer says "Sound is off. Use the Sound button to turn it on." |
+
+AU-4's `loader:bloom` plays at the hand-off as the score's opening gesture, only when audio is running. In every case the toggle is revealed at the hand-off.
+
+**The prompt (cases a and c-blocked)**
 - **Container:** `role="dialog" aria-modal="true" aria-labelledby="sound-title" aria-describedby="sound-desc"`. Not a heading (the page's single h1 is Scene 1's).
 - **Content**
   - `#sound-title` label (`--t-label`, 600, +8 %): **SOUND IS PART OF THE EXPERIENCE**
@@ -211,20 +230,21 @@ The loader **is** Scene 1 (CD §5). Stages 1–7 keep their timings. This sectio
   1. On show, focus moves to **ENTER WITH SOUND** (default, CD §5). `aria-modal` + `inert` background.
   2. Tab / Shift+Tab cycle between the two buttons (and "Read the story as text" if it is visible): a real trap for the dialog's lifetime.
   3. **Escape = CONTINUE WITHOUT SOUND** (the quiet, non-committal choice; decision D-1). Announced the same as clicking it.
-  4. On either choice: both buttons get `aria-disabled="true"` (double-click guard), the prompt un-inks (300 ms), the dialog and `inert` are removed, and **focus moves to the sound toggle** (it fades in at its place at the same moment) so the result is visible and keyboard users keep their position. The announcer says "Sound on." or "Continuing without sound. You can turn sound on with the Sound button."
-  5. Hand-off continues exactly as CD §5: camera 4 % push → S1 line 1 then line 2 ink in (700 ms) → score fades in over 1.5 s if chosen → scroll unlocks.
-- **Autoplay honesty:** audio is created and resumed only inside the ENTER click handler. If `resume()` fails the story still starts, the toggle reads OFF/not pressed, and the failure is announced (§3.2).
-- **No dark patterns:** one prompt, once per visit; no re-asking; no pre-ticked preference; "without sound" is always available and costs nothing.
+  4. On either choice: both buttons get `aria-disabled="true"` (double-click guard), the prompt un-inks (300 ms), the dialog and `inert` are removed, and **focus moves to the sound toggle** (it fades in at its place at the same moment) so the result is visible and keyboard users keep their position. ENTER writes `ozone-sound=on`; CONTINUE and Escape write `ozone-sound=off` and set gain 0 (G-3, TD5). The announcer says "Sound on." or "Continuing without sound. You can turn sound on with the Sound button."
+  5. Hand-off continues exactly as CD §5: camera 4 % push → S1 line 1 then line 2 ink in (700 ms) → score fades in over 1.5 s if sound is on → scroll unlocks.
+- **No prompt (cases b, d):** there is no dialog interaction. If focus was inside the loader (the "Read the story as text" link) it moves to the toggle at hand-off; otherwise focus is left alone, so the first Tab reaches the skip link.
+- **Failure honesty:** if ENTER's `resume()` fails the story still starts, the toggle reads OFF/not pressed, and the failure is announced (§3.2).
+- **No dark patterns:** at most one prompt per page load, and none at all once a choice is stored; no re-asking; no pre-ticked preference; "without sound" is always available and costs nothing.
 
-### 5.4 Returning visitor (short version)
-- Stored locally (functional only, no analytics, nothing sent): `localStorage["ozone.v1"] = {seen:true, sound:"on"|"off"}`. If storage is blocked the visitor is simply treated as new each time.
-- ≤ 1 s: stages 2–5 merge into one ink wipe of S1 (CD §5). Progress is still real (usually instant).
-- **Last choice was sound ON:** a **compact prompt** appears by 600 ms (a gesture is still required by browsers): label + the same two buttons, no description, focus on ENTER WITH SOUND, same trap and Escape rule.
-- **Last choice was sound OFF:** **no prompt.** The story starts silently, the toggle shows OFF, and the announcer says "Sound is off. Use the Sound button to turn it on." (decision D-2: it respects the stated preference; the brief's "sound on by default" applies to first visits).
-- Returning with `?view=text` stored: opens in static mode, no loader.
+### 5.4 Returning visitors (storage, TD5; G-3)
+- Stored locally (functional only, no analytics, nothing sent): `localStorage['ozone-sound']` = `on` | `off`, persistent, written **only** by ENTER, CONTINUE, Escape or the toggle. `sessionStorage['ozone-seen']` marks the short loader; `sessionStorage['ozone-view']` holds the text-view choice. There is no combined object. If storage is blocked the visitor is treated as new each time.
+- **Short loader:** with `ozone-seen` set (a repeat load in the same session), stages 2–5 merge into one ink wipe of S1, ≤ 1 s (CD §5). Progress is still real (usually instant). A returning visitor in a new session gets the full loader but the sound handling below.
+- **`ozone-sound=on`:** case **c** (§5.3). If the context is blocked, a **compact prompt** appears by 600 ms of the short loader (or at the normal prompt time): label + the same two buttons, no description, focus on ENTER WITH SOUND, same trap and Escape rule.
+- **`ozone-sound=off`:** case **d**: **no prompt.** An explicit CONTINUE WITHOUT SOUND persists and suppresses the prompt on later visits (decision D-2; G-3). The brief's "sound on by default" applies to first visits.
+- Returning with `ozone-view` stored (or `?view=text`): opens in static mode, no loader.
 
 ### 5.5 Reduced motion and no-JS in the loader
-- **Reduced motion:** a plain horizontal bar fills with real progress, `%` beside it, S1 is shown complete with a ≤ 200 ms fade, and the prompt is identical (sound is still offered). SKIP INTRO is omitted (nothing to skip).
+- **Reduced motion:** a plain horizontal bar fills with real progress, `%` beside it, S1 is shown complete with a ≤ 200 ms fade, and the sound cases of §5.3 apply unchanged (sound is still offered). SKIP INTRO is omitted (nothing to skip).
 - **No JS:** no loader; the static comic renders.
 - **Screen-reader users** hear, in order: the progress announcements, then the dialog. The dialog is preceded by the "Read the story as text" link in the tab order, which is the recommended path for linear reading.
 
@@ -251,7 +271,7 @@ The loader **is** Scene 1 (CD §5). Stages 1–7 keep their timings. This sectio
 Layout cells use: **H** = headline block, **C** = captions, **A** = art focal, **x/y** = % of viewport.
 
 **6.4 Hand-off to gsap-animator (all scenes)**
-- Hooks: `data-scene="1…7"`, `data-beat="s1|t1|…|t6"`, `.l1`/`.l2` (ink-in via `mask`/`clip-path` stroke mask, reading direction), `data-caption="m1…"`, `data-leader`, `data-ui="counter|toggle|skip|wordmark"`.
+- Hooks: `data-scene="1…7"`, `data-beat="s1|t1|…|s6|t67"` (the 12 beat ids), `.l1`/`.l2` (ink-in via `mask`/`clip-path` stroke mask, reading direction), `data-caption="m1…"`, `data-leader`, `data-ui="counter|toggle|skip|wordmark"`.
 - Windows: line 1 inks at ≈ 70–88 % of the incoming transition, line 2 at ≈ 85–100 % (CD §6). The outgoing headline leaves with its art plane. At most one headline legible at a time.
 - Idle loops (breath, blink, lamp, drift) **run for at most 5 s after a hold begins, then settle to a still pose** and resume on the next scroll (WCAG 2.2.2). Reduced motion: none.
 - Every scrubbed state is a pure function of scroll position, so reverse and fast-fling are always legible and no frame is blank.
@@ -438,12 +458,12 @@ Hover is gated by `@media (hover:hover)`; touch uses `:active`. Focus: **3 px `#
 |---|---|---|---|---|---|---|
 | **ENTER WITH SOUND →** | `#F5D547` fill, `#101014` text, arrow SVG | Arrow nudges 4 px right; 2 px `#101014` inset border | Ring (dark ground) | `translateY(1px)`, inset border 3 px | After click: `aria-disabled="true"`, no style change (dialog closes in 300 ms) | Failure to start audio is reported on the toggle and announcer, not here |
 | **CONTINUE WITHOUT SOUND** | Transparent, `#F1EBDD` text, 1.5 px `#F1EBDD` border | Border 3 px | Ring | Fill `#F1EBDD`, text `#101014` | As above | — |
-| **Sound toggle** | §3.2 (OFF: outlined chip; ON: yellow chip) | Border 3 px | Ring (paper variant on paper) | `translateY(1px)` | `aria-busy` while resuming (chip shows a single dot) | Error: chip stays OFF + announcement; unavailable: text-only status |
+| **Sound toggle** | §3.2 (OFF: outlined chip; ON: yellow chip). Not shown or focusable until the hand-off | Border 3 px | Ring (paper variant on paper) | `translateY(1px)` | `aria-busy` while resuming or while the audio items load (chip shows a single dot) | Error: chip stays OFF + announcement; unavailable: text-only status |
 | **Skip to the message** | Pill, §3.3 | Border 3 px; arrow nudge | Ring | `translateY(1px)` | `inert` from S7 | — |
 | **SKIP INTRO** | Text button, off-white, 1.5 px underline | Underline 3 px | Ring | Opacity .8 on the label (non-text, ≥ 3:1 maintained) | Removed when the prompt shows | — |
 | **Read the story as text** | Off-white link, 2 px underline, offset .15em | Underline 3 px | Ring | — | — | Navigation to `?view=text` (page reload with the same scroll-less start) |
 | **Try again** | As CONTINUE | as above | Ring | as above | `aria-busy` while re-fetching | success: loader resumes; second failure: message persists, link stays primary |
-| **Back-matter links** (sources, CDPH resource) | `#101014`, 2 px underline, offset .15em, min 44 px tall hit area (padding) | Underline 4 px | Ring (paper) | Underline 4 px + text `#101014` | — | External links open in the same tab; the browser's back button returns to the scroll position |
+| **Back-matter links** (sources) | `#101014`, 2 px underline, offset .15em, min 44 px tall hit area (padding) | Underline 4 px | Ring (paper) | Underline 4 px + text `#101014` | — | External links open in the same tab; the browser's back button returns to the scroll position |
 | **Switch to the animated story** (static, text-view only) | Link as above | | | | | Reload to story mode |
 | **Progressbar, counter, SCROLL cue, wordmark** | Non-interactive | — | not focusable | — | — | — |
 
@@ -466,7 +486,7 @@ Same paper after S7; `<section id="sources" aria-labelledby>` in `<main>`, credi
   | Smoking damages the lungs. (M6) | CDC, "Health Effects of Cigarettes: COPD", May 15, 2024 | https://www.cdc.gov/tobacco/about/cigarettes-and-copd.html | Scene 4 |
   (M7 and the "not used" statistics stay out.)
 - `<h3>` **Federal law**: "Federal law prohibits selling tobacco products to anyone under 21." (L1) FDA, "Tobacco 21", content current as of 08/07/2025, https://www.fda.gov/tobacco-products/retail-sales-tobacco-products/tobacco-21. No California statement anywhere (FS: BLOCKED).
-- `<h3>` **Resource**: one link, "California Department of Public Health, Tobacco Control Branch", as a resource only, with no claim attached. **Ships only when its home-page URL has been read and confirmed** (CDPH returned 503; open issue I-2).
+- `<h3>` **Resource**: **omitted entirely while there is no link to show** (the CDPH link is not shipped: California is BLOCKED in FS; open issue I-2), so no empty heading exists. If a link is ever confirmed it is one link with no claim attached, and the h3 returns with it. QA asserts there is no CDPH link and no "Resource" heading in the current build.
 - Footer `<h2>` **Credits**: "Illustration, music and sound are original, made for this page." plus the two font licences (OFL-1.1, TS §2) and "Facts checked November 18, 2026." (written as a date, `2026-11-18` in a `<time datetime>`).
 - Link targets 44 px tall; links never rely on colour alone; link text is the source title (not "click here"); URLs are visible text under the title (`overflow-wrap:anywhere`) so a printed copy keeps them.
 - Motion hook: none. Static from first paint. Score fades to silence under it (CD §7).
@@ -484,7 +504,7 @@ Same paper after S7; `<section id="sources" aria-labelledby>` in `<main>`, credi
 | Headline | 5-of-12 (S5 9) | 5–6-of-12 (S5 8) | 4–6-of-8 | 3-of-4 (S5 4) |
 | Captions | right/left columns, stacked, leaders | sequential slot where the headline is wide (S4) | full-width rows at the bottom | two-at-a-time or sequential, stacked under the headline |
 | Below the fold | nothing (pinned) | nothing | nothing | nothing; S7 page flows into the back matter |
-| Pin length | 1210 vh | 1210 vh | 1210 vh (svh) | **0.8×** (1010 svh) |
+| Pin length (`--budget`, keyed on `[data-rig]`) | 1210 vh | 1210 vh | **desktop × 0.9** (≈ 1089 svh) | **0.8×** (1010 svh) |
 | Nav | top bar, bottom-left toggle | same | same | top bar compressed (counter hides ≤ 359), toggle bottom-left |
 
 ### 9.2 Touch equivalents
@@ -497,7 +517,7 @@ There is no hover-only idea in the story. Scroll is drag/flick on touch; no gest
 - **320 px width:** every scene has a 320 row in §6. Zone widths 288 px; no horizontal page scroll at any width (SS §10: verified on the specimen).
 
 ### 9.4 Orientation change and resize
-Not locked to an orientation. On `resize`/`orientationchange` (debounced 200 ms) the app re-picks the rig **only if the aspect bucket or width changed** (height-only changes under 120 px, such as a URL-bar collapse, are ignored; pins use `svh`). It stores `{scene id, local progress}`, rebuilds, and scrolls to the equivalent position; no scene jump, no loader replay, the audio keeps playing, an open sound dialog keeps focus and re-lays out in place.
+Not locked to an orientation. On `resize`/`orientationchange` (one 150 ms debounce) the app rebuilds **only on a bucket change** (the rig or mode from `src/motion/rig.ts` changes; anything else, including URL-bar collapse, is ignored because the stage is `100lvh` with a `100svh` copy box; TD2). It stores `{scene id, local progress}`, rebuilds, and scrolls to the equivalent position; no scene jump, no loader replay, the audio keeps playing, an open sound dialog keeps focus and re-lays out in place.
 
 ### 9.5 Large screens
 ≥ 1920: the camera shows more bleed, the text zone stays at 1680 px (SS §2), type tokens cap (TS §5), captions ≤ 34 ch.
@@ -519,13 +539,13 @@ h2  YOUR FUTURE IS BIGGER THAN A CIGARETTE. BE STRONG ENOUGH TO SAY NO.(S5)
 h2  OZONE WE CHECK IDs. NO EXCEPTIONS.                                 (S6)
 h2  DON’T START. PROTECT YOUR FUTURE.                                  (S7)
 h2  Sources
-   h3 Health facts · h3 Federal law · h3 Resource
+   h3 Health facts · h3 Federal law   (an h3 Resource appears only if a resource link ships)
 h2  Credits                                                            (footer)
 ```
 Loader prompt, toggle and counter contain no headings.
 
 ### 10.3 Focus order across the sticky stage
-Skip link → sound toggle → (scenes: none) → Sources links in order → CDPH link → footer. The loader reorders temporarily (§5.3). Focus never lands on hidden or off-screen scene copy because none is focusable. Focus-not-obscured: scroll-padding (3.1) and the fixed UI never covers a focused back-matter link at 320 px (tested at 400 %: static mode, toggle bottom-left 48 px high).
+Skip link → sound toggle → (scenes: none) → Sources links in order → footer. The loader reorders temporarily (§5.3). Focus never lands on hidden or off-screen scene copy because none is focusable. Focus-not-obscured: scroll-padding (3.1) and the fixed UI never covers a focused back-matter link at 320 px (tested at 400 %: static mode, toggle bottom-left 48 px high).
 
 ### 10.4 Criteria checklist
 | SC | How it is met |
@@ -565,7 +585,7 @@ Informative illustrations get specific alt (on `.art-slot`); the same string is 
 Global: static comic (§1.3), no scrub, no idle, no parallax, ≤ 200 ms fades only (also skipped on `reduce` for panel entry). Sound is still offered.
 | Scene | Reduced-motion expression |
 |---|---|
-| Loader | Plain bar + %, S1 shown complete, same prompt. |
+| Loader | Plain bar + %, S1 shown complete, same sound cases (§5.3). |
 | S1 | Complete frame; teen at rest. |
 | S2 | Static frame with balloons placed; T1 bridge shows the walking teen crossing the gutter. |
 | S3 | All of M1 and M2 visible; tallies placed; T2 bridge shows balloons in the gutter. |
@@ -585,8 +605,7 @@ This page sells nothing and asks for nothing. Hierarchy of actions, from most to
 1. **Scroll** (the story itself): SCROLL cue, once.
 2. **Sound** (ENTER WITH SOUND is the primary on the prompt; the toggle afterwards).
 3. **Skip to the message** (quiet, always available; not hidden to force completion).
-4. **Sources** (transparent, at the end).
-5. **One resource link** (CDPH) in the back matter, no pop-up, no tracking.
+4. **Sources** (transparent, at the end). No resource link ships while California is BLOCKED; if one is confirmed later it is a plain back-matter link, no pop-up, no tracking.
 
 Not present, by design: store links, offers, address, hours, phone, social, newsletter, share buttons, exit prompts, scroll-jacking beyond the pins, countdowns, guilt copy, re-asking for sound. OZONE's commitment is delivered by S6 and the S7 sign-off, not by a button.
 
@@ -596,17 +615,17 @@ Not present, by design: store links, offers, address, hours, phone, social, news
 
 **Decisions made (reversible)**
 - D-1 Escape in the sound dialog = CONTINUE WITHOUT SOUND.
-- D-2 A returning visitor who last chose "without sound" gets no prompt; one who chose sound gets the compact prompt (browsers still need a gesture).
+- D-2 A returning visitor with stored `ozone-sound=off` gets no prompt and no audio attempt (case d); with `on` they get case c (the compact prompt only if the browser blocks audio). An explicit CONTINUE WITHOUT SOUND persists (G-3).
 - D-3 Header wordmark is not a link or a tab stop (a scroll story's "home" is the start, and there is nowhere else to go).
 - D-4 No `<nav>`; counter is non-interactive; swap for seven scene links if keyboard testing asks.
 - D-5 Static comic uses a flat text plate (side or below), not overlaid text, so legibility never depends on art.
 - D-6 Static mode below 360 CSS px height (zoom and 320-high landscape).
 - D-7 Toggle and skip are opaque pills so contrast cannot fail over any art or mid-transition.
+- D-8 (G-1, G-3) Sound start follows the four cases of §5.3; the loader never plays a bed. (TD12) The height clamp is owned by TYPOGRAPHY; I-3 is closed.
 
 **Open issues**
 - I-1 **S5 horizon vs headline.** With TS tokens the S5 headline block is about 485 px (54 % of 900) at 1440×900, so "upper 40 %" and a 58 % vanishing point cannot hold. Spec: horizon = headline bottom + 6 % (≈ 72 % at 1440, 62 % at 1024×768, 40–48 % at 390). Also the moon must sit outside the headline measure (high right, not high left). Owner: creative-director (art), typography-spacing (confirm hero size).
-- I-2 **CDPH link URL** is unverified (CDPH 503, FS). The link ships only after a source read confirms it. Owner: technical-lead / researcher.
-- I-3 **Display type clamp by height** for short landscape (844×390, 1024×768). Owner: typography-spacing.
+- I-2 **CDPH resource link** is not shipped (California BLOCKED, FS); the Resource h3 is omitted with it. It could return only after a source read confirms the URL. Owner: technical-lead / researcher.
 - I-4 **Text-safe-zone art notes** (§2.1, §3.1 reserves) must be accepted by the illustration owners; the S4 teen moves to x 66 % at 1024×768. Owner: ai-visuals / creative-director.
 - I-5 **No quit-help or teen cessation resource** is in FS; none is added. If the client wants one, a verified source is needed. Owner: orchestrator.
 - I-6 **Source tags (agency + year)** in caption boxes are a small addition to the CD caption rule; confirm. Owner: creative-director.
