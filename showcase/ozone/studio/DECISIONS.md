@@ -17,3 +17,9 @@
 - I-1 (Scene 5 horizon ~72 % so the headline fits): accepted provisionally; creative-director judges it in the render-critique loop.
 - I-2 (CDPH link): ships only after a source read confirms the URL (California still BLOCKED).
 - I-5 (quit-help resource): not added; the client brief does not ask for one and FACTS has none for this brief.
+
+## 2026-11-18 · Orchestrator decisions on ANIMATION_SPECIFICATION.md
+- A-1 Track height = story budget + 100svh (sticky stage sits inside the track). TECHNICAL_ARCHITECTURE §3 `--track-h: 1210vh` is wrong; frontend corrects it before Gate A.
+- A-2 Rig M uses the desktop scroll table; rig P = desktop × 0.9 rounded to 5 (gsap-animator proposal) — creative-director may tune after the filmstrip.
+- A-3 Scroll is NOT locked during the 1.5 s score fade: it unlocks at the loader hand-off; music fades in alongside (client: no unnecessary delays). Overrides CD §5 on this point.
+- A-4 `sfx:tNM:<id>` / `cue:sN` / `cue:t45:lowpass-open` label names are the contract for AUDIO_SPECIFICATION.
