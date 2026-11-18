@@ -11,7 +11,7 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 | T4 | Creative direction (art, character, 7 scenes, loader, 6 transitions, audio) | DONE: concept "Your Ink"; client decisions pending at Gate A (gender read open; Scene 6 adult customer; M7 off; placeholder wordmark) | CREATIVE_DIRECTION.md |
 | T5 | Specs (design, type/spacing, animation ownership, audio score) | DONE: all 6 specs; AUDIO covers every `sfx:`/`cue:` label (checked by grep); decisions AU-1..AU-5 | AUDIO_SPECIFICATION.md, DECISIONS.md |
 | T6 | Architecture + Gate A → client review | **DONE: Gate A r2 PASS with conditions; client approved 2026-11-18** (all 15 defaults). Conditions (N1–N14, partial 4/8/14/18/29/30) being closed before T6b; rulings G-11..G-19 | GATE_A_REVIEW_R2.md, DECISIONS.md |
-| T6b | t45/t67 prototype on placeholder art (TD8, G-17) | NEXT, after the Gate A conditions are checked by the tech lead | — |
+| T6b | t45/t67 prototype on placeholder art (TD8, G-17, G-22) | IN PROGRESS: Gate A conditions met (tech-lead diff check); creative sign-off of fidelity targets; `proto/fidelity.json` written (`0d21215`); gsap-animator building the prototype; QA measures after | proto/fidelity.json |
 | T7–T12 | Rig, scenes, transitions+loader, audio, QA/perf, Gate B | NOT STARTED (gated by T6) | — |
 
 ## Carried over from the vaping brief (kept, still valid)
@@ -30,6 +30,7 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 - 2026-11-18 · Gate A r1 fix pass complete. Cross-file names reconciled by orchestrator (P budget 1090, red-all ≤ 600, `story-ready` mark, audio caps, loader items). S1 headline fit measured in Chromium at 640×360/320×568/390×844/1440×900 (reports/typography/).
 - 2026-11-18 · Gate A r2 PASS with conditions. Tech lead measured that CDP CPU throttling does not reach Workers (main ×4, Worker ×1) and that this container has no GPU (software raster only). Presented to the client.
 - 2026-11-18 · Client approved Gate A ("Approve": all defaults). Rulings G-11..G-19 recorded; stale CD text and vaping-era report titles fixed by orchestrator; condition fixes dispatched.
+- 2026-11-18 · Gate A conditions met (N1–N14 closed; N15–N19 fixed by orchestrator). Creative director changed the fidelity targets (per-scene halftone, no live filters). T6b build started.
 
 ## Open failures / blockers
 - California legal sources unreadable from this environment (BLOCKED).
