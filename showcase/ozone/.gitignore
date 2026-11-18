@@ -1,0 +1,3 @@
+# T6b raw Chromium traces (~6 MB each, ~146 MB total): local evidence only, metrics are in the per-run JSON
+reports/proto/t45/
+reports/proto/t67/
