@@ -1,0 +1,23 @@
+{
+  "_source": "TARGET values, not measurements. TECHNICAL_ARCHITECTURE §10.1; creative-director sign-off in DECISIONS.md (G-22). Placeholder art must be 0.9–1.3x of halftone targets and 0.9–1.0x of nodes.perFrame; real art in T8 must stay within 1.1x.",
+  "viewports": { "L": [1440, 900], "S": [390, 844], "rigMap": { "L": "L", "M": "L", "P": "S", "S": "S" } },
+  "halftoneFillArea": {
+    "unit": "share of viewport; sum of bounding boxes of halftone-filled elements, each clipped to the viewport, overlaps counted twice",
+    "L": { "s1": 0.30, "s2": 0.30, "s3": 0.35, "s4": 0.35, "s4RedDots": 0.04, "s5": 0.30, "s6": 0.25, "s7": 0 },
+    "S": { "s1": 0.30, "s2": 0.25, "s3": 0.35, "s4": 0.35, "s4RedDots": 0.07, "s5": 0.40, "s6": 0.20, "s7": 0 },
+    "spanCaps": { "L": { "t45": 0.35, "t67": 0.30 }, "S": { "t45": 0.40, "t67": 0.35 } },
+    "minDotPitchCssPx": 3
+  },
+  "filteredLayers": [],
+  "maskId": "eraser-mask",
+  "maskTarget": "red-all",
+  "redAllExtentViewportWidths": [1.0, 2.2],
+  "nodes": {
+    "perFrame": { "L": 4500, "S": 3240 },
+    "perFrameCap": { "L": 5000, "S": 3600 },
+    "redAll": 600,
+    "panel": 300,
+    "document": 20000,
+    "sceneSplitGuide": { "L": { "s4": 1200, "s5": 2000, "s6": 1000, "character": 200 }, "S": { "s4": 900, "s5": 1400, "s6": 800, "character": 140 } }
+  }
+}
