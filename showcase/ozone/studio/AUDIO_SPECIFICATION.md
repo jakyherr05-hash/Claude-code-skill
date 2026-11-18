@@ -1,7 +1,12 @@
 # Audio Specification — OZONE — "Your Ink" (original score and SFX, live Web Audio)
-_Owner: audio (composer / sound designer) · 2026-11-18 (T5) · Inputs: PROJECT_BRIEF; CREATIVE_DIRECTION §5–§7, §9; ANIMATION_SPECIFICATION §1, §2, §5, §8 (labels); TECHNICAL_ARCHITECTURE §5–§6 (AudioDirector contract); DESIGN_SPECIFICATION §3.2, §5; DECISIONS D1, A-3, A-4. This file has no code. Nothing here has been rendered yet: every level and check is a target, verified by §6–§7._
+_Owner: audio (composer / sound designer) · 2026-11-18 (T5; revised for Gate A round 1) · Inputs: PROJECT_BRIEF; CREATIVE_DIRECTION §5–§7, §9; ANIMATION_SPECIFICATION §1, §2, §5, §8 (labels); TECHNICAL_ARCHITECTURE §3, §5, §6, §8 (AudioDirector contract, budgets); DESIGN_SPECIFICATION §3.2, §5; GATE_A_REVIEW_R1; DECISIONS D1, A-3, A-4, AU-1…AU-5, TD3, TD5, TD7, TD10, G-1, G-3. This file has no code. Nothing here has been rendered yet: every level and check is a target, verified by §6–§7._
 
-**Contract.** The only triggers are the master-timeline labels `cue:sN`, `cue:t45:lowpass-open`, `sfx:tNM:<id>` and `sfx:footstep` (A-4). §5 maps every one. Under D1, autoplay is attempted at init. Under A-3, scroll unlocks at the hand-off and the score fades in at the same time; audio never gates anything. The piece is one score in one tempo that never restarts. Scroll chooses *where in the score* we are, not *whether* it plays.
+**Contract.** The only triggers are the master-timeline labels `cue:sN`, `cue:t45:lowpass-open`, `sfx:tNM:<id>` and `sfx:footstep` (A-4), plus the internal hand-off event `loader:bloom` (AU-4, G-1). §5 maps every one. Sound start follows the four G-1 cases in §4:
+- Autoplay is probed once at init (D1).
+- The loader itself never makes a sound.
+- The score's first audible frame coincides with a visible, operable sound toggle (WCAG 1.4.2).
+
+Under A-3, scroll unlocks at the hand-off and the score fades in at the same time; audio never gates anything. The piece is one score in one tempo that never restarts. Scroll chooses *where in the score* we are, not *whether* it plays.
 **Never heard (CD §7):** beeps, scanner/register/card-reader tones, chimes, notifications, whooshes, lighter, inhale/exhale, coughing, heartbeats, horror stingers, laughter, sirens, words, bare test-tone oscillators, audible loops.
 
 ## 1 · Musical form
@@ -56,7 +61,16 @@ Here x is the progress through a cue's scroll span (0 → 1, §4). Levels are mu
 - **Holds longer than 16 bars.** Extension groups of 4 bars cycle through variations: (a) upper voices inverted up one chord tone; (b) motif-free bars with a seeded piano counter-line on chord tones (stepwise, ≤ 1 leap per bar); (c) one layer dropped; (d) pad top voice ±8va. The same variation never falls on the same chord group twice in a row. After 32 bars in one cue with no scroll (≈ 107 s), the cue thins to pad + air at −6 dB until the next scroll, matching the idle stop in ANIMATION §1.
 
 ## 3 · Instrument designs
-Pre-rendered voices are synthesised in JS into AudioBuffers during the loader's "score buffers" step, then played with playbackRate (≤ ±2 semitones, roots a major third apart). Live voices are built from OscillatorNode, BiquadFilter and Gain. Humanisation uses a seeded PRNG (mulberry32, seed = cue·1000 + bar·10 + voice), so renders are deterministic.
+**Rendered voices (TD10).** Felt piano, plucked string, tuned mallet, the noise buffers and both reverb IRs are computed in a **file-based Worker**:
+- **Worker.** `new Worker(new URL('./renderWorker.ts', import.meta.url), {type:'module'})`, allowed by CSP `worker-src 'self'` (TD7); no blob Worker.
+- **Recurrence oscillators.** Each partial is y[n] = 2cos(ω)·y[n−1] − y[n−2] with Float64 state: one multiply-add per sample, no `Math.sin` per sample. Decays are running multipliers.
+- **Hand-over.** The Worker transfers one Float32Array per root. The main thread copies each into an AudioBuffer of the **one production AudioContext** (`createBuffer` + `copyToChannel`), one root per task. Every main-thread task is ≤ 16 ms and is queued with `MessageChannel`/`setTimeout(0)`; `requestIdleCallback` is not used (Safari lacks it).
+- **No OfflineAudioContext in production.** It exists only on the dev-only QA page (§6).
+- **Half-rate buffers.** Piano and mallet buffers are rendered at `ctx.sampleRate / 2`: every partial they use stays below 0.45 × that rate, and higher partials are omitted. The plucked string, noise and IRs are rendered at the full rate.
+- **Playback** uses playbackRate (≤ ±2 semitones, roots a major third apart).
+- **`audio-buffers` loader item (TD3).** Non-critical, 4000 ms timeout, no retry. On timeout it is marked skipped for the progress count, but rendering continues. Each rendered voice joins on the first bar line after its buffers arrive; until then its notes are skipped, never substituted. The live voices carry the score meanwhile, so it is never silent.
+
+Live voices are built from OscillatorNode, BiquadFilter and Gain. Humanisation uses a seeded PRNG (mulberry32, seed = cue·1000 + bar·10 + voice), so renders are deterministic.
 
 | Voice | Source / oscillator stack | Filter | Envelope A / D / S / R (ms) | Modulation | Stereo · humanise | Hall send |
 |---|---|---|---|---|---|---|
@@ -73,7 +87,7 @@ Pre-rendered voices are synthesised in JS into AudioBuffers during the loader's 
 | Murmur, S2 (live) | 3 talker streams from one brown-noise buffer, each BP F1 (random walk 350–750 Hz, Q 4) + BP F2 (900–1700 Hz, Q 6), ≤ 2 formant moves/s · syllable AM 3–5.5 Hz random, depth 70 % · phrase gaps 0.4–1.2 s | LPF 1.4 kHz (no intelligible vowels) | stream fades 800 / 1200 | no periodic bursts and no rising glides (rules out laughter) | pans +0.3 / +0.5 / +0.7 (the peers) | −4 |
 | Ambience (S1) | city: brown noise LPF 220 Hz at −50 dBFS + pink LPF 800 Hz swells every 6–12 s · lamp: noise BP 120 Hz Q 30 + 240 Hz Q 30 (−6 dB) at −54 dBFS (noise-based, no oscillator) | — | follows cue | — | lamp pans with the lamp | −16 |
 
-- **Reverb (generated IR, the `audio-ir` loader item).**
+- **Reverb (IRs generated in the render Worker; the `audio-ir` loader item).**
   - **Hall** (music and featured SFX): stereo, 3.2 s long, RT60 2.6 s. L and R are independent seeded white noise × e^(−6.91t/2.6). HF damping: the noise runs through a one-pole LPF whose cutoff glides 9 kHz → 1.8 kHz from t 0 to 2.5 s. Early reflections: taps at 7/11/17/23/31/41 ms, −6…−16 dB, alternating L/R. Pre-delay 18 ms (a DelayNode before the ConvolverNode). Normalised to −3 dB energy. Return HPF 120 Hz and LPF 8 kHz.
   - **Room** (S6 room tone, card tap, footsteps behind glass): 0.6 s, RT60 0.45 s, damping 6 → 2.5 kHz, pre-delay 4 ms. Desktop only; mobile sends these to the hall at −10 dB.
 - **Master chain.**

@@ -1,0 +1,230 @@
+# OZONE — Test plan and acceptance matrix
+
+Owner: qa-engineer. Status: plan only, nothing here has been run (no code exists). Gate A round 1 fix pass (findings 7, 8, 15, 18, 27, 28; TD1, TD5, TD6, TD8, TD9; G-1).
+Sources: approved plan §4, ANIMATION_SPECIFICATION §9, TECHNICAL_ARCHITECTURE §8, DESIGN_SPECIFICATION §3.2, DECISIONS (TD1–TD12, G-1..G-3). TECH §9 now says "test plan = this file".
+
+## 0. Rules for every row
+
+- Status vocabulary: **PASS** (assertions green and evidence file exists and was opened), **FAIL**, **NOT TESTED**, **BLOCKED** (a precondition could not be established, for example autoplay policy did not take effect). Exit code 0 and "file exists" are never evidence by themselves.
+- Every spec writes its evidence under `showcase/ozone/reports/<area>/`. Audio evidence goes under `showcase/ozone/reports/audio/` (this replaces `qa/audio/`; qa owns `reports/**`). Specs write a JSON result next to any image, with the measured numbers and the verdict.
+- Screenshots and filmstrips are opened and described in `studio/QA_REPORT.md` before a PASS is cited.
+- Visual diffs: each diff is classified as intended (baseline updated with a one-line reason in QA_REPORT) or regression (defect with owner). No bulk `--update-snapshots`.
+- Lab only. Chromium only unless stated. Results are labelled "lab, emulated".
+- Preconditions are asserted inside the test. If a precondition fails (for example the autoplay policy did not apply), the row is BLOCKED, not PASS.
+- Commands run from `showcase/ozone/` against the production build: `npm run build && npx playwright test <spec> [--project=<p>]`.
+- Playwright projects (from TECH §9): the 11 width projects (320, 360, 375, 390, 414, 430, 768, 1024, 1280, 1440, 1920), `reduced-motion`, `no-js`. This plan adds `autoplay-allowed` (Chromium arg `--autoplay-policy=no-user-gesture-required`) and `autoplay-blocked` (`--autoplay-policy=document-user-activation-required`). Short names below: `w3` = widths 390/768/1440; `all-w` = all 11 widths.
+- Test-id convention: `Q-<area>-<n>`.
+
+## 1. Test hooks the build must expose (cross-file dependency)
+
+| Hook | Contract | Owner |
+|---|---|---|
+| `window.__labels` | object `{ rig: 'L'\|'M'\|'P'\|'S', px: { s1, t12, s2, t23, s3, t34, s4, t45, s5, t56, s6, t67, end } }`, scroll px for the current rig, read from the real ScrollTrigger/timeline (never recomputed by tests). Present in production build; harmless | gsap-animator |
+| `html[data-rig]`, `html[data-mode]`, `html[data-art]` | TD2 rig letter and mode; `data-art=lite\|full` | frontend |
+| `?art=lite\|full` | forces the tier. The page also calls `console.info('[ozone] art-tier=<lite\|full> source=<query\|auto>')` once, and sets `data-art`. Tests log it in every result JSON (finding 27) | gsap-animator |
+| `performance.mark('story-ready')` | at the loader hand-off. Defines "initial JS" (TD9) and the story-ready metric (G-2) | frontend |
+| `#sound` | the toggle (`aria-pressed`, DESIGN §3.2). Prompt buttons: accessible names `ENTER WITH SOUND` and `CONTINUE WITHOUT SOUND` | ui-ux, frontend |
+| `localStorage['ozone-sound']`, `sessionStorage['ozone-seen']`, `sessionStorage['ozone-view']` | TD5; no other keys | frontend, audio |
+| `?view=text` | static comic mode (TD2) | frontend |
+| `.story`, `.stage`, `.track`, `#beat-s1…#beat-t67`, `#scene-7`, Sources | TD1 DOM | frontend |
+| `rig.ts` exports | the media-query strings and the L/M/P/S/static list; tests import them, they do not retype breakpoints | frontend |
+| `window.__ozoneStats` (debug) | `{ triggers, tweens, listeners }` counts for the leak test | gsap-animator, frontend |
+| AudioContext instrumentation | done by tests via `addInitScript` wrapping `AudioContext`, `AudioNode.prototype.connect`, `GainNode`, `AudioScheduledSourceNode.start`; no production hook needed | qa |
+
+## 2. Acceptance matrix
+
+Spec paths are under `showcase/ozone/tests/`. Evidence under `showcase/ozone/reports/`. "Rule" gives the PASS condition; anything else measured is FAIL; a condition the environment cannot create is BLOCKED or NOT TESTED as stated.
+
+### 2.1 Build, SEO, content, budgets
+
+| ID | Criterion | Spec | Command | Evidence | PASS / FAIL / NOT TESTED rule |
+|---|---|---|---|---|---|
+| Q-BLD-1 | typecheck, lint, build, prerender pass | `build/scripts.spec.ts` | `npm run typecheck && npm run lint && npm run build` | `reports/build/build.log`, `reports/build/scripts.json` | PASS: all exit 0 and log shows the prerender step ran. FAIL otherwise |
+| Q-BLD-2 | Prerendered HTML has all 7 headlines (both lines), the OZONE ID line, Sources, exactly one `<h1>` | `build/prerender.spec.ts` | `npx playwright test tests/build/prerender.spec.ts` | `reports/build/prerender.json` | PASS: 7/7 headlines, 1 `h1`, ID line and Sources present in `dist/index.html`. Any missing = FAIL |
+| Q-BLD-3 | SEO head: title, description, OG/Twitter text tags, `lang`, theme-color; canonical only if a production URL was supplied | `build/prerender.spec.ts` | same | `reports/build/prerender.json` | PASS: each tag present and non-empty. Canonical with no URL supplied = expected absent, PASS if absent |
+| Q-BLD-4 | No vaping strings anywhere (finding 28). Scan `dist/index.html` AND every `dist/assets/*.js`, `*.css` and `*.svg` | `build/forbidden-strings.spec.ts` | `npx playwright test tests/build/forbidden-strings.spec.ts` | `reports/build/forbidden-strings.json` (file, match, 60 chars of context) | PASS: zero matches of `/\bvap(e|es|ed|ing|er|ers|or|ing)\b\|e-?cig\|\bjuul\b/i`. A match inside third-party minified code must be justified in `tests/fixtures/grep-allow.json` (file, offset, reason) or it is FAIL |
+| Q-BLD-5 | California is BLOCKED: no CDPH link and no California claim (finding 28) | `build/forbidden-strings.spec.ts` | same | `reports/build/forbidden-strings.json` | PASS while `FACTS_AND_SOURCES.md` marks California BLOCKED: zero `a[href]` to `cdph.ca.gov`, zero matches of `/cdph\|california\|stake act\|SB ?1124/i` in the HTML and JS chunks, and no `h3` "Resource" (empty heading). If FACTS later marks California read, set `CA_STATUS=read` and the row inverts to "link present, h3 not empty" |
+| Q-BLD-6 | Initial JS ≤ 180 KB gz and first-load fonts ≤ 150 KB (TECH §8). "Initial JS" = every script response requested before `performance.mark('story-ready')` (TD9) | `perf/budgets.spec.ts` | `npx playwright test tests/perf/budgets.spec.ts --project=w3` | `reports/perf/budgets.json` (list of requests, gz sizes) | PASS: gz sum ≤ 184,320 B (180 KB) and font bytes ≤ 153,600 B (150 KB). Gz measured with `zlib.gzipSync` level 9 on the response body |
+| Q-BLD-7 | HTML budget (TD9): prerendered HTML ≤ 250 KB gz | `perf/budgets.spec.ts` | same | `reports/perf/budgets.json` | PASS: `gzipSync(dist/index.html)` ≤ 256,000 B |
+| Q-BLD-8 | Node budget (TD9): document SVG nodes ≤ 20,000 (no-JS project, `document.querySelectorAll('svg *').length`; `<use>` shadow trees not counted); each `sN-panel` in `<defs>` ≤ 300 nodes | `perf/nodes.spec.ts` | `npx playwright test tests/perf/nodes.spec.ts --project=no-js` | `reports/perf/nodes-document.json` | PASS: total ≤ 20,000 and every `sN-panel` ≤ 300. FAIL otherwise, with the offending ids listed |
+| Q-BLD-9 | Rendered nodes in any frame ≤ 5,000 (≤ 3,600 at 390) (TD9), plus per-scene live nodes ≤ 2,500 (≤ 1,800 at 390) from ANIMATION §9 unless tech-lead drops it. Count = SVG elements with no `display:none` ancestor, sampled at every label ±1 and at 25/50/75 % of each transition, at 390/768/1440 | `perf/nodes.spec.ts` | `npx playwright test tests/perf/nodes.spec.ts --project=w3` | `reports/perf/nodes-frames.json` (max per viewport, frame where it occurred) | PASS: max ≤ limit at every sampled frame. The max and its frame are reported even when PASS |
+| Q-BLD-10 | Art is not hydrated and `mount` uses only `display` (TD9) | `perf/nodes.spec.ts` | same | `reports/perf/nodes-hydration.json` | PASS: a `MutationObserver` on the art subtree (started at document start via `addInitScript`) records zero `childList` mutations after `story-ready`; computed `content-visibility` is `visible` on all art; `mount` toggles change only `style.display` (attribute mutations filtered to `style`) |
+
+### 2.2 Layout, responsive matrix, zoom, safe area
+
+| ID | Criterion | Spec | Command | Evidence | Rule |
+|---|---|---|---|---|---|
+| Q-LAY-1 | No horizontal overflow at 11 widths, at each label ±1 and in the static comic | `layout/overflow.spec.ts` | `npx playwright test tests/layout/overflow.spec.ts --project=all-w` | `reports/layout/overflow.json` | PASS: `scrollWidth - clientWidth ≤ 0` on `html` and `body` at every sample. FAIL otherwise |
+| Q-LAY-2 | Zero intersecting text rects per sampled frame | `layout/text-overlap.spec.ts` | `npx playwright test tests/layout/text-overlap.spec.ts --project=w3` | `reports/layout/text-overlap.json`, failing frames as PNG with the two rects outlined | At every sampled playhead (each label ±1 px and 25/50/75 % of each transition, forward and reverse) collect `Range.getClientRects()` of every text node whose effective opacity > 0.05 and clip-path area > 0. PASS: for every pair from different elements, intersection area < 1 px²  (zero intersecting rects). Same-element line boxes are excluded. Any pair = FAIL naming both texts. A frame with two headlines both with opacity > 0.05 also FAILS |
+| Q-LAY-3 | Contrast: text over art ≥ 4.5:1 body, ≥ 3:1 large (worst-pixel method) | `a11y/contrast.spec.ts` | `npx playwright test tests/a11y/contrast.spec.ts --project=w3` | `reports/a11y/contrast.json` (worst ratio per text block and its pixel position) | PASS: worst pixel under each text block's rect meets threshold at the sampled holds. Uses the demo helper (`demo/tests/responsive-a11y.spec.ts`) with the headline captured on a screenshot with art, not computed from CSS colour |
+| Q-LAY-4 | Interactive targets ≥ 44 × 44 CSS px | `layout/targets.spec.ts` | `npx playwright test tests/layout/targets.spec.ts --project=all-w` | `reports/layout/targets.json` | PASS: every visible button, link and `#sound` has box ≥ 44 × 44, except inline links in running text, listed in the JSON as exempt (WCAG 2.5.8 inline exception) |
+| Q-LAY-5 | Responsive matrix screenshots at 11 widths (S1, S4, S7, static comic) | `layout/matrix.spec.ts` | `npx playwright test tests/layout/matrix.spec.ts --project=all-w` | `reports/layout/matrix/<w>-<scene>.png` + `reports/layout/matrix.md` | A screenshot existing is not a pass. PASS only when QA_REPORT carries, per width, a written description of what was seen after opening the images (text legible, no clipping, character in frame). Missing description = NOT TESTED |
+| Q-LAY-6 | 200 % and 400 % zoom: content and functions kept, reflow at 320 CSS px | `layout/zoom.spec.ts` | `npx playwright test tests/layout/zoom.spec.ts` | `reports/layout/zoom.json`, PNGs | Emulated with 1280×720 at `deviceScaleFactor` 2 and 4 and with viewports 640×360 and 320×180 (CSS px). PASS: no overflow, the S1 block inside the `100svh` copy box under the top bar (TD12), `#sound` and anchors operable, `max-height:359px` switches to static mode (that is the expected result at 400 %). This is viewport emulation, not browser zoom UI |
+| Q-LAY-7 | Orientation change 390×844 ↔ 844×390 mid-story | `layout/orientation.spec.ts` | `npx playwright test tests/layout/orientation.spec.ts` | `reports/layout/orientation.json` | PASS: scene id before = after; rig changes per `rig.ts`; no console error; `__ozoneStats` trigger count after = before |
+| Q-LAY-8 | Safe-area insets | `layout/safe-area.spec.ts` | `npx playwright test tests/layout/safe-area.spec.ts` | `reports/layout/safe-area.json`, PNGs | CDP `Emulation.setSafeAreaInsetsOverride {insets:{top:47,bottom:34,left:0,right:0}}` at 390×844, then 844×390 with 0/47/0/47 left/right. PASS: top bar and `#sound` have computed offset ≥ the inset and no text is clipped. If the CDP method is rejected by the installed Chromium: **NOT TESTED** (no CSS-only substitute is claimed) |
+| Q-LAY-9 | Rig coverage: all of L, M, P, S and static are exercised | `layout/rigs.spec.ts` | `npx playwright test tests/layout/rigs.spec.ts` | `reports/layout/rigs.json` | Viewports 1440×900 (L), 1024×768 (M), 768×1024 (P), 390×844 (S), 1280×300 (static). PASS: the observed `data-rig` set equals the `rig.ts` list (no value missing, none extra) |
+
+### 2.3 Scroll engine and story structure
+
+| ID | Criterion | Spec | Command | Evidence | Rule |
+|---|---|---|---|---|---|
+| Q-SCR-1 | TD1: for each rig, `st.end − st.start === track.offsetHeight`; exactly one ScrollTrigger on `.story`; `start:'top top'` | `scroll/track.spec.ts` | `npx playwright test tests/scroll/track.spec.ts` | `reports/scroll/track.json` (per rig: start, end, offsetHeight, delta) | PASS: delta is exactly 0 for L, M, P, S after fonts ready and after one resize that keeps the rig. Also: 12 `#beat-*` heights sum to `--budget`; `#scene-7` follows `.story`. Reading `st` goes through `ScrollTrigger.getAll()` on the page |
+| Q-SCR-2 | Slow/fast forward and reverse, repeated boundary crossing, interrupted scroll, reload mid-page, resize mid-scroll | `scroll/behaviour.spec.ts` | `npx playwright test tests/scroll/behaviour.spec.ts --project=w3` | `reports/scroll/behaviour.json` | Real `mouse.wheel` (desktop) and CDP touch gestures (390). PASS: after each manoeuvre, scene id derived from `__labels` equals the one shown (the headline legible), master progress equals `(scrollY − st.start)/(st.end − st.start)` within 0.002, no console error, trigger count unchanged. Reload at `t34` mid restores the stored scene with SFX suppressed (TD10) |
+| Q-SCR-3 | Leak check across reload and route-style re-init | `scroll/leaks.spec.ts` | `npx playwright test tests/scroll/leaks.spec.ts` | `reports/scroll/leaks.json` | Reload 3×, rig change 3×. PASS: `__ozoneStats` triggers, tweens and listeners identical to the first load (±0) |
+| Q-SCR-4 | Heap growth ≤ 10 % over 3 full scrolls | `scroll/heap.spec.ts` | `npx playwright test tests/scroll/heap.spec.ts --project=w3` | `reports/scroll/heap.json` (baseline, after each scroll, ratio) | Baseline: after hand-off, `HeapProfiler.collectGarbage` ×2, `Runtime.getHeapUsage.usedSize`. Then top→bottom→top ×3 by wheel, forced GC ×2 after each, read again. PASS: final ≤ 1.10 × baseline AND DOM node count final ≤ 1.05 × baseline. FAIL otherwise. Audio running (instrumented) during the scrolls |
+| Q-SCR-5 | Lenis absent, native scroll only (plan C4) | `scroll/native.spec.ts` | `npx playwright test tests/scroll/native.spec.ts` | `reports/scroll/native.json` | PASS: no `lenis` global/class in the page or chunks, `getComputedStyle(html).scrollBehavior === 'auto'`, wheel of 10 notches shows no scrollY plateau of more than one frame (the ANIMATION §9 wheel check) |
+| Q-SCR-6 | Anchors | `scroll/anchors.spec.ts` | `npx playwright test tests/scroll/anchors.spec.ts --project=w3` | `reports/scroll/anchors.json` | `#scene-5` etc. jump instantly to the beat start from `__labels`, focus lands on the heading, hash at load handled, SFX skipped on jumps > 60 units (ANIMATION §3). PASS on all three |
+| Q-SCR-7 | Scrub value (TD4) | `scroll/scrub.spec.ts` | `npx playwright test tests/scroll/scrub.spec.ts` | `reports/scroll/scrub.json` | `(pointer:fine)` project: master `scrollTrigger.vars.scrub === 0.5`; `(pointer:coarse)` (hasTouch): `true`. Either mismatch FAIL |
+| Q-SCR-8 | Art tier override (finding 27) | `scroll/art-tier.spec.ts` | `npx playwright test tests/scroll/art-tier.spec.ts` | `reports/scroll/art-tier.json` | `?art=lite` → `html[data-art=lite]` and the console line `art-tier=lite source=query`; `?art=full` likewise; no param → `source=auto`. PASS: all three, and every other spec's JSON records the tier. All perf and visual specs run with `?art=full` unless the row says otherwise, and the lite tier is run once for the scroll and text-overlap checks |
+
+### 2.4 Story content, accessibility, reduced motion, keyboard
+
+| ID | Criterion | Spec | Command | Evidence | Rule |
+|---|---|---|---|---|---|
+| Q-A11Y-1 | TD6: all 7 headlines and all captions are in the accessibility tree at 5 sampled playheads | `a11y/tree.spec.ts` | `npx playwright test tests/a11y/tree.spec.ts --project=w3` | `reports/a11y/tree-<w>-<playhead>.yml` (`page.accessibility`/ARIA snapshot), `reports/a11y/tree.json` | Playheads from `__labels`: `s1`, mid `t23`, `s4`, mid `t56`, `s6`. At each, the snapshot must contain all 7 headline texts (both lines) and every caption (`[data-caption]` text list from the prerendered DOM). PASS: 7/7 headlines and N/N captions at 5/5 playheads at each of 3 widths. Also computed `visibility !== 'hidden'`, `display !== 'none'` on every headline and caption at each playhead (they may be at opacity 0). Any missing item = FAIL naming item and playhead |
+| Q-A11Y-2 | Animation property rule (TD6) | `a11y/tree.spec.ts` | same | `reports/a11y/tree.json` | PASS: a `MutationObserver` over the whole scroll finds no `visibility`, `display` or `hidden` change on headline and caption elements, and no `autoAlpha` pattern (`visibility` in inline style) |
+| Q-A11Y-3 | axe WCAG 2.2 AA, 0 serious/critical, at 390/768/1440; at S1 hold, mid-transition, S7, prompt open, static comic | `a11y/axe.spec.ts` | `npx playwright test tests/a11y/axe.spec.ts --project=w3` | `reports/a11y/axe-<w>-<state>.json` | PASS: 0 violations with impact serious or critical in each state. Minor/moderate listed, not gating. `color-contrast` results for text over art are also covered by Q-LAY-3, since axe cannot see image pixels |
+| Q-A11Y-4 | Keyboard path (automated) | `a11y/keyboard.spec.ts` | `npx playwright test tests/a11y/keyboard.spec.ts --project=w3` | `reports/a11y/keyboard.json`, focus-ring PNGs | Tab order = DOM/visual order from skip link, prompt buttons (if open), `#sound`, anchors, Sources links. PASS: each focused element has a visible indicator (outline area ≥ 2 px thick, contrast ≥ 3:1 against its neighbour, measured on the screenshot), no keyboard trap, Escape behaves per DESIGN §3, focus is never behind the sticky stage. Space/PageDown on the story advance the scroll |
+| Q-A11Y-5 | Manual keyboard pass | none (human) | n/a | `reports/a11y/manual-keyboard.md` | Recorded by QA, step by step. NOT TESTED until the note exists |
+| Q-A11Y-6 | Reduced motion: no pin, no scrub, all content visible, loader static | `a11y/reduced-motion.spec.ts` | `npx playwright test tests/a11y/reduced-motion.spec.ts --project=reduced-motion` | `reports/a11y/reduced-motion.json`, PNGs | PASS: zero ScrollTriggers, `.stage` not sticky, no transform changes on `[data-cam]` across a full scroll, all 7 headlines and captions at opacity 1, loader shows the static mark plus progress, no CSS animation running (`document.getAnimations().length === 0`), SFX not triggered by scroll |
+| Q-A11Y-7 | Static / no-JS readability | `a11y/no-js.spec.ts` | `npx playwright test tests/a11y/no-js.spec.ts --project=no-js` | `reports/a11y/no-js-<w>.png`, JSON | PASS: stacked comic readable at 390/768/1440, all 7 headlines visible, no overflow, `html` has no `js-story`/`js-loading`. GSAP-failure variant: block `**/assets/*gsap*` or the chunk holding it, expect content readable and the watchdog (TD7) reverts to static within 12.5 s |
+| Q-A11Y-8 | Screen reader | none | n/a | n/a | Accessibility-tree evidence only (Q-A11Y-1). Orca/NVDA/VoiceOver: **NOT TESTED** |
+
+### 2.5 Loading and failure paths
+
+| ID | Criterion | Spec | Command | Evidence | Rule |
+|---|---|---|---|---|---|
+| Q-LOAD-1 | Progress = completed/total of real items (TD3: `font-display`, `font-text`, `art-s1s2`, `audio-engine`, `audio-ir`, `audio-buffers`) | `loading/progress.spec.ts` | `npx playwright test tests/loading/progress.spec.ts --project=w3` | `reports/loading/progress.json` | Sample `aria-valuenow` each rAF while delaying each item in turn via `page.route`. PASS: every value equals `round(100 × done/total)` at that instant, never decreases, total = 6 (4 with `ozone-sound=off`, TD3), and the value reaches 100 only after the last item settles |
+| Q-LOAD-2 | Fast, Fast 3G throttled, returning visitor (`ozone-seen`) short ≤ 1 s | `loading/profiles.spec.ts` | `npx playwright test tests/loading/profiles.spec.ts --project=w3` | `reports/loading/profiles.json` | CDP `Network.emulateNetworkConditions` (Fast 3G: 1.6 Mbit/s down, 750 Kbit/s up, 562 ms RTT). PASS: story opens on every profile; returning visit hand-off ≤ 1,000 ms after load; first-visit hand-off ≤ the hard timeout of 10 s; never stuck |
+| Q-LOAD-3 | Network failure path: block the S1/S2 art chunk, a font file, and the audio buffers one at a time | `loading/failure.spec.ts` | `npx playwright test tests/loading/failure.spec.ts --project=w3` | `reports/loading/failure-<item>.png`, JSON | PASS per item: loader reaches hand-off or the TD3 fallback (static mode with the DESIGN §5.2 message); item shown skipped; text remains legible with fallback font (computed font-family list contains the metric-matched local); zero uncaught exceptions; art chunk blocked → one retry observed in the request log |
+| Q-LOAD-4 | Hard timeout and watchdog | `loading/timeout.spec.ts` | `npx playwright test tests/loading/timeout.spec.ts` | `reports/loading/timeout.json` | Hang every request to `/assets/*` with a route that never fulfils. PASS: prompt/hand-off or static fallback by 10 s, `js-loading` removed by about 12 s, text-story link visible at 8 s |
+| Q-LOAD-5 | Console-error guard | `smoke/console.spec.ts` | `npx playwright test tests/smoke/console.spec.ts --project=all-w` | `reports/smoke/console.json` | PASS: zero `console.error`, `pageerror`, failed same-origin requests (excluding the ones the failure specs block on purpose) across load + full scroll |
+| Q-LOAD-6 | Links and media | `smoke/links.spec.ts` | `npx playwright test tests/smoke/links.spec.ts` | `reports/smoke/links.json` | PASS: every Sources link has `https` and `rel` `noopener`, internal anchors resolve; external links get one `HEAD`/`GET` check, a non-200 is recorded as a warning with date (hosts can rate-limit); no images 404 |
+
+### 2.6 Transitions and visual regression
+
+| ID | Criterion | Spec | Command | Evidence | Rule |
+|---|---|---|---|---|---|
+| Q-VIS-1 | Seven holds baselines: `toHaveScreenshot` for S1…S7 at 390/768/1440 (21 images) | `visual/holds.spec.ts` | `npx playwright test tests/visual/holds.spec.ts --project=w3` | `tests/visual/holds.spec.ts-snapshots/`, diffs in `reports/visual/diff/` | Deterministic settle: page on `?art=full`, `reducedMotion:'no-preference'`, fonts ready, scroll set via `__labels.px[sN]`, wait 2 rAF with the master progress equal to the target ± 0.001, idle breath/blink loops frozen by the test hook (`gsap.globalTimeline.pause()` after seeking is NOT allowed to hide a scrub bug, so freeze only `data-idle` tweens), `animations:'disabled'`, `caret:'hide'`, masks on nothing. Threshold `maxDiffPixelRatio: 0.002`. PASS: all 21 within threshold or each diff classified intended |
+| Q-VIS-2 | Static comic baselines at 390/768/1440 (3 images, full page) | `visual/static.spec.ts` | `npx playwright test tests/visual/static.spec.ts --project=w3` | same | `?view=text` and the `no-js` project both captured; same threshold and rule. 3/3 |
+| Q-VIS-3 | The six transitions, forward and reverse | `visual/transitions.spec.ts` | `npx playwright test tests/visual/transitions.spec.ts` | `reports/visual/transitions/t<ab>-<w>-<dir>-<pos>.png` + filmstrip sheets | Positions: just-before (−1 px), start, mid, end, just-after (+1 px), at 1440 and 390, both directions: 6 × 5 × 2 × 2 = 120 frames. The frames are opened and described in QA_REPORT, and checked against the beat table in ANIMATION §3. Forward and reverse frames at the same position must match within `maxDiffPixelRatio: 0.002` (the reverse-coherence assertion). Creative-director critique of the filmstrips is a separate verdict. PASS needs both |
+| Q-VIS-4 | Playhead determinism | `visual/determinism.spec.ts` | `npx playwright test tests/visual/determinism.spec.ts` | `reports/visual/determinism.json` | Same position reached by 3 different routes (forward slow, fast jump, reverse) gives identical camera transform and headline clip-paths (±0.5 px / ±0.5 %). PASS: all positions at 12 labels × 3 widths |
+| Q-VIS-5 | Ownership: one owner per element per time range | `scroll/ownership.spec.ts` | `npx playwright test tests/scroll/ownership.spec.ts` | `reports/scroll/ownership.json` | Walk `master.getChildren(true)`; PASS: no two tweens animate the same target+property over overlapping time ranges |
+
+### 2.7 Audio
+
+All audio specs use an instrumented `AudioContext` (`addInitScript`) and record to `reports/audio/`. Precondition per project: the spec reads `ctx.state` right after construction in `autoplay-allowed` / `autoplay-blocked`. If the observed state does not match the project's policy, the row is **BLOCKED**.
+
+| ID | Criterion | Spec | Command | Evidence | Rule |
+|---|---|---|---|---|---|
+| Q-AUD-1 | G-1 four cases | `audio/start-cases.spec.ts` | `npx playwright test tests/audio/start-cases.spec.ts --project=autoplay-allowed --project=autoplay-blocked` | `reports/audio/start-cases.json`, PNG per case | See table 2.7a. All four must pass |
+| Q-AUD-2 | Toggle truth: ON = preference on AND `running` AND gain > 0 | `audio/toggle.spec.ts` | `npx playwright test tests/audio/toggle.spec.ts --project=autoplay-blocked --project=autoplay-allowed` | `reports/audio/toggle.json` (timeline of `ctx.state`, master gain, `aria-pressed`) | PASS: at every `statechange`, every 100 ms for 3 s after each action, and on `visibilitychange`, `aria-pressed === (pref==='on' && state==='running' && gain>0)`. Never true on click alone |
+| Q-AUD-3 | Finding 18: blocked → CONTINUE → still OFF after 2 s | `audio/toggle.spec.ts` | same | same | `autoplay-blocked`: load, a pending `resume()` exists (recorded), click CONTINUE WITHOUT SOUND, wait 2,000 ms while also clicking neutral areas of the page (to give a stale `resume()` a gesture). PASS: `aria-pressed==='false'`, master gain 0, `ctx.state==='suspended'`, `ozone-sound==='off'` at 2,000 ms. Escape on the prompt gives the same result. Any ON = FAIL |
+| Q-AUD-4 | TD5 persistence: OFF survives reload | `audio/persistence.spec.ts` | `npx playwright test tests/audio/persistence.spec.ts` | `reports/audio/persistence.json` | Turn OFF with the toggle, reload, expect `ozone-sound==='off'`, no `AudioContext` created or none running, no prompt, toggle `aria-pressed='false'`, no audio started even after scrolling through 3 cues. Also: saved `on` + autoplay blocked → prompt; saved `off` is never overridden by default-ON. Storage keys are exactly `ozone-sound`, `ozone-seen`, `ozone-view`; no `ozone.v1` |
+| Q-AUD-5 | Storage write rule (TD5): `ozone-sound` is written only by ENTER, CONTINUE, Escape, the toggle | `audio/persistence.spec.ts` | same | same | Wrap `Storage.prototype.setItem`; PASS: writes occur only inside those four user actions (the stack/initiator is the handler) and never on autoplay success, visibility change or load |
+| Q-AUD-6 | One context, one graph, after re-init, reload and re-toggle | `audio/graph.spec.ts` | `npx playwright test tests/audio/graph.spec.ts` | `reports/audio/graph.json` | PASS: `AudioContext` constructor count = 1 per page load; node-count by type matches AUDIO_SPECIFICATION caps after 3 toggle cycles and a rig change; no growth |
+| Q-AUD-7 | SFX fire counts per crossing, direction-aware, cooldowns | `audio/sfx.spec.ts` | `npx playwright test tests/audio/sfx.spec.ts --project=autoplay-allowed` | `reports/audio/sfx.json` | Slow forward through all 6 transitions: each `sfx:*` id fires exactly once. Reverse: only bed/soft variants (ANIMATION §3 rule). A jump over > 60 units fires none and applies only the latest `setCue`. Fast scroll: per-type cooldown honoured (no id twice inside its cooldown). Expected counts come from the ANIMATION SFX table, loaded by the spec |
+| Q-AUD-8 | No restart after mute, no restart on cue change | `audio/continuity.spec.ts` | `npx playwright test tests/audio/continuity.spec.ts --project=autoplay-allowed` | `reports/audio/continuity.json` | PASS: after mute (gain ramp 0.4 s ±0.05 s to 0 then `suspend`) and unmute, the music scheduler continues at the bar position it would have had (no bar-0 restart: first scheduled note time modulo bar length equals expected within 20 ms); cue changes land on bar lines (±5 ms of the audio clock) |
+| Q-AUD-9 | Visibility change | `audio/visibility.spec.ts` | `npx playwright test tests/audio/visibility.spec.ts --project=autoplay-allowed` | `reports/audio/visibility.json` | Hidden: fade and `suspend`; visible: resumes only if preference on (1.0 s visible fade is not a toggle ramp, finding 17). With preference off, stays suspended. PASS: all three |
+| Q-AUD-10 | Musical quality: offline render per cue | `audio/render.spec.ts` | `npx playwright test tests/audio/render.spec.ts` | `reports/audio/cue-<n>.wav`, `reports/audio/cue-<n>-spectrogram.png`, `reports/audio/render.json` | `OfflineAudioContext` render of each of the 7 cues. Measured: peak ≤ −1.0 dBFS (no clipping, no sample at ±1.0), RMS between −28 and −12 dBFS, no DC offset > 0.01, no silence gap longer than 2 s inside a cue except the specified near-silence. PASS: all 7 meet it. "Professionally composed" is **not a test**: creative-director's listen-through is a separate verdict file `reports/audio/listen-review.md`; without it that part is NOT TESTED |
+| Q-AUD-11 | Audio load budgets (TECH §8, TD10) | `audio/budgets.spec.ts` | `npx playwright test tests/audio/budgets.spec.ts --project=autoplay-allowed` | `reports/audio/budgets.json` | Buffer memory ≤ 17 MB desktop / 12 MB mobile profile (sum of `AudioBuffer` `length × channels × 4`); render ≤ 400 ms (390 mobile profile); no long task attributed to audio during the build (`longtask` count 0 in that window); `ctx.renderCapacity` average ≤ 0.25 where available, otherwise that sub-check is NOT TESTED |
+| Q-AUD-12 | Real iOS/Android audio unlock | none | n/a | n/a | **NOT TESTED** (no devices) |
+
+**2.7a G-1 start cases (Q-AUD-1).** Each case has an assertion list; "first audible frame" = the first `requestAnimationFrame` after an `AnalyserNode` tapped on the master output reports RMS > 1e-4 (−80 dBFS). Before that frame the spec checks nothing audible happened earlier than the hand-off.
+
+| Case | Setup | Assertions (PASS needs all) |
+|---|---|---|
+| (a) First visit, autoplay blocked | `autoplay-blocked`, empty storage | loader never produces audible output; prompt appears with both buttons; `aria-pressed=false` throughout; after ENTER WITH SOUND: context `running`, `aria-pressed=true`, `ozone-sound=on`, audible output starts at hand-off and not before |
+| (b) First visit, autoplay allowed | `autoplay-allowed`, empty storage | no prompt shown; loader silent (no audible frame before `story-ready`); first audible frame is at or after hand-off; **at that frame `#sound` is visible, not disabled, has `tabindex` ≥ 0 or is natively focusable, `#sound.focus()` makes it `document.activeElement`, and `aria-pressed==='true'`**; toggle exists from the same rAF as the first audible frame (WCAG 1.4.2). Violated if the toggle appears later by even one frame |
+| (c) Returning, `ozone-sound=on` | set storage, both projects | allowed: behaves as (b). blocked: behaves as (a). In both, short loader ≤ 1 s if `ozone-seen` |
+| (d) Returning, `ozone-sound=off` | set storage, both projects | no `AudioContext` created before a user action (or created and never resumed), no prompt, toggle `aria-pressed=false`, zero audible frames across a full scroll; then toggle ON → audio starts and `audio-*` items load with `aria-busy` (TD3) |
+
+### 2.8 Performance (lab)
+
+| ID | Criterion | Spec | Command | Evidence | Rule |
+|---|---|---|---|---|---|
+| Q-PRF-1 | Lighthouse, mobile and desktop, median of 3 | `perf/lighthouse.mjs` (node script in `tests/perf/`, `lighthouse@13.6.0`, TD11) | `node tests/perf/lighthouse.mjs --runs=3` | `reports/perf/lighthouse/<form>-run<n>.json`, `reports/perf/lighthouse/summary.json` | 3 runs per form factor on the production build served by `vite preview`; the median of each metric is the reported value (TECH §8 "median of 5" is replaced by 3). PASS: median LCP ≤ 2.5 s, CLS ≤ 0.05, TBT ≤ 200 ms, on the mobile form at least; desktop reported. The LCP element is whatever Lighthouse reports (G-2), recorded by name; no claim that it is the S1 h1. Story-ready (`story-ready` − navigationStart) is reported per run; judged against the target in TECH §8, and NOT TESTED against a target while TECH §8 has none |
+| Q-PRF-2 | CLS across the whole scroll and font swap | `perf/cls.spec.ts` | `npx playwright test tests/perf/cls.spec.ts --project=w3` | `reports/perf/cls.json` | `layout-shift` observer (entries without recent input) from load to the end of a full scroll. PASS: total ≤ 0.05 |
+| Q-PRF-3 | INP (lab) | `perf/inp.spec.ts` | `npx playwright test tests/perf/inp.spec.ts --project=w3` | `reports/perf/inp.json` | Event Timing observer (`durationThreshold:16`) over clicks/keys on ENTER, CONTINUE, `#sound`, skip. PASS: worst duration ≤ 200 ms at 4× CPU throttle. This is lab INP, not field INP |
+| Q-PRF-4 | Scroll jank probe | `perf/scroll-jank.spec.ts` | `npx playwright test tests/perf/scroll-jank.spec.ts --project=w3` | `reports/perf/scroll-jank.json` | Slow (60 px/frame) and fast (400 px/frame) wheel scrolls through the whole story at 4× CPU throttle, 3 runs each. PASS: zero rAF intervals > 50 ms, p95 ≤ 33 ms, long tasks 0 during the slow scroll. The t45 and t67 spans get the full protocol in §3 |
+| Q-PRF-5 | Heap | see Q-SCR-4 | | | |
+| Q-PRF-6 | Field CWV, real-device performance | none | n/a | n/a | **NOT TESTED** (no field data, no devices) |
+
+## 3. T6b prototype protocol (TD8, finding 8)
+
+Specs: `tests/proto/t45.spec.ts` and `tests/proto/t67.spec.ts`, sharing `tests/proto/protocol.ts`. Run after Gate A approval and client OK, before T7. Both run against the **prototype build on placeholder art** (URL from `PROTO_URL`, default the `vite preview` of the prototype), through the production code path: real master timeline, real ScrollTrigger, real audio engine.
+
+`capture-reference.mjs --filmstrip` cannot do this and is not used for any measurement: it spreads its steps over the full page height (at least 0.85 viewport each, so t45's 120 svh cannot be sampled at 12 steps) and fixes `deviceScaleFactor: 1`, which is about 1/9 of the pixels of a DPR 3 phone. It may be used for DPR 1 context filmstrips only, labelled as such. (ANIMATION §9 item 2 and §9 item 3 are superseded by this section; gsap-animator updates §9 to point here.)
+
+### 3.1 Placeholder-fidelity gate (precondition, otherwise the whole run is BLOCKED)
+
+The protocol first checks that the prototype is representative, from the DOM at the t45 span (and t67 for its own run). Real values come from the art agent's `proto/fidelity.json` (fill area per halftone region, filtered layer ids, mask id, node counts). PASS requires all of:
+- halftone fill area (sum of the bounding boxes of elements filled by the halftone pattern, in CSS px² at the viewport) ≥ 0.9 × the real value and ≤ 1.3 ×;
+- exactly the same 3 layers carry a `filter` (computed style `filter !== 'none'` or `filter` attribute) as in `fidelity.json`;
+- the eraser `<mask>` exists on the same element and covers the same bounding box ±10 %;
+- live node count in the span at the sampled frames within ±10 % of 2,500 (1,800 at 390) per scene (TD9 frame limits 5,000 / 3,600 still apply);
+- `will-change` and the promoted-layer list recorded (from `Layerize`/`UpdateLayer` trace events), for the report.
+
+### 3.2 Configurations and inputs
+
+| Config | Viewport | DPR | CPU throttle (main thread) | Input |
+|---|---|---|---|---|
+| A (phone) | 390 × 844, `isMobile`, `hasTouch` | 3 (1170 × 2532 device px) | 4× | CDP `Input.synthesizeScrollGesture` (touch source) AND `Input.dispatchMouseEvent` wheel |
+| B (desktop) | 1440 × 900 | 1 | 1× | `page.mouse.wheel` |
+| C (retina desktop) | 1440 × 900 | 2 | 1× | `page.mouse.wheel` |
+
+CDP CPU throttling slows the main thread only, not raster or the compositor, so on config A it does not model a phone's raster cost. This is why raster is measured separately (3.4) and why the result remains "lab, emulated".
+
+Each config runs both **slow** (60 px per 16 ms step, about 3,600 px/s; touch gesture at 3,600 px/s) and **fast** (400 px per step, about 24,000 px/s; touch gesture capped at the speed Chromium accepts, recorded) forward through the span, then reverse once, **3 runs each**, fresh page each run (cold start, no warm-up run counted). Pointer-based wheel steps use `mouse.wheel` with the real input path (not `scrollBy`, not `window.scrollTo`).
+
+Scroll span: from `__labels.px.s4 − 100` to `__labels.px.s5 + 100` for t45 (this includes the S4→S5 cue change); from `__labels.px.t67 − 100` to `__labels.px.end` for t67. Positions are read from `window.__labels` after fonts and art are ready; the spec never computes label positions itself and records the `rig` value.
+
+### 3.3 Audio
+
+Audio runs for the whole measurement: `ENTER WITH SOUND` is clicked (or autoplay-allowed project used), the spec asserts `ctx.state==='running'`, master gain > 0 and at least the music voices of cue s4 audible (analyser RMS > 1e-4) before the scroll starts, and that `cue:s5` fires during the span (`setCue(5,+1)` logged by the instrumentation). If any of those is false the run is BLOCKED (the measurement would not be representative). Audio-engine long tasks (`longtask` with attribution to the audio worker or scheduler) are reported separately.
+
+### 3.4 Trace and metrics
+
+For each run: `Tracing.start` with categories `devtools.timeline`, `disabled-by-default-devtools.timeline`, `disabled-by-default-devtools.timeline.frame`, `cc`, `gpu`, `viz`, `benchmark`, `blink.user_timing`, `loading`, `v8`; in-page `PerformanceObserver` for `longtask` and `long-animation-frame` (buffered), and a `requestAnimationFrame` interval probe. Stored: `reports/proto/<t45|t67>/<config>-<input>-<speed>-run<n>.json` (metrics) and `.trace.json.gz` (trace), plus a filmstrip of 12 evenly spaced scroll positions at the real DPR (`.png`, opened and described in the report).
+
+Derived metrics:
+1. **Frame time**: rAF intervals during scrolling, in ms (max, p50, p95).
+2. **Long tasks** and **long animation frames** (duration > 50 ms): count, with the LoAF script attribution.
+3. **Raster**: for each frame window (`PipelineReporter` events), the sum of `RasterTask` durations that start in the window; p50 and p95 per run. Also counts of `Paint`, `Layerize`, `UpdateLayer`, `ImageDecodeTask` and the number of dropped/missed frames (`PipelineReporter` state not `STATE_PRESENTED_ALL`).
+4. Raster backend (GPU or software) read from the trace metadata and written into the JSON; a software raster result is labelled and not compared with the thresholds as if it were GPU: the raster criterion is recorded BLOCKED for that run and the other criteria are still judged.
+
+### 3.5 Pass criteria
+
+Carried over from ANIMATION §9 (all must hold in every one of the 3 runs, every config, both slow and fast, forward and reverse):
+- zero frames > 50 ms;
+- p95 frame time ≤ 33 ms;
+- long-task count 0 during the slow scroll.
+
+Added by this plan:
+- **Zero long-animation-frame entries > 50 ms during the slow scroll** (LoAF includes rendering work the long-task API does not).
+- **Raster p95 per frame ≤ 8 ms** (per-frame sum of `RasterTask` wall time). Justification: at 60 Hz a frame is 16.7 ms; raster runs off the main thread but a tile that is not rastered before activation shows as checkerboard or a dropped frame, and the main thread plus compositor need the other half of the budget. 8 ms (about half a frame) leaves a margin of about 2× for a phone GPU being slower than this lab machine. The figure is a judgement, not a measurement on a device, and the margin is not verified. The per-frame sum counts parallel raster threads end to end, so it over-counts and is conservative. If the first prototype run shows the threshold cannot discriminate (everything below 2 ms or everything above 8 ms with no visible problem), performance-engineer may propose a changed figure with the evidence; QA does not move it silently.
+
+Verdict rule per scene span: PASS only if 3/3 runs satisfy every criterion on every config. Any failing config → FAIL, which triggers the ANIMATION cut-line order (mask → opacity stagger fallback; halftone density; far-plane freeze (lite tier); node cull; bake filters) plus the extra cut-line from finding 8: depth planes as HTML-wrapped `<svg>` layers transformed on the wrapper. After each cut-line the whole protocol is re-run (the JSON records the cut-line name in `variant`). The reported numbers are the median and the worst of the 3 runs.
+
+Outputs: `reports/proto/VERDICT.md` (verdict per span and config, with the median/worst table, trace file names, opened filmstrip descriptions, cut-lines applied) feeding the performance verdict required by T6b. Real-device performance is NOT TESTED.
+
+## 4. What is NOT TESTED (stated up front)
+
+- Real devices of any kind: iOS Safari, Android Chrome, real touch hardware, real GPUs on phones, thermals. Mobile results are Chromium emulation (viewport, DPR, touch, CPU throttle) and are labelled "emulated".
+- Field Core Web Vitals (no RUM, no CrUX data).
+- Firefox and WebKit, unless installed in the test environment and added as projects; then only the smoke, overflow and axe rows run and the report names the engine. Otherwise NOT TESTED.
+- Screen readers (VoiceOver, NVDA, JAWS, Orca, TalkBack): the accessibility-tree snapshots are the only evidence.
+- Browser zoom UI (200 % / 400 % is viewport/DPR emulation), forced-colours mode, OS-level text-size settings.
+- Safe-area insets unless the installed Chromium supports the CDP override (Q-LAY-8).
+- Hosting behaviour: headers/CSP on a real host (TECH §9), CDN caching.
+- Whether the music is "professionally composed": measured only for clipping and level; the judgement is creative-director's listen-through.
+- California-specific claims: BLOCKED at source; the tests assert their absence.
+- OZONE's statement "We check IDs. No exceptions." is the client's, not verified by tests.
+
+## 5. Defect filing
+
+Each defect: id, steps, expected, actual, evidence path, severity, owner agent (frontend-engineer, gsap-animator, audio, ui-ux-designer, typography-spacing, creative-director, performance-engineer, tech-lead). Logged in `studio/QA_REPORT.md`; the status vocabulary in section 0 applies.
+
+## 6. Gate B condition (from the QA role)
+
+Full suite green on the final build with the matrix above (every row PASS, or NOT TESTED where §4 lists it and the report says so), no unexplained visual diffs, a11y and reduced-motion rows PASS, T6b verdict PASS before T7. The verdict with evidence paths is written to `PROJECT_STATUS.md`.
