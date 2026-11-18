@@ -1,4 +1,4 @@
-# QA Report — OZONE — Clear Air (youth vaping prevention)
+# QA Report — OZONE — "Your Ink" (cigarettes only)
 _Owner: qa-engineer · Date: 2026-11-17 · Build: <commit>_
 
 Statuses: PASS (evidence linked) · FAIL · NOT TESTED · BLOCKED
