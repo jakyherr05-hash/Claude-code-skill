@@ -1,0 +1,2397 @@
+{
+  "_note": "MEASUREMENTS of the PLACEHOLDER art against fidelity.json TARGETS. DOM measurement only; not a performance result.",
+  "generated": "2026-11-19T02:10:36.716Z",
+  "url": "http://localhost:4174/",
+  "targets": "proto/fidelity.json",
+  "rigs": {
+    "L": {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "rig": "L",
+      "art": {
+        "tier": "full",
+        "source": "auto",
+        "cuts": [
+          6
+        ],
+        "filters": 0
+      },
+      "flags": {
+        "filteredLayers": 0,
+        "redAllNodes": 600,
+        "redAllExtentViewportWidths": 1.217,
+        "redAllExtentPass": true,
+        "redAllNodesPass": true,
+        "maskId": "eraser-mask",
+        "maskTarget": "url(#eraser-mask)",
+        "maskPass": true,
+        "maskBoxVsBBox": {
+          "w": 1.02,
+          "h": 1.02
+        },
+        "maskBoxPass": true,
+        "documentNodes": 9020,
+        "documentNodesPass": true,
+        "panelNodes": [
+          300,
+          300,
+          300,
+          300,
+          300,
+          300
+        ]
+      },
+      "samples": [
+        {
+          "name": "s4",
+          "kind": "hold",
+          "units": 575,
+          "scrollY": 5175,
+          "playhead": 574.98353,
+          "htShare": 0.34107125059427995,
+          "htRedShare": 0.03895947411387331,
+          "htByPlane": {
+            "s4-wall": 7.65,
+            "s4-mid": 22.56,
+            "red-all(red)": 3.9
+          },
+          "minPitch": 6.074981689453125,
+          "nodesPerFrame": 4380,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 4980,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0,0,0,0,-1462.54968,-1609.0697)",
+          "camTransform": "translate3d(7.19818px, 0px, 0px) scale(2.02499)",
+          "htTarget": 0.35,
+          "htRatio": 0.9744892874122285,
+          "htPass": true,
+          "redTarget": 0.04,
+          "redRatio": 0.9739868528468326,
+          "nodesTarget": 4500,
+          "nodesRatio": 0.9733333333333334,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "mid-t45",
+          "kind": "mid",
+          "units": 715,
+          "scrollY": 6435,
+          "playhead": 714.98053,
+          "htShare": 0.32330593215900955,
+          "htRedShare": 0.03693021068823191,
+          "htByPlane": {
+            "s4-wall": 7.25,
+            "s4-mid": 21.38,
+            "red-all(red)": 3.69
+          },
+          "minPitch": 5.9146528244018555,
+          "nodesPerFrame": 4380,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 4980,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0.743,0,0,0.743,-375.87527,-413.53091)",
+          "camTransform": "translate3d(2.57386px, 0px, 0px) scale(1.97155)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesTarget": 4500,
+          "nodesRatio": 0.9733333333333334,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "s5",
+          "kind": "hold",
+          "units": 825,
+          "scrollY": 7425,
+          "playhead": 824.95622,
+          "htShare": 0.3137047730404668,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s5-far": 12.13,
+            "s5-mid": 19.24
+          },
+          "minPitch": 6.074906587600707,
+          "nodesPerFrame": 4400,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4400,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-222.44px, 0px, 0px) scale(0.455618)",
+          "htTarget": 0.3,
+          "htRatio": 1.045682576801556,
+          "htPass": true,
+          "nodesTarget": 4500,
+          "nodesRatio": 0.9777777777777777,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "s6",
+          "kind": "hold",
+          "units": 1015,
+          "scrollY": 9135,
+          "playhead": 1014.96615,
+          "htShare": 0.2665038842242599,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 26.65
+          },
+          "minPitch": 6.074944826272818,
+          "nodesPerFrame": 4391,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4391,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-2004.02px, -737.093px, 0px) scale(1.31624)",
+          "htTarget": 0.25,
+          "htRatio": 1.0660155368970397,
+          "htPass": true,
+          "nodesTarget": 4500,
+          "nodesRatio": 0.9757777777777777,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "mid-t67",
+          "kind": "mid",
+          "units": 1135,
+          "scrollY": 10215,
+          "playhead": 1134.97153,
+          "htShare": 0.1465548398262127,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 14.66
+          },
+          "minPitch": 4.504956832298865,
+          "nodesPerFrame": 4200,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4200,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-1463.25px, -554.012px, 0px) scale(0.976074)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesTarget": 4500,
+          "nodesRatio": 0.9333333333333333,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "end",
+          "kind": "end",
+          "units": 1209.5,
+          "scrollY": 10886,
+          "playhead": 1209.51479,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 4200,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4200,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-486.12px, -463.65px, 0px) scale(0.615)",
+          "htTarget": 0,
+          "htRatio": null,
+          "htPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-10",
+          "kind": "sweep45",
+          "units": 655,
+          "scrollY": 5895,
+          "playhead": 654.973,
+          "htShare": 0.34856444066768094,
+          "htRedShare": 0.03992762111465412,
+          "htByPlane": {
+            "s4-wall": 7.74,
+            "s4-mid": 23.12,
+            "red-all(red)": 3.99
+          },
+          "minPitch": 6.1499998569488525,
+          "nodesPerFrame": 4380,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 4980,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0,0,0,0,-1462.54968,-1609.0697)",
+          "camTransform": "translate3d(14.4px, 0px, 0px) scale(2.05)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-10",
+          "kind": "sweep67",
+          "units": 1075,
+          "scrollY": 9675,
+          "playhead": 1074.94706,
+          "htShare": 0.2647654426582481,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 26.48
+          },
+          "minPitch": 6.055098680349496,
+          "nodesPerFrame": 4391,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4391,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-1991.13px, -734.685px, 0px) scale(1.31194)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-20",
+          "kind": "sweep45",
+          "units": 670,
+          "scrollY": 6030,
+          "playhead": 669.9528,
+          "htShare": 0.34856444066768094,
+          "htRedShare": 0.03992762111465412,
+          "htByPlane": {
+            "s4-wall": 7.74,
+            "s4-mid": 23.12,
+            "red-all(red)": 3.99
+          },
+          "minPitch": 6.1499998569488525,
+          "nodesPerFrame": 4380,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 4980,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0,0,0,0,-1462.54968,-1609.0697)",
+          "camTransform": "translate3d(14.4px, 0px, 0px) scale(2.05)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-20",
+          "kind": "sweep67",
+          "units": 1090,
+          "scrollY": 9810,
+          "playhead": 1089.96316,
+          "htShare": 0.20944674182239992,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 20.94
+          },
+          "minPitch": 5.385516973642202,
+          "nodesPerFrame": 4391,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4391,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-1775.74px, -653.443px, 0px) scale(1.16686)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-30",
+          "kind": "sweep45",
+          "units": 685,
+          "scrollY": 6165,
+          "playhead": 684.96527,
+          "htShare": 0.34856444066768094,
+          "htRedShare": 0.03992762111465412,
+          "htByPlane": {
+            "s4-wall": 7.74,
+            "s4-mid": 23.12,
+            "red-all(red)": 3.99
+          },
+          "minPitch": 6.1499998569488525,
+          "nodesPerFrame": 4380,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 4980,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0,0,0,0,-1462.54968,-1609.0697)",
+          "camTransform": "translate3d(14.4px, 0px, 0px) scale(2.05)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-30",
+          "kind": "sweep67",
+          "units": 1105,
+          "scrollY": 9945,
+          "playhead": 1104.96111,
+          "htShare": 0.16033845331241595,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 16.03
+          },
+          "minPitch": 4.7120448259206915,
+          "nodesPerFrame": 4391,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4391,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-1559.09px, -571.728px, 0px) scale(1.02094)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-40",
+          "kind": "sweep45",
+          "units": 700,
+          "scrollY": 6300,
+          "playhead": 699.98621,
+          "htShare": 0.3478911334461127,
+          "htRedShare": 0.039814846611731215,
+          "htByPlane": {
+            "s4-wall": 7.75,
+            "s4-mid": 23.06,
+            "red-all(red)": 3.98
+          },
+          "minPitch": 6.141308784484863,
+          "nodesPerFrame": 4380,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 4980,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0.0318,0,0,0.0318,-1416.0406,-1557.90129)",
+          "camTransform": "translate3d(13.9633px, 0px, 0px) scale(2.0471)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-40",
+          "kind": "sweep67",
+          "units": 1120,
+          "scrollY": 10080,
+          "playhead": 1119.96753,
+          "htShare": 0.15382773359698806,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 15.38
+          },
+          "minPitch": 4.615384615384615,
+          "nodesPerFrame": 4391,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4391,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-1528px, -560px, 0px) scale(1)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-50",
+          "kind": "sweep45",
+          "units": 715,
+          "scrollY": 6435,
+          "playhead": 714.97811,
+          "htShare": 0.3233144682544459,
+          "htRedShare": 0.03693116955877638,
+          "htByPlane": {
+            "s4-wall": 7.25,
+            "s4-mid": 21.39,
+            "red-all(red)": 3.69
+          },
+          "minPitch": 5.91473114490509,
+          "nodesPerFrame": 4380,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 4980,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0.7429,0,0,0.7429,-376.02152,-413.69182)",
+          "camTransform": "translate3d(2.57768px, 0px, 0px) scale(1.97158)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-50",
+          "kind": "sweep67",
+          "units": 1135,
+          "scrollY": 10215,
+          "playhead": 1134.97153,
+          "htShare": 0.1465548398262127,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 14.66
+          },
+          "minPitch": 4.504956832298865,
+          "nodesPerFrame": 4200,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4200,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-1463.25px, -554.012px, 0px) scale(0.976074)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-60",
+          "kind": "sweep45",
+          "units": 730,
+          "scrollY": 6570,
+          "playhead": 729.9688,
+          "htShare": 0.23665298713150903,
+          "htRedShare": 0.027032118073664603,
+          "htByPlane": {
+            "s4-wall": 5.31,
+            "s4-mid": 15.65,
+            "red-all(red)": 2.7
+          },
+          "minPitch": 5.0603249073028564,
+          "nodesPerFrame": 4400,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 5000,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-40.3561px, 0px, 0px) scale(1.68677)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-60",
+          "kind": "sweep67",
+          "units": 1150,
+          "scrollY": 10350,
+          "playhead": 1149.9719,
+          "htShare": 0.1004385293135434,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 10.04
+          },
+          "minPitch": 3.7294154900770917,
+          "nodesPerFrame": 4200,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4200,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-1008.52px, -511.96px, 0px) scale(0.80804)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-70",
+          "kind": "sweep45",
+          "units": 745,
+          "scrollY": 6705,
+          "playhead": 744.97643,
+          "htShare": 0.1462531468900076,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s5-far": 1.7,
+            "s5-mid": 4.33,
+            "s4-wall": 2.18,
+            "s4-mid": 6.42
+          },
+          "minPitch": 3.2406331300735474,
+          "nodesPerFrame": 4400,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4400,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-131.796px, 0px, 0px) scale(1.08021)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-70",
+          "kind": "sweep67",
+          "units": 1165,
+          "scrollY": 10485,
+          "playhead": 1164.97227,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 4200,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4200,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-551.599px, -469.705px, 0px) scale(0.639196)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-80",
+          "kind": "sweep45",
+          "units": 760,
+          "scrollY": 6840,
+          "playhead": 759.95744,
+          "htShare": 0.30668507375430537,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s5-far": 10.53,
+            "s5-mid": 20.14
+          },
+          "minPitch": 8.496413230895996,
+          "nodesPerFrame": 4400,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4400,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-198.575px, 0px, 0px) scale(0.637231)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-80",
+          "kind": "sweep67",
+          "units": 1180,
+          "scrollY": 10620,
+          "playhead": 1179.97264,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 4200,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4200,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-486.12px, -463.65px, 0px) scale(0.615)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-90",
+          "kind": "sweep45",
+          "units": 775,
+          "scrollY": 6975,
+          "playhead": 774.96265,
+          "htShare": 0.3387823255278147,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s5-far": 13.1,
+            "s5-mid": 20.78
+          },
+          "minPitch": 6.313053369522094,
+          "nodesPerFrame": 4400,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4400,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-223.261px, 0px, 0px) scale(0.473479)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-90",
+          "kind": "sweep67",
+          "units": 1195,
+          "scrollY": 10755,
+          "playhead": 1194.9718,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 4200,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 4200,
+          "nodesDocument": 9020,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -1409.224951171875,
+              "y": -405.1159948730469,
+              "w": 1787.55,
+              "h": 787.032099609375
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 1752.5,
+            "bboxH": 771.60009765625,
+            "extentViewportWidths": 1.2170138888888888,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-486.12px, -463.65px, 0px) scale(0.615)",
+          "htCap": 0.3,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        }
+      ],
+      "consoleErrors": [],
+      "spanMax": {
+        "t45": {
+          "maxHalftone": 0.34856444066768094,
+          "cap": 0.35,
+          "maxNodes": 4400,
+          "minNodes": 4380
+        },
+        "t67": {
+          "maxHalftone": 0.2647654426582481,
+          "cap": 0.3,
+          "maxNodes": 4391,
+          "minNodes": 4200
+        }
+      }
+    },
+    "S": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "rig": "S",
+      "art": {
+        "tier": "full",
+        "source": "auto",
+        "cuts": [
+          6
+        ],
+        "filters": 0
+      },
+      "flags": {
+        "filteredLayers": 0,
+        "redAllNodes": 600,
+        "redAllExtentViewportWidths": 1.493,
+        "redAllExtentPass": true,
+        "redAllNodesPass": true,
+        "maskId": "eraser-mask",
+        "maskTarget": "url(#eraser-mask)",
+        "maskPass": true,
+        "maskBoxVsBBox": {
+          "w": 1.02,
+          "h": 1.02
+        },
+        "maskBoxPass": true,
+        "documentNodes": 6700,
+        "documentNodesPass": true,
+        "panelNodes": [
+          300,
+          300,
+          300,
+          300,
+          300,
+          300
+        ]
+      },
+      "samples": [
+        {
+          "name": "s4",
+          "kind": "hold",
+          "units": 480,
+          "scrollY": 4051,
+          "playhead": 479.9988268,
+          "htShare": 0.3406434291184197,
+          "htRedShare": 0.0682110997530076,
+          "htByPlane": {
+            "s4-wall": 6.89,
+            "s4-mid": 20.35,
+            "red-all(red)": 6.82
+          },
+          "minPitch": 4.050000190734863,
+          "nodesPerFrame": 2980,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 3580,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0,0,0,0,-633.81464,-631.52179)",
+          "camTransform": "translate3d(1.94996px, 0px, 0px) scale(2.025)",
+          "htTarget": 0.35,
+          "htRatio": 0.9732669403383422,
+          "htPass": true,
+          "redTarget": 0.07,
+          "redRatio": 0.9744442821858227,
+          "nodesTarget": 3240,
+          "nodesRatio": 0.9197530864197531,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "mid-t45",
+          "kind": "mid",
+          "units": 600,
+          "scrollY": 5064,
+          "playhead": 600.0281558,
+          "htShare": 0.3227107556027786,
+          "htRedShare": 0.06462023985919721,
+          "htByPlane": {
+            "s4-wall": 6.53,
+            "s4-mid": 19.28,
+            "red-all(red)": 6.46
+          },
+          "minPitch": 3.941956043243408,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 3820,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0.7458,0,0,0.7458,-161.11568,-160.53284)",
+          "camTransform": "translate3d(0.673665px, 0px, 0px) scale(1.97098)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesTarget": 3240,
+          "nodesRatio": 0.9938271604938271,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "s5",
+          "kind": "hold",
+          "units": 690,
+          "scrollY": 5823,
+          "playhead": 689.9612858,
+          "htShare": 0.38133036808078147,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s5-far": 11.86,
+            "s5-mid": 26.27
+          },
+          "minPitch": 4.049937725067139,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-60.2443px, 0px, 0px) scale(0.455618)",
+          "htTarget": 0.4,
+          "htRatio": 0.9533259202019536,
+          "htPass": true,
+          "nodesTarget": 3240,
+          "nodesRatio": 0.9938271604938271,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "s6",
+          "kind": "hold",
+          "units": 850,
+          "scrollY": 7174,
+          "playhead": 850.0398874,
+          "htShare": 0.21325441925352237,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 21.33
+          },
+          "minPitch": 4.050049048203688,
+          "nodesPerFrame": 2971,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 2971,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-542.763px, -691.245px, 0px) scale(1.31627)",
+          "htTarget": 0.2,
+          "htRatio": 1.0662720962676118,
+          "htPass": true,
+          "nodesTarget": 3240,
+          "nodesRatio": 0.9169753086419753,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "mid-t67",
+          "kind": "mid",
+          "units": 950,
+          "scrollY": 8018,
+          "playhead": 950.04458,
+          "htShare": 0.12153568121870711,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 12.15
+          },
+          "minPitch": 3.0574769240159254,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-411.218px, -521.197px, 0px) scale(0.99368)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesTarget": 3240,
+          "nodesRatio": 0.9938271604938271,
+          "nodesPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "end",
+          "kind": "end",
+          "units": 1009.5,
+          "scrollY": 8520,
+          "playhead": 1009.5260441,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-372.45px, -462.512px, 0px) scale(0.9)",
+          "htTarget": 0,
+          "htRatio": null,
+          "htPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-10",
+          "kind": "sweep45",
+          "units": 552,
+          "scrollY": 4659,
+          "playhead": 552.040122,
+          "htShare": 0.34910617021730667,
+          "htRedShare": 0.0699057035269355,
+          "htByPlane": {
+            "s4-wall": 7.06,
+            "s4-mid": 20.86,
+            "red-all(red)": 6.99
+          },
+          "minPitch": 4.099999904632568,
+          "nodesPerFrame": 2980,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 3580,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0,0,0,0,-633.81464,-631.52179)",
+          "camTransform": "translate3d(3.9px, 0px, 0px) scale(2.05)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-10",
+          "kind": "sweep67",
+          "units": 902,
+          "scrollY": 7613,
+          "playhead": 902.0565462,
+          "htShare": 0.21168832966183485,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 21.17
+          },
+          "minPitch": 4.035150821392352,
+          "nodesPerFrame": 2971,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 2971,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-539.058px, -688.701px, 0px) scale(1.31142)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-20",
+          "kind": "sweep45",
+          "units": 564,
+          "scrollY": 4760,
+          "playhead": 564.0075082,
+          "htShare": 0.34910617021730667,
+          "htRedShare": 0.0699057035269355,
+          "htByPlane": {
+            "s4-wall": 7.06,
+            "s4-mid": 20.86,
+            "red-all(red)": 6.99
+          },
+          "minPitch": 4.099999904632568,
+          "nodesPerFrame": 2980,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 3580,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0,0,0,0,-633.81464,-631.52179)",
+          "camTransform": "translate3d(3.9px, 0px, 0px) scale(2.05)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-20",
+          "kind": "sweep67",
+          "units": 914,
+          "scrollY": 7714,
+          "playhead": 914.0239324,
+          "htShare": 0.16727219977571742,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 16.73
+          },
+          "minPitch": 3.586932329031137,
+          "nodesPerFrame": 2971,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 2971,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-480.483px, -612.202px, 0px) scale(1.16575)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-30",
+          "kind": "sweep45",
+          "units": 576,
+          "scrollY": 4861,
+          "playhead": 575.9748944,
+          "htShare": 0.34910617021730667,
+          "htRedShare": 0.0699057035269355,
+          "htByPlane": {
+            "s4-wall": 7.06,
+            "s4-mid": 20.86,
+            "red-all(red)": 6.99
+          },
+          "minPitch": 4.099999904632568,
+          "nodesPerFrame": 2980,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 3580,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0,0,0,0,-633.81464,-631.52179)",
+          "camTransform": "translate3d(3.9px, 0px, 0px) scale(2.05)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-30",
+          "kind": "sweep67",
+          "units": 926,
+          "scrollY": 7815,
+          "playhead": 925.9913186,
+          "htShare": 0.1282667608402423,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 12.83
+          },
+          "minPitch": 3.1410030218271108,
+          "nodesPerFrame": 2971,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 2971,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-422.208px, -536.093px, 0px) scale(1.02083)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-40",
+          "kind": "sweep45",
+          "units": 588,
+          "scrollY": 4962,
+          "playhead": 587.9422806,
+          "htShare": 0.34814295390722294,
+          "htRedShare": 0.06971283414946508,
+          "htByPlane": {
+            "s4-wall": 7.04,
+            "s4-mid": 20.8,
+            "red-all(red)": 6.97
+          },
+          "minPitch": 4.094339847564697,
+          "nodesPerFrame": 2980,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 3580,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0.0311,0,0,0.0311,-614.103,-611.88146)",
+          "camTransform": "translate3d(3.78446px, 0px, 0px) scale(2.04717)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-40",
+          "kind": "sweep67",
+          "units": 938,
+          "scrollY": 7916,
+          "playhead": 937.9587048,
+          "htShare": 0.12308658382811274,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 12.31
+          },
+          "minPitch": 3.0769230769230766,
+          "nodesPerFrame": 2971,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 2971,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-413.833px, -525.156px, 0px) scale(1)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-50",
+          "kind": "sweep45",
+          "units": 600,
+          "scrollY": 5064,
+          "playhead": 600.0281558,
+          "htShare": 0.3227107556027786,
+          "htRedShare": 0.06462023985919721,
+          "htByPlane": {
+            "s4-wall": 6.53,
+            "s4-mid": 19.28,
+            "red-all(red)": 6.46
+          },
+          "minPitch": 3.941956043243408,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 3820,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(0.7458,0,0,0.7458,-161.11568,-160.53284)",
+          "camTransform": "translate3d(0.673665px, 0px, 0px) scale(1.97098)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-50",
+          "kind": "sweep67",
+          "units": 950,
+          "scrollY": 8018,
+          "playhead": 950.04458,
+          "htShare": 0.12153568121870711,
+          "htRedShare": 0,
+          "htByPlane": {
+            "s6-mid": 12.15
+          },
+          "minPitch": 3.0574769240159254,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-411.218px, -521.197px, 0px) scale(0.99368)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-60",
+          "kind": "sweep45",
+          "units": 612,
+          "scrollY": 5165,
+          "playhead": 611.995542,
+          "htShare": 0.2361456849297172,
+          "htRedShare": 0.04728629183278134,
+          "htByPlane": {
+            "s4-wall": 4.78,
+            "s4-mid": 14.11,
+            "red-all(red)": 4.73
+          },
+          "minPitch": 3.3720579147338867,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 600,
+          "nodesIncludingRedAll": 3820,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "inline"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-10.9602px, 0px, 0px) scale(1.68603)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-60",
+          "kind": "sweep67",
+          "units": 962,
+          "scrollY": 8119,
+          "playhead": 962.0119662,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-393.111px, -493.787px, 0px) scale(0.949925)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-70",
+          "kind": "sweep45",
+          "units": 624,
+          "scrollY": 5266,
+          "playhead": 623.9629282,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-35.6556px, 0px, 0px) scale(1.08117)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-70",
+          "kind": "sweep67",
+          "units": 974,
+          "scrollY": 8220,
+          "playhead": 973.9793524,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-375.05px, -466.447px, 0px) scale(0.906282)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-80",
+          "kind": "sweep45",
+          "units": 636,
+          "scrollY": 5368,
+          "playhead": 636.0488034,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-53.8595px, 0px, 0px) scale(0.635301)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-80",
+          "kind": "sweep67",
+          "units": 986,
+          "scrollY": 8321,
+          "playhead": 985.9467386,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-372.45px, -462.512px, 0px) scale(0.9)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t45-90",
+          "kind": "sweep45",
+          "units": 648,
+          "scrollY": 5469,
+          "playhead": 648.0161896,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-60.4774px, 0px, 0px) scale(0.47321)",
+          "htCap": 0.4,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        },
+        {
+          "name": "t67-90",
+          "kind": "sweep67",
+          "units": 998,
+          "scrollY": 8423,
+          "playhead": 998.0326138,
+          "htShare": 0,
+          "htRedShare": 0,
+          "htByPlane": {},
+          "minPitch": null,
+          "nodesPerFrame": 3220,
+          "nodesRedAll": 0,
+          "nodesIncludingRedAll": 3220,
+          "nodesDocument": 6700,
+          "filteredAttr": [],
+          "filteredComputed": 0,
+          "mask": {
+            "id": "eraser-mask",
+            "appliedTo": "url(#eraser-mask)",
+            "box": {
+              "x": -460.42197570800784,
+              "y": -387.1759875488281,
+              "w": 593.8440124511719,
+              "h": 752.3519750976562
+            },
+            "boxVsBBox": {
+              "w": 1.02,
+              "h": 1.02
+            }
+          },
+          "red": {
+            "bboxW": 582.2000122070312,
+            "bboxH": 737.5999755859375,
+            "extentViewportWidths": 1.4928205441205928,
+            "nodes": 600,
+            "display": "none"
+          },
+          "eraserTransform": "matrix(1,0,0,1,0,0)",
+          "camTransform": "translate3d(-372.45px, -462.512px, 0px) scale(0.9)",
+          "htCap": 0.35,
+          "capPass": true,
+          "nodesCapPass": true,
+          "minPitchPass": true
+        }
+      ],
+      "consoleErrors": [],
+      "spanMax": {
+        "t45": {
+          "maxHalftone": 0.34910617021730667,
+          "cap": 0.4,
+          "maxNodes": 3220,
+          "minNodes": 2980
+        },
+        "t67": {
+          "maxHalftone": 0.21168832966183485,
+          "cap": 0.35,
+          "maxNodes": 3220,
+          "minNodes": 2971
+        }
+      }
+    }
+  },
+  "notes": [
+    "Halftone share = sum of bounding boxes of pattern-filled elements (computed fill url(#ht-...)), each clipped to the viewport, overlaps counted twice, as a share of the viewport (fidelity.json unit).",
+    "Nodes per frame = SVG elements without an inline display:none ancestor (defs/mask/pattern/clipPath excluded, visibility:hidden still counted) + 1 + descendants of each rendered <use> target; red-all is counted separately (G-4) and reported as nodesRedAll / nodesIncludingRedAll. The s3 stand-in is sized so that even WITH red-all the s4 hold stays within the 5,000 / 3,600 caps.",
+    "Per-scene node split differs from fidelity.json sceneSplitGuide (S rig: s3 560, s4 720, s5 1560, s6 800, page 480; L: s3 980, rest as the guide): the guide cannot satisfy 0.9-1.0x of nodes.perFrame at s6 and mid-t67 at 390 once the six sN-panel <use> targets (1,800) are rendered.",
+    "S4 halftone aims below its target (0.95x) because t45 caps (35 % L) equal the S4 target and t45 shows the S4 hold for its first third.",
+    "Rig S/P only: S5 halftone is flat until 95 % of t45 (hand-in), because the S5 road at pull-back scale would exceed the 40 % t45 cap. Frames 70-90 % of t45 at 390 therefore carry no halftone.",
+    "S5 groups hand over to flat tint at t56 45 % (behind the mullion wipe) so only the street/interior carries halftone at s6.",
+    "The fill-area measure counts bounding boxes, so cut-line 2 (density step) does not change it; it changes raster cost only.",
+    "This is DOM measurement of placeholder art. It is not a performance result."
+  ]
+}

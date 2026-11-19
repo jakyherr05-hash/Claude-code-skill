@@ -9,6 +9,7 @@ import { buildMaster, createTrigger } from './master';
 import { audio } from './audio';
 import { exposeHooks } from './qa';
 import { on } from './cleanup';
+import { mountHud } from './hud';
 
 registerPlugins();
 ScrollTrigger.config({ ignoreMobileResize: true });
@@ -52,7 +53,7 @@ async function boot() {
     window.clearTimeout(t);
     t = window.setTimeout(() => {
       const st = ScrollTrigger.getAll()[0];
-      if (st) sessionStorage.setItem('proto-progress', String(st.progress));
+      if (st) try { sessionStorage.setItem('proto-progress', String(st.progress)); } catch { /* storage may be blocked (sandboxed frame) */ }
       if (pickRig() !== rig || stage.clientWidth !== W || stage.clientHeight !== H) location.reload();
     }, 150);
   };
@@ -70,8 +71,8 @@ function handOff(s: { tl: gsap.core.Timeline; st: ScrollTrigger } | null) {
   exposeHooks({ rig, st: s?.st ?? null, tl: s?.tl ?? null, audio, art, tier, source, cuts: params.cuts, filters: params.filters, lite });
   if (s) {
     const L = LABELS[rig];
-    const saved = sessionStorage.getItem('proto-progress');
-    sessionStorage.removeItem('proto-progress');
+    let saved: string | null = null;
+    try { saved = sessionStorage.getItem('proto-progress'); sessionStorage.removeItem('proto-progress'); } catch { /* storage may be blocked */ }
     let target: number | null = null;
     if (saved) target = s.st.start + Number(saved) * (s.st.end - s.st.start);
     else if (params.at) {
@@ -80,6 +81,7 @@ function handOff(s: { tl: gsap.core.Timeline; st: ScrollTrigger } | null) {
     }
     if (target !== null) window.scrollTo(0, target);
     initAudio(() => cueFor(s.tl, L));
+    if (params.hud) mountHud(s.tl, L);
   }
   // prototype hand-off is immediate on load
   performance.mark('story-ready');

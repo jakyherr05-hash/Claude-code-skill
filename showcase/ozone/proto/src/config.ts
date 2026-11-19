@@ -38,18 +38,22 @@ const q = new URLSearchParams(location.search);
 
 export const params = {
   art: (q.get('art') === 'lite' || q.get('art') === 'full' ? q.get('art') : null) as 'lite' | 'full' | null,
-  /** ?cut=N is cumulative (lines 1..N); ?cutonly=6 or ?cutonly=2,6 is an exact set. */
+  /** Default (G-27): cut-line 6 only (one composited layer per depth plane, full detail).
+   *  ?cut=N is cumulative (lines 1..N); ?cutonly=6 or ?cutonly=2,6 is an exact set; ?cutonly=0 is the old single-SVG build. */
   cuts: parseCuts(q.get('cut'), q.get('cutonly')),
   /** report-only variant: three live ink-edge filters. Fails the fidelity gate on purpose (filteredLayers must be []). */
   filters: q.get('filters') === '1',
   /** ?at=s5 or ?at=t45+30 (label plus units) : scroll there after the hand-off (convenience for screenshots). */
   at: q.get('at'),
   audio: q.get('audio') !== 'off',
+  /** ?hud=1: on-screen frame meter for the device check (G-27) */
+  hud: q.get('hud') === '1' || import.meta.env.VITE_DEVICE_CHECK === '1',
   /** scrub override for the wheel check: ?scrub=0.5|true */
   scrub: q.get('scrub'),
 };
 
 function parseCuts(cum: string | null, only: string | null): number[] {
+  if (cum === null && only === null) return [6];
   if (only) return only.split(',').map(Number).filter((n) => n >= 1 && n <= 6);
   const n = Number(cum ?? 0);
   return Array.from({ length: Math.max(0, Math.min(6, n)) }, (_, i) => i + 1);
