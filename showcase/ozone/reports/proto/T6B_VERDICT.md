@@ -147,3 +147,10 @@ Evidence: `reports/proto/t45-<cfg>-run<N>.json`, `t67-...`, `t45-cut6-...`, scre
 
 ## Orchestrator verification (independent of the QA scripts)
 A separate, lighter probe (`proto/tests/orchestrator-probe.mjs`: no CPU throttle, no trace, one wheel pass, rAF intervals) agrees in direction. t45 at 1440×900@1: default max 183 ms; per-plane layers only (`cutonly=6`) max 100 ms; cumulative `cut=6` max 117 ms. t45 at 390×844@3: default 117 ms; `cutonly=6` 50.0 ms; `cut=6` 67 ms. t67 at 1440: default 50.0 ms; `cut=6` 16.8 ms. Single unthrottled runs: direction only, not a gate. Rulings G-24..G-26 in DECISIONS.md. Raw traces are git-ignored (local only).
+
+## Re-run on the per-plane default (variant `layers`, G-27), run by the orchestrator with the same scripts
+Full TEST_PLAN §3 protocol, 3 configs × inputs × 3 runs, traced, audio on. Table: `summary-layers.md`. Fidelity of this build is within targets (`fidelity-layers-default.json`). The build under test predates two non-rendering edits (storage try/catch, meter flag).
+- **t45 A (390×844@3, CPU ×4):** FAIL strictly, 0/12. Worst frames now 33 to 133 ms (default build: 450 to 567). Each run has 1 to 2 long tasks or LoAF > 50 ms, which fail the gate.
+- **t45 B/C (1440×900 @1/@2):** FAIL, worst frames 117 to 283 ms, with LoAF but almost no main-thread long tasks. This is the software compositing seen before, which this lab cannot separate from a GPU.
+- **t67:** near pass. On B/C every failure is a 50.0 to 50.1 ms frame or a single LoAF; under G-24 fast scroll passes 3/3 on B and C. A fails on single long tasks of about 50 ms.
+- **Lab verdict: still FAIL (software raster), much improved on the phone configuration.** Real-device check via the private artifact frame meter is pending with the client.

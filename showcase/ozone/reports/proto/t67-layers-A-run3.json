@@ -1,0 +1,1070 @@
+{
+ "protocol": "TEST_PLAN §3 (T6b)",
+ "span": "t67",
+ "variant": "layers",
+ "query": "",
+ "url": "http://localhost:4174/",
+ "config": {
+  "name": "A",
+  "label": "phone 390x844 DPR3 4x CPU",
+  "viewport": {
+   "width": 390,
+   "height": 844
+  },
+  "dpr": 3,
+  "mobile": true,
+  "throttle": 4,
+  "profile": "mobile",
+  "inputs": [
+   "touch",
+   "wheel"
+  ]
+ },
+ "control": {
+  "frames": 240,
+  "p50": 16.7,
+  "p95": 16.7,
+  "max": 16.8,
+  "over50": 0,
+  "load": [
+   0.91,
+   0.94,
+   0.51
+  ]
+ },
+ "gpu": {
+  "webgl": true,
+  "vendor": "Google Inc. (Google)",
+  "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+  "devDriPresent": false,
+  "softwareRaster": true
+ },
+ "browserVersion": "153.0.8010.12",
+ "launchArgs": [
+  "--autoplay-policy=no-user-gesture-required"
+ ],
+ "nproc": 4,
+ "run": 3,
+ "label": "lab, software raster, emulated",
+ "entries": [
+  {
+   "span": "t67",
+   "config": "A",
+   "input": "touch",
+   "speed": "slow",
+   "run": 3,
+   "speedSpec": {
+    "step": 60,
+    "gap": 16,
+    "touchSpeed": 3600
+   },
+   "host": {
+    "before": {
+     "load": [
+      1.15,
+      1.06,
+      0.61
+     ],
+     "nproc": 4
+    },
+    "after": {
+     "load": [
+      1.51,
+      1.14,
+      0.65
+     ]
+    }
+   },
+   "criteria": {
+    "audioPrecondition": true,
+    "noFilters": true,
+    "cueFired": true,
+    "frameTime": true,
+    "longTasksSlow": true,
+    "loafSlow": true,
+    "reachedTarget": true,
+    "noConsoleErrors": true,
+    "workerBudget": false
+   },
+   "blocked": null,
+   "rig": "S",
+   "labels": {
+    "from": 7511,
+    "to": 8524
+   },
+   "scrollSpanPx": {
+    "from": 7411,
+    "to": 8524,
+    "length": 1113
+   },
+   "audioBefore": {
+    "ctxState": "running",
+    "masterGain": 0.3499999940395355,
+    "rms": 0.015923774632277995,
+    "cue": 6,
+    "mobileProfile": true,
+    "profileOverride": "mobile",
+    "cues": [
+     6
+    ],
+    "cueLogLen": 2,
+    "renderMs": 111.70000000006985
+   },
+   "dom": {
+    "filteredElements": [],
+    "willChange": [
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform"
+    ],
+    "willChangeCount": 11,
+    "svgNodes": 4909
+   },
+   "audioAfterForward": {
+    "cue": 7,
+    "cueLogTail": [
+     {
+      "t": 6.672834467120182,
+      "cue": 7,
+      "tail": 15,
+      "fling": true
+     }
+    ],
+    "rms": 0.02507053277550318,
+    "ctxState": "running"
+   },
+   "trace": {
+    "file": "t67/t67-layers-A-touch-slow-run3.trace.json.gz",
+    "bytes": 967054
+   },
+   "traceMetrics": {
+    "counts": {
+     "Paint": 35,
+     "Layerize": 267,
+     "UpdateLayer": 276,
+     "ImageDecodeTask": 0,
+     "RasterTask": 230,
+     "CompositeLayers": 0
+    },
+    "pipelineFrames": 322,
+    "frameStates": {
+     "STATE_NO_UPDATE_DESIRED": 252,
+     "STATE_PRESENTED_ALL": 45,
+     "STATE_PRESENTED_PARTIAL": 20,
+     "STATE_DROPPED": 5
+    },
+    "droppedOrMissed": 25,
+    "rasterTasks": 230,
+    "rasterTotalMs": 72.51,
+    "rasterThreads": [
+     "ThreadPoolForegroundWorker"
+    ],
+    "rasterPerFrameP50Ms": 0,
+    "rasterPerFrameP95Ms": 5.27,
+    "rasterPerFrameMaxMs": 13,
+    "rasterTaskMaxMs": 2.55
+   },
+   "traced": true,
+   "directions": {
+    "forward": {
+     "t0": 7050.400000000023,
+     "t1": 8116,
+     "y0": 7411,
+     "y1": 8545,
+     "inputWallMs": 660.2,
+     "achievedPxPerS": 1718,
+     "reachedPx": 8545,
+     "frames": 60,
+     "frameMaxMs": 50,
+     "frameP50Ms": 16.7,
+     "frameP95Ms": 16.8,
+     "framesOver50": 0,
+     "framesOver33": 1,
+     "worstIntervals": [
+      50,
+      33.4,
+      33.3,
+      16.8,
+      16.8
+     ],
+     "longTasks": 0,
+     "longTaskList": [],
+     "loafOver50": 0,
+     "loafList": [],
+     "reachedTarget": true,
+     "gate": {
+      "noFrameOver50": true,
+      "p95Le33": true,
+      "noLongTaskSlow": true,
+      "noLoafOver50Slow": true,
+      "reachedTarget": true
+     }
+    },
+    "reverse": {
+     "t0": 9333.100000000093,
+     "t1": 10398.20000000007,
+     "y0": 8545,
+     "y1": 7414,
+     "inputWallMs": 660.82,
+     "achievedPxPerS": 1712,
+     "reachedPx": 7414,
+     "frames": 62,
+     "frameMaxMs": 33.3,
+     "frameP50Ms": 16.7,
+     "frameP95Ms": 16.8,
+     "framesOver50": 0,
+     "framesOver33": 0,
+     "worstIntervals": [
+      33.3,
+      33.3,
+      16.8,
+      16.8,
+      16.7
+     ],
+     "longTasks": 0,
+     "longTaskList": [],
+     "loafOver50": 0,
+     "loafList": [],
+     "reachedTarget": true,
+     "gate": {
+      "noFrameOver50": true,
+      "p95Le33": true,
+      "noLongTaskSlow": true,
+      "noLoafOver50Slow": true,
+      "reachedTarget": true
+     }
+    }
+   },
+   "audioEnd": {
+    "rms": 0.021674732388108207
+   },
+   "audio": {
+    "late": {
+     "count": 2,
+     "maxMs": 39.97732426303855
+    },
+    "tickMaxMs": 28.9,
+    "mainCopyMaxMs": 6.6,
+    "sources": {
+     "sounding": 23,
+     "peakSounding": 49,
+     "graphAlive": 28,
+     "peakGraph": 68,
+     "created": 328
+    },
+    "ticks": 474,
+    "contexts": 1,
+    "hardwareConcurrency": 4
+   },
+   "stats": {
+    "triggers": 1,
+    "listeners": 5,
+    "tweens": 132
+   },
+   "workerRender": {
+    "measuredMs": 111.7,
+    "unthrottledMs": 105.1,
+    "estimatedMs": 420.4,
+    "rule": "max(measured, unthrottled x4), estimated",
+    "budgetMs": 400,
+    "gatingProfile": "mobile",
+    "profile": "mobile",
+    "withinBudget": false,
+    "calibration": {
+     "mainMs": 2464.2,
+     "workerMs": 612.6,
+     "mainOverWorker": 4.02
+    }
+   },
+   "consoleErrors": [],
+   "pass": true
+  },
+  {
+   "span": "t67",
+   "config": "A",
+   "input": "touch",
+   "speed": "fast",
+   "run": 3,
+   "speedSpec": {
+    "step": 400,
+    "gap": 16,
+    "touchSpeed": 24000
+   },
+   "host": {
+    "before": {
+     "load": [
+      1.51,
+      1.14,
+      0.65
+     ],
+     "nproc": 4
+    },
+    "after": {
+     "load": [
+      2.09,
+      1.28,
+      0.7
+     ]
+    }
+   },
+   "criteria": {
+    "audioPrecondition": true,
+    "noFilters": true,
+    "cueFired": true,
+    "frameTime": true,
+    "longTasksSlow": null,
+    "loafSlow": null,
+    "reachedTarget": false,
+    "noConsoleErrors": true,
+    "workerBudget": true
+   },
+   "blocked": null,
+   "rig": "S",
+   "labels": {
+    "from": 7511,
+    "to": 8524
+   },
+   "scrollSpanPx": {
+    "from": 7411,
+    "to": 8524,
+    "length": 1113
+   },
+   "audioBefore": {
+    "ctxState": "running",
+    "masterGain": 0.3499999940395355,
+    "rms": 0.01592281392322847,
+    "cue": 6,
+    "mobileProfile": true,
+    "profileOverride": "mobile",
+    "cues": [
+     6
+    ],
+    "cueLogLen": 2,
+    "renderMs": 89.59999999997672
+   },
+   "dom": {
+    "filteredElements": [],
+    "willChange": [
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform"
+    ],
+    "willChangeCount": 11,
+    "svgNodes": 4909
+   },
+   "audioAfterForward": {
+    "cue": 7,
+    "cueLogTail": [
+     {
+      "t": 6.542222222222223,
+      "cue": 7,
+      "tail": 15,
+      "fling": true
+     }
+    ],
+    "rms": 0.022552741122567915,
+    "ctxState": "running"
+   },
+   "trace": {
+    "file": "t67/t67-layers-A-touch-fast-run3.trace.json.gz",
+    "bytes": 667557
+   },
+   "traceMetrics": {
+    "counts": {
+     "Paint": 17,
+     "Layerize": 239,
+     "UpdateLayer": 133,
+     "ImageDecodeTask": 0,
+     "RasterTask": 114,
+     "CompositeLayers": 0
+    },
+    "pipelineFrames": 267,
+    "frameStates": {
+     "STATE_NO_UPDATE_DESIRED": 238,
+     "STATE_PRESENTED_ALL": 17,
+     "STATE_PRESENTED_PARTIAL": 5,
+     "STATE_DROPPED": 7
+    },
+    "droppedOrMissed": 12,
+    "rasterTasks": 114,
+    "rasterTotalMs": 36.75,
+    "rasterThreads": [
+     "ThreadPoolForegroundWorker"
+    ],
+    "rasterPerFrameP50Ms": 0,
+    "rasterPerFrameP95Ms": 2.26,
+    "rasterPerFrameMaxMs": 11.18,
+    "rasterTaskMaxMs": 4.49
+   },
+   "traced": true,
+   "directions": {
+    "forward": {
+     "t0": 6996.5,
+     "t1": 7821,
+     "y0": 7411,
+     "y1": 8783,
+     "inputWallMs": 420.68,
+     "achievedPxPerS": 3261,
+     "reachedPx": 8783,
+     "frames": 46,
+     "frameMaxMs": 50,
+     "frameP50Ms": 16.7,
+     "frameP95Ms": 16.8,
+     "framesOver50": 0,
+     "framesOver33": 1,
+     "worstIntervals": [
+      50,
+      33.3,
+      16.8,
+      16.7,
+      16.7
+     ],
+     "longTasks": 1,
+     "longTaskList": [
+      {
+       "at": 65.6,
+       "d": 61
+      }
+     ],
+     "loafOver50": 1,
+     "loafList": [
+      {
+       "at": 52,
+       "d": 56.3,
+       "block": 0,
+       "scripts": []
+      }
+     ],
+     "reachedTarget": false,
+     "gate": {
+      "noFrameOver50": true,
+      "p95Le33": true,
+      "noLongTaskSlow": null,
+      "noLoafOver50Slow": null,
+      "reachedTarget": false
+     }
+    },
+    "reverse": {
+     "t0": 9035.5,
+     "t1": 9858.800000000047,
+     "y0": 8783,
+     "y1": 7596,
+     "inputWallMs": 420.26,
+     "achievedPxPerS": 2824,
+     "reachedPx": 7596,
+     "frames": 46,
+     "frameMaxMs": 50,
+     "frameP50Ms": 16.7,
+     "frameP95Ms": 16.8,
+     "framesOver50": 0,
+     "framesOver33": 2,
+     "worstIntervals": [
+      50,
+      33.4,
+      16.8,
+      16.7,
+      16.7
+     ],
+     "longTasks": 0,
+     "longTaskList": [],
+     "loafOver50": 0,
+     "loafList": [],
+     "reachedTarget": false,
+     "gate": {
+      "noFrameOver50": true,
+      "p95Le33": true,
+      "noLongTaskSlow": null,
+      "noLoafOver50Slow": null,
+      "reachedTarget": false
+     }
+    }
+   },
+   "audioEnd": {
+    "rms": 0.02535233193797442
+   },
+   "audio": {
+    "late": {
+     "count": 4,
+     "maxMs": 89.31972789115648
+    },
+    "tickMaxMs": 20.5,
+    "mainCopyMaxMs": 5.5,
+    "sources": {
+     "sounding": 23,
+     "peakSounding": 49,
+     "graphAlive": 27,
+     "peakGraph": 64,
+     "created": 312
+    },
+    "ticks": 440,
+    "contexts": 1,
+    "hardwareConcurrency": 4
+   },
+   "stats": {
+    "triggers": 1,
+    "listeners": 5,
+    "tweens": 132
+   },
+   "workerRender": {
+    "measuredMs": 89.6,
+    "unthrottledMs": 73,
+    "estimatedMs": 292,
+    "rule": "max(measured, unthrottled x4), estimated",
+    "budgetMs": 400,
+    "gatingProfile": "mobile",
+    "profile": "mobile",
+    "withinBudget": true,
+    "calibration": {
+     "mainMs": 2474.2,
+     "workerMs": 494.8,
+     "mainOverWorker": 5
+    }
+   },
+   "consoleErrors": [],
+   "pass": false
+  },
+  {
+   "span": "t67",
+   "config": "A",
+   "input": "wheel",
+   "speed": "slow",
+   "run": 3,
+   "speedSpec": {
+    "step": 60,
+    "gap": 16,
+    "touchSpeed": 3600
+   },
+   "host": {
+    "before": {
+     "load": [
+      2.09,
+      1.28,
+      0.7
+     ],
+     "nproc": 4
+    },
+    "after": {
+     "load": [
+      1.92,
+      1.28,
+      0.72
+     ]
+    }
+   },
+   "criteria": {
+    "audioPrecondition": true,
+    "noFilters": true,
+    "cueFired": true,
+    "frameTime": false,
+    "longTasksSlow": false,
+    "loafSlow": false,
+    "reachedTarget": true,
+    "noConsoleErrors": true,
+    "workerBudget": true
+   },
+   "blocked": null,
+   "rig": "S",
+   "labels": {
+    "from": 7511,
+    "to": 8524
+   },
+   "scrollSpanPx": {
+    "from": 7411,
+    "to": 8524,
+    "length": 1113
+   },
+   "audioBefore": {
+    "ctxState": "running",
+    "masterGain": 0.3499999940395355,
+    "rms": 0.02231899320904422,
+    "cue": 6,
+    "mobileProfile": true,
+    "profileOverride": "mobile",
+    "cues": [
+     6
+    ],
+    "cueLogLen": 2,
+    "renderMs": 88.30000000004657
+   },
+   "dom": {
+    "filteredElements": [],
+    "willChange": [
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform"
+    ],
+    "willChangeCount": 11,
+    "svgNodes": 4909
+   },
+   "audioAfterForward": {
+    "cue": 7,
+    "cueLogTail": [
+     {
+      "t": 6.6118820861678005,
+      "cue": 7,
+      "tail": 15,
+      "fling": true
+     }
+    ],
+    "rms": 0.022314332564341163,
+    "ctxState": "running"
+   },
+   "trace": {
+    "file": "t67/t67-layers-A-wheel-slow-run3.trace.json.gz",
+    "bytes": 888723
+   },
+   "traceMetrics": {
+    "counts": {
+     "Paint": 29,
+     "Layerize": 272,
+     "UpdateLayer": 173,
+     "ImageDecodeTask": 0,
+     "RasterTask": 204,
+     "CompositeLayers": 0
+    },
+    "pipelineFrames": 309,
+    "frameStates": {
+     "STATE_NO_UPDATE_DESIRED": 253,
+     "STATE_PRESENTED_ALL": 34,
+     "STATE_DROPPED": 8,
+     "STATE_PRESENTED_PARTIAL": 14
+    },
+    "droppedOrMissed": 22,
+    "rasterTasks": 204,
+    "rasterTotalMs": 52.94,
+    "rasterThreads": [
+     "ThreadPoolForegroundWorker"
+    ],
+    "rasterPerFrameP50Ms": 0,
+    "rasterPerFrameP95Ms": 4.16,
+    "rasterPerFrameMaxMs": 13.83,
+    "rasterTaskMaxMs": 1.82
+   },
+   "traced": true,
+   "directions": {
+    "forward": {
+     "t0": 7032.600000000093,
+     "t1": 8149.600000000093,
+     "y0": 7411,
+     "y1": 8524,
+     "inputWallMs": 310.42,
+     "achievedPxPerS": 3585,
+     "reachedPx": 8524,
+     "frames": 62,
+     "frameMaxMs": 66.7,
+     "frameP50Ms": 16.7,
+     "frameP95Ms": 16.8,
+     "framesOver50": 1,
+     "framesOver33": 2,
+     "worstIntervals": [
+      66.7,
+      49.9,
+      16.8,
+      16.8,
+      16.8
+     ],
+     "longTasks": 1,
+     "longTaskList": [
+      {
+       "at": 173.4,
+       "d": 59
+      }
+     ],
+     "loafOver50": 1,
+     "loafList": [
+      {
+       "at": 161.1,
+       "d": 51.9,
+       "block": 0,
+       "scripts": [
+        {
+         "inv": "DOMWindow.onwheel",
+         "type": "event-listener",
+         "src": "index-E97oNXG8.js",
+         "fn": "qo",
+         "d": 5.200000000069849
+        }
+       ]
+      }
+     ],
+     "reachedTarget": true,
+     "gate": {
+      "noFrameOver50": false,
+      "p95Le33": true,
+      "noLongTaskSlow": false,
+      "noLoafOver50Slow": false,
+      "reachedTarget": true
+     }
+    },
+    "reverse": {
+     "t0": 9364.5,
+     "t1": 10472.20000000007,
+     "y0": 8524,
+     "y1": 7411,
+     "inputWallMs": 304.49,
+     "achievedPxPerS": 3655,
+     "reachedPx": 7411,
+     "frames": 65,
+     "frameMaxMs": 50,
+     "frameP50Ms": 16.7,
+     "frameP95Ms": 16.8,
+     "framesOver50": 0,
+     "framesOver33": 1,
+     "worstIntervals": [
+      50,
+      16.8,
+      16.8,
+      16.8,
+      16.8
+     ],
+     "longTasks": 0,
+     "longTaskList": [],
+     "loafOver50": 0,
+     "loafList": [],
+     "reachedTarget": true,
+     "gate": {
+      "noFrameOver50": true,
+      "p95Le33": true,
+      "noLongTaskSlow": true,
+      "noLoafOver50Slow": true,
+      "reachedTarget": true
+     }
+    }
+   },
+   "audioEnd": {
+    "rms": 0.021938526747276466
+   },
+   "audio": {
+    "late": {
+     "count": 2,
+     "maxMs": 39.97732426303855
+    },
+    "tickMaxMs": 20.6,
+    "mainCopyMaxMs": 5.5,
+    "sources": {
+     "sounding": 23,
+     "peakSounding": 49,
+     "graphAlive": 28,
+     "peakGraph": 65,
+     "created": 321
+    },
+    "ticks": 474,
+    "contexts": 1,
+    "hardwareConcurrency": 4
+   },
+   "stats": {
+    "triggers": 1,
+    "listeners": 5,
+    "tweens": 132
+   },
+   "workerRender": {
+    "measuredMs": 88.3,
+    "unthrottledMs": 84.2,
+    "estimatedMs": 336.8,
+    "rule": "max(measured, unthrottled x4), estimated",
+    "budgetMs": 400,
+    "gatingProfile": "mobile",
+    "profile": "mobile",
+    "withinBudget": true,
+    "calibration": {
+     "mainMs": 2329.8,
+     "workerMs": 581.6,
+     "mainOverWorker": 4.01
+    }
+   },
+   "consoleErrors": [],
+   "pass": false
+  },
+  {
+   "span": "t67",
+   "config": "A",
+   "input": "wheel",
+   "speed": "fast",
+   "run": 3,
+   "speedSpec": {
+    "step": 400,
+    "gap": 16,
+    "touchSpeed": 24000
+   },
+   "host": {
+    "before": {
+     "load": [
+      1.92,
+      1.28,
+      0.72
+     ],
+     "nproc": 4
+    },
+    "after": {
+     "load": [
+      1.95,
+      1.32,
+      0.74
+     ]
+    }
+   },
+   "criteria": {
+    "audioPrecondition": true,
+    "noFilters": true,
+    "cueFired": true,
+    "frameTime": true,
+    "longTasksSlow": null,
+    "loafSlow": null,
+    "reachedTarget": true,
+    "noConsoleErrors": true,
+    "workerBudget": true
+   },
+   "blocked": null,
+   "rig": "S",
+   "labels": {
+    "from": 7511,
+    "to": 8524
+   },
+   "scrollSpanPx": {
+    "from": 7411,
+    "to": 8524,
+    "length": 1113
+   },
+   "audioBefore": {
+    "ctxState": "running",
+    "masterGain": 0.3499999940395355,
+    "rms": 0.02083460034411281,
+    "cue": 6,
+    "mobileProfile": true,
+    "profileOverride": "mobile",
+    "cues": [
+     6
+    ],
+    "cueLogLen": 2,
+    "renderMs": 99.29999999993015
+   },
+   "dom": {
+    "filteredElements": [],
+    "willChange": [
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform",
+     "div.plane:transform"
+    ],
+    "willChangeCount": 11,
+    "svgNodes": 4909
+   },
+   "audioAfterForward": {
+    "cue": 7,
+    "cueLogTail": [
+     {
+      "t": 6.350657596371882,
+      "cue": 7,
+      "tail": 15,
+      "fling": true
+     }
+    ],
+    "rms": 0.023754921324594336,
+    "ctxState": "running"
+   },
+   "trace": {
+    "file": "t67/t67-layers-A-wheel-fast-run3.trace.json.gz",
+    "bytes": 576467
+   },
+   "traceMetrics": {
+    "counts": {
+     "Paint": 15,
+     "Layerize": 245,
+     "UpdateLayer": 41,
+     "ImageDecodeTask": 0,
+     "RasterTask": 101,
+     "CompositeLayers": 0
+    },
+    "pipelineFrames": 259,
+    "frameStates": {
+     "STATE_NO_UPDATE_DESIRED": 240,
+     "STATE_PRESENTED_ALL": 11,
+     "STATE_PRESENTED_PARTIAL": 2,
+     "STATE_DROPPED": 6
+    },
+    "droppedOrMissed": 8,
+    "rasterTasks": 101,
+    "rasterTotalMs": 34.04,
+    "rasterThreads": [
+     "ThreadPoolForegroundWorker"
+    ],
+    "rasterPerFrameP50Ms": 0,
+    "rasterPerFrameP95Ms": 0.53,
+    "rasterPerFrameMaxMs": 10.95,
+    "rasterTaskMaxMs": 4.74
+   },
+   "traced": true,
+   "directions": {
+    "forward": {
+     "t0": 7008.600000000093,
+     "t1": 7911,
+     "y0": 7411,
+     "y1": 8524,
+     "inputWallMs": 96.37,
+     "achievedPxPerS": 11549,
+     "reachedPx": 8524,
+     "frames": 52,
+     "frameMaxMs": 49.9,
+     "frameP50Ms": 16.7,
+     "frameP95Ms": 16.8,
+     "framesOver50": 0,
+     "framesOver33": 1,
+     "worstIntervals": [
+      49.9,
+      33.3,
+      16.8,
+      16.8,
+      16.8
+     ],
+     "longTasks": 0,
+     "longTaskList": [],
+     "loafOver50": 1,
+     "loafList": [
+      {
+       "at": 20.5,
+       "d": 56.3,
+       "block": 0,
+       "scripts": [
+        {
+         "inv": "DOMWindow.onwheel",
+         "type": "event-listener",
+         "src": "index-E97oNXG8.js",
+         "fn": "qo",
+         "d": 21.5
+        }
+       ]
+      }
+     ],
+     "reachedTarget": true,
+     "gate": {
+      "noFrameOver50": true,
+      "p95Le33": true,
+      "noLongTaskSlow": null,
+      "noLoafOver50Slow": null,
+      "reachedTarget": true
+     }
+    },
+    "reverse": {
+     "t0": 9124.600000000093,
+     "t1": 9983.900000000023,
+     "y0": 8524,
+     "y1": 7411,
+     "inputWallMs": 55.48,
+     "achievedPxPerS": 20060,
+     "reachedPx": 7411,
+     "frames": 50,
+     "frameMaxMs": 49.9,
+     "frameP50Ms": 16.7,
+     "frameP95Ms": 16.7,
+     "framesOver50": 0,
+     "framesOver33": 1,
+     "worstIntervals": [
+      49.9,
+      16.8,
+      16.7,
+      16.7,
+      16.7
+     ],
+     "longTasks": 1,
+     "longTaskList": [
+      {
+       "at": 76.1,
+       "d": 50
+      }
+     ],
+     "loafOver50": 1,
+     "loafList": [
+      {
+       "at": 56.7,
+       "d": 52.2,
+       "block": 0,
+       "scripts": []
+      }
+     ],
+     "reachedTarget": true,
+     "gate": {
+      "noFrameOver50": true,
+      "p95Le33": true,
+      "noLongTaskSlow": null,
+      "noLoafOver50Slow": null,
+      "reachedTarget": true
+     }
+    }
+   },
+   "audioEnd": {
+    "rms": 0.02153287045561834
+   },
+   "audio": {
+    "late": {
+     "count": 2,
+     "maxMs": 31.269841269841265
+    },
+    "tickMaxMs": 16.7,
+    "mainCopyMaxMs": 4.9,
+    "sources": {
+     "sounding": 23,
+     "peakSounding": 49,
+     "graphAlive": 27,
+     "peakGraph": 61,
+     "created": 296
+    },
+    "ticks": 442,
+    "contexts": 1,
+    "hardwareConcurrency": 4
+   },
+   "stats": {
+    "triggers": 1,
+    "listeners": 5,
+    "tweens": 132
+   },
+   "workerRender": {
+    "measuredMs": 99.3,
+    "unthrottledMs": 76.2,
+    "estimatedMs": 304.8,
+    "rule": "max(measured, unthrottled x4), estimated",
+    "budgetMs": 400,
+    "gatingProfile": "mobile",
+    "profile": "mobile",
+    "withinBudget": true,
+    "calibration": {
+     "mainMs": 2478.7,
+     "workerMs": 604.7,
+     "mainOverWorker": 4.1
+    }
+   },
+   "consoleErrors": [],
+   "pass": true
+  }
+ ]
+}

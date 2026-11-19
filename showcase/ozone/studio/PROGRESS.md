@@ -11,7 +11,7 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 | T4 | Creative direction (art, character, 7 scenes, loader, 6 transitions, audio) | DONE: concept "Your Ink"; client decisions pending at Gate A (gender read open; Scene 6 adult customer; M7 off; placeholder wordmark) | CREATIVE_DIRECTION.md |
 | T5 | Specs (design, type/spacing, animation ownership, audio score) | DONE: all 6 specs; AUDIO covers every `sfx:`/`cue:` label (checked by grep); decisions AU-1..AU-5 | AUDIO_SPECIFICATION.md, DECISIONS.md |
 | T6 | Architecture + Gate A → client review | **DONE: Gate A r2 PASS with conditions; client approved 2026-11-18** (all 15 defaults). Conditions (N1–N14, partial 4/8/14/18/29/30) being closed before T6b; rulings G-11..G-19 | GATE_A_REVIEW_R2.md, DECISIONS.md |
-| T6b | t45/t67 prototype on placeholder art (TD8, G-17, G-22) | **FAIL (lab, software raster)**: prototype `969c731`; QA protocol 96 pages + cut-line ladder; t45 fails all variants, t67 closest at `cut=6`; orchestrator spot-check agrees; per-plane layers (`cutonly=6`) best full-detail option (G-24..G-26). Waiting for client decision on real-device check | reports/proto/T6B_VERDICT.md |
+| T6b | t45/t67 prototype on placeholder art (TD8, G-17, G-22) | **FAIL (lab, software raster)**: prototype `969c731`; QA protocol 96 pages + cut-line ladder; t45 fails all variants, t67 closest at `cut=6`; orchestrator spot-check agrees; per-plane layers (`cutonly=6`) best full-detail option (G-24..G-26). Client chose a real-device check (G-27): per-plane layers now default, lab re-run still FAIL but phone worst frames 450–567 → 33–133 ms; private frame-meter artifact published, waiting for client device readings | reports/proto/T6B_VERDICT.md |
 | T7–T12 | Rig, scenes, transitions+loader, audio, QA/perf, Gate B | NOT STARTED (gated by T6) | — |
 
 ## Carried over from the vaping brief (kept, still valid)
@@ -33,6 +33,8 @@ _Plan: /root/.claude/plans/sunny-conjuring-waterfall.md (approved 2026-11-18). R
 - 2026-11-18 · Gate A conditions met (N1–N14 closed; N15–N19 fixed by orchestrator). Creative director changed the fidelity targets (per-scene halftone, no live filters). T6b build started.
 
 - 2026-11-18 · T6b measured by QA (3 configs × wheel/touch × slow/fast × 3 runs, traced, audio on). FAIL: t45 all variants; t67 strict FAIL, closest at `cut=6`. Cause: whole-SVG repaint per frame (main-thread `Layerize`), then software compositing. Orchestrator re-ran a lighter probe: same direction; per-plane layers keep full detail and remove most of the repaint. Rulings G-24..G-26.
+
+- 2026-11-19 · Per-plane layers made the default (G-27); full protocol re-run (`summary-layers.md`); device-check build published as a private artifact with an on-screen frame meter. Waiting for the client's readings.
 
 ## Open failures / blockers
 - T6b FAIL in the lab; T7/T8 blocked until resolved (client decision: real-device check).

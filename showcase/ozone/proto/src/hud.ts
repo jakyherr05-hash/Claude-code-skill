@@ -16,8 +16,8 @@ export function mountHud(tl: gsap.core.Timeline, units: Record<LabelName, number
 
   const el = document.createElement('div');
   el.setAttribute('role', 'status');
-  el.style.cssText = 'position:fixed;z-index:9999;top:max(8px,env(safe-area-inset-top));right:8px;max-width:min(330px,calc(100vw - 16px));' +
-    'background:rgba(0,0,0,.82);color:#fff;font:12px/1.35 ui-monospace,Menlo,monospace;padding:8px 10px;border-radius:6px;white-space:pre-wrap;contain:content';
+  el.style.cssText = 'position:fixed;z-index:9999;top:max(8px,env(safe-area-inset-top));right:8px;max-width:min(300px,calc(100vw - 16px));' +
+    'background:rgba(0,0,0,.82);color:#fff;font:11px/1.3 ui-monospace,Menlo,monospace;padding:6px 8px;border-radius:6px;white-space:pre-wrap;contain:content';
   const out = document.createElement('div');
   const row = document.createElement('div');
   row.style.cssText = 'display:flex;gap:6px;margin-top:6px';
@@ -43,9 +43,10 @@ export function mountHud(tl: gsap.core.Timeline, units: Record<LabelName, number
     const ok = over === 0 && p95 <= 33.5;
     return `${k === 't45' ? 'Scene 4→5' : 'Scene 6→7'}: ${ok ? 'SMOOTH' : 'STUTTER'}\n  frames ${f.length} · p95 ${p95.toFixed(1)} ms · max ${max.toFixed(1)} ms · >50 ms ${over}`;
   };
-  const text = () => {
+  const text = (full = true) => {
     const hz = idle.length > 30 ? Math.round(1000 / pct(idle, 0.5)) : 0;
-    return `OZONE prototype frame meter\n${innerWidth}×${innerHeight} @${devicePixelRatio}x · ${hz ? hz + ' Hz' : 'measuring Hz'}\n${line('t45')}\n${line('t67')}\n${navigator.userAgent}`;
+    const head = `${innerWidth}×${innerHeight} @${devicePixelRatio}x · ${hz ? hz + ' Hz' : 'measuring Hz'}`;
+    return full ? `OZONE prototype frame meter\n${head}\n${line('t45')}\n${line('t67')}\n${navigator.userAgent}` : `${line('t45')}\n${line('t67')}\n${head}`;
   };
 
   let prev = performance.now(), prevHead = tl.time(), lastPaint = 0;
@@ -60,7 +61,7 @@ export function mountHud(tl: gsap.core.Timeline, units: Record<LabelName, number
       }
     }
     prev = now; prevHead = head;
-    if (now - lastPaint > 250) { out.textContent = text(); lastPaint = now; }
+    if (now - lastPaint > 250) { out.textContent = text(false); lastPaint = now; }
     requestAnimationFrame(frame);
   };
   requestAnimationFrame(frame);
