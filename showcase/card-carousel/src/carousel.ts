@@ -31,7 +31,8 @@ export interface CarouselHandle {
  * Every card's pose comes from its continuous offset `o` from the front slot (o = i - progress):
  *   x      = ±0.71·W·|o|^0.82          neighbours' centres land exactly on the screen edges
  *   scale  = 1 − 0.07·|o|^2.3          stays ~1 near the centre, 0.93 at the neighbour slot
- *   haze   = 0.22·|o|^2.3              side cards: side = 0.78·front + 23 (a light grey veil)
+ *   haze   = 0.2·|o|^2.3               side cards: side ≈ 0.8·front + 40 (light grey veil), tone-mapped
+ *   blur   = |o|^2.3 × 0.55% of W      side cards are softly blurred
  *   rotY   = ∓4.7°·o (perspective 2.84·W)  outer edges come slightly toward you
  *   z      = nearest to the centre on top (the swap happens half-way through a move)
  */
@@ -39,7 +40,7 @@ const SPACING = 0.71;
 const PATH_EXP = 0.82;
 const SCALE_DROP = 0.07;
 const SHAPE_EXP = 2.3;
-const HAZE = 0.22;
+const HAZE = 0.2;
 const ROT_DEG = 4.7;
 const PERSPECTIVE = 2.84;
 
@@ -56,6 +57,15 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
   const cards = gsap.utils.toArray<HTMLElement>('[data-card]', root);
   const hazes = cards.map((c) => c.querySelector<HTMLElement>('.haze')!);
   const imgs = cards.map((c) => c.querySelector<HTMLImageElement>('img')!);
+  // Blurred twin of each image (side cards are measured as softly blurred); only its opacity animates.
+  const softs = imgs.map((im) => {
+    const s = im.cloneNode() as HTMLImageElement;
+    s.className = 'soft';
+    s.alt = '';
+    s.setAttribute('aria-hidden', 'true');
+    im.after(s);
+    return s;
+  });
   const pauseBtn = root.querySelector<HTMLButtonElement>('[data-pause]');
   const n = cards.length;
 
@@ -89,7 +99,7 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
   let shownIndex = -1;
   let gl: CardStage | null = null; // WebGL renderer, once loaded
   const zooms = cards.map(() => ({ z: 1 })); // image zoom inside each card (entry only)
-  const poses: CardPose[] = cards.map(() => ({ x: 0, scale: 1, rotY: 0, haze: 0, z: 0, visible: true, zoom: 1 }));
+  const poses: CardPose[] = cards.map(() => ({ x: 0, scale: 1, rotY: 0, haze: 0, blur: 0, z: 0, visible: true, zoom: 1 }));
 
   /** The measured pose of a card at offset o. Both renderers draw exactly this. */
   function computePoses() {
@@ -102,6 +112,7 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
       p.scale = 1 - SCALE_DROP * shape;
       p.rotY = -Math.sign(o) * ROT_DEG * Math.min(a, 1.5);
       p.haze = Math.min(1, shape) * HAZE;
+      p.blur = Math.min(1, shape); // 0 = sharp, 1 = the measured side-card blur
       p.z = 0; // set below as a rank, so the order only changes at the half-way swap (once per move)
       p.visible = a <= 1.9; // past the screen edge: skip painting
       p.zoom = zooms[i].z;
@@ -122,6 +133,7 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
         const s = setters[i];
         s.x(p.x); s.sx(p.scale); s.sy(p.scale); s.rotY(p.rotY);
         hazes[i].style.opacity = String(p.haze);
+        softs[i].style.opacity = String(p.blur);
         if (p.z !== lastZ[i]) { cards[i].style.zIndex = String(p.z); lastZ[i] = p.z; }
         const vis = p.visible ? 'visible' : 'hidden';
         if (vis !== lastVis[i]) { cards[i].style.visibility = vis; lastVis[i] = vis; }

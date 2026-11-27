@@ -31,6 +31,7 @@ export interface CardPose {
   scale: number;
   rotY: number; // degrees, CSS rotateY convention
   haze: number; // 0..1 veil opacity
+  blur: number; // 0..1 of the measured side-card blur
   z: number; // paint order (higher = on top)
   visible: boolean;
   zoom: number; // image zoom inside the card (1 = fit)
@@ -59,6 +60,7 @@ const fragment = /* glsl */ `
   uniform float uRim;     // rim width, in card units (1 CSS px / card size)
   uniform float uHaze;    // grey veil opacity
   uniform float uZoom;
+  uniform float uBlur;    // mip LOD bias for the side-card softness
   uniform vec3 uHazeColor;
   varying vec2 vUv;
   vec3 toSrgb(vec3 c) { return mix(c * 12.92, 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c)); }
@@ -71,7 +73,7 @@ const fragment = /* glsl */ `
     float alpha = 1.0 - smoothstep(-aa, aa, d);
     if (alpha <= 0.0) discard;
     // Blend in sRGB like the browser does (the veil was measured on sRGB pixels: side = 0.78*front + 23).
-    vec3 col = toSrgb(texture2D(map, (vUv - 0.5) / uZoom + 0.5).rgb);
+    vec3 col = toSrgb(texture2D(map, (vUv - 0.5) / uZoom + 0.5, uBlur).rgb);
     col = mix(col, uHazeColor, uHaze);
     float rim = smoothstep(-uRim - aa, -uRim, d);       // 1 px band just inside the edge
     col = mix(col, vec3(1.0), 0.16 * rim);
@@ -93,7 +95,7 @@ export async function createCardStage(
   const scene = new Scene();
   const camera = new PerspectiveCamera(30, 1, 1, 100000);
   const geometry = new PlaneGeometry(1, 1);
-  const hazeColor = new Color(105 / 255, 105 / 255, 108 / 255); // measured veil colour, kept as sRGB values (blended in sRGB)
+  const hazeColor = new Color(200 / 255, 200 / 255, 206 / 255); // measured veil colour, kept as sRGB values (blended in sRGB)
 
   await Promise.all(images.map((im) => (im.complete && im.naturalWidth ? im.decode().catch(() => undefined) : new Promise((r) => { im.onload = r; im.onerror = r; }))));
   const textures = images.map((im) => {
@@ -113,6 +115,7 @@ export async function createCardStage(
       uRim: { value: 0.003 },
       uHaze: { value: 0 },
       uZoom: { value: 1 },
+      uBlur: { value: 0 },
       uHazeColor: { value: hazeColor },
     },
     vertexShader: vertex,
@@ -172,6 +175,7 @@ export async function createCardStage(
       const u = materials[i].uniforms;
       u.uHaze.value = p.haze;
       u.uZoom.value = p.zoom;
+      u.uBlur.value = p.blur * 2.2; // ~4.5 source px of softness at the side slot
       u.uRim.value = 1 / Math.max(1, cardPx * p.scale);
     });
     dirty = true;

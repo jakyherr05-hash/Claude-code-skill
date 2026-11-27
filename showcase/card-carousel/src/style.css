@@ -7,7 +7,8 @@ LAYOUT: every position below is measured from the reference recording (390 x 689
 */
 :root {
   color-scheme: dark;
-  --ink: rgb(129, 129, 131);           /* measured text grey */
+  --ink: #e8e9ee;                      /* measured text colour (HDR source, tone-mapped) */
+  --ink-soft: #d3d2d8;                 /* pill text and outline */
   /* Front card width: 70.4% of the viewport (measured), capped for short or wide screens. */
   --card: min(70.4vw, 46svh, 460px);
   --radius: calc(var(--card) * 0.085); /* measured corner radius: 8.5% of card width */
@@ -16,11 +17,12 @@ LAYOUT: every position below is measured from the reference recording (390 x 689
 html, body { height: 100%; }
 body {
   margin: 0;
-  /* Measured: #28282a at top centre, #1e1e20 low, edges ~#1f1f23, bottom #1b1b1e. */
+  /* Measured (tone-mapped HDR): #1d1e22 at the top, #1a1b1f behind the header, #131315 under the
+     cards, #0d0d0f at the bottom; the sides fall to ~#0f1014 (vignette). */
   background:
-    radial-gradient(90% 55% at 50% 10%, #2a2a2c 0%, rgba(42, 42, 44, 0) 70%),
-    linear-gradient(#262628, #1b1b1e);
-  background-color: #1f1f22;
+    radial-gradient(85% 75% at 50% 35%, rgba(13, 13, 16, 0) 40%, rgba(4, 4, 7, 0.75) 100%),
+    linear-gradient(#1d1e22 0%, #1a1b1f 22%, #161619 55%, #131315 80%, #0d0d0f 100%);
+  background-color: #141417;
   color: var(--ink);
   font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
@@ -47,7 +49,7 @@ body {
   justify-content: space-between;
   padding-left: clamp(24px, 7.7vw, 120px);
   padding-right: clamp(18px, 5.6vw, 90px);
-  font-weight: 800;
+  font-weight: 900;
   font-size: clamp(16px, 4.7vw, 22px);
   line-height: 1;
   text-transform: uppercase;
@@ -96,6 +98,16 @@ body {
   pointer-events: none;
   -webkit-user-drag: none;
 }
+/* Pre-blurred copy of the image, faded in toward the sides. Its blur never changes, so it is rasterised
+   once; only its opacity animates (compositor-only), which keeps the motion smooth. */
+.card img.soft {
+  position: absolute;
+  inset: 0;
+  filter: blur(calc(var(--card) * 0.0055));
+  transform: scale(1.02); /* hide the blur's transparent fringe at the edges */
+  opacity: 0;
+  will-change: opacity;
+}
 /* WebGL renderer: one canvas over the stage, centred on it (so the camera axis = the CSS perspective origin).
    Taller than the stage so a tilted card's near edge never clips. */
 .cards-gl {
@@ -111,11 +123,12 @@ body {
 .is-webgl .cards-gl { opacity: 1; }
 .is-webgl .card { opacity: 0; } /* DOM cards stay for screen readers and as the no-WebGL fallback */
 
-/* Measured on the side cards: side = 0.78 x front + 23, i.e. a 22% veil of grey ~rgb(105,105,108). */
+/* Measured on the side cards (tone-mapped): side ≈ 0.8 x front + 40, i.e. a 20% veil of light grey,
+   plus a blur of ~4.5 source px (0.55% of the card width). */
 .card .haze {
   position: absolute;
   inset: 0;
-  background: rgb(105, 105, 108);
+  background: rgb(200, 200, 206);
   opacity: 0;
   pointer-events: none;
   will-change: opacity; /* own compositor layer: changing the veil must not re-raster the card image */
@@ -126,7 +139,7 @@ body {
 .title {
   margin: 0;
   font-size: clamp(14px, 4.1vw, 20px);
-  font-weight: 800;
+  font-weight: 900;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -137,7 +150,8 @@ body {
   transform: translateX(-50%);
   margin: 0;
   padding: 0.38em 1em;
-  border: 1px solid var(--ink);
+  border: 1px solid var(--ink-soft);
+  color: var(--ink-soft);
   border-radius: 999px;
   font-size: clamp(8px, 2.05vw, 10px); /* measured pill: 123 x 15 px */
   font-weight: 600;
