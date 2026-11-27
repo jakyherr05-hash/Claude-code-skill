@@ -1,0 +1,171 @@
+/*
+VOICE: quiet gallery at night, the images do the talking.
+IDEA: a strip of prints sliding past a spotlight; the one in the light is in front.
+PICTURE: the card strip itself, centred.
+COLOUR and TYPE: charcoal with a soft top light, muted grey type; Archivo Expanded, heavy.
+LAYOUT: every position below is measured from the reference recording (390 x 689 CSS px phone).
+*/
+:root {
+  color-scheme: dark;
+  --ink: rgb(129, 129, 131);           /* measured text grey */
+  /* Front card width: 70.4% of the viewport (measured), capped for short or wide screens. */
+  --card: min(70.4vw, 46svh, 460px);
+  --radius: calc(var(--card) * 0.085); /* measured corner radius: 8.5% of card width */
+}
+* { box-sizing: border-box; min-width: 0; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  /* Measured: #28282a at top centre, #1e1e20 low, edges ~#1f1f23, bottom #1b1b1e. */
+  background:
+    radial-gradient(90% 55% at 50% 10%, #2a2a2c 0%, rgba(42, 42, 44, 0) 70%),
+    linear-gradient(#262628, #1b1b1e);
+  background-color: #1f1f22;
+  color: var(--ink);
+  font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  font-variation-settings: 'wdth' 125; /* expanded width (font-stretch gets mangled by the minifier) */
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  position: relative;
+  height: 100svh;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+/* Header row: cap tops at 13.8% of the height; measured padding 30px left (7.7vw), 22px right (5.6vw). */
+.masthead {
+  position: absolute;
+  top: 13.8svh;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding-left: clamp(24px, 7.7vw, 120px);
+  padding-right: clamp(18px, 5.6vw, 90px);
+  font-weight: 800;
+  font-size: clamp(16px, 4.7vw, 22px);
+  line-height: 1;
+  text-transform: uppercase;
+  max-width: 900px;
+  margin-inline: auto;
+}
+.word { display: inline-block; overflow: hidden; }
+.word > span { display: inline-block; }
+
+/* The strip: cards centred at 51.2% of the height. */
+.carousel { position: absolute; inset: 0; outline: none; }
+.stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 51.2svh;
+  height: var(--card);
+  margin-top: calc(var(--card) / -2);
+  touch-action: pan-y;          /* horizontal swipes are ours, vertical scroll stays native */
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.stage.is-dragging { cursor: grabbing; }
+
+.card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: var(--card);
+  aspect-ratio: 1 / 1;
+  margin: 0 0 0 calc(var(--card) / -2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #222;
+  outline: 1px solid rgba(255, 255, 255, 0.16); /* measured: thin light rim, no drop shadow */
+  outline-offset: -1px;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+/* WebGL renderer: one canvas over the stage, centred on it (so the camera axis = the CSS perspective origin).
+   Taller than the stage so a tilted card's near edge never clips. */
+.cards-gl {
+  position: absolute;
+  left: 0;
+  top: -15%;
+  width: 100%;
+  height: 130%;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+}
+.is-webgl .cards-gl { opacity: 1; }
+.is-webgl .card { opacity: 0; } /* DOM cards stay for screen readers and as the no-WebGL fallback */
+
+/* Measured on the side cards: side = 0.78 x front + 23, i.e. a 22% veil of grey ~rgb(105,105,108). */
+.card .haze {
+  position: absolute;
+  inset: 0;
+  background: rgb(105, 105, 108);
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity; /* own compositor layer: changing the veil must not re-raster the card image */
+}
+
+/* Caption: title cap top at 85.5%, pill at 90.1% of the height (static, as in the recording). */
+.caption { position: absolute; left: 0; right: 0; top: 85.5svh; text-align: center; }
+.title {
+  margin: 0;
+  font-size: clamp(14px, 4.1vw, 20px);
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.tag {
+  position: absolute;
+  left: 50%;
+  top: 4.6svh;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.38em 1em;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  font-size: clamp(8px, 2.05vw, 10px); /* measured pill: 123 x 15 px */
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Pause control for the autoplay: hidden until it gets keyboard focus. */
+.pause {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  background: #1f1f22;
+  color: #ddd;
+  font: inherit;
+  font-size: 13px;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.pause:focus-visible { clip-path: none; outline: 2px solid #ddd; outline-offset: 2px; }
+.carousel:focus-visible .stage { outline: 1px solid rgba(255, 255, 255, 0.35); outline-offset: 10px; border-radius: 12px; }
+
+/* Before the entry runs, keep things hidden only when JS is going to animate them. */
+.js-motion .stage { opacity: 0; } /* opacity, not visibility: cards set their own visibility inline */
+.js-motion .word > span, .js-motion .caption { visibility: hidden; }

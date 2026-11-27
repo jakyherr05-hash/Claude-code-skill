@@ -1,0 +1,24 @@
+{
+  "name": "card-carousel",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "GSAP swipe card carousel with a dealt-deck entry. Slides are 1:1.",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --port 4175 --strictPort",
+    "test": "node tests/carousel.check.mjs"
+  },
+  "dependencies": {
+    "@types/three": "^0.187.0",
+    "gsap": "3.15.1",
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "typescript": "7.0.2",
+    "vite": "8.3.8"
+  }
+}

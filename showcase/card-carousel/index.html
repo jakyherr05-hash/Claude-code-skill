@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Card Carousel</title>
+  <script>
+    // Hide animated parts only when JS runs; reveal anyway if the module never starts.
+    document.documentElement.classList.add('js-motion');
+    setTimeout(function () { if (!document.documentElement.classList.contains('motion-ready')) document.documentElement.classList.remove('js-motion'); }, 4000);
+  </script>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead" aria-label="Collection">
+      <span class="word"><span>Art</span></span>
+      <span class="word"><span>Of</span></span>
+      <span class="word"><span>2026</span></span>
+    </header>
+
+    <section class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Featured images">
+      <div class="stage" data-stage>
+        <canvas class="cards-gl" data-gl aria-hidden="true"></canvas>
+        <figure class="card" data-card>
+          <img src="/slides/01.jpg" alt="Poster: a person in a glowing visor under the title ChatGPT Prompt Guide for UI/UX designers" width="1080" height="1080" />
+          <span class="haze" aria-hidden="true"></span>
+        </figure>
+        <figure class="card" data-card>
+          <img src="/slides/02.jpg" alt="Black G-Shock watch at an angle on a black background" width="1080" height="1080" />
+          <span class="haze" aria-hidden="true"></span>
+        </figure>
+        <figure class="card" data-card>
+          <img src="/slides/03.jpg" alt="Black G-Shock watch, front view on a white background" width="1080" height="1080" />
+          <span class="haze" aria-hidden="true"></span>
+        </figure>
+        <figure class="card" data-card>
+          <img src="/slides/04.jpg" alt="Black G-Shock watch, front view lit from above on a black background" width="1080" height="1080" />
+          <span class="haze" aria-hidden="true"></span>
+        </figure>
+        <figure class="card" data-card>
+          <img src="/slides/05.jpg" alt="G-Shock watch on a wrist in front of a brick wall, striped sleeve" width="1080" height="1080" />
+          <span class="haze" aria-hidden="true"></span>
+        </figure>
+      </div>
+      <button class="pause" type="button" data-pause aria-pressed="false">Pause carousel</button>
+    </section>
+
+    <footer class="caption">
+      <h1 class="title">Motion posters</h1>
+      <p class="tag">Extended graphic</p>
+    </footer>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
