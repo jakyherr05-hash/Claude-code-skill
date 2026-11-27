@@ -130,6 +130,20 @@ const browser = await chromium.launch();
   check((await idx(page)) === 0, 'loops from last to first');
   check((await page.locator('[data-caption-title]').textContent()) === 'Prompt guide', 'caption follows the active slide');
   await page.screenshot({ path: `${SHOTS}/desktop.png` });
+
+  // Quick repeated taps must all count (regression: taps were lost mid-animation).
+  for (let i = 0; i < 4; i++) { await page.click('[data-next]'); await page.waitForTimeout(60); }
+  await page.waitForTimeout(2000);
+  check((await idx(page)) === 4, '4 quick taps on next move exactly 4 cards', `index ${await idx(page)}`);
+  const cap = await page.evaluate(() => [document.querySelector('[data-caption-title]').textContent, document.querySelectorAll('[data-card]')[window.__carousel.index].dataset.title]);
+  check(cap[0] === cap[1], 'caption matches the front card after rapid moves', cap.join(' / '));
+
+  // Wheel / trackpad scroll turns the ring and settles on a whole card.
+  await page.mouse.move(cx, cy);
+  for (let i = 0; i < 6; i++) { await page.mouse.wheel(60, 0); await page.waitForTimeout(16); }
+  await page.waitForTimeout(1500);
+  const p = await page.evaluate(() => window.__carousel.progress);
+  check((await idx(page)) !== 4 && Math.abs(p - Math.round(p)) < 0.01, 'wheel turns the ring and settles on a card', `progress ${p.toFixed(3)}`);
   await ctx.close();
 }
 

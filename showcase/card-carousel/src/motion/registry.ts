@@ -13,7 +13,7 @@ export function registerGSAP() {
   if (registered) return;
   gsap.registerPlugin(Observer, CustomEase);
   for (const [name, path] of Object.entries(motionTokens.customEases)) CustomEase.create(name, path);
-  gsap.defaults({ ease: motionTokens.ease.land, duration: motionTokens.dur.m });
+  gsap.defaults({ ease: motionTokens.ease.ring, duration: motionTokens.dur.m });
   registered = true;
 }
 

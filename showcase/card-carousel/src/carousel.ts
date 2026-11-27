@@ -17,36 +17,24 @@ export interface CarouselHandle {
   destroy(): void;
 }
 
-const SPACING = 0.62; // centre-to-centre distance between neighbours, in card widths
-const Z_BIAS = 18; // lifts the card that is travelling toward the centre, so it slides OVER the current one
+/*
+ * The cards sit on the outside of a vertical cylinder (a 3D ring) that turns around its centre.
+ * Each card's place on the ring comes from ONE continuous number, `progress`:
+ * card i sits at angle (i - progress) * STEP. Drag, wheel, buttons, keys and the entry all
+ * just move `progress`, so every input produces the same circular motion.
+ */
+const STEP = 36; // degrees between neighbouring cards on the ring
+const RADIUS = 1.4; // ring radius, in card widths (leaves a small gap between neighbours)
+const FADE_FROM = 76; // cards past this angle (going round the back) fade out...
+const FADE_TO = 100; // ...and are fully hidden here
+const FOLLOW_TIME = 0.11; // drag/wheel smoothing: the ring eases toward the finger (seconds, time constant)
 
-const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+const rad = (deg: number) => (deg * Math.PI) / 180;
 
-/** Signed distance from the active position, wrapped so the strip loops: result in [-n/2, n/2). */
+/** Signed distance from the front position, wrapped so the ring loops: result in [-n/2, n/2). */
 function wrapOffset(raw: number, n: number) {
   return ((((raw + n / 2) % n) + n) % n) - n / 2;
-}
-
-interface Pose { x: number; y: number; scale: number; rotY: number; rotZ: number; dim: number; alpha: number; z: number }
-
-/** Pose of a card at a continuous offset `o` from the centre. Everything (drag, tweens, entry) goes through here. */
-function poseAt(o: number, width: number, dir: number, reduced: boolean): Pose {
-  const a = Math.abs(o);
-  const s = Math.sign(o) || 0;
-  const xUnits = a <= 1 ? SPACING * a : a <= 2 ? SPACING + 0.42 * (a - 1) : SPACING + 0.42 + 0.3 * (a - 2);
-  const scale = reduced ? 1 - 0.06 * Math.min(a, 1) : a <= 1 ? 1 - 0.14 * a : 0.86 - 0.08 * Math.min(a - 1, 1.5);
-  const towardCentre = s !== 0 && s === dir && a < 1.5;
-  return {
-    x: s * xUnits * width,
-    y: 0,
-    scale,
-    rotY: reduced ? 0 : s * Math.min(a, 1) * 9,
-    rotZ: 0,
-    dim: Math.min(a, 1) * 0.5 + clamp01(a - 1) * 0.25,
-    alpha: 1 - clamp01((a - 1.9) / 0.5),
-    z: Math.round(100 - a * 20 + (towardCentre ? Z_BIAS : 0)),
-  };
 }
 
 export function createCarousel(root: HTMLElement, options: CarouselOptions = {}): CarouselHandle {
@@ -61,13 +49,16 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
 
   let reduced = prefersReducedMotion();
   let width = cards[0].offsetWidth;
-  const state = { progress: 0 };
-  let dir = 0; // +1 moving to next, -1 to previous
+  const state = { progress: 0 }; // what is on screen
+  let target = 0; // where the ring is heading (whole number when at rest)
+  let following = false; // true while drag/wheel smoothing runs on the ticker
   let ready = false;
   let shownIndex = -1;
+  let dir = 1;
   let tween: gsap.core.Tween | null = null;
-  const enter = cards.map(() => ({ e: 0 })); // 0 = stacked deck; the entry deals it out to 1
-  const seeds = cards.map((_, i) => ((i * 37) % 11) - 5); // fixed little tilts for the stacked deck
+  let captionTl: gsap.core.Timeline | null = null;
+  // Entry values: `spread` 0 = all cards stacked on one spot of the ring, 1 = spaced out; `spin` = extra ring turn.
+  const entry = { spread: 0, spin: 0 };
 
   const idx = (p: number) => ((Math.round(p) % n) + n) % n;
 
@@ -87,36 +78,30 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
     return b;
   });
 
-  // --- rendering: one pass sets every card from state.progress ---
+  // --- rendering: one pass places every card on the ring from state.progress ---
   const setters = cards.map((c) => ({
     x: gsap.quickSetter(c, 'x', 'px'),
-    y: gsap.quickSetter(c, 'y', 'px'),
-    scale: gsap.quickSetter(c, 'scale'),
+    z: gsap.quickSetter(c, 'z', 'px'),
     rotY: gsap.quickSetter(c, 'rotationY', 'deg'),
-    rotZ: gsap.quickSetter(c, 'rotation', 'deg'),
   }));
 
   function render() {
+    const R = width * RADIUS;
     for (let i = 0; i < n; i++) {
       const o = wrapOffset(i - state.progress, n);
-      const p = poseAt(o, width, dir, reduced);
-      const e = enter[i].e;
-      if (e < 1) {
-        // Entry: blend from the stacked deck (centre, small, tilted, dark) to the fanned-out pose.
-        p.x *= e;
-        p.y = (1 - e) * 24;
-        p.scale = lerp(0.62, p.scale, e);
-        p.rotY *= e;
-        p.rotZ = (1 - e) * seeds[i];
-        p.dim = lerp(0.75, p.dim, e);
-        p.z = Math.round(lerp(200 - Math.abs(o) * 5, p.z, e)); // front card stays on top while the deck deals out
-      }
+      const angle = o * STEP * entry.spread + entry.spin;
+      const a = Math.abs(angle);
+      const cos = Math.cos(rad(angle));
+      const alpha = 1 - clamp01((a - FADE_FROM) / (FADE_TO - FADE_FROM));
       const s = setters[i];
-      s.x(p.x); s.y(p.y); s.scale(p.scale); s.rotY(p.rotY); s.rotZ(p.rotZ);
-      cards[i].style.zIndex = String(p.z);
-      cards[i].style.opacity = String(p.alpha);
-      cards[i].style.visibility = p.alpha <= 0 ? 'hidden' : 'visible';
-      dims[i].style.opacity = String(p.dim);
+      s.x(R * Math.sin(rad(angle)));
+      s.z(R * (cos - 1));
+      s.rotY(angle);
+      // Painter's order by depth; while stacked in the entry, the front card stays on top.
+      cards[i].style.zIndex = String(1000 + Math.round(cos * 500) + Math.round((1 - entry.spread) * (20 - Math.abs(o) * 4)));
+      cards[i].style.opacity = String(alpha);
+      cards[i].style.visibility = alpha <= 0.001 ? 'hidden' : 'visible';
+      dims[i].style.opacity = String(Math.min(0.72, (1 - cos) * 1.6));
     }
     const active = idx(state.progress);
     if (active !== shownIndex) showIndex(active);
@@ -129,48 +114,72 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
     dots.forEach((d, i) => d.setAttribute('aria-current', String(i === active)));
     const title = cards[active].dataset.title ?? '';
     const tag = cards[active].dataset.tag ?? '';
+    captionTl?.kill(); // a half-finished swap must never write stale text later
     if (first || reduced) {
+      gsap.set([titleEl, tagEl], { clearProps: 'all' });
       titleEl.textContent = title;
       tagEl.textContent = tag;
       return;
     }
-    // Caption swap: old text slides out the way the deck is moving, new text comes in behind it.
     const d = dir || 1;
-    gsap.killTweensOf([titleEl, tagEl]);
-    gsap.timeline()
-      .to([titleEl, tagEl], { xPercent: -40 * d, autoAlpha: 0, duration: 0.16, ease: 'power2.in' })
+    captionTl = gsap.timeline()
+      .to([titleEl, tagEl], { xPercent: -30 * d, autoAlpha: 0, duration: 0.18, ease: 'power2.in' })
       .add(() => { titleEl.textContent = title; tagEl.textContent = tag; })
-      .fromTo([titleEl, tagEl], { xPercent: 40 * d }, { xPercent: 0, autoAlpha: 1, duration: 0.4, ease: 'expo.out', stagger: 0.04 });
+      .fromTo([titleEl, tagEl], { xPercent: 30 * d, autoAlpha: 0 }, { xPercent: 0, autoAlpha: 1, duration: 0.45, ease: 'power2.out', stagger: 0.05 });
   }
 
-  // --- programmatic moves (buttons, keys, dots, release snap) ---
-  function tweenTo(target: number) {
+  // --- smoothing loop for drag and wheel: exponential ease toward `target` ---
+  function onTick(_t: number, deltaMs: number) {
+    if (!following) return;
+    const k = 1 - Math.exp(-deltaMs / 1000 / (reduced ? 0.04 : FOLLOW_TIME));
+    state.progress += (target - state.progress) * k;
+    if (!dragging && !wheeling && Math.abs(target - state.progress) < 0.0004) {
+      state.progress = target;
+      following = false;
+      scheduleAutoplay();
+    }
+    render();
+  }
+  gsap.ticker.add(onTick);
+
+  function stopMotion() {
     tween?.kill();
-    const dist = Math.abs(target - state.progress);
-    if (dist < 0.0005) { state.progress = target; render(); return; }
-    dir = Math.sign(target - state.progress);
+    tween = null;
+    following = false;
+  }
+
+  // --- discrete moves (buttons, keys, dots, taps): ease in AND out around the ring ---
+  function tweenTo(t: number) {
+    stopMotion();
+    target = t;
+    const dist = Math.abs(t - state.progress);
+    if (dist < 0.0004) { state.progress = t; render(); return; }
+    dir = Math.sign(t - state.progress);
     tween = gsap.to(state, {
-      progress: target,
-      duration: reduced ? motionTokens.dur.xs : Math.min(1.1, motionTokens.dur.m * (0.6 + 0.4 * Math.min(dist, 2))),
-      ease: reduced ? 'power1.out' : motionTokens.ease.land,
+      progress: t,
+      duration: reduced ? motionTokens.dur.xs : Math.min(1.6, 0.75 + 0.25 * dist),
+      ease: reduced ? 'power1.out' : motionTokens.ease.ring,
       onUpdate: render,
-      onComplete: () => { state.progress = target; tween = null; scheduleAutoplay(); },
+      onComplete: () => { tween = null; scheduleAutoplay(); },
     });
   }
 
+  // Steps are counted from where the ring is HEADING, so quick repeated taps all count.
   function goTo(i: number) {
     if (!ready) return;
-    const current = Math.round(state.progress);
-    const delta = wrapOffset(i - idx(current), n); // shortest way round the loop
-    tweenTo(current + Math.round(delta));
+    const base = Math.round(target);
+    tweenTo(base + Math.round(wrapOffset(i - idx(base), n)));
   }
-  const next = () => ready && tweenTo(Math.round(state.progress) + 1);
-  const prev = () => ready && tweenTo(Math.round(state.progress) - 1);
+  const next = () => { if (ready) tweenTo(Math.round(target) + 1); };
+  const prev = () => { if (ready) tweenTo(Math.round(target) - 1); };
 
-  // --- swipe / drag: the deck follows the finger 1:1, then snaps ---
-  let startProgress = 0;
+  // --- swipe / drag: the ring turns with the finger, smoothed, then settles on the nearest card ---
+  const pxPerCard = () => width * 0.8;
+  let pressed = false; // Observer reports releases anywhere on the page; only handle presses that began on the ring
+  let dragging = false;
   let dragged = false;
-  const observer = Observer.create({
+  let startTarget = 0;
+  const pointer = Observer.create({
     target: stage,
     type: 'pointer,touch',
     dragMinimum: 3,
@@ -178,54 +187,83 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
     preventDefault: false,
     onPress: () => {
       if (!ready) return;
-      tween?.kill();
-      tween = null;
-      startProgress = state.progress;
+      pressed = true;
+      stopMotion();
+      target = state.progress;
+      startTarget = target;
       dragged = false;
       autoplayCall?.kill();
     },
     onDragStart: (self) => {
       if (!ready || self.axis === 'y') return;
+      dragging = true;
       stage.classList.add('is-dragging');
     },
     onDrag: (self) => {
-      if (!ready || self.axis === 'y') return;
+      if (!ready || !dragging || self.axis === 'y') return;
       dragged = true;
-      const dp = -self.deltaX / (width * SPACING);
-      if (dp !== 0) dir = Math.sign(dp);
-      state.progress += dp;
-      // Never more than 2 slides away from where the drag started.
-      state.progress = Math.max(startProgress - 2, Math.min(startProgress + 2, state.progress));
-      render();
+      const dp = -self.deltaX / pxPerCard();
+      if (dp) dir = Math.sign(dp);
+      target = Math.max(startTarget - 2, Math.min(startTarget + 2, target + dp));
+      following = true;
     },
     onRelease: (self) => {
       stage.classList.remove('is-dragging');
-      if (!ready) return;
-      if (!dragged) {
-        // A tap on a side card brings it to the front.
+      const wasDragging = dragging;
+      dragging = false;
+      if (!ready || !pressed) return;
+      pressed = false;
+      if (!dragged || !wasDragging) {
+        // A tap on a side card turns it to the front.
         const hit = (self.event?.target as Element | null)?.closest<HTMLElement>('[data-card]');
         const i = hit ? cards.indexOf(hit) : -1;
         if (i >= 0 && i !== idx(state.progress)) goTo(i);
         else tweenTo(Math.round(state.progress));
         return;
       }
-      const v = self.velocityX; // px/s, negative = finger moving left = next slide
-      const moved = state.progress - startProgress;
-      let target: number;
+      const v = self.velocityX; // px/s; negative = finger moving left = next card
+      const moved = target - startTarget;
+      let snap: number;
       if (Math.abs(v) > 300) {
-        target = v < 0 ? Math.floor(state.progress) + 1 : Math.ceil(state.progress) - 1;
-        if (Math.abs(v) > 2200) target += v < 0 ? 1 : -1; // a hard flick carries one more
+        snap = v < 0 ? Math.floor(target) + 1 : Math.ceil(target) - 1;
+        if (Math.abs(v) > 2200) snap += v < 0 ? 1 : -1; // a hard flick carries one more card
       } else if (Math.abs(moved) > 0.15) {
-        target = moved > 0 ? Math.ceil(state.progress) : Math.floor(state.progress);
+        snap = moved > 0 ? Math.ceil(target) : Math.floor(target);
       } else {
-        target = Math.round(startProgress);
+        snap = Math.round(startTarget);
       }
-      const base = Math.round(startProgress);
-      target = Math.max(base - 2, Math.min(base + 2, target));
-      tweenTo(target);
+      const base = Math.round(startTarget);
+      target = Math.max(base - 2, Math.min(base + 2, snap));
+      following = true; // glide on from the current speed into the slot (no stop-start)
     },
   });
-  observer.disable();
+
+  // --- wheel / trackpad: horizontal (or vertical) scroll turns the ring, then it settles ---
+  let wheeling = false;
+  let wheelEnd: gsap.core.Tween | null = null;
+  const wheel = Observer.create({
+    target: stage,
+    type: 'wheel',
+    wheelSpeed: 1,
+    preventDefault: true,
+    onWheel: (self) => {
+      if (!ready) return;
+      const d = Math.abs(self.deltaX) > Math.abs(self.deltaY) ? self.deltaX : self.deltaY;
+      if (!d) return;
+      if (tween) { stopMotion(); target = state.progress; }
+      wheeling = true;
+      dir = Math.sign(d);
+      target += d / (pxPerCard() * 1.4);
+      following = true;
+      wheelEnd?.kill();
+      wheelEnd = gsap.delayedCall(0.14, () => {
+        wheeling = false;
+        target = Math.round(target);
+      });
+    },
+  });
+  pointer.disable();
+  wheel.disable();
 
   // --- buttons and keyboard ---
   const prevBtn = root.querySelector<HTMLButtonElement>('[data-prev]');
@@ -246,8 +284,8 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
   let hovering = false;
   function scheduleAutoplay() {
     autoplayCall?.kill();
-    if (!options.autoplay || reduced || hovering || document.hidden) return;
-    autoplayCall = gsap.delayedCall(options.autoplayDelay ?? 1.6, next);
+    if (!options.autoplay || !ready || reduced || hovering || dragging || document.hidden) return;
+    autoplayCall = gsap.delayedCall(options.autoplayDelay ?? 1.8, next);
   }
   root.addEventListener('pointerenter', () => { hovering = true; autoplayCall?.kill(); });
   root.addEventListener('pointerleave', () => { hovering = false; scheduleAutoplay(); });
@@ -255,16 +293,22 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
   document.addEventListener('visibilitychange', onVisibility);
 
   // --- resize + reduced-motion changes ---
-  const ro = new ResizeObserver(() => { width = cards[0].offsetWidth; render(); });
+  const applySize = () => {
+    width = cards[0].offsetWidth;
+    stage.style.perspective = `${Math.round(width * 3.4)}px`;
+    render();
+  };
+  const ro = new ResizeObserver(applySize);
   ro.observe(stage);
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   const onMq = () => { reduced = mq.matches; render(); };
   mq.addEventListener('change', onMq);
 
-  // --- entry: the deck lands stacked, then deals out to both sides ---
+  // --- entry: the stacked deck swings round the ring, then fans out into place ---
   function finishEntry() {
     ready = true;
-    observer.enable();
+    pointer.enable();
+    wheel.enable();
     document.documentElement.classList.add('motion-ready');
     scheduleAutoplay();
   }
@@ -273,37 +317,36 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
     const header = gsap.utils.toArray<HTMLElement>('.masthead .word > span');
     const after = ['.caption', '.controls', '.hint'];
     if (reduced) {
-      enter.forEach((o) => (o.e = 1));
+      entry.spread = 1;
+      entry.spin = 0;
       render();
       gsap.set(header, { visibility: 'visible' });
       gsap.fromTo([stage, ...after], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3, ease: 'power1.out', onComplete: finishEntry });
       return;
     }
-    // Deal order: outermost cards fan out first, the front card rises last and on top.
-    const order = cards
-      .map((_, i) => i)
-      .sort((a, b) => Math.abs(wrapOffset(b - state.progress, n)) - Math.abs(wrapOffset(a - state.progress, n)));
-    enter.forEach((o) => (o.e = 0));
+    entry.spread = 0;
+    entry.spin = -78; // start round the side of the ring, just coming into view
     render();
     const front = idx(state.progress);
 
-    gsap.timeline({ onComplete: finishEntry })
+    gsap.timeline({ onComplete: finishEntry, defaults: { ease: 'power3.inOut' } })
       .set(header, { visibility: 'visible' })
-      .fromTo(header, { yPercent: 115 }, { yPercent: 0, duration: 0.9, ease: 'expo.out', stagger: motionTokens.stagger.words }, 0)
-      .fromTo(stage, { autoAlpha: 0, y: 70 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'expo.out' }, 0.05)
-      .to(order.map((i) => enter[i]), { e: 1, duration: 1.15, ease: motionTokens.ease.land, stagger: motionTokens.stagger.cards, onUpdate: render }, 0.45)
-      .fromTo(imgs[front], { scale: 1.2 }, { scale: 1, duration: 1.6, ease: 'expo.out' }, 0.45)
-      .fromTo(after, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'expo.out', stagger: 0.08 }, 1.05);
+      .fromTo(header, { yPercent: 115 }, { yPercent: 0, duration: 0.9, ease: 'power3.out', stagger: motionTokens.stagger.words }, 0)
+      .fromTo(stage, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, ease: 'power1.out' }, 0.1)
+      .to(entry, { spin: 0, duration: 1.3, onUpdate: render }, 0.1) // deck swings round to the front
+      .to(entry, { spread: 1, duration: 1.1, onUpdate: render }, 0.75) // then fans out around the ring
+      .fromTo(imgs[front], { scale: 1.18 }, { scale: 1, duration: 1.6, ease: 'power2.inOut' }, 0.3)
+      .fromTo(after, { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.08 }, 1.35);
   }
 
   // Start once fonts and the first images are ready (with a cap so a slow network never blocks it).
-  render();
+  applySize();
   const loaded = Promise.all([
     document.fonts?.ready ?? Promise.resolve(),
     ...imgs.slice(0, 3).map((im) => im.decode().catch(() => undefined)),
   ]);
   Promise.race([loaded, new Promise((r) => setTimeout(r, 1500))]).then(() => {
-    width = cards[0].offsetWidth;
+    applySize();
     playEntry();
   });
 
@@ -311,11 +354,15 @@ export function createCarousel(root: HTMLElement, options: CarouselOptions = {})
     get index() { return idx(state.progress); },
     get progress() { return state.progress; },
     get ready() { return ready; },
-    goTo, next: () => { next(); }, prev: () => { prev(); },
+    goTo, next, prev,
     destroy() {
-      observer.kill();
-      tween?.kill();
+      pointer.kill();
+      wheel.kill();
+      stopMotion();
+      captionTl?.kill();
       autoplayCall?.kill();
+      wheelEnd?.kill();
+      gsap.ticker.remove(onTick);
       ro.disconnect();
       mq.removeEventListener('change', onMq);
       document.removeEventListener('keydown', onKey);
