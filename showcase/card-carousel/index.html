@@ -20,44 +20,35 @@
 
     <section class="carousel" id="carousel" role="region" aria-roledescription="carousel" aria-label="Featured images">
       <div class="stage" data-stage>
-        <figure class="card" data-card data-title="Prompt guide" data-tag="For UI/UX designers">
+        <canvas class="cards-gl" data-gl aria-hidden="true"></canvas>
+        <figure class="card" data-card>
           <img src="/slides/01.jpg" alt="Poster: a person in a glowing visor under the title ChatGPT Prompt Guide for UI/UX designers" width="1080" height="1080" />
-          <span class="dim" aria-hidden="true"></span>
+          <span class="haze" aria-hidden="true"></span>
         </figure>
-        <figure class="card" data-card data-title="Shock resist" data-tag="Three-quarter view">
+        <figure class="card" data-card>
           <img src="/slides/02.jpg" alt="Black G-Shock watch at an angle on a black background" width="1080" height="1080" />
-          <span class="dim" aria-hidden="true"></span>
+          <span class="haze" aria-hidden="true"></span>
         </figure>
-        <figure class="card" data-card data-title="Analog digital" data-tag="Front view">
+        <figure class="card" data-card>
           <img src="/slides/03.jpg" alt="Black G-Shock watch, front view on a white background" width="1080" height="1080" />
-          <span class="dim" aria-hidden="true"></span>
+          <span class="haze" aria-hidden="true"></span>
         </figure>
-        <figure class="card" data-card data-title="Protection" data-tag="Studio light">
+        <figure class="card" data-card>
           <img src="/slides/04.jpg" alt="Black G-Shock watch, front view lit from above on a black background" width="1080" height="1080" />
-          <span class="dim" aria-hidden="true"></span>
+          <span class="haze" aria-hidden="true"></span>
         </figure>
-        <figure class="card" data-card data-title="Everyday wear" data-tag="On the wrist">
+        <figure class="card" data-card>
           <img src="/slides/05.jpg" alt="G-Shock watch on a wrist in front of a brick wall, striped sleeve" width="1080" height="1080" />
-          <span class="dim" aria-hidden="true"></span>
+          <span class="haze" aria-hidden="true"></span>
         </figure>
       </div>
-
-      <div class="caption" aria-live="polite">
-        <h1 class="title"><span data-caption-title>Prompt guide</span></h1>
-        <p class="tag"><span data-caption-tag>For UI/UX designers</span></p>
-      </div>
-
-      <nav class="controls" aria-label="Carousel controls">
-        <button class="arrow" type="button" data-prev aria-label="Previous slide">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
-        </button>
-        <div class="dots" data-dots></div>
-        <button class="arrow" type="button" data-next aria-label="Next slide">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
-        </button>
-      </nav>
-      <p class="hint" aria-hidden="true">Swipe or drag</p>
+      <button class="pause" type="button" data-pause aria-pressed="false">Pause carousel</button>
     </section>
+
+    <footer class="caption">
+      <h1 class="title">Motion posters</h1>
+      <p class="tag">Extended graphic</p>
+    </footer>
   </main>
   <script type="module" src="/src/main.ts"></script>
 </body>
